@@ -1,0 +1,48 @@
+<section class="flight" *ngFor="let flight of flightsDetails">
+  <div class="flight-details">
+    <div class="flight-details_departure">
+      <span class="date">{{
+        flight.departureDateTime | date : "EEE, d MMM y"
+      }}</span>
+      <span class="start-time">
+        <span class="time">{{
+          flight.departureDateTime | date : "HH:mm"
+        }}</span>
+        <span class="offset">{{ flight.departureDateTime | date : "z" }}</span>
+      </span>
+      <span class="station">{{flight.departureStation}}</span>
+    </div>
+    <div class="travel-time">
+      <span class="travel-time_duration">2h 50m</span>
+      <i class="fa-solid fa-plane-departure"></i>
+      <span class="travel-time_direction">Direct</span>
+    </div>
+    <div class="flight-details_arrival">
+      <span class="date">{{
+        flight.arrivalDateTime | date : "EEE, d MMM y"
+      }}</span>
+      <span class="end-time">
+        <span class="offset">{{ flight.arrivalDateTime | date : "z" }}</span>
+        <span class="time">{{ flight.arrivalDateTime | date : "HH:mm" }}</span>
+      </span>
+      <span class="station">{{flight.arrivalStation}}</span>
+    </div>
+  </div>
+  <div class="flight-order">
+    <div class="flight-number">
+      <span class="flight-number_label">Flight no.</span>
+      <span class="flight-number_number">{{ flight.flightNumber }}</span>
+    </div>
+    <div class="flight-info">
+      <div class="flight-availability">
+        100 seats <br />
+        available
+      </div>
+      <div class="flight-price">
+        <span class="flight-price_label">Price</span>
+        <span class="flight-price_price">€146.70</span>
+      </div>
+    </div>
+    <button class="flight-btn">Select</button>
+  </div>
+</section>

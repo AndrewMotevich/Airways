@@ -1,0 +1,29 @@
+@mixin label-small {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+}
+
+@mixin subtitle-small {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+@mixin subtitle-large {
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 36px;
+
+  @media screen and (min-width: 601px) {
+    font-size: 30px;
+  }
+
+  @media screen and (max-width: 600px) and (min-width: 541px) {
+    font-size: 25px;
+  }
+
+  @media screen and (max-width: 540px) {
+    font-size: 22px;
+  }
+}
