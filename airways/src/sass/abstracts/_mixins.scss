@@ -1,0 +1,8 @@
+@mixin typography($weight, $size, $height, $spacing) {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: $weight;
+  font-size: $size;
+  line-height: $height;
+  letter-spacing: $spacing;
+}
