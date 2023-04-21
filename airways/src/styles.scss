@@ -9,3 +9,14 @@
 @import "./sass/layout/grid";
 @import "./sass/layout/header";
 @import "./sass/layout/footer";
+/* You can add global styles to this file, and also import other style files */
+
+body {
+  font-family: "Roboto";
+  font-size: 14px;
+  line-height: 20px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  background-color: #f5f5f5;
+}
