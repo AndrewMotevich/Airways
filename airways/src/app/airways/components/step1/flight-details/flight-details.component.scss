@@ -1,16 +1,15 @@
-@import "/src/sass/abstracts/mixins";
+@import '/src/sass/abstracts/mixins';
+@import '/src/sass/abstracts/variables';
+@import '/src/sass/base/typography';
 
 .flight {
   box-sizing: border-box;
   max-width: 1128px;
   margin: 2rem auto;
 
-  background: #ffffff;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+  background-color: $color-neutral100;
+  box-shadow: $shadow;
   border-radius: 5px;
-
-  //background: url(/assets/flight-select.png) no-repeat;
-  //background-size: cover;
 
   @media screen and (min-width: 960px) {
     display: grid;
@@ -51,19 +50,10 @@
     }
 
     .date {
-      font-family: "Roboto";
-      font-style: normal;
-      font-weight: 400;
-
-      line-height: 16px;
-
-      letter-spacing: 0.5px;
-      color: #74767a;
-      margin-bottom: 0.3rem;
-
-      @media screen and (min-width: 541px) {
-        font-size: 16px;
-      }
+      @extend %text-label-large;
+     
+      color: $color-neutral30;
+      margin-bottom: 0.3rem;      
 
       @media screen and (max-width: 540px) {
         font-size: 13px;
@@ -86,19 +76,18 @@
 
     .time {
       @include subtitle-large;
-      color: #000000;      
+      color: $color-dark;
     }
 
     .offset {
       font-size: 8px;
       line-height: 16px;
-      color: #74767a;
+      color: $color-neutral30;
     }
 
     .station {
       @include label-small;
-
-      color: #74767a;
+      color: $color-neutral30;
     }
 
     .travel-time {
@@ -110,28 +99,32 @@
       position: relative;
 
       &::before {
-        content: "";
-        border-top: 2px solid #d0d9df;
+        content: '';
+        border-width: 2px;
+        border-style: solid;
+        border-color: $color-secondary40;
         width: 83%;
         position: absolute;
         top: 52%;
       }
 
-      .fa-plane-departure {
-        color: #0090bd;
-        background-color: #fff;
+      .plane {
+        color: $color-secondary0;
+        background-color: $color-neutral100;
         position: relative;
         padding: 0 0.8rem;
+        font-size: 1.7rem;
+        height: 20px;
       }
 
       &_duration {
         @include label-small;
-        color: #000000;
+        color: $color-dark;
       }
 
       &_direction {
         @include label-small;
-        color: #000000;
+        color: $color-dark;
       }
     }
   }
@@ -158,7 +151,9 @@
     justify-content: flex-end;
 
     height: 100%;
-    border-right: 2px dashed #d0d9df;
+    border-right-width: 2px;
+    border-right-style: dashed;
+    border-right-color: $color-secondary40;
 
     @media screen and (min-width: 960px) {
       padding-right: 2rem;
@@ -176,17 +171,13 @@
       padding-left: 1.5rem;
       padding-right: 1rem;
       flex-direction: column;
-    }   
+    }
 
     &_label {
-      line-height: 20px;
-      letter-spacing: 0.25px;
-      color: #74767a;
-      white-space: nowrap;
-
-      @media screen and (max-width: 540px) {
-        font-size: 14px;
-      }
+      @extend %text-body-medium;
+      
+      color: $color-neutral30;
+      white-space: nowrap;      
 
       @media screen and (max-width: 540px) {
         font-size: 12px;
@@ -220,15 +211,12 @@
   }
 
   &-availability {
-    @include subtitle-small;
-
+    @extend %text-subtitle-small;
     box-sizing: border-box;
     text-align: right;
 
-    /* Neutral/neutral20 */
-
-    color: #454a53;
-    background: rgba(241, 201, 51, 0.3);
+    color: $color-neutral20;
+    background-color: $color-highlight-yellow30;
     border-radius: 2px;
     padding: 0.25rem 0.6rem;
 
@@ -260,18 +248,17 @@
       display: flex;
       align-items: center;
       text-align: right;
-
-      color: #11397e;
+      color: $color-primary;
     }
 
     &_label {
-      @include subtitle-small;
+      @extend %text-subtitle-small;
       flex-grow: 1;
-      padding-top: 5px;
-      color: #74767a;
       display: flex;
       align-items: center;
       justify-content: flex-end;
+      padding-top: 5px;
+      color: $color-neutral30;
 
       @media screen and (max-width: 959px) {
         display: none;
@@ -286,22 +273,17 @@
     width: 78px;
     height: 36px;
 
-    background: linear-gradient(108.75deg, #0090bd 59.91%, #073590 95.36%);
-
-    border: 1px solid #11397e;
+    background: $color-highlight-gradient;
+    border-style: solid;
+    border-color: $color-primary;
     border-radius: 4px;
 
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 20px;
+    @extend %text-button;
 
     display: flex;
     align-items: center;
     text-align: center;
-    letter-spacing: 0.1px;
 
-    /* Neutral/neutral100 */
-
-    color: #ffffff;
+    color: $color-neutral100;
   }
 }
