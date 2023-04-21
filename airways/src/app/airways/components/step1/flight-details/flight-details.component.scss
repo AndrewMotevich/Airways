@@ -51,9 +51,9 @@
 
     .date {
       @extend %text-label-large;
-     
+
       color: $color-neutral30;
-      margin-bottom: 0.3rem;      
+      margin-bottom: 0.3rem;
 
       @media screen and (max-width: 540px) {
         font-size: 13px;
@@ -75,8 +75,20 @@
     }
 
     .time {
-      @include subtitle-large;
+      @extend %text-subtitle-large;
       color: $color-dark;
+
+      @media screen and (min-width: 601px) {
+        font-size: 30px;
+      }
+
+      @media screen and (max-width: 600px) and (min-width: 541px) {
+        font-size: 25px;
+      }
+
+      @media screen and (max-width: 540px) {
+        font-size: 22px;
+      }
     }
 
     .offset {
@@ -86,7 +98,7 @@
     }
 
     .station {
-      @include label-small;
+      @extend %text-label-small;
       color: $color-neutral30;
     }
 
@@ -118,12 +130,12 @@
       }
 
       &_duration {
-        @include label-small;
+        @extend %text-label-small;
         color: $color-dark;
       }
 
       &_direction {
-        @include label-small;
+        @extend %text-label-small;
         color: $color-dark;
       }
     }
@@ -175,9 +187,9 @@
 
     &_label {
       @extend %text-body-medium;
-      
+
       color: $color-neutral30;
-      white-space: nowrap;      
+      white-space: nowrap;
 
       @media screen and (max-width: 540px) {
         font-size: 12px;
@@ -243,7 +255,7 @@
     }
 
     &_price {
-      @include subtitle-large;
+      @extend %text-subtitle-large;
 
       display: flex;
       align-items: center;
