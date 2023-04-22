@@ -277,25 +277,4 @@
       }
     }
   }
-
-  &-btn {
-    box-sizing: border-box;
-    padding: 8px 16px;
-
-    width: 78px;
-    height: 36px;
-
-    background: $color-highlight-gradient;
-    border-style: solid;
-    border-color: $color-primary;
-    border-radius: 4px;
-
-    @extend %text-button;
-
-    display: flex;
-    align-items: center;
-    text-align: center;
-
-    color: $color-neutral100;
-  }
 }
