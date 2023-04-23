@@ -2,14 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { FetchCitiesService } from '../../services/fetch-cities.service';
+import { FetchApiService } from '../../services/feth-api.service';
 import { City } from '../../models/city.model';
-
-// type fromInput = {
-//   code: string;
-//   name: string;
-//   timeZone: string;
-// };
+import { FormDataService } from '../../services/form-data.service';
+import { formData } from '../../models/formData.model';
 
 @Component({
   selector: 'app-main-form',
@@ -17,6 +13,8 @@ import { City } from '../../models/city.model';
   styleUrls: ['./main-form.component.scss'],
 })
 export class MainFormComponent implements OnInit {
+  toggle = false;
+
   passengers = ['Adults', 'Child', 'Infant'];
 
   isLoading = false;
@@ -27,7 +25,7 @@ export class MainFormComponent implements OnInit {
 
   cities: City[] = [];
 
-  constructor(private getCities: FetchCitiesService) {}
+  constructor(private getCities: FetchApiService, private formDataService: FormDataService) {}
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -54,8 +52,11 @@ export class MainFormComponent implements OnInit {
   });
 
   submit(): void {
-    // eslint-disable-next-line no-console
-    console.log(this.form.value);
+    if (this.form.valid) {
+      this.formDataService.setFormData(this.form.value as unknown as formData);
+      // eslint-disable-next-line no-console
+      console.log(this.formDataService.formData);
+    }
     // todo service for form
   }
 

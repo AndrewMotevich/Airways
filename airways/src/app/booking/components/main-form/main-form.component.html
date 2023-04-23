@@ -1,7 +1,7 @@
 <div *ngIf="isLoading">Loading...</div>
 <form class="form-container" *ngIf="!isLoading" [formGroup]="form" (ngSubmit)="submit()">
   <mat-radio-group aria-label="Select an option" formControlName="roundedTrip">
-    <mat-radio-button value="true">Round Trip</mat-radio-button>
+    <mat-radio-button value="true" checked>Round Trip</mat-radio-button>
     <mat-radio-button value="false">One Way</mat-radio-button>
   </mat-radio-group>
 
@@ -11,7 +11,10 @@
       [matAutocomplete]="autoFrom">
     <mat-autocomplete #autoFrom="matAutocomplete">
       <mat-option *ngFor="let option of filteredFromOptions | async" [value]="option.name">
-        {{option.name}}
+        <div>
+          {{option.name}} ({{option.code}})
+        </div>
+        <small>{{option.time_zone}}</small>
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
@@ -22,7 +25,10 @@
       [matAutocomplete]="autoDestination">
     <mat-autocomplete #autoDestination="matAutocomplete">
       <mat-option *ngFor="let option of filteredDestinationOptions | async" [value]="option.name">
-        {{option.name}}
+        <div>
+          {{option.name}} ({{option.code}})
+        </div>
+        <small>{{option.time_zone}}</small>
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
@@ -47,14 +53,29 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Passengers</mat-label>
-      <mat-select formControlName="passengers">
-        <mat-option value="Adult">
-          <div>Adult <button mat-raised-button>+</button>{{0}}<button>-</button></div>
-          <small>14+ years</small>
-          <div>Child <button>+</button>{{0}}<button>-</button></div>
-          <small>2-14 years</small>
-          <div>Infant <button>+</button>{{0}}<button>-</button></div>
-          <small>0-2 years</small>
+      <mat-select formControlName="passengers" hideSingleSelectionIndicator>
+        <mat-option value="1">
+          <div class="selection-option">
+            <div>
+              <div>Adult</div>
+              <small>14+ years</small>
+            </div>
+            <button class="passengers-button">+</button>{{1}}<button class="passengers-button">-</button>
+          </div>
+          <div class="selection-option">
+            <div>
+              <div>Child</div>
+              <small>2-14 years</small>
+            </div>
+            <button class="passengers-button">+</button>{{0}}<button class="passengers-button">-</button>
+          </div>
+          <div class="selection-option">
+            <div>
+              <div>Infant</div>
+              <small>0-2 years</small>
+            </div>
+            <button class="passengers-button">+</button>{{0}}<button class="passengers-button">-</button>
+          </div>
         </mat-option>
       </mat-select>
     </mat-form-field>

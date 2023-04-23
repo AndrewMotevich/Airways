@@ -6,7 +6,7 @@ import { City } from '../models/city.model';
 @Injectable({
   providedIn: 'root',
 })
-export class FetchCitiesService {
+export class FetchApiService {
   cities: City[] = [];
 
   constructor(private http: HttpClient) {}

@@ -4,13 +4,29 @@
   height: 390px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   border-radius: 8px;
   background-color: #ffffff;
+  padding: 24px;
+}
+
+.passengers-button {
+  width: 24px;
+  height: 24px;
+  border: none;
+}
+
+.selection-option {
+  width: 169px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .btn {
   width: 126px;
   height: 60px;
+  align-self: flex-end;
 }
 
 .date-passengers-container {
