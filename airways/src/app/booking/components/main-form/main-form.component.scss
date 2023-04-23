@@ -5,5 +5,16 @@
   display: flex;
   flex-direction: column;
   border-radius: 8px;
-  background-color: rgb(24, 87, 222);
+  background-color: #ffffff;
+}
+
+.btn {
+  width: 126px;
+  height: 60px;
+}
+
+.date-passengers-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
