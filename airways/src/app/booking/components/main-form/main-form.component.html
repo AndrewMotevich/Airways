@@ -1,0 +1,8 @@
+<div *ngIf="isLoading">Loading...</div>
+<form class="form-container" *ngIf="!isLoading" [formGroup]="form" (ngSubmit)="submit()">
+  <mat-radio-group aria-label="Select an option" formControlName="roundedTrip">
+    <mat-radio-button value="true" ngDefaultControl>Round Trip</mat-radio-button>
+    <mat-radio-button value="false">One Way</mat-radio-button>
+  </mat-radio-group>
+  <button mat-raised-button color="primary">Search</button>
+</form>
