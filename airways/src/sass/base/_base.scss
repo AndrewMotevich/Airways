@@ -1,11 +1,16 @@
+html,
 body {
-  font-family: 'Roboto';
+  height: 100%;
+}
+
+body {
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
   font-size: 14px;
   line-height: 20px;
   font-style: normal;
   font-weight: 400;
   letter-spacing: 0.5px;
-  background-color: #f5f5f5;
+  background-color: $color-neutral80;
 }
 
 .mdc-button.btn-with-gradient {
