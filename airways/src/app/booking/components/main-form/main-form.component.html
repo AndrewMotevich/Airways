@@ -1,0 +1,86 @@
+<div *ngIf="isLoading">Loading...</div>
+<form class="form-container" *ngIf="!isLoading" [formGroup]="form" (ngSubmit)="submit()">
+  <mat-radio-group aria-label="Select an option" formControlName="roundedTrip">
+    <mat-radio-button value="true" checked>Round Trip</mat-radio-button>
+    <mat-radio-button value="false">One Way</mat-radio-button>
+  </mat-radio-group>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>From</mat-label>
+    <input type="text" placeholder="Chose your origin" aria-label="From" matInput formControlName="from"
+      [matAutocomplete]="autoFrom">
+    <mat-autocomplete #autoFrom="matAutocomplete">
+      <mat-option *ngFor="let option of filteredFromOptions | async" [value]="option.name">
+        <div>
+          {{option.name}} ({{option.code}})
+        </div>
+        <small>{{option.time_zone}}</small>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Destination</mat-label>
+    <input type="text" placeholder="Chose your origin" aria-label="Destination" matInput formControlName="destination"
+      [matAutocomplete]="autoDestination">
+    <mat-autocomplete #autoDestination="matAutocomplete">
+      <mat-option *ngFor="let option of filteredDestinationOptions | async" [value]="option.name">
+        <div>
+          {{option.name}} ({{option.code}})
+        </div>
+        <small>{{option.time_zone}}</small>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <div class="date-passengers-container">
+
+    <mat-form-field appearance="fill" class="example-form-field">
+      <mat-label>Enter a date range</mat-label>
+      <mat-date-range-input [rangePicker]="rangePicker">
+        <input matStartDate placeholder="Start date" formControlName="dateStart">
+        <input matEndDate placeholder="End date" formControlName="dateEnd">
+      </mat-date-range-input>
+      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="rangePicker"></mat-datepicker-toggle>
+      <mat-date-range-picker #rangePicker>
+        <mat-date-range-picker-actions>
+          <button mat-button matDateRangePickerCancel>Cancel</button>
+          <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
+        </mat-date-range-picker-actions>
+      </mat-date-range-picker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Passengers</mat-label>
+      <mat-select formControlName="passengers" hideSingleSelectionIndicator>
+        <mat-option value="1">
+          <div class="selection-option">
+            <div>
+              <div>Adult</div>
+              <small>14+ years</small>
+            </div>
+            <button class="passengers-button">+</button>{{1}}<button class="passengers-button">-</button>
+          </div>
+          <div class="selection-option">
+            <div>
+              <div>Child</div>
+              <small>2-14 years</small>
+            </div>
+            <button class="passengers-button">+</button>{{0}}<button class="passengers-button">-</button>
+          </div>
+          <div class="selection-option">
+            <div>
+              <div>Infant</div>
+              <small>0-2 years</small>
+            </div>
+            <button class="passengers-button">+</button>{{0}}<button class="passengers-button">-</button>
+          </div>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+
+  <button class="btn" mat-raised-button color="primary">Search</button>
+</form>

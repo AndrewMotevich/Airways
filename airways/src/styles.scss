@@ -1,10 +1,10 @@
 // base
-@import "./sass/base/normalize";
-@import "./sass/base/typography";
+@import './sass/base/normalize';
+@import './sass/base/typography';
 /* abstracts */
-@import "./sass/abstracts/variables";
-@import "./sass/abstracts/placeholders";
-@import "./sass/abstracts/mixins";
+@import './sass/abstracts/variables';
+@import './sass/abstracts/placeholders';
+@import './sass/abstracts/mixins';
 // layout
 @import "./sass/layout/grid";
 @import "./sass/layout/header";
@@ -12,3 +12,15 @@
 
 @import "./sass/base/base";
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  background-color: $color-neutral40;
+}
