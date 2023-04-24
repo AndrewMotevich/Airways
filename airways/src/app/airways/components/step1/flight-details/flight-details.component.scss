@@ -228,9 +228,21 @@
     text-align: right;
 
     color: $color-neutral20;
-    background-color: $color-highlight-yellow30;
+    
     border-radius: 2px;
     padding: 0.25rem 0.6rem;
+
+    &.plenty {
+      background-color: $color-highlight-green30;
+    }
+
+    &.few {
+      background-color: $color-highlight-red30;
+    }
+
+    &.enough {
+      background-color: $color-highlight-yellow30;
+    }
 
     @media screen and (min-width: 960px) {
       width: 100%;

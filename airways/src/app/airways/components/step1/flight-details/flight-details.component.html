@@ -1,46 +1,46 @@
-<section class="flight" *ngFor="let flight of flightsDetails">
+<section class="flight" *ngFor="let flight of flightsDetails$ | async">
   <div class="flight-details">
     <div class="flight-details_departure">
       <span class="date">{{
-        flight.departureDateTime | date : "EEE, d MMM y"
+        flight.departure_at | date : "EEE, d MMM y"
       }}</span>
       <span class="start-time">
         <span class="time">{{
-          flight.departureDateTime | date : "HH:mm"
+          flight.departure_at | date : "HH:mm"
         }}</span>
-        <span class="offset">{{ flight.departureDateTime | date : "z" }}</span>
+        <span class="offset">{{ flight.departure_at | date : "z" }}</span>
       </span>
-      <span class="station">{{flight.departureStation}}</span>
+      <span class="station">{{flight.origin}}</span>
     </div>
     <div class="travel-time">
-      <span class="travel-time_duration">2h 50m</span>
+      <span class="travel-time_duration">{{flight.duration}} = {{flight.duration | duration}}</span>
       <mat-icon aria-hidden="true" fontIcon="flight_takeoff" class="plane"></mat-icon>
-      <span class="travel-time_direction">Direct</span>
+      <span class="travel-time_direction">Direct, transfers {{flight.transfers}}</span>
     </div>
     <div class="flight-details_arrival">
       <span class="date">{{
-        flight.arrivalDateTime | date : "EEE, d MMM y"
+        flight.return_at | date : "EEE, d MMM y"
       }}</span>
       <span class="end-time">
-        <span class="offset">{{ flight.arrivalDateTime | date : "z" }}</span>
-        <span class="time">{{ flight.arrivalDateTime | date : "HH:mm" }}</span>
+        <span class="offset">{{ flight.return_at | date : "z" }}</span>
+        <span class="time">{{ flight.return_at | date : "HH:mm" }}</span>
       </span>
-      <span class="station">{{flight.arrivalStation}}</span>
+      <span class="station">{{flight.destination}}</span>
     </div>
   </div>
   <div class="flight-order">
     <div class="flight-number">
       <span class="flight-number_label">Flight no.</span>
-      <span class="flight-number_number">{{ flight.flightNumber }}</span>
+      <span class="flight-number_number">{{flight.airline}} {{flight.flight_number}}</span>
     </div>
     <div class="flight-info">
-      <div class="flight-availability">
-        100 seats <br />
+      <div class="flight-availability" [appColored]="flight.seats">
+        {{flight.seats}} seats <br />
         available
       </div>
       <div class="flight-price">
         <span class="flight-price_label">Price</span>
-        <span class="flight-price_price">€146.70</span>
+        <span class="flight-price_price">{{flight.price | currency | formatPrice}}</span>
       </div>
     </div>
     <button mat-button class="btn-with-gradient">Select</button>

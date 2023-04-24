@@ -1,16 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DEFAULT_CURRENCY_CODE, OnInit } from '@angular/core';
 import { IFlightDetails } from 'src/app/airways/models/flight-details.interface';
-import mockFlightsData from '../../../../../assets/data/flight-details.json';
+import { FlightsDataService } from 'src/app/airways/services/flightsData.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-flight-details',
   templateUrl: './flight-details.component.html',
-  styleUrls: ['./flight-details.component.scss']
+  styleUrls: ['./flight-details.component.scss'],
+  providers: [FlightsDataService, { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' }]
 })
 export class FlightDetailsComponent implements OnInit {
-  flightsDetails!: IFlightDetails[];
+  flightsDetails$!: Observable<IFlightDetails[]>;
+
+  constructor(private flightsDataService: FlightsDataService) { }
 
   ngOnInit(): void {
-    this.flightsDetails = mockFlightsData.flights;
+    this.flightsDetails$ = this.flightsDataService.getFlightsData();
   }
 }
