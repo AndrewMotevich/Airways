@@ -1,6 +1,6 @@
 import { Component, DEFAULT_CURRENCY_CODE, OnInit } from '@angular/core';
-import { IFlightDetails } from 'src/app/airways/models/flight-details.interface';
-import { FlightsDataService } from 'src/app/airways/services/flightsData.service';
+import { IFlightDetails } from 'src/app/booking/models/flight-details.interface';
+import { FlightsDataService } from 'src/app/booking/services/flightsData.service';
 import { Observable } from 'rxjs';
 
 @Component({
