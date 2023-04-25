@@ -1,4 +1,4 @@
-export type City = {
+export type CityDateType = {
   'country_code': string;
   'code': string;
   'name': string;

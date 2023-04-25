@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { FetchApiService } from '../../services/feth-api.service';
-import { City } from '../../models/city.model';
+import { AviaSalesApiService as AviasalesApiService } from '../../services/aviasales-api.service';
+import { CityDateType } from '../../models/city-data-type.model';
 import { FormDataService } from '../../services/form-data.service';
-import { formData } from '../../models/formData.model';
+import { FormDataType } from '../../models/form-data-type.model';
 
 @Component({
   selector: 'app-main-form',
@@ -19,13 +19,13 @@ export class MainFormComponent implements OnInit {
 
   isLoading = false;
 
-  filteredFromOptions: Observable<City[]> | undefined;
+  filteredFromOptions?: Observable<CityDateType[]>;
 
-  filteredDestinationOptions: Observable<City[]> | undefined;
+  filteredDestinationOptions?: Observable<CityDateType[]>;
 
-  cities: City[] = [];
+  cities: CityDateType[] = [];
 
-  constructor(private getCities: FetchApiService, private formDataService: FormDataService) {}
+  constructor(private getCities: AviasalesApiService, private formDataService: FormDataService) {}
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -53,20 +53,17 @@ export class MainFormComponent implements OnInit {
 
   submit(): void {
     if (this.form.valid) {
-      this.formDataService.setFormData(this.form.value as unknown as formData);
-      // eslint-disable-next-line no-console
-      console.log(this.formDataService.formData);
+      this.formDataService.setFormData(this.form.value as unknown as FormDataType);
     }
-    // todo service for form
   }
 
-  private filterFrom(value: string): City[] {
+  private filterFrom(value: string): CityDateType[] {
     const filterValue = value.toLowerCase();
 
     return this.cities.filter((city) => city.name.toLowerCase().includes(filterValue));
   }
 
-  private filterDestination(value: string): City[] {
+  private filterDestination(value: string): CityDateType[] {
     const filterValue = value.toLowerCase();
 
     return this.cities.filter((city) => city.name.toLowerCase().includes(filterValue));

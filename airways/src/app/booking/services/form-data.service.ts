@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { formData } from '../models/formData.model';
+import { FormDataType } from '../models/form-data-type.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FormDataService {
-  formData: formData | undefined;
+  formData: FormDataType | undefined;
 
-  setFormData(obj: formData): void {
+  setFormData(obj: FormDataType): void {
     this.formData = obj;
   }
 }

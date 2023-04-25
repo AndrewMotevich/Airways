@@ -1,4 +1,4 @@
-export type formData = {
+export type FormDataType = {
   roundedTrip: boolean;
   from: string;
   destination: string;
