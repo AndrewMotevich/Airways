@@ -12,6 +12,15 @@
   padding: 24px;
 }
 
+.rounded-input {
+  border-radius: 4px !important;
+  border: 0.5px solid rgba(116, 118, 122, 0.6) !important;
+}
+.mat-mdc-text-field-wrapper {
+  border-radius: 4px !important;
+  border: 0.5px solid rgba(116, 118, 122, 0.6) !important;
+}
+
 .origin-destination-container {
   position: relative;
   width: inherit;
@@ -51,7 +60,7 @@
 
 .btn {
   width: 126px;
-  height: 60px;
+  height: 60px !important;
   align-self: flex-end;
 }
 
