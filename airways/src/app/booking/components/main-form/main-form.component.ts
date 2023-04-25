@@ -17,7 +17,7 @@ import { changeIcon } from '../../../../assets/icons/Vector';
   encapsulation: ViewEncapsulation.None,
 })
 export class MainFormComponent implements OnInit {
-  toggle = false;
+  toggle = true;
 
   isLoading = false;
 
@@ -27,11 +27,23 @@ export class MainFormComponent implements OnInit {
 
   cities: CityDateType[] = [];
 
-  adult = 0;
+  adult = 1;
 
   child = 0;
 
   infant = 0;
+
+  form = new FormGroup({
+    roundedTrip: new FormControl<string>('both', [Validators.required]),
+    from: new FormControl<string>('', [Validators.required]),
+    destination: new FormControl<string>('', [Validators.required]),
+    dateStart: new FormControl<Date>(new Date(), [Validators.required]),
+    dateEnd: new FormControl<Date | null>(null, [Validators.required]),
+    passengers: new FormControl<number>(0, [Validators.min(1)]),
+    adult: new FormControl<number>(1, [Validators.min(1), Validators.max(9)]),
+    child: new FormControl<number>(0, [Validators.min(0), Validators.max(9)]),
+    infant: new FormControl<number>(0, [Validators.min(0), Validators.max(9)]),
+  });
 
   constructor(
     private getCities: AviasalesApiService,
@@ -57,29 +69,23 @@ export class MainFormComponent implements OnInit {
     });
   }
 
-  form = new FormGroup({
-    roundedTrip: new FormControl<string>('true', [Validators.required]),
-    from: new FormControl<string>('', [Validators.required]),
-    destination: new FormControl<string>('', [Validators.required]),
-    dateStart: new FormControl<Date>(new Date(), [Validators.required]),
-    dateEnd: new FormControl<Date | 'null'>('null', [Validators.required]),
-    passengers: new FormControl<number>(0),
-    adult: new FormControl<number>(0, [Validators.min(1), Validators.max(10)]),
-    child: new FormControl<number>(0, [Validators.min(0), Validators.max(10)]),
-    infant: new FormControl<number>(0, [Validators.min(0), Validators.max(10)]),
-  });
-
-  submit(): void {
+  public submit(): void {
+    console.log(this.form.value);
     if (this.form.valid) {
       this.formDataService.setFormData(this.form.value as unknown as FormDataType);
+      console.log(this.formDataService.formData);
     }
   }
 
-  clickHandler(event: Event, increase: boolean, property: 'adult' | 'child' | 'infant'): void {
+  public passengersHandler(
+    event: Event,
+    increase: boolean,
+    property: 'adult' | 'child' | 'infant'
+  ): void {
     event.stopPropagation();
     switch (property) {
       case 'adult':
-        if (increase && this.adult < 10) {
+        if (increase && this.adult < 9) {
           this.adult += 1;
           this.form.controls.adult.setValue(this.adult);
         } else if (!increase && this.adult > 0) {
@@ -88,7 +94,7 @@ export class MainFormComponent implements OnInit {
         }
         break;
       case 'child':
-        if (increase && this.child < 10) {
+        if (increase && this.child < 9) {
           this.child += 1;
           this.form.controls.child.setValue(this.child);
         } else if (!increase && this.child > 0) {
@@ -97,7 +103,7 @@ export class MainFormComponent implements OnInit {
         }
         break;
       case 'infant':
-        if (increase && this.infant < 10) {
+        if (increase && this.infant < 9) {
           this.infant += 1;
           this.form.controls.infant.setValue(this.infant);
         } else if (!increase && this.infant > 0) {
@@ -111,7 +117,7 @@ export class MainFormComponent implements OnInit {
     this.form.controls.passengers.setValue(this.adult + this.child + this.infant);
   }
 
-  changeDirections(): void {
+  public changeDirectionsHandler(): void {
     const currentFrom = this.form.controls.from.value;
     const currentDestination = this.form.controls.destination.value;
     this.form.controls.from.setValue(currentDestination);

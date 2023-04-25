@@ -2,7 +2,10 @@ export type FormDataType = {
   roundedTrip: string;
   from: string;
   destination: string;
-  dataStart: object;
-  dataEnd: object;
-  passengers: string;
+  dataStart: Date;
+  dataEnd: Date;
+  passengers: number;
+  adult: number;
+  child: number;
+  infant: number;
 };

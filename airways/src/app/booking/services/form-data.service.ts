@@ -5,7 +5,7 @@ import { FormDataType } from '../models/form-data-type.model';
   providedIn: 'root',
 })
 export class FormDataService {
-  formData: FormDataType | undefined;
+  formData?: FormDataType;
 
   setFormData(obj: FormDataType): void {
     this.formData = obj;
