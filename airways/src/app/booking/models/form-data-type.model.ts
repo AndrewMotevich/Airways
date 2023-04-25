@@ -1,8 +1,8 @@
 export type FormDataType = {
-  roundedTrip: boolean;
+  roundedTrip: string;
   from: string;
   destination: string;
   dataStart: object;
   dataEnd: object;
-  passengers: number;
+  passengers: string;
 };
