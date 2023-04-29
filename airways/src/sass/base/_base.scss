@@ -21,7 +21,7 @@ body {
 
   background: $color-highlight-gradient;
   transition: 0.5s;
-  
+
   border-style: solid;
   border-width: 1px;
   border-color: $color-primary;
@@ -40,4 +40,27 @@ body {
 
 .mat-mdc-button.btn-with-gradient:not(:disabled) {
   color: $color-neutral100;
+}
+
+.mat-typography h2 {
+  @include title-h2;
+}
+
+.mat-mdc-form-field-icon-suffix {
+  padding-left: 9px !important;
+}
+.mat-mdc-form-field-icon-suffix > .mat-icon {
+  padding: 10px;
+  font-size: 1.9rem;
+  line-height: 1.5rem;
+}
+
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__text-label,
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__checkmark {
+  color: $color-primary !important;
+}
+
+.mat-mdc-standard-chip.mdc-evolution-chip--with-primary-graphic
+  .mdc-evolution-chip__action--primary {
+  margin: 0 auto;
 }

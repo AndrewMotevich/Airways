@@ -8,3 +8,16 @@
     letter-spacing: $spacing;
   }
 }
+
+@mixin white-block($radius: 5px) {
+  background: $color-neutral100;
+  box-shadow: $shadow;
+  border-radius: $radius;
+  box-sizing: border-box;
+}
+
+@mixin title-h2 {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+}
