@@ -1,5 +1,6 @@
 // primary
 $color-primary: rgb(17, 57, 126);
+$color-primary-dark: rgba(16, 38, 76);
 // secondary
 $color-secondary0: rgba(0, 144, 189, 1);
 $color-secondary10: rgba(122, 191, 212, 1);
@@ -7,7 +8,7 @@ $color-secondary40: rgba(208, 217, 223, 1);
 $color-secondary50: rgba(225, 229, 235, 1);
 $color-secondary60: rgba(233, 237, 241, 1);
 $color-secondary80: rgba(241, 243, 246, 1);
-$color-secondary90: rgba(244, 246, 249, 1);
+$color-secondary90: rgba(244, 246, 249);
 $color-secondary100: rgba(250, 250, 250, 1);
 // highlight
 $color-highlight-gradient: linear-gradient(108.75deg, #0090bd 59.91%, #073590 95.36%);
@@ -35,3 +36,4 @@ $color-neutral100: rgb(255, 255, 255);
 $shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
 
 $color-dark: rgb(0, 0, 0);
+
