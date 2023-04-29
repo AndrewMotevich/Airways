@@ -1,0 +1,42 @@
+<div [formGroup]="fg">
+  <div formArrayName="passengersDetailsArray">
+    <fieldset
+      class="passenger-form"
+      *ngFor="let passenger of passengers?.controls; index as i"
+      [formGroupName]="i"
+    >
+      <h2>{{ i + 1 }} {{ passenger.get('category')?.value }}</h2>
+
+      <div class="passenger-form_wrapper">
+        <mat-form-field appearance="outline">
+          <mat-label>First name*</mat-label>
+          <input matInput type="text" formControlName="firstName" />
+          <mat-icon matSuffix appearance="outline">info</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Last name*</mat-label>
+          <input matInput type="text" formControlName="lastName" />
+          <mat-icon matSuffix class="error-icon">error</mat-icon>
+        </mat-form-field>
+
+        <mat-chip-listbox aria-label="Gender selection" class="gender" formControlName="gender">
+          <mat-chip-option class="gender-male">Male</mat-chip-option>
+          <mat-chip-option class="gender-female">Female</mat-chip-option>
+        </mat-chip-listbox>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Date of birth*</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            name="dateOfBirth"
+            formControlName="dateOfBirth"
+          />
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </fieldset>
+  </div>
+</div>

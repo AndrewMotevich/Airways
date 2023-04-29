@@ -1,0 +1,52 @@
+@import '/src/sass/abstracts/variables';
+@import '/src/sass/abstracts/mixins';
+
+%gender {
+  background-color: $color-secondary90;
+  border: 1px solid $color-neutral40;
+  width: 108px;
+  height: 54px;
+  margin: 0;
+}
+
+.passenger-form {
+  @include white-block(8px);
+  padding: 2.15rem 2.3rem 2rem 3rem;
+  margin-bottom: 2rem;
+  border: none;
+
+  &_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+  }
+
+  h2 {
+    color: $color-primary-dark;
+    text-transform: capitalize;
+    margin-bottom: 1.5rem;
+    padding-left: 0.4rem;
+  }
+
+  .gender {
+    margin-left: 0.5rem;
+
+    &-male {
+      @extend %gender;
+      border-radius: 4px 0px 0px 4px;
+    }
+
+    &-female {
+      @extend %gender;
+      border-radius: 0px 4px 4px 0px;
+    }
+  }
+
+  .mdc-evolution-chip-set {
+    align-items: flex-start;
+  }
+}
+
+.error-icon {
+  fill: $color-error;
+}

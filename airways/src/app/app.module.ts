@@ -12,6 +12,7 @@ import { FooterComponent } from './core/components/header/footer/footer.componen
 import { MainPageComponent } from './booking/pages/main-page/main-page.component';
 import { Page404Component } from './booking/pages/page404/page404.component';
 import { AirwaysModule } from './booking/airways.module';
+import { BookingFlightModule } from './booking/pages/booking-flight/booking-flight.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { AirwaysModule } from './booking/airways.module';
     HeaderComponent,
     FooterComponent,
     MainPageComponent,
-    Page404Component,
+    Page404Component
   ],
   imports: [
     ReactiveFormsModule,
@@ -30,7 +31,8 @@ import { AirwaysModule } from './booking/airways.module';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    AirwaysModule
+    AirwaysModule,
+    BookingFlightModule
   ],
   providers: [],
   bootstrap: [AppComponent],
