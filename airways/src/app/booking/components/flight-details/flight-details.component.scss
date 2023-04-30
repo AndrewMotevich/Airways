@@ -1,0 +1,292 @@
+@import '/src/sass/abstracts/mixins';
+@import '/src/sass/abstracts/variables';
+@import '/src/sass/base/typography';
+
+.flight {
+  box-sizing: border-box;
+  max-width: 1128px;
+  margin: 2rem auto;
+
+  background-color: $color-neutral100;
+  box-shadow: $shadow;
+  border-radius: 5px;
+
+  @media screen and (min-width: 960px) {
+    display: grid;
+    grid-template-columns: 4fr 3fr;
+  }
+
+  @media screen and (max-width: 959px) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-details {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+
+    @media screen and (min-width: 960px) {
+      padding-top: 1.9rem;
+      padding-bottom: 1.5rem;
+      padding-left: 2.5rem;
+    }
+
+    @media screen and (max-width: 959px) {
+      padding: 1.5rem;
+    }
+
+    &_departure,
+    &_arrival {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &_arrival {
+      align-items: flex-end;
+
+      @media screen and (min-width: 960px) {
+        padding-right: 0.6rem;
+      }
+    }
+
+    .date {
+      @extend %text-label-large;
+
+      color: $color-neutral30;
+      margin-bottom: 0.3rem;
+
+      @media screen and (max-width: 540px) {
+        font-size: 13px;
+      }
+    }
+
+    .start-time {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .end-time {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .time {
+      @extend %text-subtitle-large;
+      color: $color-dark;
+
+      @media screen and (min-width: 601px) {
+        font-size: 30px;
+      }
+
+      @media screen and (max-width: 600px) and (min-width: 541px) {
+        font-size: 25px;
+      }
+
+      @media screen and (max-width: 540px) {
+        font-size: 22px;
+      }
+    }
+
+    .offset {
+      font-size: 8px;
+      line-height: 16px;
+      color: $color-neutral30;
+    }
+
+    .station {
+      @extend %text-label-small;
+      color: $color-neutral30;
+    }
+
+    .travel-time {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      padding-top: 2px;
+      position: relative;
+
+      &::before {
+        content: '';
+        border-width: 2px;
+        border-style: solid;
+        border-color: $color-secondary40;
+        width: 83%;
+        position: absolute;
+        top: 52%;
+      }
+
+      .plane {
+        color: $color-secondary0;
+        background-color: $color-neutral100;
+        position: relative;
+        padding: 0 0.8rem;
+        font-size: 1.7rem;
+        height: 20px;
+      }
+
+      &_duration {
+        @extend %text-label-small;
+        color: $color-dark;
+      }
+
+      &_direction {
+        @extend %text-label-small;
+        color: $color-dark;
+      }
+    }
+  }
+
+  &-order {
+    display: flex;
+    align-items: center;
+
+    @media screen and (min-width: 960px) {
+      padding-right: 2.55rem;
+    }
+
+    @media screen and (max-width: 959px) {
+      padding-bottom: 1.2rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  &-number {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-end;
+
+    height: 100%;
+    border-right-width: 2px;
+    border-right-style: dashed;
+    border-right-color: $color-secondary40;
+
+    @media screen and (min-width: 960px) {
+      padding-right: 2rem;
+      padding-left: 0.6rem;
+      gap: 0.6rem;
+    }
+
+    @media screen and (max-width: 959px) and (min-width: 541px) {
+      padding-left: 1.5rem;
+      padding-right: 1rem;
+      gap: 0.6rem;
+    }
+
+    @media screen and (max-width: 540px) {
+      padding-left: 1.5rem;
+      padding-right: 1rem;
+      flex-direction: column;
+    }
+
+    &_label {
+      @extend %text-body-medium;
+
+      color: $color-neutral30;
+      white-space: nowrap;
+
+      @media screen and (max-width: 540px) {
+        font-size: 12px;
+      }
+    }
+
+    &_number {
+      white-space: nowrap;
+    }
+  }
+
+  &-info {
+    display: flex;
+    align-items: flex-end;
+    flex-grow: 1;
+    padding-right: 2rem;
+    padding-left: 1.3rem;
+    height: 100%;
+    box-sizing: border-box;
+
+    @media screen and (min-width: 960px) {
+      flex-direction: column;
+      padding-top: 1.2rem;
+      padding-bottom: 0.8rem;
+    }
+
+    @media screen and (max-width: 959px) {
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  &-availability {
+    @extend %text-subtitle-small;
+    box-sizing: border-box;
+    text-align: right;
+
+    color: $color-neutral20;
+    
+    border-radius: 2px;
+    padding: 0.25rem 0.6rem;
+
+    &.plenty {
+      background-color: $color-highlight-green30;
+    }
+
+    &.few {
+      background-color: $color-highlight-red30;
+    }
+
+    &.enough {
+      background-color: $color-highlight-yellow30;
+    }
+
+    @media screen and (min-width: 960px) {
+      width: 100%;
+    }
+
+    @media screen and (max-width: 540px) {
+      font-size: 11px;
+    }
+
+    @media screen and (max-width: 426px) {
+      display: none;
+    }
+  }
+
+  &-price {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    @media screen and (max-width: 959px) {
+      align-items: flex-end;
+    }
+
+    &_price {
+      @extend %text-subtitle-large;
+
+      display: flex;
+      align-items: center;
+      text-align: right;
+      color: $color-primary;
+    }
+
+    &_label {
+      @extend %text-subtitle-small;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-top: 5px;
+      color: $color-neutral30;
+
+      @media screen and (max-width: 959px) {
+        display: none;
+      }
+    }
+  }
+}

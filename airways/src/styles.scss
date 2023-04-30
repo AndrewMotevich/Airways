@@ -6,18 +6,8 @@
 @import './sass/abstracts/placeholders';
 @import './sass/abstracts/mixins';
 // layout
-@import './sass/layout/grid';
-@import './sass/layout/header';
-@import './sass/layout/footer';
+@import "./sass/layout/grid";
+@import "./sass/layout/header";
+@import "./sass/layout/footer";
 
-html,
-body {
-  height: 100%;
-}
-body {
-  display: flex;
-  justify-content: center;
-  margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-  background-color: $color-neutral40;
-}
+@import "./sass/base/base";

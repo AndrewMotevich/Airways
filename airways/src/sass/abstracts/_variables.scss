@@ -1,5 +1,5 @@
 // primary
-$color-primary: #11397e;
+$color-primary: rgb(17, 57, 126);
 // secondary
 $color-secondary0: rgba(0, 144, 189, 1);
 $color-secondary10: rgba(122, 191, 212, 1);
@@ -19,17 +19,19 @@ $color-highlight-red30: rgba(179, 38, 30, 0.3);
 // error
 $color-error: rgba(179, 38, 30, 1);
 // neutral
-$color-neutral0: #1c1b1f;
-$color-neutral10: #49454f;
+$color-neutral0: rgb(28, 27, 31);
+$color-neutral10: rgb(73, 69, 79);
 $color-neutral20: rgba(69, 74, 83, 1);
-$color-neutral30: #74767a;
+$color-neutral30: rgb(116, 118, 122);
 $color-neutral40: rgb(116, 118, 122, 0.6);
 $color-neutral50: rgba(0, 0, 0, 0.25);
 $color-neutral60: rgba(206, 206, 206, 1);
 $color-neutral70: rgba(116, 118, 122, 0.2);
 $color-neutral80: rgba(245, 245, 245, 1);
 $color-neutral90: rgba(241, 243, 246, 0.15);
-$color-neutral100: #ffffff;
+$color-neutral100: rgb(255, 255, 255);
 
 // box-shadow
 $shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+
+$color-dark: rgb(0, 0, 0);
