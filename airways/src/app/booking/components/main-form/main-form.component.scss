@@ -1,0 +1,85 @@
+@import '../../../../sass/abstracts/variables';
+
+.form-container {
+  margin-top: 62px;
+  width: 580px;
+  height: 390px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 8px;
+  background-color: $color-neutral100;
+  padding: 24px;
+}
+
+.rounded-input {
+  border-radius: 4px !important;
+  border: 0.5px solid rgba(116, 118, 122, 0.6) !important;
+}
+.mat-mdc-text-field-wrapper {
+  border-radius: 4px !important;
+  border: 0.5px solid rgba(116, 118, 122, 0.6) !important;
+}
+
+.origin-destination-container {
+  position: relative;
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+.change-direction-btn {
+  position: absolute !important;
+  top: 40px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+}
+
+.hidden {
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  visibility: hidden;
+}
+
+.passengers-button {
+  width: 24px;
+  height: 24px;
+  border: none;
+  cursor: pointer;
+}
+
+.selection-option {
+  width: 169px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn {
+  width: 126px;
+  height: 60px !important;
+  align-self: flex-end;
+}
+
+.date-passengers-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.select-panel.mat-mdc-select-panel {
+  .mat-mdc-option-active {
+    background-color: $color-neutral100 !important;
+  }
+  .mdc-list-item__primary-text {
+    color: rgba(0, 0, 0, 0.87) !important;
+  }
+
+  .mat-mdc-option:hover {
+    cursor: default;
+    background-color: $color-neutral100 !important;
+  }
+}
