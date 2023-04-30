@@ -1,3 +1,8 @@
+// MUI
+@use "@angular/material" as mat;
+
+@include mat.core();
+
 // base
 @import "./sass/base/normalize";
 @import "./sass/base/typography";
@@ -9,3 +14,7 @@
 @import "./sass/layout/grid";
 @import "./sass/layout/header";
 @import "./sass/layout/footer";
+
+html {
+  background-color: $color-secondary40;
+}

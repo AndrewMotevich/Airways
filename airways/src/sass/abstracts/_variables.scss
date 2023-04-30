@@ -1,39 +1,35 @@
 // primary
-$color-primary: #11397e;
+$color-primary: rgb(17, 57, 126);
 // secondary
-$color-secondary0: rgba(0, 144, 189, 1);
-$color-secondary10: rgba(122, 191, 212, 1);
-$color-secondary40: rgba(208, 217, 223, 1);
-$color-secondary50: rgba(225, 229, 235, 1);
-$color-secondary60: rgba(233, 237, 241, 1);
-$color-secondary80: rgba(241, 243, 246, 1);
-$color-secondary90: rgba(244, 246, 249, 1);
-$color-secondary100: rgba(250, 250, 250, 1);
+$color-secondary0: rgb(0, 144, 189);
+$color-secondary10: rgb(122, 191, 212);
+$color-secondary40: rgb(208, 217, 223);
+$color-secondary50: rgb(225, 229, 235);
+$color-secondary60: rgb(233, 237, 241);
+$color-secondary80: rgb(241, 243, 246);
+$color-secondary90: rgb(244, 246, 249);
+$color-secondary100: rgb(250, 250, 250);
 // highlight
-$color-highlight-gradient: linear-gradient(
-  108.75deg,
-  #0090bd 59.91%,
-  #073590 95.36%
-);
-$color-highlight-green0: rgba(127, 137, 6, 1);
+$color-highlight-gradient: linear-gradient(108.75deg, rgb(0, 144, 189) 59.91%, rgb(7, 53, 144) 95.36%);
+$color-highlight-green0: rgb(127, 137, 6);
 $color-highlight-green30: rgba(127, 137, 6, 0.3);
-$color-highlight-yellow0: rgba(241, 201, 51, 1);
+$color-highlight-yellow0: rgb(241, 201, 51);
 $color-highlight-yellow30: rgba(241, 201, 51, 0.3);
 $color-highlight-red30: rgba(179, 38, 30, 0.3);
 // error
-$color-error: rgba(179, 38, 30, 1);
+$color-error: rgb(179, 38, 30);
 // neutral
-$color-neutral0: #1c1b1f;
-$color-neutral10: #49454f;
-$color-neutral20: rgba(69, 74, 83, 1);
-$color-neutral30: #74767a;
+$color-neutral0: rgb(28, 27, 31);
+$color-neutral10: rgb(73, 69, 79);
+$color-neutral20: rgb(69, 74, 83);
+$color-neutral30: rgb(116, 118, 122);
 $color-neutral40: rgb(116, 118, 122, 0.6);
 $color-neutral50: rgba(0, 0, 0, 0.25);
-$color-neutral60: rgba(206, 206, 206, 1);
+$color-neutral60: rgb(206, 206, 206);
 $color-neutral70: rgba(116, 118, 122, 0.2);
-$color-neutral80: rgba(245, 245, 245, 1);
+$color-neutral80: rgb(245, 245, 245);
 $color-neutral90: rgba(241, 243, 246, 0.15);
-$color-neutral100: #ffffff;
+$color-neutral100: rgb(255, 255, 255);
 
 // box-shadow
 $shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
