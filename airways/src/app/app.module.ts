@@ -14,8 +14,8 @@ import { MainPageModule } from './booking/pages/main-page/main-page.module';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    AirwaysModule
     MainPageModule,
+    AirwaysModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

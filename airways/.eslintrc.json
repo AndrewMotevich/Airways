@@ -42,7 +42,8 @@
         "@typescript-eslint/explicit-function-return-type": "warn",
         "lines-between-class-members": "warn",
         "@typescript-eslint/lines-between-class-members": "warn",
-        "spaced-comment": "warn"
+        "spaced-comment": "warn",
+        "class-methods-use-this": ["error", { "exceptMethods": ["transform"] }]
       }
     },
     {
