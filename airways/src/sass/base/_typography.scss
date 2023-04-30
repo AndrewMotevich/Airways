@@ -17,13 +17,13 @@
 
 // Subtitle
 %text-subtitle-large {
-  @include typography(400, 30px, 36px, 0px);
+  @include typography(700, 30px, 36px);
 }
-%text-subtitle-large {
+%text-subtitle-medium {
   @include typography(400, 20px, 20px, 0px);
 }
 %text-subtitle-small {
-  @include typography(400, 12px, 16px, 0.4px);
+  @include typography(700, 12px, 16px);
 }
 
 // Label
@@ -60,5 +60,5 @@
 
 // Button
 %text-button {
-  @include typography(400, 16px, 20px, 0.1px);
+  @include typography(500, 16px, 20px, 0.1px);
 }

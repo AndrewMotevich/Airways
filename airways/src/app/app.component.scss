@@ -1,1 +1,6 @@
-@import "../sass/abstracts/_variables";
+.container {
+  max-width: 1128px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0 2rem;
+}
