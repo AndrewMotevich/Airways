@@ -1,1 +1,44 @@
-<header>Header</header>
+<header>
+  <div class="header-wrapper">
+    <img src="../../../../../assets/images/Logo.png" alt="Logo Airways">
+    <div class="header-items-wrapper">
+
+      <mat-stepper *ngIf="false" linear #stepper>
+        <mat-step>
+          <ng-template matStepLabel>Flights</ng-template>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Passengers</ng-template>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Review & Payment</ng-template>
+        </mat-step>
+      </mat-stepper>
+
+      <mat-form-field class="date-select" appearance="outline" hideRequiredMarker>
+        <mat-select hideSingleSelectionIndicator placeholder="MM/DD/YYYY">
+          <mat-option value="MM/DD/YYYY">MM/DD/YYYY</mat-option>
+          <mat-option value="DD/MM/YYYY">DD/MM/YYYY</mat-option>
+          <mat-option value="YYYY/DD/MM">YYYY/DD/MM</mat-option>
+          <mat-option value="YYYY/MM/DD">YYYY/MM/DD</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="currency-select" appearance="outline" hideRequiredMarker>
+        <mat-select hideSingleSelectionIndicator class="select" placeholder="EUR">
+          <mat-option value="EUR">EUR</mat-option>
+          <mat-option value="USA">USA</mat-option>
+          <mat-option value="RUB">RUB</mat-option>
+          <mat-option value="PLN">PLN</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-button class="sign-button-wrapper">
+        <mat-icon fontIcon="person_outline"></mat-icon>
+        <span>Sign in</span>
+      </button>
+
+      <button mat-icon-button><mat-icon fontIcon="shopping_basket"></mat-icon></button>
+    </div>
+  </div>
+</header>
