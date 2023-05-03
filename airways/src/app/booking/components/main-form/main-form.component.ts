@@ -1,31 +1,58 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { FetchApiService } from '../../services/feth-api.service';
-import { City } from '../../models/city.model';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
+import { AviaSalesApiService as AviasalesApiService } from '../../services/aviasales-api.service';
+import { CityDateType } from '../../models/city-data-type.model';
 import { FormDataService } from '../../services/form-data.service';
-import { formData } from '../../models/formData.model';
+import { FormDataType } from '../../models/form-data-type.model';
+import { changeIcon } from '../../../../assets/icons/Vector';
 
 @Component({
   selector: 'app-main-form',
   templateUrl: './main-form.component.html',
   styleUrls: ['./main-form.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class MainFormComponent implements OnInit {
-  toggle = false;
-
-  passengers = ['Adults', 'Child', 'Infant'];
+  toggle = true;
 
   isLoading = false;
 
-  filteredFromOptions: Observable<City[]> | undefined;
+  filteredFromOptions?: Observable<CityDateType[]>;
 
-  filteredDestinationOptions: Observable<City[]> | undefined;
+  filteredDestinationOptions?: Observable<CityDateType[]>;
 
-  cities: City[] = [];
+  cities: CityDateType[] = [];
 
-  constructor(private getCities: FetchApiService, private formDataService: FormDataService) {}
+  adult = 1;
+
+  child = 0;
+
+  infant = 0;
+
+  form = new FormGroup({
+    roundedTrip: new FormControl<string>('both', [Validators.required]),
+    from: new FormControl<string>('', [Validators.required]),
+    destination: new FormControl<string>('', [Validators.required]),
+    dateStart: new FormControl<Date>(new Date(), [Validators.required]),
+    dateEnd: new FormControl<Date | null>(null, [Validators.required]),
+    passengers: new FormControl<number>(0, [Validators.min(1)]),
+    adult: new FormControl<number>(1, [Validators.min(1), Validators.max(9)]),
+    child: new FormControl<number>(0, [Validators.min(0), Validators.max(9)]),
+    infant: new FormControl<number>(0, [Validators.min(0), Validators.max(9)]),
+  });
+
+  constructor(
+    private getCities: AviasalesApiService,
+    private formDataService: FormDataService,
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer
+  ) {
+    iconRegistry.addSvgIconLiteral('change-icon', sanitizer.bypassSecurityTrustHtml(changeIcon));
+  }
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -42,31 +69,66 @@ export class MainFormComponent implements OnInit {
     });
   }
 
-  form = new FormGroup({
-    roundedTrip: new FormControl<string>('', [Validators.required]),
-    from: new FormControl<string>('', [Validators.required]),
-    destination: new FormControl<string>('', [Validators.required]),
-    dateStart: new FormControl<string>('', [Validators.required]),
-    dateEnd: new FormControl<string>('', [Validators.required]),
-    passengers: new FormControl<string>('', [Validators.required]),
-  });
-
-  submit(): void {
+  public submit(): void {
     if (this.form.valid) {
-      this.formDataService.setFormData(this.form.value as unknown as formData);
-      // eslint-disable-next-line no-console
-      console.log(this.formDataService.formData);
+      this.formDataService.setFormData(this.form.value as unknown as FormDataType);
     }
-    // todo service for form
   }
 
-  private filterFrom(value: string): City[] {
+  public passengersHandler(
+    event: Event,
+    increase: boolean,
+    property: 'adult' | 'child' | 'infant'
+  ): void {
+    event.stopPropagation();
+    switch (property) {
+      case 'adult':
+        if (increase && this.adult < 9) {
+          this.adult += 1;
+          this.form.controls.adult.setValue(this.adult);
+        } else if (!increase && this.adult > 0) {
+          this.adult -= 1;
+          this.form.controls.adult.setValue(this.adult);
+        }
+        break;
+      case 'child':
+        if (increase && this.child < 9) {
+          this.child += 1;
+          this.form.controls.child.setValue(this.child);
+        } else if (!increase && this.child > 0) {
+          this.child -= 1;
+          this.form.controls.child.setValue(this.child);
+        }
+        break;
+      case 'infant':
+        if (increase && this.infant < 9) {
+          this.infant += 1;
+          this.form.controls.infant.setValue(this.infant);
+        } else if (!increase && this.infant > 0) {
+          this.infant -= 1;
+          this.form.controls.infant.setValue(this.infant);
+        }
+        break;
+      default:
+        break;
+    }
+    this.form.controls.passengers.setValue(this.adult + this.child + this.infant);
+  }
+
+  public changeDirectionsHandler(): void {
+    const currentFrom = this.form.controls.from.value;
+    const currentDestination = this.form.controls.destination.value;
+    this.form.controls.from.setValue(currentDestination);
+    this.form.controls.destination.setValue(currentFrom);
+  }
+
+  private filterFrom(value: string): CityDateType[] {
     const filterValue = value.toLowerCase();
 
     return this.cities.filter((city) => city.name.toLowerCase().includes(filterValue));
   }
 
-  private filterDestination(value: string): City[] {
+  private filterDestination(value: string): CityDateType[] {
     const filterValue = value.toLowerCase();
 
     return this.cities.filter((city) => city.name.toLowerCase().includes(filterValue));

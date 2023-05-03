@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'formatPrice'
+  name: 'formatPrice',
 })
 export class FormatPricePipe implements PipeTransform {
   transform(price: string | null): string {
@@ -9,5 +9,4 @@ export class FormatPricePipe implements PipeTransform {
 
     return price.endsWith('.00') ? price.split('.')[0] : price;
   }
-
 }

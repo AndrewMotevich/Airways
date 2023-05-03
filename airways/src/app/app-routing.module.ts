@@ -6,9 +6,9 @@ import { Page404Component } from './booking/pages/page404/page404.component';
 import { BookingFlightComponent } from './booking/pages/booking-flight/booking-flight.component';
 
 const routes: Routes = [
-  { path: 'select', component: SelectFlightComponent },
-  { path: 'booking', component: BookingFlightComponent },
   { path: '', component: MainPageComponent },
+  { path: 'select-flight', component: SelectFlightComponent },
+  { path: 'booking', component: BookingFlightComponent },
   { path: '404', component: Page404Component },
   { path: '**', redirectTo: '/404' },
 ];
