@@ -1,0 +1,112 @@
+<div class="login-form-container">
+  <div class="login-form-wrapper">
+    <mat-tab-group dynamicHeight>
+      <mat-tab label="Log in" class="tab-login">
+
+        <div class="login-header-container">
+          <button class="login-header-button">
+            <img width="24px" src="../../../../assets/icons/google_24px.png" alt="google icon">
+            <p>Continue with Google</p>
+          </button>
+
+          <button class="login-header-button">
+            <img width="24px" src="../../../../assets/icons/facebook.png" alt="facebook icon">
+            <p>Continue with Facebook</p>
+          </button>
+        </div>
+
+        <form [formGroup]="loginForm" class="login-footer-container">
+          <div class="divider">
+            <div class="line"><mat-divider></mat-divider></div>
+            <div class="text">or log in with your email</div>
+            <div class="line"><mat-divider></mat-divider></div>
+          </div>
+
+          <div>
+            <mat-form-field appearance="fill" class="width-100">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="Enter your email" formControlName="email">
+              <mat-error *ngIf="loginForm.controls.email.hasError('required')">You mast enter a value</mat-error>
+              <mat-error *ngIf="loginForm.controls.email.hasError('email')">Invalid email</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field appearance="fill" class="width-100">
+              <mat-label>Password</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-error *ngIf="loginForm.controls.password.hasError('required')">You mast enter a value</mat-error>
+              <mat-error *ngIf="loginForm.controls.password.hasError('minlength')">Min length 8</mat-error>
+            </mat-form-field>
+          </div>
+
+          <a href="#" class="link link-fogot-position">Forgot password?</a>
+
+          <button mat-raised-button color="primary" class="login-btn">Log in</button>
+        </form>
+
+      </mat-tab>
+
+      <mat-tab label="Sign up" class="tab-signup">
+
+        <div class="login-header-container">
+          <button class="login-header-button">
+            <img width="24px" src="../../../../assets/icons/google_24px.png" alt="google icon">
+            <p>Continue with Google</p>
+          </button>
+
+          <button class="login-header-button">
+            <img width="24px" src="../../../../assets/icons/facebook.png" alt="facebook icon">
+            <p>Continue with Facebook</p>
+          </button>
+        </div>
+
+        <form [formGroup]="registerForm" class="login-footer-container">
+
+          <div class="divider">
+            <div class="line"><mat-divider></mat-divider></div>
+            <div class="text">or sign up in with your email</div>
+            <div class="line"><mat-divider></mat-divider></div>
+          </div>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="pat@example.com" formControlName="email" required>
+            <mat-error *ngIf="registerForm.controls.email.hasError('required')">You mast enter a value</mat-error>
+            <mat-error *ngIf="registerForm.controls.email.hasError('email')">Invalid email</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password">
+            <mat-icon matSuffix>error_outline</mat-icon>
+            <mat-error *ngIf="registerForm.controls.password.hasError('required')">You mast enter a value</mat-error>
+            <mat-error *ngIf="registerForm.controls.password.hasError('minlength')">Min length 8</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>First name</mat-label>
+            <input matInput placeholder="Enter your first name" formControlName="firstName" required>
+            <mat-icon matSuffix>error_outline</mat-icon>
+            <mat-error *ngIf="registerForm.controls.firstName.hasError('required')">You mast enter a value</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Last name</mat-label>
+            <input matInput placeholder="Enter your last name" formControlName="lastName" required>
+            <mat-icon matSuffix>error_outline</mat-icon>
+            <mat-error *ngIf="registerForm.controls.lastName.hasError('required')">You mast enter a value</mat-error>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" class="login-btn">Sign up</button>
+        </form>
+
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  <button mat-icon-button (click)="modalWindowService.showModal()"><mat-icon fontIcon="clear icon"></mat-icon></button>
+</div>

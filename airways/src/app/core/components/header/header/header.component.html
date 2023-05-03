@@ -33,7 +33,7 @@
         </mat-select>
       </mat-form-field>
 
-      <button mat-button class="sign-button-wrapper">
+      <button mat-button class="sign-button-wrapper" (click)="modalWindowServices.showModal()">
         <mat-icon fontIcon="person_outline"></mat-icon>
         <span>Sign in</span>
       </button>
@@ -41,4 +41,5 @@
       <button mat-icon-button><mat-icon fontIcon="shopping_basket"></mat-icon></button>
     </div>
   </div>
+  <app-login-form *ngIf="modalWindowServices.isLogin"></app-login-form>
 </header>
