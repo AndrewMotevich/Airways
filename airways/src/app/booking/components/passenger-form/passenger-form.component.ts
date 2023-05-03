@@ -1,13 +1,39 @@
-import { Component, Input } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { ControlContainer, FormControl, FormGroup, FormGroupDirective } from '@angular/forms';
+import * as Constant from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-passenger-form',
   templateUrl: './passenger-form.component.html',
-  styleUrls: ['./passenger-form.component.scss']
+  styleUrls: ['./passenger-form.component.scss'],
+  viewProviders: [
+    { provide: ControlContainer, useExisting: FormGroupDirective }
+  ]
 })
-export class PassengerFormComponent {
-  @Input() passengers!: FormArray;
+export class PassengerFormComponent implements OnInit {
+  @Input() passenger!: FormGroup;
 
-  @Input() fg!: FormGroup;
+  @Input() id!: number;
+
+  form!: any;
+
+  nameTooltip = Constant.NAME_TOOLTIP;
+
+  get firstName(): FormControl<string> {
+    return this.passenger.get('firstName') as unknown as FormControl<string>;
+  }
+
+  get lastName(): FormControl<string> {
+    return this.passenger.get('lastName') as unknown as FormControl<string>;
+  }
+
+  get category(): string {
+    return this.passenger.get('category')?.value;
+  }
+
+  constructor(private rootFormGroup: FormGroupDirective) { }
+
+  ngOnInit(): void {
+    this.form = this.rootFormGroup.control.get(Constant.PASSENGERS_FORM_ARRAY_NAME);
+  }
 }

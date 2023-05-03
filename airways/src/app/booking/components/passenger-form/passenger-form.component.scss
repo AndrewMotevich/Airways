@@ -19,6 +19,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1.2rem;
+    margin-bottom: 2rem;
   }
 
   h2 {
@@ -45,8 +46,15 @@
   .mdc-evolution-chip-set {
     align-items: flex-start;
   }
+
+  &_needhelp {
+
+    
+      
+    
+  }
 }
 
 .error-icon {
-  fill: $color-error;
+  color: $color-error;
 }

@@ -1,3 +1,7 @@
+:root {
+  --mdc-typography-body2-font-size: 12px;
+}
+
 html,
 body {
   height: 100%;
@@ -63,4 +67,8 @@ body {
 .mat-mdc-standard-chip.mdc-evolution-chip--with-primary-graphic
   .mdc-evolution-chip__action--primary {
   margin: 0 auto;
+}
+
+.mdc-text-field {
+  background-color: $color-secondary90;
 }

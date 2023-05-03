@@ -1,0 +1,10 @@
+<ng-container [formGroup]="form">
+  <ng-container [formArrayName]="formArrayName">
+    <ng-container
+      *ngFor="let passenger of passengers; index as i"
+      [formGroupName]="i"
+    >
+      <app-passenger-form [passenger]="passenger" [id]="i"></app-passenger-form>
+    </ng-container>
+  </ng-container>
+</ng-container>

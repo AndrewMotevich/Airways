@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { IPassengerDetails } from '../../models/passenger.interface';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { IPassengersData } from '../../models/passengers-data.interface';
 
 @Component({
   selector: 'app-booking-flight',
@@ -9,42 +9,14 @@ import { IPassengerDetails } from '../../models/passenger.interface';
 })
 
 export class BookingFlightComponent implements OnInit {
-  passengersData = [
-    { adult: 1 },
-    { child: 0 },
-    { infant: 0 }
-  ];
+  passengersData: IPassengersData = { adult: 1, child: 1, infant: 0 };
 
   passengersFormGroup!: FormGroup;
-
-  get passengersDetailsArray(): FormArray {
-    return this.passengersFormGroup.get('passengersDetailsArray') as FormArray;
-  }
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    const passengersArray: FormGroup[] = [];
-
-    this.passengersData.map(item => {
-      const [category, total] = Object.entries(item)[0];
-
-      if (!total) return;
-
-      const arr = [...Array(total)].map((_) => this.fb.group<IPassengerDetails>({
-        category: [category],
-        firstName: [''],
-        lastName: [''],
-        gender: [''],
-        dateOfBirth: ['']
-      }));
-
-      passengersArray.push(...arr);
-    });
-
-    this.passengersFormGroup = this.fb.group({
-      passengersDetailsArray: this.fb.array(passengersArray)
-    })
+    this.passengersFormGroup = this.fb.nonNullable.group({});
   }
 
   onSubmit(): void {
