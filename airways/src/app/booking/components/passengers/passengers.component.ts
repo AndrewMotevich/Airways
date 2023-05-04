@@ -37,7 +37,7 @@ export class PassengersComponent implements OnInit {
           gender: ['', [Validators.required]],
           dateOfBirth: ['', [Validators.required]],
           needHelp: false,
-          checkedInBag: [{ value: '', disabled: false }]
+          checkedInBag: [{ value: 0, disabled: false }]
         }));
       });
     });
