@@ -41,17 +41,29 @@
       @extend %gender;
       border-radius: 0px 4px 4px 0px;
     }
+
+    &-section {
+      .mat-mdc-form-field-error {
+        font-size: 12px;
+        text-align: center;
+      }
+
+      &.error {
+        .mat-mdc-chip {
+          border-color: $color-error;
+        }        
+      }
+    }
   }
 
   .mdc-evolution-chip-set {
     align-items: flex-start;
   }
 
-  &_needhelp {
-
-    
-      
-    
+  .needhelp {
+    padding-bottom: 1.5rem;
+    display: flex;
+    align-items: center;      
   }
 }
 
