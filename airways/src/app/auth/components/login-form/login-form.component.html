@@ -15,7 +15,7 @@
           </button>
         </div>
 
-        <form [formGroup]="loginForm" class="login-footer-container">
+        <form [formGroup]="loginForm" class="login-footer-container" (submit)="submitLogin()">
           <div class="divider">
             <div class="line"><mat-divider></mat-divider></div>
             <div class="text">or log in with your email</div>
@@ -65,7 +65,7 @@
           </button>
         </div>
 
-        <form [formGroup]="registerForm" class="login-footer-container">
+        <form [formGroup]="registerForm" class="login-footer-container" (submit)="submitRegister()">
 
           <div class="divider">
             <div class="line"><mat-divider></mat-divider></div>
@@ -93,6 +93,8 @@
             <input matInput placeholder="Enter your first name" formControlName="firstName" required>
             <mat-icon matSuffix>error_outline</mat-icon>
             <mat-error *ngIf="registerForm.controls.firstName.hasError('required')">You mast enter a value</mat-error>
+            <mat-error *ngIf="registerForm.controls.firstName.hasError('pattern')">You mast use only spaces and
+              letters</mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="fill">
@@ -100,7 +102,82 @@
             <input matInput placeholder="Enter your last name" formControlName="lastName" required>
             <mat-icon matSuffix>error_outline</mat-icon>
             <mat-error *ngIf="registerForm.controls.lastName.hasError('required')">You mast enter a value</mat-error>
+            <mat-error *ngIf="registerForm.controls.lastName.hasError('pattern')">You mast use only spaces and
+              letters</mat-error>
           </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Date of birth</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="bthDate" required>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="registerForm.controls.bthDate.hasError('dateError')">You aren't time traveler</mat-error>
+          </mat-form-field>
+
+          <mat-button-toggle-group class="toggle-gender-button" name="gender" formControlName="gender"
+            [value]="registerForm.controls.gender.value">
+            <mat-button-toggle class="width-100" value="male"><mat-icon
+                *ngIf="registerForm.controls.gender.value === 'male'">check</mat-icon>Male</mat-button-toggle>
+            <mat-button-toggle class="width-100" value="female"><mat-icon
+                *ngIf="registerForm.controls.gender.value === 'female'">check</mat-icon>Female</mat-button-toggle>
+          </mat-button-toggle-group>
+
+          <div class="mobile-container">
+
+            <mat-form-field class="example-full-width" appearance="fill" hideRequiredMarker>
+              <mat-label>Country code</mat-label>
+              <input type="text" aria-label="country" matInput formControlName="country"
+                [matAutocomplete]="autoCountry">
+              <button mat-icon-button matSuffix>
+                <mat-icon>keyboard_arrow_down</mat-icon>
+              </button>
+              <mat-autocomplete #autoCountry="matAutocomplete">
+                <mat-option *ngFor="let country of filteredCountriesOptions | async"
+                  [value]="country.name + ' (' + country.dial_code + ')'">
+                  <div>
+                    {{country.name}} ({{country.dial_code}})
+                  </div>
+                </mat-option>
+              </mat-autocomplete>
+              <mat-error *ngIf="registerForm.controls.country.hasError('required')">Chose code</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <mat-label>Mobile phone number</mat-label>
+              <input type="tel" matInput placeholder="e.g. 111111111" formControlName="phoneNumber" maxlength="9">
+              <mat-error *ngIf="registerForm.controls.phoneNumber.hasError('required')">Enter phone</mat-error>
+              <mat-error *ngIf="registerForm.controls.phoneNumber.hasError('pattern')">You mast use only
+                numbers</mat-error>
+            </mat-form-field>
+
+          </div>
+
+
+          <mat-form-field class="example-full-width" appearance="fill" hideRequiredMarker>
+            <mat-label>Citizenship</mat-label>
+            <input type="text" aria-label="citizenship" matInput formControlName="citizenship"
+              [matAutocomplete]="autoCitizenship">
+            <button mat-icon-button matSuffix>
+              <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+            <mat-autocomplete #autoCitizenship="matAutocomplete">
+              <mat-option *ngFor="let citizenship of filteredCitizenshipOptions | async"
+                [value]="citizenship.nationality">
+                <div>
+                  {{citizenship.nationality}}
+                </div>
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="registerForm.controls.citizenship.hasError('required')">Chose citizenship</mat-error>
+          </mat-form-field>
+
+          <div>
+            <mat-checkbox class="example-margin" color="primary" formControlName="acceptTerms" matInput>
+              <span>I agree to Airway's <a href="#" class="link">Privacy policy</a> and <a href="#" class="link">Terms
+                  of Use</a></span>
+            </mat-checkbox>
+            <mat-error *ngIf="agreeTermError">You should accept</mat-error>
+          </div>
 
           <button mat-raised-button color="primary" class="login-btn">Sign up</button>
         </form>

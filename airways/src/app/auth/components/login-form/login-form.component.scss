@@ -74,3 +74,13 @@
     align-self: flex-end;
   }
 }
+.toggle-gender-button {
+  height: 40px;
+  margin: 4px 0;
+}
+.mobile-container {
+  margin-top: 16px;
+  width: inherit;
+  display: flex;
+  justify-content: space-between;
+}

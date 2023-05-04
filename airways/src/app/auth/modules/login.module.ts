@@ -6,6 +6,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginFormComponent } from '../components/login-form/login-form.component';
 
@@ -19,6 +23,10 @@ import { LoginFormComponent } from '../components/login-form/login-form.componen
     MatFormFieldModule,
     MatInputModule,
     MatDividerModule,
+    MatDatepickerModule,
+    MatButtonToggleModule,
+    MatAutocompleteModule,
+    MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule,
   ],
