@@ -17,6 +17,7 @@ import {
   ICitizenshipCode,
   ICountryCode,
 } from '../../models/countries-data-type.model';
+import { LoginFormDataType, RegisterFormDataType } from '../../models/login-form-data-type.model';
 
 @Component({
   selector: 'app-login-form',
@@ -41,6 +42,10 @@ export class LoginFormComponent implements OnInit {
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
   });
 
+  switchAgreeTermError(value: Event): void {
+    this.agreeTermError = !(value.target as HTMLInputElement).checked;
+  }
+
   registerForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
@@ -51,7 +56,7 @@ export class LoginFormComponent implements OnInit {
     country: new FormControl('', [Validators.required]),
     phoneNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]*')]),
     citizenship: new FormControl('', [Validators.required]),
-    acceptTerms: new FormControl('', [Validators.requiredTrue]),
+    acceptTerms: new FormControl<boolean>(false, [Validators.requiredTrue]),
   });
 
   constructor(
@@ -101,13 +106,13 @@ export class LoginFormComponent implements OnInit {
       this.agreeTermError = true;
     }
     if (this.registerForm.valid) {
-      console.log(this.registerForm.value);
+      this.authDataService.setRegisterFormData(this.registerForm.value as RegisterFormDataType);
     }
   }
 
   submitLogin(): void {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
+      this.authDataService.setLoginFormData(this.loginForm.value as LoginFormDataType);
     }
   }
 }

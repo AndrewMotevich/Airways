@@ -71,7 +71,7 @@ export class MainFormComponent implements OnInit {
 
   public submit(): void {
     if (this.form.valid) {
-      this.formDataService.setFormData(this.form.value as unknown as FormDataType);
+      this.formDataService.setMainFormData(this.form.value as unknown as FormDataType);
     }
   }
 

@@ -5,9 +5,13 @@ import { FormDataType } from '../models/form-data-type.model';
   providedIn: 'root',
 })
 export class FormDataService {
-  formData?: FormDataType;
+  private formData?: FormDataType;
 
-  setFormData(obj: FormDataType): void {
+  setMainFormData(obj: FormDataType): void {
     this.formData = obj;
+  }
+
+  getMainFormData(): FormDataType | undefined {
+    return this.formData;
   }
 }
