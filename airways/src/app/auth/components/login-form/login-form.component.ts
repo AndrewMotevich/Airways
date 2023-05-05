@@ -115,4 +115,22 @@ export class LoginFormComponent implements OnInit {
       this.authDataService.setLoginFormData(this.loginForm.value as LoginFormDataType);
     }
   }
+
+  mockSetLoginForm(): void {
+    this.loginForm.controls.email.setValue('harryPotter@gmail.com');
+    this.loginForm.controls.password.setValue('password123');
+  }
+
+  mockSetRegisterForm(): void {
+    this.registerForm.controls.email.setValue('harryPotter@gmail.com');
+    this.registerForm.controls.password.setValue('password123');
+    this.registerForm.controls.firstName.setValue('Harry');
+    this.registerForm.controls.lastName.setValue('Potter');
+    this.registerForm.controls.bthDate.setValue(new Date(Date.parse('1980-07-31')));
+    this.registerForm.controls.gender.setValue('male');
+    this.registerForm.controls.country.setValue('United Kingdom (+44)');
+    this.registerForm.controls.phoneNumber.setValue('111111111');
+    this.registerForm.controls.citizenship.setValue('British, UK');
+    this.registerForm.controls.acceptTerms.setValue(true);
+  }
 }

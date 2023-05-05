@@ -5,8 +5,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
 
-import { HeaderComponent } from '../../components/header/header/header.component';
-import { FooterComponent } from '../../components/header/footer/footer.component';
+import { HeaderComponent } from '../../components/header/header.component';
+import { FooterComponent } from '../../components/footer/footer.component';
 import { LoginModule } from '../../../auth/modules/login.module';
 
 @NgModule({
