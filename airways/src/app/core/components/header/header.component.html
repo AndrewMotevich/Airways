@@ -1,22 +1,29 @@
-<header>
-  <div class="header-wrapper">
-    <img src="../../../../../assets/images/Logo.png" alt="Logo Airways">
-    <div class="header-items-wrapper">
+<header [ngClass]="{
+  'header-main-page' : !showStepper,
+  'header-with-stepper' : showStepper
+}">
+  <div class="header-wrapper" [formGroup]="headerData">
+    <a routerLink="/">
+      <img src="../../../../../assets/images/Logo.png" alt="Logo Airways">
+    </a>
 
-      <mat-stepper *ngIf="false" linear #stepper>
-        <mat-step>
-          <ng-template matStepLabel>Flights</ng-template>
-        </mat-step>
-        <mat-step>
-          <ng-template matStepLabel>Passengers</ng-template>
-        </mat-step>
-        <mat-step>
-          <ng-template matStepLabel>Review & Payment</ng-template>
-        </mat-step>
-      </mat-stepper>
+    <mat-stepper *ngIf="showStepper" linear class="stepper" [selectedIndex]="stepperIndex">
+      <mat-step [routerLink]="['/select-flight']" [stepControl]="flights">
+        <ng-template matStepLabel>Flights</ng-template>
+      </mat-step>
+      <mat-step [stepControl]="passengers">
+        <ng-template matStepLabel>Passengers</ng-template>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Review & Payment</ng-template>
+      </mat-step>
+    </mat-stepper>
+
+    <div class="header-items-wrapper">
+      <mat-label *ngIf="!showStepper">Book flights</mat-label>
 
       <mat-form-field class="date-select" appearance="outline" hideRequiredMarker>
-        <mat-select hideSingleSelectionIndicator placeholder="MM/DD/YYYY">
+        <mat-select hideSingleSelectionIndicator formControlName="dateFormat">
           <mat-option value="MM/DD/YYYY">MM/DD/YYYY</mat-option>
           <mat-option value="DD/MM/YYYY">DD/MM/YYYY</mat-option>
           <mat-option value="YYYY/DD/MM">YYYY/DD/MM</mat-option>
@@ -25,7 +32,7 @@
       </mat-form-field>
 
       <mat-form-field class="currency-select" appearance="outline" hideRequiredMarker>
-        <mat-select hideSingleSelectionIndicator class="select" placeholder="EUR">
+        <mat-select hideSingleSelectionIndicator class="select" formControlName="currencyFormat">
           <mat-option value="EUR">EUR</mat-option>
           <mat-option value="USA">USA</mat-option>
           <mat-option value="RUB">RUB</mat-option>
@@ -41,5 +48,5 @@
       <button mat-icon-button><mat-icon fontIcon="shopping_basket"></mat-icon></button>
     </div>
   </div>
-  <app-login-form *ngIf="modalWindowServices.isLogin"></app-login-form>
 </header>
+<app-login-form *ngIf="modalWindowServices.isLogin"></app-login-form>

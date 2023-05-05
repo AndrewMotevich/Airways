@@ -4,14 +4,15 @@
 .login-form-container {
   position: absolute;
   left: 30%;
+  top: 80px;
   display: flex;
+  z-index: 10;
 }
 .login-form-wrapper {
   width: 494px;
   padding: 32px 24px;
   border-radius: 8px;
   background-color: $color-neutral100;
-  z-index: 10;
 }
 .tab-login {
   width: 100%;

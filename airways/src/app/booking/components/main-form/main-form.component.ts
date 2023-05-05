@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { AviaSalesApiService as AviasalesApiService } from '../../services/aviasales-api.service';
 import { CityDateType } from '../../models/city-data-type.model';
 import { FormDataService } from '../../services/form-data.service';
@@ -39,13 +40,14 @@ export class MainFormComponent implements OnInit {
     destination: new FormControl<string>('', [Validators.required]),
     dateStart: new FormControl<Date>(new Date(), [Validators.required]),
     dateEnd: new FormControl<Date | null>(null, [Validators.required]),
-    passengers: new FormControl<number>(0, [Validators.min(1)]),
+    passengers: new FormControl<number>(1, [Validators.min(1)]),
     adult: new FormControl<number>(1, [Validators.min(1), Validators.max(9)]),
     child: new FormControl<number>(0, [Validators.min(0), Validators.max(9)]),
     infant: new FormControl<number>(0, [Validators.min(0), Validators.max(9)]),
   });
 
   constructor(
+    private router: Router,
     private getCities: AviasalesApiService,
     private formDataService: FormDataService,
     iconRegistry: MatIconRegistry,
@@ -72,6 +74,7 @@ export class MainFormComponent implements OnInit {
   public submit(): void {
     if (this.form.valid) {
       this.formDataService.setMainFormData(this.form.value as unknown as FormDataType);
+      this.router.navigate(['/select-flight']);
     }
   }
 

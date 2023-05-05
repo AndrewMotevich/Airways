@@ -5,6 +5,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
 
+import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from '../../components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { LoginModule } from '../../../auth/modules/login.module';
@@ -17,7 +19,10 @@ import { LoginModule } from '../../../auth/modules/login.module';
     MatButtonModule,
     MatIconModule,
     MatStepperModule,
+    FormsModule,
+    ReactiveFormsModule,
     LoginModule,
+    RouterModule,
   ],
   exports: [HeaderComponent, FooterComponent],
 })
