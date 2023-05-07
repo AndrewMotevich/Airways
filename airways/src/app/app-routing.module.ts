@@ -8,6 +8,13 @@ const routes: Routes = [
   { path: '', component: MainPageComponent },
   { path: 'select-flight', component: SelectFlightComponent },
   { path: '404', component: Page404Component },
+  {
+    path: 'select-flight',
+    loadChildren: () =>
+      import('./booking/pages/select-flight/select-flight.module').then(
+        (m) => m.SelectFlightModule
+      ),
+  },
   { path: '**', redirectTo: '/404' },
 ];
 

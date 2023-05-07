@@ -1,13 +1,14 @@
-<section class="flight" *ngFor="let flight of flightsDetails$ | async">
+<!-- <section class="flight" *ngFor="let flight of flightsDetails$ | async"> -->
+<section class="flight">
   <div class="flight-details">
     <div class="flight-details_departure">
       <span class="date">{{
         flight.departure_at | date : "EEE, d MMM y"
-      }}</span>
+        }}</span>
       <span class="start-time">
         <span class="time">{{
           flight.departure_at | date : "HH:mm"
-        }}</span>
+          }}</span>
         <span class="offset">{{ flight.departure_at | date : "z" }}</span>
       </span>
       <span class="station">{{flight.origin}}</span>
@@ -20,7 +21,7 @@
     <div class="flight-details_arrival">
       <span class="date">{{
         flight.return_at | date : "EEE, d MMM y"
-      }}</span>
+        }}</span>
       <span class="end-time">
         <span class="offset">{{ flight.return_at | date : "z" }}</span>
         <span class="time">{{ flight.return_at | date : "HH:mm" }}</span>
