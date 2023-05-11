@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ModalWindowService {
-  isLogin = false;
+  isModal = false;
 
   showModal(): void {
-    this.isLogin = !this.isLogin;
+    this.isModal = !this.isModal;
   }
 }

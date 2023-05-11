@@ -7,6 +7,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { HeaderComponent } from '../../components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { LoginModule } from '../../../auth/modules/login.module';
@@ -23,6 +24,7 @@ import { LoginModule } from '../../../auth/modules/login.module';
     ReactiveFormsModule,
     LoginModule,
     RouterModule,
+    SharedModule,
   ],
   exports: [HeaderComponent, FooterComponent],
 })

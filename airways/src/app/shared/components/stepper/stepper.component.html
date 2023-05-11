@@ -1,1 +1,22 @@
-<p>stepper works!</p>
+<div class="stepper-wrapper">
+  <button mat-mini-fab color="primary" [disabled]="stepperStatus.flight.disabled" class="stepper-icon">
+    <mat-icon *ngIf="stepperStatus.flight.completed">done</mat-icon>
+    <mat-icon *ngIf="stepperStatus.flight.edit">edit</mat-icon>
+    <div *ngIf="stepperStatus.flight.disabled">1</div>
+  </button>
+  <mat-label>Flight</mat-label>
+  <mat-divider class="stepper-line"></mat-divider>
+  <button mat-mini-fab color="primary" [disabled]="stepperStatus.passengers.disabled" class="stepper-icon">
+    <mat-icon *ngIf="stepperStatus.passengers.completed">done</mat-icon>
+    <mat-icon *ngIf="stepperStatus.passengers.edit">edit</mat-icon>
+    <div *ngIf="stepperStatus.passengers.disabled">2</div>
+  </button>
+  <mat-label>Passengers</mat-label>
+  <mat-divider class="stepper-line"></mat-divider>
+  <button mat-mini-fab color="primary" [disabled]="stepperStatus.summary.disabled" class="stepper-icon">
+    <mat-icon *ngIf="stepperStatus.summary.completed">done</mat-icon>
+    <mat-icon *ngIf="stepperStatus.summary.edit">edit</mat-icon>
+    <div *ngIf="stepperStatus.summary.disabled">3</div>
+  </button>
+  <mat-label>Review % Payment</mat-label>
+</div>

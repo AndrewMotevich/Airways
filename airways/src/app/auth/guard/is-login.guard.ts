@@ -11,7 +11,7 @@ export class IsLoginGuard implements CanActivate {
 
   canActivate(): boolean {
     if (this.loginService.getIsLogin() === false) {
-      this.modalWindowService.isLogin = true;
+      this.modalWindowService.isModal = true;
     }
     return this.loginService.getIsLogin();
   }

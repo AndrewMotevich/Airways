@@ -7,6 +7,8 @@
       <img src="../../../../../assets/images/Logo.png" alt="Logo Airways">
     </a>
 
+    <app-stepper *ngIf="currentUrl !== '/'"></app-stepper>
+
     <div class="header-items-wrapper">
       <mat-label *ngIf="currentUrl === '/'">Book flights</mat-label>
 
@@ -37,4 +39,4 @@
     </div>
   </div>
 </header>
-<app-login-form *ngIf="modalWindowServices.isLogin"></app-login-form>
+<app-login-form *ngIf="modalWindowServices.isModal"></app-login-form>
