@@ -11,7 +11,7 @@
       *ngIf="currentUrl === '/select-flight' || currentUrl === '/booking-process' || currentUrl === '/summary'"></app-stepper>
 
     <div class="header-items-wrapper">
-      <mat-label *ngIf="currentUrl === '/'">Book flights</mat-label>
+      <mat-label *ngIf="currentUrl === '/'" (click)="authApiService.refresh().subscribe()">Book flights</mat-label>
 
       <mat-form-field class="date-select" appearance="outline" hideRequiredMarker>
         <mat-select hideSingleSelectionIndicator formControlName="dateFormat"
@@ -40,7 +40,7 @@
       </button>
 
       <button mat-button class="sign-button-wrapper" *ngIf="loginService.getIsLogin()"
-        (click)="authApiService.refresh().subscribe()">
+        (click)="authApiService.logout().subscribe()">
         <mat-icon color="primary" fontIcon="person_outline"></mat-icon>
         <span>User</span>
       </button>

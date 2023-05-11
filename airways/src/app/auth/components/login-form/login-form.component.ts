@@ -109,6 +109,7 @@ export class LoginFormComponent implements OnInit {
     }
     if (this.registerForm.valid) {
       this.authDataService.setRegisterFormData(this.registerForm.value as RegisterFormDataType);
+      this.authApiService.register().subscribe();
     }
   }
 

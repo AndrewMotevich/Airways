@@ -5,7 +5,7 @@ import { LoginService } from './login.service';
 import { AuthFormDataService } from './auth-form-data.service';
 import { ModalWindowService } from './modal-window.service';
 
-function parseJwt(token: string): object {
+function parseJwt(token: string): { firstName: string } {
   const base64Url = token.split('.')[1];
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   const jsonPayload = decodeURIComponent(
@@ -32,17 +32,52 @@ export class AuthApiService {
     private modalWindowService: ModalWindowService
   ) {}
 
-  login(): Observable<{ accessToken: string }> {
-    const loginData = this.authLoginData.getLoginFormData();
+  register(): Observable<{ message: string }> {
+    const registerData = this.authLoginData.getRegisterFormData();
+    const email = registerData?.email;
+    const password = registerData?.password;
     return this.http
-      .post<{ accessToken: string }>('https://airways-api.vercel.app/auth/login', loginData, {
+      .post<{ message: string }>('https://airways-api.vercel.app/auth/registration', registerData, {
         withCredentials: true,
       })
+      .pipe(
+        tap(() => {
+          this.login({ email, password }).subscribe();
+        })
+      );
+  }
+
+  login(obj: object | undefined = undefined): Observable<{ accessToken: string }> {
+    const loginData = this.authLoginData.getLoginFormData();
+    return this.http
+      .post<{ accessToken: string }>(
+        'https://airways-api.vercel.app/auth/login',
+        obj || loginData,
+        {
+          withCredentials: true,
+        }
+      )
       .pipe(
         tap((response) => {
           this.accessToken = response.accessToken;
           this.loginService.setIsLogin(true);
           this.modalWindowService.isModal = false;
+          alert(`The user ${parseJwt(this.accessToken).firstName} islogged in!!!`);
+        })
+      );
+  }
+
+  logout(): Observable<{ message: string }> {
+    return this.http
+      .get<{ message: string }>('https://airways-api.vercel.app/auth/logout', {
+        withCredentials: true,
+      })
+      .pipe(
+        tap(() => {
+          this.accessToken = '';
+          this.loginService.setIsLogin(false);
+          this.modalWindowService.isModal = false;
+          alert('You are logged out!!!');
         })
       );
   }
@@ -57,7 +92,6 @@ export class AuthApiService {
           this.accessToken = response.accessToken;
           this.loginService.setIsLogin(true);
           this.modalWindowService.isModal = false;
-          console.log(parseJwt(this.accessToken));
         })
       );
   }
