@@ -7,13 +7,15 @@
       <img src="../../../../../assets/images/Logo.png" alt="Logo Airways">
     </a>
 
-    <app-stepper *ngIf="currentUrl !== '/'"></app-stepper>
+    <app-stepper
+      *ngIf="currentUrl === '/select-flight' || currentUrl === '/booking-process' || currentUrl === '/summary'"></app-stepper>
 
     <div class="header-items-wrapper">
       <mat-label *ngIf="currentUrl === '/'">Book flights</mat-label>
 
       <mat-form-field class="date-select" appearance="outline" hideRequiredMarker>
-        <mat-select hideSingleSelectionIndicator formControlName="dateFormat">
+        <mat-select hideSingleSelectionIndicator formControlName="dateFormat"
+          [(value)]="this.headerDataService.currentDataFormat">
           <mat-option value="MM/DD/YYYY">MM/DD/YYYY</mat-option>
           <mat-option value="DD/MM/YYYY">DD/MM/YYYY</mat-option>
           <mat-option value="YYYY/DD/MM">YYYY/DD/MM</mat-option>
@@ -22,7 +24,8 @@
       </mat-form-field>
 
       <mat-form-field class="currency-select" appearance="outline" hideRequiredMarker>
-        <mat-select hideSingleSelectionIndicator class="select" formControlName="currencyFormat">
+        <mat-select hideSingleSelectionIndicator class="select" formControlName="currencyFormat"
+          [(value)]="this.headerDataService.currentCurrency">
           <mat-option value="EUR">EUR</mat-option>
           <mat-option value="USA">USA</mat-option>
           <mat-option value="RUB">RUB</mat-option>
@@ -30,9 +33,16 @@
         </mat-select>
       </mat-form-field>
 
-      <button mat-button class="sign-button-wrapper" (click)="modalWindowServices.showModal()">
+      <button mat-button class="sign-button-wrapper" *ngIf="loginService.getIsLogin() === false"
+        (click)="modalWindowServices.showModal()">
         <mat-icon fontIcon="person_outline"></mat-icon>
         <span>Sign in</span>
+      </button>
+
+      <button mat-button class="sign-button-wrapper" *ngIf="loginService.getIsLogin()"
+        (click)="authApiService.refresh().subscribe()">
+        <mat-icon color="primary" fontIcon="person_outline"></mat-icon>
+        <span>User</span>
       </button>
 
       <button mat-icon-button routerLink="/shopping-card"><mat-icon fontIcon="shopping_basket"></mat-icon></button>

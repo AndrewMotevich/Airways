@@ -3,6 +3,9 @@ import { ModalWindowService } from 'src/app/auth/services/modal-window.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { LoginService } from 'src/app/auth/services/login.service';
+import { AuthApiService } from 'src/app/auth/services/auth-api.service';
+import { HeaderDataService } from '../../services/header-data.service';
 
 @Component({
   selector: 'app-header',
@@ -19,11 +22,17 @@ export class HeaderComponent implements OnInit {
   currentUrl = '';
 
   headerData = new FormGroup({
-    dateFormat: new FormControl('MM/DD/YYYY', [Validators.required]),
-    currencyFormat: new FormControl('EUR', [Validators.required]),
+    dateFormat: new FormControl<string>('MM/DD/YYYY', [Validators.required]),
+    currencyFormat: new FormControl<string>('EUR', [Validators.required]),
   });
 
-  constructor(public modalWindowServices: ModalWindowService, private router: Router) {}
+  constructor(
+    public modalWindowServices: ModalWindowService,
+    private router: Router,
+    public headerDataService: HeaderDataService,
+    public loginService: LoginService,
+    public authApiService: AuthApiService
+  ) {}
 
   ngOnInit(): void {
     this.router.events.subscribe((event) => {

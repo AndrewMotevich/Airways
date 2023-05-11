@@ -18,6 +18,7 @@ import {
   ICountryCode,
 } from '../../models/countries-data-type.model';
 import { LoginFormDataType, RegisterFormDataType } from '../../models/login-form-data-type.model';
+import { AuthApiService } from '../../services/auth-api.service';
 
 @Component({
   selector: 'app-login-form',
@@ -61,7 +62,8 @@ export class LoginFormComponent implements OnInit {
 
   constructor(
     public modalWindowService: ModalWindowService,
-    private authDataService: AuthFormDataService
+    private authDataService: AuthFormDataService,
+    private authApiService: AuthApiService
   ) {}
 
   ngOnInit(): void {
@@ -113,6 +115,7 @@ export class LoginFormComponent implements OnInit {
   submitLogin(): void {
     if (this.loginForm.valid) {
       this.authDataService.setLoginFormData(this.loginForm.value as LoginFormDataType);
+      this.authApiService.login().subscribe();
     }
   }
 
