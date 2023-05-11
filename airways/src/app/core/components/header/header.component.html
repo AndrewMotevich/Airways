@@ -1,26 +1,14 @@
 <header [ngClass]="{
-  'header-main-page' : !showStepper,
-  'header-with-stepper' : showStepper
+  'header-main-page' : currentUrl === '/',
+  'header-with-stepper' : currentUrl !== '/'
 }">
   <div class="header-wrapper" [formGroup]="headerData">
     <a routerLink="/">
       <img src="../../../../../assets/images/Logo.png" alt="Logo Airways">
     </a>
 
-    <mat-stepper *ngIf="showStepper" linear class="stepper" [selectedIndex]="stepperIndex">
-      <mat-step [routerLink]="['/select-flight']" [stepControl]="flights">
-        <ng-template matStepLabel>Flights</ng-template>
-      </mat-step>
-      <mat-step [stepControl]="passengers">
-        <ng-template matStepLabel>Passengers</ng-template>
-      </mat-step>
-      <mat-step>
-        <ng-template matStepLabel>Review & Payment</ng-template>
-      </mat-step>
-    </mat-stepper>
-
     <div class="header-items-wrapper">
-      <mat-label *ngIf="!showStepper">Book flights</mat-label>
+      <mat-label *ngIf="currentUrl === '/'">Book flights</mat-label>
 
       <mat-form-field class="date-select" appearance="outline" hideRequiredMarker>
         <mat-select hideSingleSelectionIndicator formControlName="dateFormat">
@@ -45,7 +33,7 @@
         <span>Sign in</span>
       </button>
 
-      <button mat-icon-button><mat-icon fontIcon="shopping_basket"></mat-icon></button>
+      <button mat-icon-button routerLink="/shopping-card"><mat-icon fontIcon="shopping_basket"></mat-icon></button>
     </div>
   </div>
 </header>
