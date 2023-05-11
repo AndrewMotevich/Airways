@@ -29,7 +29,7 @@ export class PassengersComponent implements OnInit {
     Object.entries(this.passengersData).map(([category, total]: [category: string, total: number]) => {
       if (!total) return;
 
-      [...Array(total)].forEach((_) => {
+      [...Array(total)].forEach(() => {
         this.passengersFormArray.push(this.fb.group<IPassengerDetails>({
           category: [category],
           firstName: ['', [Validators.required, Validators.minLength(3)]],

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MAX_PHONE_LENGTH } from 'src/app/shared/constants';
 import { IPassengersData } from '../../models/passengers-data.interface';
 
 @Component({
@@ -13,10 +14,20 @@ export class BookingFlightComponent implements OnInit {
 
   passengersFormGroup!: FormGroup;
 
+  maxLength = MAX_PHONE_LENGTH;
+
+  currentPhoneCode = 'CY';
+
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.passengersFormGroup = this.fb.nonNullable.group({});
+    const phonePattern = `^[0-9]{0,${this.maxLength}}$`;
+
+    this.passengersFormGroup = this.fb.nonNullable.group({
+      phoneCode: [this.currentPhoneCode, Validators.required],
+      phone: ['', [Validators.required, Validators.maxLength(this.maxLength), Validators.pattern(phonePattern)]],
+      email: ['', [Validators.required, Validators.email]],
+    });
   }
 
   onSubmit(): void {

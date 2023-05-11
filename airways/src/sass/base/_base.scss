@@ -1,4 +1,5 @@
 @import '../abstracts/variables';
+@import '../base/typography';
 
 :root {
   --mdc-typography-body2-font-size: 12px;
@@ -11,6 +12,7 @@
   --mdc-plain-tooltip-supporting-text-size: 12px;
   --mdc-plain-tooltip-supporting-text-tracking: 0.4px;
   --mdc-plain-tooltip-container-shape: 8px;
+  --mat-mdc-form-field-label-transform: 28px;
 }
 
 html,
@@ -26,6 +28,10 @@ body {
   font-weight: 400;
   letter-spacing: 0.5px;
   background-color: $color-neutral80;
+}
+
+h2 {
+  color: $color-primary;
 }
 
 .mdc-button.btn-with-gradient {
@@ -161,4 +167,33 @@ body {
     top: calc(50% - 0.3rem);
     transform: rotate(0);
   }
+}
+
+.mat-mdc-text-field-wrapper.mdc-text-field--outlined
+  .mdc-notched-outline--upgraded
+  .mdc-floating-label--float-above {
+  --mat-mdc-form-field-label-transform: translateY(-24px)
+    scale(var(--mat-mdc-form-field-floating-label-scale, 0.75));
+  transform: var(--mat-mdc-form-field-label-transform);
+}
+
+.mat-mdc-form-field
+  .mdc-text-field--outlined
+  .mdc-notched-outline--upgraded
+  .mdc-floating-label--float-above {
+  @extend %text-label-small;
+}
+
+.mdc-notched-outline--notched .mdc-notched-outline__notch {
+  border-top-style: solid !important;
+  border-top-width: 1px !important;
+}
+
+.mdc-text-field--focused .mdc-notched-outline__notch {
+  border-top-width: 2px !important;
+}
+
+.mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+  padding-top: 22px;
+  padding-bottom: 8px;
 }
