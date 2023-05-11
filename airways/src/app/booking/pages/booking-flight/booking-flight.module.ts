@@ -13,14 +13,16 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
 import { PassengerFormComponent } from '../../components/passenger-form/passenger-form.component';
 import { BookingFlightComponent } from './booking-flight.component';
 import { PassengersComponent } from '../../components/passengers/passengers.component';
 import { CheckinBagComponent } from '../../components/checkin-bag/checkin-bag.component';
+import { ContactDetailsComponent } from '../../components/contact-details/contact-details.component';
 
 @NgModule({
 
-  declarations: [BookingFlightComponent, PassengersComponent, PassengerFormComponent, CheckinBagComponent],
+  declarations: [BookingFlightComponent, PassengersComponent, PassengerFormComponent, CheckinBagComponent, ContactDetailsComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -36,7 +38,8 @@ import { CheckinBagComponent } from '../../components/checkin-bag/checkin-bag.co
     MatCheckboxModule,
     MatButtonToggleModule,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSelectModule
   ],
   exports: [
     BookingFlightComponent, PassengersComponent, PassengerFormComponent
