@@ -23,7 +23,7 @@
           </div>
 
           <div>
-            <mat-form-field appearance="fill" class="width-100">
+            <mat-form-field appearance="outline" class="width-100">
               <mat-label>Email</mat-label>
               <input matInput placeholder="Enter your email" formControlName="email">
               <mat-error *ngIf="loginForm.controls.email.hasError('required')">You mast enter a value</mat-error>
@@ -32,7 +32,7 @@
           </div>
 
           <div>
-            <mat-form-field appearance="fill" class="width-100">
+            <mat-form-field appearance="outline" class="width-100">
               <mat-label>Password</mat-label>
               <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
               <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
@@ -73,14 +73,14 @@
             <div class="line"><mat-divider></mat-divider></div>
           </div>
 
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="outline" class="width-100">
             <mat-label>Email</mat-label>
             <input matInput placeholder="pat@example.com" formControlName="email" required>
             <mat-error *ngIf="registerForm.controls.email.hasError('required')">You mast enter a value</mat-error>
             <mat-error *ngIf="registerForm.controls.email.hasError('email')">Invalid email</mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="fill" class="width-100">
+          <mat-form-field appearance="outline" class="width-100">
             <mat-label>Password</mat-label>
             <input matInput type="password" formControlName="password">
             <mat-icon matSuffix
@@ -91,7 +91,7 @@
             <mat-error *ngIf="registerForm.controls.password.hasError('minlength')">Min length 8</mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="outline" class="width-100">
             <mat-label>First name</mat-label>
             <input matInput placeholder="Enter your first name" formControlName="firstName" required>
             <mat-icon matSuffix
@@ -104,7 +104,7 @@
               letters</mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="outline" class="width-100">
             <mat-label>Last name</mat-label>
             <input matInput placeholder="Enter your last name" formControlName="lastName" required>
             <mat-icon matSuffix
@@ -118,7 +118,7 @@
               letters</mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="outline" class="width-100">
             <mat-label>Date of birth</mat-label>
             <input matInput [matDatepicker]="picker" formControlName="bthDate" required>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
@@ -126,8 +126,8 @@
             <mat-error *ngIf="registerForm.controls.bthDate.hasError('dateError')">You aren't time traveler</mat-error>
           </mat-form-field>
 
-          <mat-button-toggle-group class="toggle-gender-button" name="gender" formControlName="gender"
-            [value]="registerForm.controls.gender.value">
+          <mat-button-toggle-group class="toggle-gender-button" class="background-color100" name="gender"
+            formControlName="gender" [value]="registerForm.controls.gender.value">
             <mat-button-toggle class="width-100" value="male"><mat-icon
                 *ngIf="registerForm.controls.gender.value === 'male'">check</mat-icon>Male</mat-button-toggle>
             <mat-button-toggle class="width-100" value="female"><mat-icon
@@ -136,7 +136,7 @@
 
           <div class="mobile-container">
 
-            <mat-form-field class="example-full-width" appearance="fill" hideRequiredMarker>
+            <mat-form-field class="color-100" appearance="outline" hideRequiredMarker>
               <mat-label>Country code</mat-label>
               <input type="text" aria-label="country" matInput formControlName="country"
                 [matAutocomplete]="autoCountry">
@@ -154,7 +154,7 @@
               <mat-error *ngIf="registerForm.controls.country.hasError('required')">Chose code</mat-error>
             </mat-form-field>
 
-            <mat-form-field class="example-full-width">
+            <mat-form-field class="color-100" appearance="outline">
               <mat-label>Mobile phone number</mat-label>
               <input type="tel" matInput placeholder="e.g. 111111111" formControlName="phoneNumber" maxlength="9">
               <mat-error *ngIf="registerForm.controls.phoneNumber.hasError('required')">Enter phone</mat-error>
@@ -165,7 +165,7 @@
           </div>
 
 
-          <mat-form-field class="example-full-width" appearance="fill" hideRequiredMarker>
+          <mat-form-field class="width-100" appearance="outline" hideRequiredMarker>
             <mat-label>Citizenship</mat-label>
             <input type="text" aria-label="citizenship" matInput formControlName="citizenship"
               [matAutocomplete]="autoCitizenship">
@@ -198,5 +198,6 @@
       </mat-tab>
     </mat-tab-group>
   </div>
-  <button mat-icon-button (click)="modalWindowService.showModal()"><mat-icon fontIcon="clear icon"></mat-icon></button>
+  <button class="cross-button" mat-icon-button (click)="modalWindowService.showModal()"><mat-icon
+      fontIcon="clear icon"></mat-icon></button>
 </div>

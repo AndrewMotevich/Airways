@@ -2,6 +2,8 @@
 @import '../../../../sass/base/typography';
 
 .login-form-container {
+  max-width: 600px;
+  width: 100%;
   position: absolute;
   left: 30%;
   top: 80px;
@@ -9,7 +11,8 @@
   z-index: 10;
 }
 .login-form-wrapper {
-  width: 494px;
+  max-width: 494px;
+  width: 100%;
   padding: 32px 24px;
   border-radius: 8px;
   background-color: $color-neutral100;
@@ -26,14 +29,21 @@
   width: 100%;
 }
 .login-header-button {
+  cursor: pointer;
   width: 100%;
   height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: $color-secondary90;
+  border-radius: 5px;
+  border: 0.5px solid $color-neutral50;
   p {
     margin: 0;
     margin-left: 8px;
+  }
+  &:hover {
+    border-color: black;
   }
 }
 .login-header-container {
@@ -84,4 +94,49 @@
   width: inherit;
   display: flex;
   justify-content: space-between;
+}
+::ng-deep.width-100 {
+  .mat-mdc-text-field-wrapper {
+    background-color: $color-secondary90;
+  }
+}
+::ng-deep.color-100 {
+  .mat-mdc-text-field-wrapper {
+    background-color: $color-secondary90;
+  }
+}
+::ng-deep.background-color100 {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $color-neutral10;
+  .mat-button-toggle-checked {
+    background-color: $color-secondary90;
+    color: $color-primary;
+    span {
+      .mat-icon {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+.background-secondary90 {
+  background-color: $color-secondary90;
+}
+@media screen and (max-width: 960px) {
+  .login-form-container {
+    left: 0%;
+    flex-direction: column;
+  }
+  .login-form-wrapper {
+    width: 80%;
+  }
+  .mobile-container {
+    flex-direction: column;
+  }
+  .cross-button {
+    align-self: flex-end;
+    order: -1;
+  }
 }
