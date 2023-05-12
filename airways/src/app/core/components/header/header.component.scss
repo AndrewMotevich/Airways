@@ -12,9 +12,19 @@ header {
   justify-content: center;
   align-items: center;
   z-index: 1;
+  color: $color-neutral10;
+}
+.header-main-color {
+  color: $color-neutral100 !important;
 }
 .header-main-page {
   background-color: $color-neutral70;
+}
+.color-primary {
+  color: $color-primary !important;
+}
+.color-100 {
+  color: $color-neutral100;
 }
 .header-with-stepper {
   background-color: $color-neutral100;
@@ -35,6 +45,12 @@ header {
 }
 
 ::ng-deep.currency-select {
+  .mat-mdc-select-placeholder {
+    color: $color-neutral10;
+  }
+  .mat-mdc-select-value {
+    color: $color-primary;
+  }
   .mdc-text-field {
     width: 64px;
     height: 40px;
@@ -42,12 +58,25 @@ header {
     display: flex;
     align-items: center;
     text-align: center;
+    color: $color-primary;
   }
   .mat-mdc-form-field-subscript-wrapper {
     height: 0;
   }
 }
+::ng-deep.currency-select-main {
+  .mat-mdc-select-placeholder {
+    color: $color-neutral100 !important;
+  }
+}
+
 ::ng-deep.date-select {
+  .mat-mdc-select-placeholder {
+    color: $color-neutral10;
+  }
+  .mat-mdc-select-value {
+    color: $color-primary;
+  }
   .mdc-text-field {
     width: 162px;
     height: 40px;
@@ -59,6 +88,11 @@ header {
   }
   .mat-mdc-form-field-subscript-wrapper {
     height: 0;
+  }
+}
+::ng-deep.date-select-main {
+  .mat-mdc-select-placeholder {
+    color: $color-neutral100 !important;
   }
 }
 ::ng-deep.select {
@@ -73,13 +107,30 @@ header {
   height: 40px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
   border-radius: 4px;
-  border: 0.5px solid rgba(116, 118, 122, 0.6);
-  outline: 0.5px solid rgba(116, 118, 122, 0.6);
+  border: 0.5px solid $color-neutral50;
 }
 .stepper {
   ::ng-deep.mat-horizontal-content-container {
     padding: 0;
+  }
+}
+.mat-menu-container {
+  display: flex;
+  align-items: center;
+}
+.hidden-mat-menu {
+  display: none;
+}
+.account-icon {
+  background-color: $color-secondary80;
+  border-radius: 50%;
+}
+@media screen and (max-width: 960px) {
+  .hidden-mat-menu {
+    display: block;
+  }
+  .header-items-wrapper {
+    display: none;
   }
 }

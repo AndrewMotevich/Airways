@@ -17,7 +17,8 @@ footer {
   justify-content: space-between;
 }
 .icons-wrapper {
-  width: 407px;
+  max-width: 407px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   p {
@@ -31,5 +32,14 @@ footer {
       width: 32px;
       height: 22px;
     }
+  }
+}
+@media screen and (max-width: 960px) {
+  .footer-wrapper {
+    flex-direction: column;
+  }
+  .icons-wrapper {
+    flex-direction: column;
+    align-items: center;
   }
 }

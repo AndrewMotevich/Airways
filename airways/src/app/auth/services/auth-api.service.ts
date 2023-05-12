@@ -69,7 +69,6 @@ export class AuthApiService {
             firstName: string;
             lastName: string;
           };
-          alert(`The user ${parseJwt(this.accessToken).firstName} islogged in!!!`);
         })
       );
   }
@@ -84,7 +83,6 @@ export class AuthApiService {
           this.accessToken = '';
           this.loginService.setIsLogin(false);
           this.modalWindowService.isModal = false;
-          alert('You are logged out!!!');
         })
       );
   }

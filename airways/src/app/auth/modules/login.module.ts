@@ -10,6 +10,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginFormComponent } from '../components/login-form/login-form.component';
 
@@ -27,6 +28,7 @@ import { LoginFormComponent } from '../components/login-form/login-form.componen
     MatButtonToggleModule,
     MatAutocompleteModule,
     MatCheckboxModule,
+    MatSnackBarModule,
     FormsModule,
     ReactiveFormsModule,
   ],

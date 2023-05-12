@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { LoginService } from 'src/app/auth/services/login.service';
 import { AuthApiService } from 'src/app/auth/services/auth-api.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { HeaderDataService } from '../../services/header-data.service';
 
 @Component({
@@ -22,8 +23,8 @@ export class HeaderComponent implements OnInit {
   currentUrl = '';
 
   headerData = new FormGroup({
-    dateFormat: new FormControl<string>('MM/DD/YYYY', [Validators.required]),
-    currencyFormat: new FormControl<string>('EUR', [Validators.required]),
+    dateFormat: new FormControl<string>('', [Validators.required]),
+    currencyFormat: new FormControl<string>('', [Validators.required]),
   });
 
   constructor(
@@ -31,7 +32,8 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     public headerDataService: HeaderDataService,
     public loginService: LoginService,
-    public authApiService: AuthApiService
+    public authApiService: AuthApiService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -41,6 +43,24 @@ export class HeaderComponent implements OnInit {
         const { url } = event;
         this.currentUrl = url;
       }
+    });
+  }
+
+  logOut(): void {
+    this.authApiService.logout().subscribe({
+      error: () => {
+        this.snackBar.open('Error', 'Ok', {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
+      },
+      complete: () => {
+        this.snackBar.open('You are logged out', 'Ok', {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
+        this.router.navigate(['/']);
+      },
     });
   }
 }

@@ -4,6 +4,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,6 +22,8 @@ import { LoginModule } from '../../../auth/modules/login.module';
     MatButtonModule,
     MatIconModule,
     MatStepperModule,
+    MatMenuModule,
+    MatSnackBarModule,
     FormsModule,
     ReactiveFormsModule,
     LoginModule,

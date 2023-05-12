@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ModalWindowService } from '../../services/modal-window.service';
 import { AuthFormDataService } from '../../services/auth-form-data.service';
 import {
@@ -63,7 +64,8 @@ export class LoginFormComponent implements OnInit {
   constructor(
     public modalWindowService: ModalWindowService,
     private authDataService: AuthFormDataService,
-    private authApiService: AuthApiService
+    private authApiService: AuthApiService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -116,7 +118,22 @@ export class LoginFormComponent implements OnInit {
   submitLogin(): void {
     if (this.loginForm.valid) {
       this.authDataService.setLoginFormData(this.loginForm.value as LoginFormDataType);
-      this.authApiService.login().subscribe();
+      this.authApiService.login().subscribe(
+        () => {},
+        (error) => {
+          this.snackBar.open(error.error.message || 'Error', 'Ok', {
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+          });
+        },
+        () => {
+          this.snackBar.open(
+            `Hooray ${this.authApiService.tokenData?.firstName}!!! You are logged in.`,
+            'Ok',
+            { horizontalPosition: 'center', verticalPosition: 'top' }
+          );
+        }
+      );
     }
   }
 
