@@ -25,6 +25,8 @@ function parseJwt(token: string): { firstName: string } {
 export class AuthApiService {
   accessToken = '';
 
+  tokenData?: { email: string; firstName: string; lastName: string };
+
   constructor(
     private http: HttpClient,
     private loginService: LoginService,
@@ -62,6 +64,11 @@ export class AuthApiService {
           this.accessToken = response.accessToken;
           this.loginService.setIsLogin(true);
           this.modalWindowService.isModal = false;
+          this.tokenData = parseJwt(this.accessToken) as {
+            email: string;
+            firstName: string;
+            lastName: string;
+          };
           alert(`The user ${parseJwt(this.accessToken).firstName} islogged in!!!`);
         })
       );
@@ -92,6 +99,11 @@ export class AuthApiService {
           this.accessToken = response.accessToken;
           this.loginService.setIsLogin(true);
           this.modalWindowService.isModal = false;
+          this.tokenData = parseJwt(this.accessToken) as {
+            email: string;
+            firstName: string;
+            lastName: string;
+          };
         })
       );
   }

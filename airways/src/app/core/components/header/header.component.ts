@@ -35,6 +35,7 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.authApiService.refresh().subscribe();
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const { url } = event;

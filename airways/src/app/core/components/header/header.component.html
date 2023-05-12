@@ -42,7 +42,7 @@
       <button mat-button class="sign-button-wrapper" *ngIf="loginService.getIsLogin()"
         (click)="authApiService.logout().subscribe()">
         <mat-icon color="primary" fontIcon="person_outline"></mat-icon>
-        <span>User</span>
+        <span>{{authApiService.tokenData?.firstName}}</span>
       </button>
 
       <button mat-icon-button routerLink="/shopping-card"><mat-icon fontIcon="shopping_basket"></mat-icon></button>

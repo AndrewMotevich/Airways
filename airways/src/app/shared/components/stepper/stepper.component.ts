@@ -13,6 +13,7 @@ export class StepperComponent implements OnInit {
   constructor(private stepperService: StepperService, private router: Router) {}
 
   ngOnInit(): void {
+    this.stepperService.setStepOne();
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const { url } = event;
