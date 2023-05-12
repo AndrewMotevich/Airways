@@ -1,0 +1,94 @@
+@import "../../../../sass/abstracts/_variables";
+
+.ticket-date-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 0px;
+  width: 225px;
+  height: 70px;
+
+  background: $color-neutral100;
+  border-left: 1px solid $color-neutral60;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+
+  color: $color-neutral40;
+
+  .card__date {
+    &--day {
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 100;
+      font-size: 12px;
+      line-height: 12px;
+      color: $color-neutral30;
+    }
+  }
+  .card__cost {
+    margin-top: 6px;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 20px;
+    color: $color-neutral30;
+  }
+
+  &.past {
+    & .card__date {
+      color: $color-secondary40;
+      &--day {
+        color: $color-neutral30;
+      }
+    }
+    .card__cost {
+      color: $color-secondary40;
+    }
+  }
+
+  &.current {
+    height: 83px;
+
+    & .card__date {
+      color: $color-primary;
+      &--day {
+        font-weight: 400;
+        font-size: 14px;
+        letter-spacing: 0.25px;
+      }
+    }
+
+    & .card__cost {
+      font-weight: 700;
+      font-size: 30px;
+      line-height: 36px;
+    }
+  }
+
+  &.future {
+    & .card__date {
+      color: $color-secondary0;
+    }
+  }
+
+  &.future,
+  &.current {
+    .card__cost {
+      color: $color-primary;
+    }
+  }
+}
+
+.bound {
+  position: absolute;
+  bottom: 0px;
+  height: 4px;
+  width: 100%;
+}
