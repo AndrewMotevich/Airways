@@ -1,0 +1,24 @@
+@import "../../../sass/abstracts/_variables";
+
+.cards-slider {
+  display: flex;
+  position: relative;
+  align-items: flex-end;
+  max-width: 1130px;
+
+  .arrow-icon {
+    position: absolute;
+    top: calc(50% - 6px);
+    background-color: $color-secondary60;
+    border-radius: 50%;
+    margin: auto;
+    font-weight: 100;
+
+    cursor: pointer;
+    z-index: 10;
+
+    &--right {
+      right: 0px;
+    }
+  }
+}
