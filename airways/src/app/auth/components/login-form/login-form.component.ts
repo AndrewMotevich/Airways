@@ -111,7 +111,14 @@ export class LoginFormComponent implements OnInit {
     }
     if (this.registerForm.valid) {
       this.authDataService.setRegisterFormData(this.registerForm.value as RegisterFormDataType);
-      this.authApiService.register().subscribe();
+      this.authApiService.register().subscribe({
+        error: (error) => {
+          this.snackBar.open(error.error.message || 'Error', 'Ok', {
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+          });
+        },
+      });
     }
   }
 
