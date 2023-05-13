@@ -1,12 +1,15 @@
+<mat-divider></mat-divider>
 <section class="baggage" *ngIf="passenger">
   <ng-container [formGroup]="passenger">
     <h3>Checked-in baggage</h3>
     <mat-button-toggle-group
       name="checkedInBag"
       aria-label="Choose a checked-in bag"
-      formControlName="checkedInBag"      
+      formControlName="checkedInBag"
     >
-      <mat-button-toggle [value]="bag" *ngFor="let bag of weights"> <mat-icon>luggage</mat-icon>{{bag}}kg</mat-button-toggle>      
+      <mat-button-toggle [value]="bag" *ngFor="let bag of weights">
+        <mat-icon>luggage</mat-icon>{{ bag }}kg</mat-button-toggle
+      >
     </mat-button-toggle-group>
   </ng-container>
   <mat-checkbox (click)="checkBag()">I don't want a checked-in bag</mat-checkbox>

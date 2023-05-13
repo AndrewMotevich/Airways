@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, FormControl, FormGroup, FormGroupDirective } from '@angular/forms';
+import { EPassenger } from '../../../models/passengers-data.interface';
 import * as Constant from '../../../../shared/constants';
 
 @Component({
@@ -30,6 +31,10 @@ export class PassengerFormComponent implements OnInit {
   get category(): string {
     return this.passenger.get('category')?.value;
   }
+
+  get canAddCheckinBag(): boolean {
+    return this.category !== EPassenger.INFANT;
+  } 
 
   constructor(private rootFormGroup: FormGroupDirective) { }
 

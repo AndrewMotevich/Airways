@@ -1,12 +1,17 @@
-
-  
-
-  <section class="passengers">
-    <form class="passengers-form" [formGroup]="passengersFormGroup" (ngSubmit)="onSubmit()">
-      <app-passengers [passengersData]="passengersData"></app-passengers>
-      <app-contact-details [formGroup]="passengersFormGroup" [maxLength]="maxLength"></app-contact-details>
-      <button mat-button type="submit" [disabled]="!this.passengersFormGroup.valid" class="btn-with-gradient">send</button>
-    </form>
-  </section>
-
-<pre>{{ passengersFormGroup.value | json }}</pre>
+<section class="passengers">
+  <form class="passengers-form" [formGroup]="passengersFormGroup" (ngSubmit)="onSubmit()">
+    <app-passengers [passengersData]="passengersData"></app-passengers>
+    <app-contact-details
+      [formGroup]="passengersFormGroup"
+      [maxLength]="maxLength"
+    ></app-contact-details>
+    <button
+      mat-button
+      type="submit"
+      [disabled]="!this.passengersFormGroup.valid"
+      class="btn-with-gradient"
+    >
+      send
+    </button>
+  </form>
+</section>

@@ -3,7 +3,7 @@ import { FormGroupDirective, FormBuilder, Validators, FormGroup, FormArray } fro
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as Constant from '../../../shared/constants';
-import { IPassengersData } from '../../models/passengers-data.interface';
+import { TPassengersData } from '../../models/passengers-data.interface';
 import { IPassengerDetails } from '../../models/passenger.interface';
 
 @Component({
@@ -12,7 +12,7 @@ import { IPassengerDetails } from '../../models/passenger.interface';
   styleUrls: ['./passengers.component.scss']
 })
 export class PassengersComponent implements OnInit {
-  @Input() passengersData!: IPassengersData;
+  @Input() passengersData!: TPassengersData;
 
   form!: FormGroup;
 

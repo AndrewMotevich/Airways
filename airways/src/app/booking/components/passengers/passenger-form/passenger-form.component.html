@@ -95,8 +95,7 @@
           >
         </section>
       </div>
-      <mat-divider></mat-divider>
-      <app-checkin-bag [passenger]="passenger"></app-checkin-bag>
+      <app-checkin-bag [passenger]="passenger" *ngIf="canAddCheckinBag"></app-checkin-bag>
     </section>
   </ng-container>
 </ng-container>
