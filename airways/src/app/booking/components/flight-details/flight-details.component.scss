@@ -1,11 +1,11 @@
-@import '/src/sass/abstracts/mixins';
-@import '/src/sass/abstracts/variables';
-@import '/src/sass/base/typography';
+@import "/src/sass/abstracts/mixins";
+@import "/src/sass/abstracts/variables";
+@import "/src/sass/base/typography";
 
 .flight {
   box-sizing: border-box;
-  max-width: 1128px;
-  margin: 2rem auto;
+  width: 1128px;
+  margin: 8px auto 2rem;
 
   background-color: $color-neutral100;
   box-shadow: $shadow;
@@ -111,7 +111,7 @@
       position: relative;
 
       &::before {
-        content: '';
+        content: "";
         border-width: 2px;
         border-style: solid;
         border-color: $color-secondary40;
@@ -228,7 +228,7 @@
     text-align: right;
 
     color: $color-neutral20;
-    
+
     border-radius: 2px;
     padding: 0.25rem 0.6rem;
 

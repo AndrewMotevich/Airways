@@ -3,14 +3,18 @@
 <div class="">select flight works</div>
 <div class="depart">
   <div class="">depart</div>
-  <app-ticket-date-slider></app-ticket-date-slider>
-  <app-flight-details></app-flight-details>
+  <section class="flight" *ngFor="let flight of flightsDetails$ | async">
+    <app-ticket-date-slider></app-ticket-date-slider>
+    <app-flight-details [flight]="flight"></app-flight-details>
+  </section>
 </div>
 
 <div class="return">
   <div class="">return</div>
-  <app-ticket-date-slider></app-ticket-date-slider>
-  <app-flight-details></app-flight-details>
+  <section class="flight" *ngFor="let flight of flightsDetails$ | async">
+    <app-ticket-date-slider></app-ticket-date-slider>
+    <app-flight-details [flight]="flight"></app-flight-details>
+  </section>
 </div>
 
 <footer></footer>

@@ -1,12 +1,12 @@
 @import "../../../../sass/abstracts/_variables";
 
 .ticket-date-card {
+  box-sizing: border-box;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 4px 0px;
-  width: 225px;
   height: 70px;
 
   background: $color-neutral100;
