@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAX_PHONE_LENGTH } from 'src/app/shared/constants';
+import { MAX_PHONE_LENGTH } from '../../../shared/constants';
 import { IPassengersData } from '../../models/passengers-data.interface';
 
 @Component({

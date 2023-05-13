@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, FormControl, FormGroup, FormGroupDirective } from '@angular/forms';
-import * as Constant from 'src/app/shared/constants';
+import * as Constant from '../../../../shared/constants';
 
 @Component({
   selector: 'app-passenger-form',
