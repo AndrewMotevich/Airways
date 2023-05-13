@@ -13,12 +13,15 @@
             matTooltip="{{ nameTooltip }}"
             matTooltipPosition="right"
             matTooltipClass="form-tooltip"
-            >info</mat-icon
+            svgIcon="icon_info"
+            class="icon-info"
+            aria-label="Info icon"            
+            ></mat-icon
           >
           <mat-icon
             *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
             matSuffix
-            class="error-icon"
+            class="icon-error"
             >error</mat-icon
           >
           <mat-error *ngIf="firstName.hasError('required')">Please enter a title</mat-error>
@@ -37,12 +40,15 @@
             matTooltip="{{ nameTooltip }}"
             matTooltipPosition="right"
             matTooltipClass="form-tooltip"
-            >info</mat-icon
+            svgIcon="icon_info"
+            class="icon-info"
+            aria-label="Info icon"
+            ></mat-icon
           >
           <mat-icon
             *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
             matSuffix
-            class="error-icon"
+            class="icon-error"
             >error</mat-icon
           >
           <mat-error *ngIf="lastName.hasError('required')">Please enter a title</mat-error>

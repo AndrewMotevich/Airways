@@ -1,5 +1,6 @@
-@import '/src/sass/abstracts/variables';
-@import '/src/sass/abstracts/mixins';
+@import '../../../../../sass/abstracts/variables';
+@import '../../../../../sass/abstracts/mixins';
+@import '../../../../../sass/base/typography';
 
 %gender {
   background-color: $color-secondary90;
@@ -29,7 +30,7 @@
     padding-left: 0.4rem;
   }
 
-  .gender {
+  ::ng-deep.gender {
     margin-left: 0.5rem;
 
     &-male {
@@ -51,7 +52,17 @@
       &.error {
         .mat-mdc-chip {
           border-color: $color-error;
-        }        
+        }
+      }
+
+      .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__text-label,
+      .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__checkmark {
+        @extend %text-label-medium;
+        color: $color-primary;
+        // font-weight: 500;
+        // font-size: 14px;
+        // line-height: 20px;
+        // letter-spacing: 0.1px;
       }
     }
   }
@@ -63,10 +74,16 @@
   .needhelp {
     padding-bottom: 1.5rem;
     display: flex;
-    align-items: center;      
+    align-items: center;
   }
 }
 
-.error-icon {
+.icon-error {
   color: $color-error;
+}
+
+.icon-info {
+  width: 28px;
+  height: 28px;
+  padding: 10px 8px 10px 12px;
 }

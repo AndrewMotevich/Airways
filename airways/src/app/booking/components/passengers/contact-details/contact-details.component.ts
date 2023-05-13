@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { PhoneCodeService } from '../../services/phone-code.service';
-import { IPhoneCode } from '../../models/phone-code.interface';
+import { PhoneCodeService } from '../../../services/phone-code.service';
+import { IPhoneCode } from '../../../models/phone-code.interface';
 
 @Component({
   selector: 'app-contact-details',
