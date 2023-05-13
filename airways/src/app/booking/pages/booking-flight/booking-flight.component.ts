@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAX_PHONE_LENGTH } from '../../../shared/constants';
-import { IPassengersData } from '../../models/passengers-data.interface';
+import { TPassengersData } from '../../models/passengers-data.interface';
 
 @Component({
   selector: 'app-booking-flight',
@@ -10,7 +10,7 @@ import { IPassengersData } from '../../models/passengers-data.interface';
 })
 
 export class BookingFlightComponent implements OnInit {
-  passengersData: IPassengersData = { adult: 1, child: 1, infant: 0 };
+  passengersData: TPassengersData = { adult: 1, child: 1, infant: 1 };
 
   passengersFormGroup!: FormGroup;
 
