@@ -14,15 +14,16 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
-import { PassengerFormComponent } from '../../components/passenger-form/passenger-form.component';
+import { PassengerFormComponent } from '../../components/passengers/passenger-form/passenger-form.component';
 import { BookingFlightComponent } from './booking-flight.component';
 import { PassengersComponent } from '../../components/passengers/passengers.component';
-import { CheckinBagComponent } from '../../components/checkin-bag/checkin-bag.component';
-import { ContactDetailsComponent } from '../../components/contact-details/contact-details.component';
+import { CheckinBagComponent } from '../../components/passengers/passenger-form/checkin-bag/checkin-bag.component';
+import { ContactDetailsComponent } from '../../components/passengers/contact-details/contact-details.component';
+import { DigitsOnlyDirective } from '../../directives/digits-only.directive';
 
 @NgModule({
 
-  declarations: [BookingFlightComponent, PassengersComponent, PassengerFormComponent, CheckinBagComponent, ContactDetailsComponent],
+  declarations: [BookingFlightComponent, PassengersComponent, PassengerFormComponent, CheckinBagComponent, ContactDetailsComponent, DigitsOnlyDirective],
   imports: [
     CommonModule,
     FormsModule,

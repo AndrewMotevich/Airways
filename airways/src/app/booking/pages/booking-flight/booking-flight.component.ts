@@ -21,11 +21,9 @@ export class BookingFlightComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    const phonePattern = `^[0-9]{0,${this.maxLength}}$`;
-
     this.passengersFormGroup = this.fb.nonNullable.group({
       phoneCode: [this.currentPhoneCode, Validators.required],
-      phone: ['', [Validators.required, Validators.maxLength(this.maxLength), Validators.pattern(phonePattern)]],
+      phone: ['', [Validators.required, Validators.maxLength(this.maxLength)]],
       email: ['', [Validators.required, Validators.email]],
     });
   }
