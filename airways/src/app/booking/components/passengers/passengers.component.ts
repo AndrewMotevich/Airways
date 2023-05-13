@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroupDirective, FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
-import * as Constant from 'src/app/shared/constants';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
+import * as Constant from '../../../shared/constants';
 import { IPassengersData } from '../../models/passengers-data.interface';
 import { IPassengerDetails } from '../../models/passenger.interface';
 
@@ -18,7 +20,16 @@ export class PassengersComponent implements OnInit {
 
   passengersFormArray: FormArray = this.fb.array([]);
 
-  constructor(private rootFormGroup: FormGroupDirective, private fb: FormBuilder) { }
+  constructor(private rootFormGroup: FormGroupDirective, private fb: FormBuilder, private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
+    this.matIconRegistry.addSvgIcon('icon_passengers',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/icons/passengers.svg'));
+
+    this.matIconRegistry.addSvgIcon('icon_contacts',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/icons/contacts.svg'));
+
+    this.matIconRegistry.addSvgIcon('icon_info',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/icons/info.svg'))
+  }
 
   ngOnInit(): void {
     this.form = this.rootFormGroup.control;

@@ -1,5 +1,8 @@
-@import '/src/sass/abstracts/variables';
+@import '../../../../sass/abstracts/variables';
 
 h2 {
   color: $color-primary;
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
 }
