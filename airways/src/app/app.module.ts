@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// import { AirwaysModule } from './booking/airways.module';
 import { MainPageModule } from './booking/pages/main-page/main-page.module';
 import { SelectFlightModule } from './booking/pages/select-flight/select-flight.module';
 
@@ -16,7 +15,6 @@ import { SelectFlightModule } from './booking/pages/select-flight/select-flight.
     HttpClientModule,
     BrowserAnimationsModule,
     MainPageModule,
-    // AirwaysModule,
     SelectFlightModule,
   ],
   providers: [],
