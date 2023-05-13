@@ -55,14 +55,19 @@
         }
       }
 
-      .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__text-label,
-      .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__checkmark {
+      .mdc-evolution-chip__text-label,
+      .mdc-evolution-chip__checkmark {
         @extend %text-label-medium;
+      }
+
+      .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled):not(.mat-mdc-chip-selected) .mdc-evolution-chip__text-label,
+      .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled):not(.mat-mdc-chip-selected) .mdc-evolution-chip__checkmark {
+        color: $color-neutral0;
+      }
+
+      .mat-mdc-chip-selected .mdc-evolution-chip__text-label,
+      .mat-mdc-chip-selected .mdc-evolution-chip__checkmark {
         color: $color-primary;
-        // font-weight: 500;
-        // font-size: 14px;
-        // line-height: 20px;
-        // letter-spacing: 0.1px;
       }
     }
   }
