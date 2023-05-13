@@ -76,11 +76,6 @@ h2 {
   line-height: 1.5rem;
 }
 
-.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__text-label,
-.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__checkmark {
-  color: $color-primary !important;
-}
-
 .mat-mdc-standard-chip.mdc-evolution-chip--with-primary-graphic
   .mdc-evolution-chip__action--primary {
   margin: 0 auto;
