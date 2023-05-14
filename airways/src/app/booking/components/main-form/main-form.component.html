@@ -8,7 +8,7 @@
 
   <div class="origin-destination-container">
 
-    <mat-form-field class="example-full-width" appearance="fill" hideRequiredMarker>
+    <mat-form-field appearance="fill" hideRequiredMarker>
       <mat-label>From</mat-label>
       <input type="text" placeholder="Chose your origin" aria-label="From" matInput formControlName="from"
         [matAutocomplete]="autoFrom">
@@ -23,7 +23,7 @@
       <mat-error *ngIf="form.controls.from.hasError('required')">Chose from</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="example-full-width" appearance="fill" hideRequiredMarker>
+    <mat-form-field appearance="fill" hideRequiredMarker>
       <mat-label>Destination</mat-label>
       <input type="text" placeholder="Chose your origin" aria-label="Destination" matInput formControlName="destination"
         [matAutocomplete]="autoDestination">
