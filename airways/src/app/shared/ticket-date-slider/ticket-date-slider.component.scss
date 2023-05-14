@@ -1,10 +1,12 @@
 @import "../../../sass/abstracts/_variables";
 
 .cards-slider {
-  display: flex;
+  box-sizing: border-box;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  display: grid;
   position: relative;
   align-items: flex-end;
-  max-width: 1130px;
+  width: 1128px;
 
   .arrow-icon {
     position: absolute;

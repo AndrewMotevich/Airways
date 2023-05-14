@@ -13,6 +13,13 @@ const routes: Routes = [
   { path: 'shopping-card', component: Page404Component, canActivate: [IsLoginGuard] },
   { path: 'user-account', component: Page404Component, canActivate: [IsLoginGuard] },
   { path: '404', component: Page404Component },
+  {
+    path: 'select-flight',
+    loadChildren: () =>
+      import('./booking/pages/select-flight/select-flight.module').then(
+        (m) => m.SelectFlightModule
+      ),
+  },
   { path: '**', redirectTo: '/404' },
 ];
 
