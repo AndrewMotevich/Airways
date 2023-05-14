@@ -1,1 +1,28 @@
-<app-flight-details></app-flight-details>
+<header></header>
+<app-flight-info-menu></app-flight-info-menu>
+<div class="">select flight works</div>
+<div class="depart">
+  <div class="direction-title"><img class='airplane-icon' src="assets/icons/airplane.png"><span>
+      {{departure.title}} to {{arrival.title}}
+    </span></div>
+  <section class="flight">
+    <app-ticket-date-slider [selectedDate]="departureDate" [ticketsData]="ticketsDataDepart"></app-ticket-date-slider>
+    <ng-container *ngFor="let flight of flightsDetailsDepart$ | async">
+      <app-flight-details [flight]="flight"></app-flight-details>
+    </ng-container>
+  </section>
+</div>
+
+<div class="return">
+  <div class="direction-title"><img class='airplane-icon' src="assets/icons/airplane.png"><span>
+      {{arrival.title}} to {{departure.title}}
+    </span></div>
+  <section class="flight">
+    <app-ticket-date-slider [selectedDate]="returnDate" [ticketsData]="ticketsDataReturn"></app-ticket-date-slider>
+    <ng-container *ngFor="let flight of flightsDetailsReturn$ | async">
+      <app-flight-details [flight]="flight"></app-flight-details>
+    </ng-container>
+  </section>
+</div>
+
+<footer></footer>
