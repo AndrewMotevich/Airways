@@ -16,7 +16,6 @@ import { SelectFlightModule } from './booking/pages/select-flight/select-flight.
     HttpClientModule,
     BrowserAnimationsModule,
     MainPageModule,
-    AirwaysModule,
     CoreModule,
     SelectFlightModule,
   ],
