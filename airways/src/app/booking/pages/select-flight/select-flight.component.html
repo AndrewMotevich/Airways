@@ -2,7 +2,9 @@
 <app-flight-info-menu></app-flight-info-menu>
 <div class="">select flight works</div>
 <div class="depart">
-  <div class="">depart</div>
+  <div class="direction-title"><img class='airplane-icon' src="assets/icons/airplane.png"><span>
+      {{departure}} to {{arrival}}
+    </span></div>
   <section class="flight" *ngFor="let flight of flightsDetails$ | async">
     <app-ticket-date-slider></app-ticket-date-slider>
     <app-flight-details [flight]="flight"></app-flight-details>
@@ -10,7 +12,9 @@
 </div>
 
 <div class="return">
-  <div class="">return</div>
+  <div class="direction-title"><img class='airplane-icon' src="assets/icons/airplane.png"><span>
+      {{arrival}} to {{departure}}
+    </span></div>
   <section class="flight" *ngFor="let flight of flightsDetails$ | async">
     <app-ticket-date-slider></app-ticket-date-slider>
     <app-flight-details [flight]="flight"></app-flight-details>
