@@ -32,7 +32,7 @@ export class SelectFlightComponent implements OnInit {
   ngOnInit(): void {
     // add запрос на cheapest билет (и просто наличие) на +- 2 дня от искомой даты
     this.flightsDetailsDepart$ = this.flightsDataService
-      .getFlightsData(this.departure.code, this.arrival.code, this.departureDate, 'eur', false)
+      .getFlightsData(this.departure.code, this.arrival.code, this.departureDate, 'eur', true)
       .pipe(
         tap((flightsData) => {
           this.ticketsDataDepart = flightsData.map((flight) => ({
@@ -44,7 +44,7 @@ export class SelectFlightComponent implements OnInit {
 
     // add запрос на cheapest билет (и просто наличие) на +- 2 дня от искомой даты
     this.flightsDetailsReturn$ = this.flightsDataService
-      .getFlightsData(this.arrival.code, this.departure.code, this.returnDate, 'eur', false)
+      .getFlightsData(this.arrival.code, this.departure.code, this.returnDate, 'eur', true)
       .pipe(
         tap((flightsData) => {
           this.ticketsDataReturn = flightsData.map((flight) => ({
