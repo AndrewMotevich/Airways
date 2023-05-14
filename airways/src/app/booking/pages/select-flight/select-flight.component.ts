@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Component, OnInit, Output } from '@angular/core';
-import { Observable, combineLatest, map, of, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import dayjs from 'dayjs';
 import { IFlightDetails } from '../../models/flight-details.interface';
 import { FlightsDataService } from '../../services/flightsData.service';
@@ -12,13 +11,17 @@ import { FlightsDataService } from '../../services/flightsData.service';
   providers: [FlightsDataService],
 })
 export class SelectFlightComponent implements OnInit {
-  flightsDetails$!: Observable<IFlightDetails[]>;
+  flightsDetailsDepart$!: Observable<IFlightDetails[]>;
 
-  departure: string = 'Dublin';
+  departure: { title: string; code: string } = { title: 'Belgrade', code: 'BEG' };
 
-  arrival: string = 'Warsaw Modlin';
+  ticketsDataDepart: { date: string; cost: string }[] = [];
 
-  ticketsData: { date: string; cost: string }[] = [];
+  flightsDetailsReturn$!: Observable<IFlightDetails[]>;
+
+  arrival: { title: string; code: string } = { title: 'Saint-Petersburg', code: 'LED' };
+
+  ticketsDataReturn: { date: string; cost: string }[] = [];
 
   @Output() departureDate: string = '2023-05-15';
 
@@ -27,11 +30,24 @@ export class SelectFlightComponent implements OnInit {
   constructor(private flightsDataService: FlightsDataService) {}
 
   ngOnInit(): void {
-    this.flightsDetails$ = this.flightsDataService
-      .getFlightsData('BEG', 'LED', this.departureDate, this.returnDate, 'eur', false)
+    // add запрос на cheapest билет (и просто наличие) на +- 2 дня от искомой даты
+    this.flightsDetailsDepart$ = this.flightsDataService
+      .getFlightsData(this.departure.code, this.arrival.code, this.departureDate, 'eur', false)
       .pipe(
         tap((flightsData) => {
-          this.ticketsData = flightsData.map((flight) => ({
+          this.ticketsDataDepart = flightsData.map((flight) => ({
+            date: dayjs(flight.departure_at).format('YYYY-MM-DD'),
+            cost: flight.price.toString(),
+          }));
+        })
+      );
+
+    // add запрос на cheapest билет (и просто наличие) на +- 2 дня от искомой даты
+    this.flightsDetailsReturn$ = this.flightsDataService
+      .getFlightsData(this.arrival.code, this.departure.code, this.returnDate, 'eur', false)
+      .pipe(
+        tap((flightsData) => {
+          this.ticketsDataReturn = flightsData.map((flight) => ({
             date: dayjs(flight.departure_at).format('YYYY-MM-DD'),
             cost: flight.price.toString(),
           }));
@@ -39,27 +55,3 @@ export class SelectFlightComponent implements OnInit {
       );
   }
 }
-// ngOnInit(): void {
-//   const flightsData$ = this.flightsDataService
-//     .getFlightsData('BEG', 'LED', this.departureDate, this.returnDate, 'eur', false)
-//     .pipe(
-//       tap((flightsData) => {
-//         this.ticketsData = flightsData.map((flight) => ({
-//           date: dayjs(flight.departure_at).format('YYYY-MM-DD'),
-//           cost: flight.price.toString(),
-//         }));
-//       })
-//     );
-
-//   this.flightsDetails$ = combineLatest([flightsData$, of(this.ticketsData)]).pipe(
-//     map(([flightsData, ticketsData]) => flightsData.map((flight) => ({
-//         ...flight,
-//         date: dayjs(flight.departure_at).format('YYYY-MM-DD'),
-//         cost: flight.price.toString(),
-//         ticketData: ticketsData.find(
-//           (t) => t.date === dayjs(flight.departure_at).format('YYYY-MM-DD')
-//         )?.cost,
-//       })))
-//   );
-// }
-// }

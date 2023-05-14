@@ -20,11 +20,15 @@ export class FlightsDataService {
     origin: string,
     destination: string,
     departureAt: string,
-    returnAt: string,
     currency: string,
     isOneWay: boolean
   ): Observable<IFlightDetails[]> {
-    const url = `${this.proxyURL}${this.basePricesUrl}?origin=${origin}&destination=${destination}&departure_at=${departureAt}&return_at=${returnAt}&unique=false&sorting=price&direct=false&currency=${currency}&market=ru&limit=30&page=1&one_way=${isOneWay}&token=${this.token}`;
+    let url = `${this.proxyURL}${this.basePricesUrl}?origin=${origin}&destination=${destination}&unique=false&sorting=price&direct=false&currency=${currency}&market=ru&limit=30&page=1&one_way=${isOneWay}&token=${this.token}`;
+
+    if (departureAt) {
+      url += `&departure_at=${departureAt}`;
+    }
+
     return this.http
       .get<IFlightsData>(url)
       .pipe(
