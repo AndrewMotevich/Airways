@@ -8,10 +8,15 @@ $color-secondary40: rgb(208, 217, 223);
 $color-secondary50: rgb(225, 229, 235);
 $color-secondary60: rgb(233, 237, 241);
 $color-secondary80: rgb(241, 243, 246);
+$color-secondary85: rgba(255, 255, 255, 0.85);
 $color-secondary90: rgb(244, 246, 249);
 $color-secondary100: rgb(250, 250, 250);
 // highlight
-$color-highlight-gradient: linear-gradient(108.75deg, rgb(0, 144, 189) 59.91%, rgb(7, 53, 144) 95.36%);
+$color-highlight-gradient: linear-gradient(
+  108.75deg,
+  rgb(0, 144, 189) 59.91%,
+  rgb(7, 53, 144) 95.36%
+);
 $color-highlight-green0: rgb(127, 137, 6);
 $color-highlight-green30: rgba(127, 137, 6, 0.3);
 $color-highlight-yellow0: rgb(241, 201, 51);

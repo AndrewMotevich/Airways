@@ -1,0 +1,136 @@
+@import '../../../../sass/abstracts/variables';
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 88px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  color: $color-neutral10;
+}
+.header-main-color {
+  color: $color-neutral100 !important;
+}
+.header-main-page {
+  background-color: $color-neutral70;
+}
+.color-primary {
+  color: $color-primary !important;
+}
+.color-100 {
+  color: $color-neutral100;
+}
+.header-with-stepper {
+  background-color: $color-neutral100;
+}
+.header-wrapper {
+  max-width: 1128px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-items-wrapper {
+  max-width: 660px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+::ng-deep.currency-select {
+  .mat-mdc-select-placeholder {
+    color: $color-neutral10;
+  }
+  .mat-mdc-select-value {
+    color: $color-primary;
+  }
+  .mdc-text-field {
+    width: 64px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: $color-primary;
+  }
+  .mat-mdc-form-field-subscript-wrapper {
+    height: 0;
+  }
+}
+::ng-deep.currency-select-main {
+  .mat-mdc-select-placeholder {
+    color: $color-neutral100 !important;
+  }
+}
+
+::ng-deep.date-select {
+  .mat-mdc-select-placeholder {
+    color: $color-neutral10;
+  }
+  .mat-mdc-select-value {
+    color: $color-primary;
+  }
+  .mdc-text-field {
+    width: 162px;
+    height: 40px;
+    padding: 0;
+    padding-right: 1rem;
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+  .mat-mdc-form-field-subscript-wrapper {
+    height: 0;
+  }
+}
+::ng-deep.date-select-main {
+  .mat-mdc-select-placeholder {
+    color: $color-neutral100 !important;
+  }
+}
+::ng-deep.select {
+  .mat-mdc-select-arrow {
+    display: none;
+  }
+}
+.sign-button-wrapper {
+  box-sizing: border-box;
+  cursor: pointer;
+  width: 114px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  border: 0.5px solid $color-neutral50;
+}
+.stepper {
+  ::ng-deep.mat-horizontal-content-container {
+    padding: 0;
+  }
+}
+.mat-menu-container {
+  display: flex;
+  align-items: center;
+}
+.hidden-mat-menu {
+  display: none;
+}
+.account-icon {
+  background-color: $color-secondary80;
+  border-radius: 50%;
+}
+@media screen and (max-width: 960px) {
+  .hidden-mat-menu {
+    display: block;
+  }
+  .header-items-wrapper {
+    display: none;
+  }
+}

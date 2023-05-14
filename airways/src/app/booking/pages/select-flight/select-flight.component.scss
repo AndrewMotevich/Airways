@@ -1,0 +1,29 @@
+@import "../../../../sass/abstracts/_variables";
+
+.return {
+  .direction-title {
+    .airplane-icon {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.direction-title {
+  display: flex;
+  align-items: center;
+
+  margin: 40px 0 8px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  color: $color-primary;
+}
+
+.airplane-icon {
+  margin-right: 12px;
+  height: 24px;
+  width: 24px;
+}
