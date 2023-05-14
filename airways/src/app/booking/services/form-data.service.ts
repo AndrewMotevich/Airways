@@ -7,8 +7,8 @@ import { FormDataType } from '../models/form-data-type.model';
 export class FormDataService {
   private formData?: FormDataType;
 
-  setMainFormData(obj: FormDataType): void {
-    this.formData = obj;
+  setMainFormData(mainFormData: FormDataType): void {
+    this.formData = mainFormData;
   }
 
   getMainFormData(): FormDataType | undefined {

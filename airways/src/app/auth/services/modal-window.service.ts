@@ -4,9 +4,21 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ModalWindowService {
-  isModal = false;
+  private modal = false;
 
-  showModal(): void {
-    this.isModal = !this.isModal;
+  closeModel(): void {
+    if (this.modal === true) this.modal = false;
+  }
+
+  openModel(): void {
+    if (this.modal === false) this.modal = true;
+  }
+
+  switchModal(): void {
+    this.modal = !this.modal;
+  }
+
+  getModal(): boolean {
+    return this.modal;
   }
 }

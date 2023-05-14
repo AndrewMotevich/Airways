@@ -35,8 +35,8 @@
         </mat-select>
       </mat-form-field>
 
-      <button mat-button class="sign-button-wrapper" *ngIf="loginService.getIsLogin() === false"
-        (click)="modalWindowServices.showModal()">
+      <button mat-button class="sign-button-wrapper" *ngIf="authApiService.getIsLogin() === false"
+        (click)="modalWindowServices.switchModal()">
         <mat-icon [ngClass]="{'color-100' : currentUrl === '/'}" fontIcon="person_outline"></mat-icon>
         <span [ngClass]="{
           'header-main-color' : currentUrl === '/',
@@ -44,7 +44,7 @@
         }">Sign in</span>
       </button>
 
-      <button mat-button class="sign-button-wrapper" *ngIf="loginService.getIsLogin()"
+      <button mat-button class="sign-button-wrapper" *ngIf="authApiService.getIsLogin()"
         [matMenuTriggerFor]="accountMenu">
         <mat-icon color="primary" [ngClass]="{
           'account-icon' : currentUrl !== '/',
@@ -61,7 +61,7 @@
     </button>
   </div>
 </header>
-<app-login-form *ngIf="modalWindowServices.isModal"></app-login-form>
+<app-login-form *ngIf="modalWindowServices.getModal()"></app-login-form>
 
 <!-- mat menu -->
 
@@ -74,11 +74,11 @@
 </mat-menu>
 
 <mat-menu #mobileMenu="matMenu">
-  <button mat-menu-item *ngIf="loginService.getIsLogin() === false" (click)="modalWindowServices.showModal()">
+  <button mat-menu-item *ngIf="authApiService.getIsLogin() === false" (click)="modalWindowServices.switchModal()">
     <span>Sign in</span>
   </button>
 
-  <button mat-menu-item *ngIf="loginService.getIsLogin()" [matMenuTriggerFor]="accountMenu">
+  <button mat-menu-item *ngIf="authApiService.getIsLogin()" [matMenuTriggerFor]="accountMenu">
     <span class="mat-menu-container "><mat-icon color="primary" fontIcon="person_outline"></mat-icon>User</span>
   </button>
 

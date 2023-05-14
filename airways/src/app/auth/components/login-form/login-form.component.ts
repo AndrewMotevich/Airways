@@ -12,12 +12,8 @@ import { map, startWith } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ModalWindowService } from '../../services/modal-window.service';
 import { AuthFormDataService } from '../../services/auth-form-data.service';
-import {
-  CitizenshipCodes,
-  CountryCodes,
-  ICitizenshipCode,
-  ICountryCode,
-} from '../../models/countries-data-type.model';
+import { CitizenshipCodes, CountryCodes } from '../../constants/auth-constants';
+import { ICitizenshipCode, ICountryCode } from '../../models/countries-data-type.model';
 import { LoginFormDataType, RegisterFormDataType } from '../../models/login-form-data-type.model';
 import { AuthApiService } from '../../services/auth-api.service';
 

@@ -9,19 +9,19 @@ export class AuthFormDataService {
 
   private loginFormData?: LoginFormDataType;
 
-  setRegisterFormData(obj: RegisterFormDataType): void {
-    this.registerFormData = obj;
+  setRegisterFormData(registerData: RegisterFormDataType): void {
+    this.registerFormData = registerData;
   }
 
-  setLoginFormData(obj: LoginFormDataType): void {
-    this.loginFormData = obj;
+  setLoginFormData(loginData: LoginFormDataType): void {
+    this.loginFormData = loginData;
   }
 
-  getRegisterFormData(): RegisterFormDataType | undefined {
-    return this.registerFormData;
+  getRegisterFormData(): RegisterFormDataType | {} {
+    return this.registerFormData || {};
   }
 
-  getLoginFormData(): LoginFormDataType | undefined {
-    return this.loginFormData;
+  getLoginFormData(): LoginFormDataType | {} {
+    return this.loginFormData || {};
   }
 }

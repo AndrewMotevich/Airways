@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalWindowService } from 'src/app/auth/services/modal-window.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { LoginService } from 'src/app/auth/services/login.service';
-import { AuthApiService } from 'src/app/auth/services/auth-api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ModalWindowService } from '../../../auth/services/modal-window.service';
+import { AuthApiService } from '../../../auth/services/auth-api.service';
 import { HeaderDataService } from '../../services/header-data.service';
 
 @Component({
@@ -20,7 +19,7 @@ import { HeaderDataService } from '../../services/header-data.service';
   ],
 })
 export class HeaderComponent implements OnInit {
-  currentUrl = '';
+  currentUrl: string = '';
 
   headerData = new FormGroup({
     dateFormat: new FormControl<string>('', [Validators.required]),
@@ -31,7 +30,6 @@ export class HeaderComponent implements OnInit {
     public modalWindowServices: ModalWindowService,
     private router: Router,
     public headerDataService: HeaderDataService,
-    public loginService: LoginService,
     public authApiService: AuthApiService,
     private snackBar: MatSnackBar
   ) {}

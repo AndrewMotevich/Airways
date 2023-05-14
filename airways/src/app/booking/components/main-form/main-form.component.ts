@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 import { AviaSalesApiService as AviasalesApiService } from '../../services/aviasales-api.service';
 import { CityDateType } from '../../models/city-data-type.model';
 import { FormDataService } from '../../services/form-data.service';
-import { FormDataType } from '../../models/form-data-type.model';
 import { changeIcon } from '../../../../assets/icons/Vector';
 
 @Component({
@@ -73,7 +72,7 @@ export class MainFormComponent implements OnInit {
 
   public submit(): void {
     if (this.form.valid) {
-      this.formDataService.setMainFormData(this.form.value as unknown as FormDataType);
+      this.formDataService.setMainFormData(this.form.getRawValue());
       this.router.navigate(['/select-flight']);
     }
   }

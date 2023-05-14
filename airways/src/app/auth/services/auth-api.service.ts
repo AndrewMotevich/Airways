@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap, Observable } from 'rxjs';
-import { LoginService } from './login.service';
 import { AuthFormDataService } from './auth-form-data.service';
 import { ModalWindowService } from './modal-window.service';
+import { RegisterFormDataType } from '../models/login-form-data-type.model';
 
 function parseJwt(token: string): { firstName: string } {
   const base64Url = token.split('.')[1];
@@ -23,19 +23,28 @@ function parseJwt(token: string): { firstName: string } {
   providedIn: 'root',
 })
 export class AuthApiService {
+  private isLogin = false;
+
   accessToken = '';
 
   tokenData?: { email: string; firstName: string; lastName: string };
 
   constructor(
     private http: HttpClient,
-    private loginService: LoginService,
     private authLoginData: AuthFormDataService,
     private modalWindowService: ModalWindowService
   ) {}
 
+  setIsLogin(value: boolean): void {
+    this.isLogin = value;
+  }
+
+  getIsLogin(): boolean {
+    return this.isLogin;
+  }
+
   register(): Observable<{ message: string }> {
-    const registerData = this.authLoginData.getRegisterFormData();
+    const registerData = this.authLoginData.getRegisterFormData() as RegisterFormDataType;
     const email = registerData?.email;
     const password = registerData?.password;
     return this.http
@@ -62,8 +71,8 @@ export class AuthApiService {
       .pipe(
         tap((response) => {
           this.accessToken = response.accessToken;
-          this.loginService.setIsLogin(true);
-          this.modalWindowService.isModal = false;
+          this.setIsLogin(true);
+          this.modalWindowService.closeModel();
           this.tokenData = parseJwt(this.accessToken) as {
             email: string;
             firstName: string;
@@ -81,8 +90,8 @@ export class AuthApiService {
       .pipe(
         tap(() => {
           this.accessToken = '';
-          this.loginService.setIsLogin(false);
-          this.modalWindowService.isModal = false;
+          this.setIsLogin(false);
+          this.modalWindowService.closeModel();
         })
       );
   }
@@ -95,8 +104,8 @@ export class AuthApiService {
       .pipe(
         tap((response) => {
           this.accessToken = response.accessToken;
-          this.loginService.setIsLogin(true);
-          this.modalWindowService.isModal = false;
+          this.setIsLogin(true);
+          this.modalWindowService.closeModel();
           this.tokenData = parseJwt(this.accessToken) as {
             email: string;
             firstName: string;
