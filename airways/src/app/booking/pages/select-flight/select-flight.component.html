@@ -5,9 +5,11 @@
   <div class="direction-title"><img class='airplane-icon' src="assets/icons/airplane.png"><span>
       {{departure}} to {{arrival}}
     </span></div>
-  <section class="flight" *ngFor="let flight of flightsDetails$ | async">
-    <app-ticket-date-slider></app-ticket-date-slider>
-    <app-flight-details [flight]="flight"></app-flight-details>
+  <section class="flight">
+    <app-ticket-date-slider [selectedDate]="departureDate" [ticketsData]="ticketsData"></app-ticket-date-slider>
+    <ng-container *ngFor="let flight of flightsDetails$ | async">
+      <app-flight-details [flight]="flight"></app-flight-details>
+    </ng-container>
   </section>
 </div>
 
@@ -15,9 +17,11 @@
   <div class="direction-title"><img class='airplane-icon' src="assets/icons/airplane.png"><span>
       {{arrival}} to {{departure}}
     </span></div>
-  <section class="flight" *ngFor="let flight of flightsDetails$ | async">
-    <app-ticket-date-slider></app-ticket-date-slider>
-    <app-flight-details [flight]="flight"></app-flight-details>
+  <section class="flight">
+    <app-ticket-date-slider [selectedDate]="returnDate" [ticketsData]="ticketsData"></app-ticket-date-slider>
+    <ng-container *ngFor="let flight of flightsDetails$ | async">
+      <app-flight-details [flight]="flight"></app-flight-details>
+    </ng-container>
   </section>
 </div>
 
