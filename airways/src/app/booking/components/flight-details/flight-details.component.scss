@@ -3,8 +3,7 @@
 @import "/src/sass/base/typography";
 
 .flight {
-  @include white-block;
-  
+  @include white-block;  
   max-width: 1128px;  
   margin: 8px auto 2rem;
 
