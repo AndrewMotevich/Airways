@@ -20,6 +20,7 @@ import { PassengersComponent } from '../../components/passengers/passengers.comp
 import { CheckinBagComponent } from '../../components/passengers/passenger-form/checkin-bag/checkin-bag.component';
 import { ContactDetailsComponent } from '../../components/passengers/contact-details/contact-details.component';
 import { DigitsOnlyDirective } from '../../directives/digits-only.directive';
+import { BookingFlightRoutingModule } from './booking-flight-routing.module';
 
 @NgModule({
 
@@ -40,10 +41,11 @@ import { DigitsOnlyDirective } from '../../directives/digits-only.directive';
     MatButtonToggleModule,
     MatCardModule,
     MatDividerModule,
-    MatSelectModule
+    MatSelectModule,
+    BookingFlightRoutingModule
   ],
   exports: [
-    BookingFlightComponent, PassengersComponent, PassengerFormComponent
+    BookingFlightComponent, PassengersComponent, PassengerFormComponent, CheckinBagComponent, ContactDetailsComponent
   ]
 })
 export class BookingFlightModule { }

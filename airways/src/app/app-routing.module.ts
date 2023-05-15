@@ -1,19 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SelectFlightComponent } from './booking/pages/select-flight/select-flight.component';
 import { MainPageComponent } from './booking/pages/main-page/main-page.component';
 import { Page404Component } from './booking/pages/page404/page404.component';
-import { BookingFlightComponent } from './booking/pages/booking-flight/booking-flight.component';
 import { IsLoginGuard } from './auth/guard/is-login.guard';
 
 const routes: Routes = [
-  { path: '', component: MainPageComponent },
-  { path: 'select-flight', component: SelectFlightComponent },  
-  { path: 'booking', component: BookingFlightComponent, canActivate: [IsLoginGuard] },
-  { path: 'summary', component: Page404Component, canActivate: [IsLoginGuard] },
-  { path: 'shopping-card', component: Page404Component, canActivate: [IsLoginGuard] },
-  { path: 'user-account', component: Page404Component, canActivate: [IsLoginGuard] },
-  { path: '404', component: Page404Component },
+  { path: '', component: MainPageComponent, pathMatch: 'full' },
   {
     path: 'select-flight',
     loadChildren: () =>
@@ -21,6 +13,15 @@ const routes: Routes = [
         (m) => m.SelectFlightModule
       ),
   },
+  {
+    path: 'booking',
+    loadChildren: () => import('./booking/pages/booking-flight/booking-flight.module').then((m) => m.BookingFlightModule),
+    //canActivate: [IsLoginGuard]
+  },
+  { path: 'summary', component: Page404Component, canActivate: [IsLoginGuard] },
+  { path: 'shopping-card', component: Page404Component, canActivate: [IsLoginGuard] },
+  { path: 'user-account', component: Page404Component, canActivate: [IsLoginGuard] },
+  { path: '404', component: Page404Component },
   { path: '**', redirectTo: '/404' },
 ];
 
@@ -28,4 +29,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
