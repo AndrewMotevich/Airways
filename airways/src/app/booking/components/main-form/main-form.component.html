@@ -1,4 +1,4 @@
-<div *ngIf="isLoading">Loading...</div>
+<div *ngIf="isLoading" class="loading"><mat-spinner strokeWidth="2" diameter="50" aria-label="Loading form"></mat-spinner></div>
 <form class="form-container" *ngIf="!isLoading" [formGroup]="form" (ngSubmit)="submit()">
 
   <mat-radio-group aria-label="Select an option" formControlName="roundedTrip">
