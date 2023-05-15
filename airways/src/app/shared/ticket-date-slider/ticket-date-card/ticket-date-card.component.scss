@@ -69,6 +69,10 @@
       font-weight: 700;
       font-size: 30px;
       line-height: 36px;
+
+      @media screen and (max-width: 670px) {
+        font-size: 20px;
+      }
     }
   }
 
