@@ -1,0 +1,25 @@
+@import '../../../../../sass/abstracts/variables';
+@import '../../../../../sass/abstracts/mixins';
+
+
+h2 { 
+  display: flex;
+  align-items: flex-end;
+  gap: .5rem;
+}
+
+.constact-details {
+  background: $color-neutral100;
+  padding: 2rem 2.3rem .5rem 2.8rem;
+
+  display: flex;
+  gap: 1.2rem;
+
+  &_phone {
+    width: 30%;
+  }
+  
+  &_email {
+    width: 33%;
+  }
+}

@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainPageModule } from './booking/pages/main-page/main-page.module';
 import { CoreModule } from './core/modules/core/core.module';
-import { SelectFlightModule } from './booking/pages/select-flight/select-flight.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,7 +16,6 @@ import { SelectFlightModule } from './booking/pages/select-flight/select-flight.
     BrowserAnimationsModule,
     MainPageModule,
     CoreModule,
-    SelectFlightModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

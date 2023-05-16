@@ -3,13 +3,9 @@
 @import "/src/sass/base/typography";
 
 .flight {
-  box-sizing: border-box;
-  max-width: 1128px;
+  @include white-block;  
+  max-width: 1128px;  
   margin: 8px auto 2rem;
-
-  background-color: $color-neutral100;
-  box-shadow: $shadow;
-  border-radius: 5px;
 
   @media screen and (min-width: 960px) {
     display: grid;

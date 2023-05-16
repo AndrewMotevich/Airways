@@ -20,10 +20,6 @@
   border-radius: 4px !important;
   border: 0.5px solid rgba(116, 118, 122, 0.6) !important;
 }
-.mat-mdc-text-field-wrapper {
-  border-radius: 4px !important;
-  border: 0.5px solid rgba(116, 118, 122, 0.6) !important;
-}
 
 .origin-destination-container {
   position: relative;
@@ -101,4 +97,11 @@
     width: 80%;
     max-width: 300px;
   }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
 }
