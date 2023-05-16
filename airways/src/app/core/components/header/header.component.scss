@@ -1,0 +1,199 @@
+@import '../../../../sass/abstracts/variables';
+
+%input-field {
+  background-color: $color-neutral90;
+  border: 0.5px solid $color-neutral60;
+  border-radius: 4px;
+}
+
+%input-style {
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+    border-color: transparent;
+  }
+
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover
+    .mdc-notched-outline
+    .mdc-notched-outline__leading,
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover
+    .mdc-notched-outline
+    .mdc-notched-outline__notch,
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover
+    .mdc-notched-outline
+    .mdc-notched-outline__trailing {
+    border-color: transparent;
+    background-color: $color-neutral70;
+  }
+
+  .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+    padding-top: 16px;
+  }
+
+  &.mat-focused .mdc-notched-outline--notched {
+    background-color: $color-secondary60;
+  }
+
+  &.mat-focused .mat-mdc-select-value,
+  &.mat-focused .mat-mdc-select-arrow {
+    position: relative;
+    z-index: 2;
+  }
+
+  &.mat-focused .mat-mdc-select-placeholder,
+  &.mat-focused .mat-mdc-select-value,
+  &.mat-focused .mat-mdc-select-arrow {
+    color: $color-neutral0;
+  }
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 88px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  color: $color-neutral10;
+}
+.header-main-color {
+  color: $color-neutral100 !important;
+}
+.header-main-page {
+  background-color: $color-neutral70;
+}
+.color-primary {
+  color: $color-primary !important;
+}
+.color-100 {
+  color: $color-neutral100;
+}
+.header-with-stepper {
+  background-color: $color-neutral100;
+}
+.header-wrapper {
+  max-width: 1128px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-items-wrapper {
+  max-width: 660px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 40px;
+}
+
+::ng-deep.currency-select {
+  &:not(.mat-focused) .mat-mdc-select-placeholder {
+    color: $color-neutral10;
+  }
+  &:not(.currency-select-main) .mat-mdc-select-value {
+    color: $color-primary;
+  }
+  .mdc-text-field {
+    width: 64px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: $color-primary;
+    @extend %input-field;
+  }
+  .mat-mdc-form-field-subscript-wrapper {
+    height: 0;
+  }
+
+  @extend %input-style;
+}
+
+::ng-deep.currency-select-main {
+  &:not(.mat-focused) .mat-mdc-select-placeholder,
+  .mat-mdc-select-value {
+    color: $color-neutral100;
+  }
+}
+
+::ng-deep.date-select {
+  .mat-mdc-select-placeholder {
+    color: $color-neutral10;
+  }
+  
+  &:not(.date-select-main) .mat-mdc-select-value {
+    color: $color-primary;
+  }
+  .mdc-text-field {
+    width: 162px;
+    height: 40px;
+    padding: 0;
+    padding-right: 1rem;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    @extend %input-field;
+  }
+
+  @extend %input-style;
+
+  .mat-mdc-form-field-subscript-wrapper {
+    height: 0;
+  }
+}
+
+::ng-deep.date-select-main {
+  .mat-mdc-select-placeholder,
+  .mat-mdc-select-arrow,
+  .mat-mdc-select-value {
+    color: $color-neutral100;
+  }
+}
+
+::ng-deep.select {
+  .mat-mdc-select-arrow {
+    display: none;
+  }
+}
+.sign-button-wrapper {
+  box-sizing: border-box;
+  cursor: pointer;
+  width: 114px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  border: 0.5px solid $color-neutral60;
+  background-color: $color-neutral90;
+}
+.stepper {
+  ::ng-deep.mat-horizontal-content-container {
+    padding: 0;
+  }
+}
+.mat-menu-container {
+  display: flex;
+  align-items: center;
+}
+.hidden-mat-menu {
+  display: none;
+}
+.account-icon {
+  background-color: $color-secondary80;
+  border-radius: 50%;
+}
+@media screen and (max-width: 960px) {
+  .hidden-mat-menu {
+    display: block;
+  }
+  .header-items-wrapper {
+    display: none;
+  }
+}

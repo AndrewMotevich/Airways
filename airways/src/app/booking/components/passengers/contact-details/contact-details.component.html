@@ -1,0 +1,27 @@
+<h2><mat-icon svgIcon="icon_contacts"></mat-icon>Contact details</h2>
+<p>We need contact details to be able to deliver the latest information regarding your flight.</p>
+
+<section class="constact-details">
+  <ng-container [formGroup]="formGroup">
+    <mat-form-field appearance="outline">
+      <mat-label>Country code</mat-label>
+      <mat-select formControlName="phoneCode">
+        <mat-option *ngFor="let phoneCode of phoneCodes | async" [value]="phoneCode.code">{{phoneCode.country}}({{phoneCode.phone}})</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="constact-details_phone">
+      <mat-label>Mobile phone number</mat-label>
+      <input matInput appDigitsOnly type="tel" formControlName="phone" autocomplete="off" [maxlength]="maxLength" [size]="maxLength"/>
+      <mat-error *ngIf="phone.hasError('required')">This field is required</mat-error>
+      <mat-error *ngIf="phone.hasError('pattern')">Only digits, no other characters allowed</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="constact-details_email">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="e.g. example@email.com" type="email" formControlName="email"/>
+      <mat-error *ngIf="email.hasError('required')">This field is required</mat-error>
+      <mat-error *ngIf="email.hasError('email')">Check email</mat-error>
+    </mat-form-field>
+  </ng-container>
+</section>
