@@ -22,7 +22,7 @@ export class TicketDateSliderComponent {
       return { date: date.format('DD MMM dddd'), cost: ticket ? ticket.cost : null };
     });
   }
-
+  
   boundColor: string = 'rgb(255, 153, 0)';
 
   selectedDates: { date: string; cost: string | null }[] = [];
