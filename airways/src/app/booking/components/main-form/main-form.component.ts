@@ -92,7 +92,6 @@ export class MainFormComponent implements OnInit {
     if (this.form.valid) {
       this.formDataService.setMainFormData(this.form.getRawValue());
       this.router.navigate(['/select-flight']);
-      console.log(this.formDataService.getMainFormData());
     }
   }
 
