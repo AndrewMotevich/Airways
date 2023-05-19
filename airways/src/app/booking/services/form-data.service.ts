@@ -9,6 +9,10 @@ export class FormDataService {
 
   setMainFormData(mainFormData: FormDataType): void {
     this.formData = mainFormData;
+    this.formData.from = this.formData.from?.match(/\(\w+\)/)?.[0] || '';
+    this.formData.destination = this.formData.destination?.match(/\(\w+\)/)?.[0] || '';
+    this.formData.from = this.formData.from?.match(/\w+/)?.[0] || '';
+    this.formData.destination = this.formData.destination?.match(/\w+/)?.[0] || '';
   }
 
   getMainFormData(): FormDataType | undefined {

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { map } from 'rxjs/operators';
+import { map, mergeMap, toArray } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -9,6 +9,7 @@ import { AviaSalesApiService as AviasalesApiService } from '../../services/avias
 import { CityDateType } from '../../models/city-data-type.model';
 import { FormDataService } from '../../services/form-data.service';
 import { changeIcon } from '../../../../assets/icons/Vector';
+import { AirportsDataType } from '../../models/airports-data-type';
 
 @Component({
   selector: 'app-main-form',
@@ -21,11 +22,13 @@ export class MainFormComponent implements OnInit {
 
   isLoading = false;
 
-  filteredFromOptions?: Observable<CityDateType[]>;
+  filteredFromOptions?: Observable<AirportsDataType[]>;
 
-  filteredDestinationOptions?: Observable<CityDateType[]>;
+  filteredDestinationOptions?: Observable<AirportsDataType[]>;
 
   cities: CityDateType[] = [];
+
+  airports: AirportsDataType[] = [];
 
   adult = 1;
 
@@ -47,7 +50,7 @@ export class MainFormComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private getCities: AviasalesApiService,
+    private aviasalesApiService: AviasalesApiService,
     private formDataService: FormDataService,
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer
@@ -57,9 +60,23 @@ export class MainFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.getCities.getCities().subscribe(() => {
-      this.isLoading = false;
-      this.cities = this.getCities.cities;
+    this.aviasalesApiService.getCities().subscribe(() => {
+      this.cities = this.aviasalesApiService.cities;
+
+      this.aviasalesApiService
+        .getAirports()
+        .pipe(
+          mergeMap((x) => x),
+          map((x) => ({
+            ...x,
+            city_name: this.cities.find((val) => val.code === x.city_code)?.name || '',
+          })),
+          toArray()
+        )
+        .subscribe((res) => {
+          this.aviasalesApiService.airports = res;
+          this.airports = res;
+        });
 
       this.filteredFromOptions = this.form.controls.from.valueChanges.pipe(
         map((value) => this.filterFrom(value || ''))
@@ -67,6 +84,7 @@ export class MainFormComponent implements OnInit {
       this.filteredDestinationOptions = this.form.controls.destination.valueChanges.pipe(
         map((value) => this.filterDestination(value || ''))
       );
+      this.isLoading = false;
     });
   }
 
@@ -74,6 +92,7 @@ export class MainFormComponent implements OnInit {
     if (this.form.valid) {
       this.formDataService.setMainFormData(this.form.getRawValue());
       this.router.navigate(['/select-flight']);
+      console.log(this.formDataService.getMainFormData());
     }
   }
 
@@ -124,15 +143,15 @@ export class MainFormComponent implements OnInit {
     this.form.controls.destination.setValue(currentFrom);
   }
 
-  private filterFrom(value: string): CityDateType[] {
+  private filterFrom(value: string): AirportsDataType[] {
     const filterValue = value.toLowerCase();
 
-    return this.cities.filter((city) => city.name.toLowerCase().includes(filterValue));
+    return this.airports.filter((airport) => airport.city_name.toLowerCase().includes(filterValue));
   }
 
-  private filterDestination(value: string): CityDateType[] {
+  private filterDestination(value: string): AirportsDataType[] {
     const filterValue = value.toLowerCase();
 
-    return this.cities.filter((city) => city.name.toLowerCase().includes(filterValue));
+    return this.airports.filter((airport) => airport.city_name.toLowerCase().includes(filterValue));
   }
 }
