@@ -1,11 +1,37 @@
-.container {
-  max-width: 1128px;
-  min-height: 690px;
-  margin: 0 auto;
-  margin-top: 88px;
-  box-sizing: border-box;  
+.main-page {
+  main {
+    box-sizing: border-box;
+    background-image: url(../assets/images/main-bg.png);    
+    background-repeat: no-repeat;    
+    padding: 9.4rem 2rem 2rem;
 
-  @media screen and (max-width: 1150px) {
-    padding: 0 2rem;
+    @media screen and (min-width: 1330px) {
+      background-size: 100% auto;
+      background-position: top center;
+      min-height: max(702px, 100vh);
+    }
+
+    @media screen and (max-width: 1329px) {
+      background-size: auto 100%;
+      background-position: top center;
+      min-height: min(702px, 100vh);
+    }
+
+    @media screen and (max-width: 980px) {
+      background-position: 70% top;
+    }
+  }
+}
+
+.page {
+  &.main-page {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer {
+    flex-grow: 1;
+    display: flex;
+    align-items: flex-end;
   }
 }

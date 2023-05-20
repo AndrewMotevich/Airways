@@ -1,18 +1,25 @@
 @import '../../../../sass/abstracts/variables';
+@import '../../../../sass/base/typography';
 
 .form-container {
-  margin-top: 150px;
-  max-width: 580px;
-  width: 100%;
-  height: 390px;
+  max-width: 550px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 1rem;
   border-radius: 8px;
-  background-color: $color-secondary85;
-  padding: 24px;
-  .mat-mdc-text-field-wrapper {
-    background-color: $color-secondary90;
+  background-color: $main-form-bg;
+  padding: 17px 14px 23px;
+
+  &_inner {
+    padding: 0 10px 0;
+    text-align: right;
+  }
+
+  .mat-mdc-radio-button {
+    margin-right: 3.3rem;
+  }
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
   }
 }
 
@@ -23,17 +30,21 @@
 
 .origin-destination-container {
   position: relative;
-  width: inherit;
   display: flex;
   flex-direction: column;
+  gap:.3rem;
+  padding-bottom: 1.7rem;
 }
 
-.change-direction-btn {
+.change-direction-btn.mdc-fab {
   position: absolute !important;
   top: 40px;
   right: 20px;
   width: 40px;
   height: 40px;
+  background-color: $color-neutral100;
+  border: 0.5px solid $color-neutral40;
+  box-shadow: none;
 }
 
 .hidden {
@@ -42,6 +53,8 @@
   margin: 0;
   padding: 0;
   visibility: hidden;
+  position: absolute;
+  left: -3px;
 }
 
 .passengers-button {
@@ -49,34 +62,51 @@
   height: 24px;
   border: none;
   cursor: pointer;
+  background-color: transparent;
 }
 
 .selection-option {
-  width: 169px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  &_type {
+    margin: 0;
+    line-height: 1rem;
+    color: $color-primary;
+  }
+
+  small {
+    color: $color-neutral30;
+    @extend %text-body-medium;
+  }
 }
 
 .btn {
-  width: 126px;
-  height: 60px !important;
-  align-self: flex-end;
+  padding: 0 2.3rem;
 }
 
 .date-passengers-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+
+  .date {
+    flex-grow: 1;
+  }
+
+  .passengers {
+    width: 12.5rem;
+  }
 }
 
 .select-panel.mat-mdc-select-panel {
   .mat-mdc-option-active {
     background-color: $color-neutral100 !important;
   }
-  .mdc-list-item__primary-text {
-    color: rgba(0, 0, 0, 0.87) !important;
-  }
+  
 
   .mat-mdc-option:hover {
     cursor: default;
@@ -84,18 +114,9 @@
   }
 }
 
-@media screen and (max-width: 960px) {
-  .form-container {
-    max-width: 400px;
-  }
+@media screen and (max-width: 960px) {  
   .date-passengers-container {
     flex-direction: column;
-  }
-}
-@media screen and (max-width: 540px) {
-  .form-container {
-    width: 80%;
-    max-width: 300px;
   }
 }
 
