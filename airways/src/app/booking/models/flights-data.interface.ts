@@ -1,7 +1,7 @@
 import { IFlightDetails } from "./flight-details.interface";
 
 export interface IFlightsData {
-  succsess: boolean;
+  success: boolean;
   data: IFlightDetails[];
   currency: "eur" | "rub";
 }

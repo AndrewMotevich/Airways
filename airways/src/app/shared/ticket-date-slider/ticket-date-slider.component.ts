@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core';
+/* eslint-disable class-methods-use-this */
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import dayjs from 'dayjs';
+import { FormDataService } from '../../booking/services/form-data.service';
 
 @Component({
   selector: 'app-ticket-date-slider',
@@ -22,7 +24,21 @@ export class TicketDateSliderComponent {
       return { date: date.format('DD MMM dddd'), cost: ticket ? ticket.cost : null };
     });
   }
+
+  constructor(private formDataService: FormDataService) {}
+
+  @Output() nextDateButtonClick: EventEmitter<void> = new EventEmitter<void>();
   
+  @Output() prevDateButtonClick: EventEmitter<void> = new EventEmitter<void>();
+
+  onNextDateButtonClick(): void {
+    this.nextDateButtonClick.emit();
+  }
+
+  onPrevDateButtonClick(): void {
+    this.prevDateButtonClick.emit();
+  }
+
   boundColor: string = 'rgb(255, 153, 0)';
 
   selectedDates: { date: string; cost: string | null }[] = [];

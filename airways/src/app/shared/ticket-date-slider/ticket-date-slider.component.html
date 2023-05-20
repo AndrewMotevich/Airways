@@ -1,10 +1,10 @@
 <ng-container *ngIf="selectedDates">
   <div class="cards-slider">
-    <mat-icon class="arrow-icon arrow-icon--left">keyboard_arrow_left</mat-icon>
+    <mat-icon class="arrow-icon arrow-icon--left" (click)="onPrevDateButtonClick()">keyboard_arrow_left</mat-icon>
     <div *ngFor="let card of selectedDates; let i = index">
       <app-ticket-date-card [card]="selectedDates[i]" [boundColor]="boundColor" [index]="i">
       </app-ticket-date-card>
     </div>
-    <mat-icon class="arrow-icon arrow-icon--right">keyboard_arrow_right</mat-icon>
+    <mat-icon class="arrow-icon arrow-icon--right" (click)="onNextDateButtonClick()">keyboard_arrow_right</mat-icon>
   </div>
 </ng-container>

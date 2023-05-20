@@ -14,3 +14,8 @@ export interface PointModel {
   title: string | null;
   code: string | null;
 }
+
+export const enum FlightDirection {
+  DEPARTURE = 'departure',
+  ARRIVAL = 'arrival',
+}
