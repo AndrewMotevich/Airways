@@ -1,11 +1,25 @@
 // MUI
 @use '@angular/material' as mat;
+@use './sass/theme/flight-theme';
 
 @include mat.core();
+// theme init
+
+@include mat.all-component-themes(flight-theme.$light-theme);
+
+// .light-theme {
+//   @include mat.all-component-colors(flight-theme.$light-theme);
+// }
+
+.dark-theme {
+  @include mat.all-component-colors(flight-theme.$dark-theme);
+}
+
 
 // base
 @import './sass/base/normalize';
 @import './sass/base/typography';
+@import './sass/base/base';
 /* abstracts */
 @import './sass/abstracts/variables';
 @import './sass/abstracts/placeholders';
@@ -14,4 +28,4 @@
 @import './sass/layout/grid';
 @import './sass/layout/header';
 @import './sass/layout/footer';
-@import './sass/base/base';
+@import './sass/layout/layout';

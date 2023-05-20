@@ -2,6 +2,7 @@
 @import '../base/typography';
 
 :root {
+  --mdc-typography-body1-line-height: 24px;
   --mdc-typography-body2-font-size: 12px;
   --mdc-switch-track-width: 52px;
   --mdc-switch-track-height: 32px;
@@ -13,15 +14,17 @@
   --mdc-plain-tooltip-supporting-text-tracking: 0.4px;
   --mdc-plain-tooltip-container-shape: 8px;
   --mat-mdc-form-field-label-transform: 28px;
+  --mdc-shape-medium: 0;
 }
 
 html,
-body {
-  // height: 100%;
+body,
+.main-page {
+  height: 100%;
 }
 
 body {
-  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
   font-size: 14px;
   line-height: 20px;
   font-style: normal;
@@ -167,8 +170,7 @@ h2 {
 .mat-mdc-text-field-wrapper.mdc-text-field--outlined
   .mdc-notched-outline--upgraded
   .mdc-floating-label--float-above {
-  --mat-mdc-form-field-label-transform: translateY(-24px)
-    scale(var(--mat-mdc-form-field-floating-label-scale, 0.75));
+  --mat-mdc-form-field-label-transform: translateY(-22px);
   transform: var(--mat-mdc-form-field-label-transform);
 }
 
@@ -191,4 +193,68 @@ h2 {
 .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
   padding-top: 22px;
   padding-bottom: 8px;
+}
+
+.mdc-menu-surface {
+  box-shadow: $shadow;
+}
+
+.cdk-overlay-pane:not(.mat-mdc-select-panel-above) .mdc-menu-surface.mat-mdc-select-panel {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  padding: 14px 0 0;
+}
+
+.mat-primary .mat-mdc-option .mdc-list-item__primary-text {
+  width: 100%;
+}
+
+.mat-mdc-option:hover:not(.mdc-list-item--disabled),
+.mat-mdc-option:focus:not(.mdc-list-item--disabled),
+.mat-mdc-option.mat-mdc-option-active,
+.mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple):not(
+    .mdc-list-item--disabled
+  ) {
+  background: none;
+}
+
+.mat-mdc-option {
+  margin-bottom: 0.5rem;
+}
+
+.mdc-menu-surface::-webkit-scrollbar {
+  width: 4px;
+}
+
+.mdc-menu-surface::-webkit-scrollbar-track {
+  border-radius: 100px;
+}
+
+.mdc-menu-surface::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  background-color: $color-primary;
+}
+
+.mat-mdc-raised-button.mat-mdc-button-base {
+  height: 60px;
+}
+
+.mat-datepicker-actions {
+  border-top: 0.5px solid $color-neutral60;
+  padding-top: 8px;
+}
+
+.light-theme {
+  .mat-mdc-radio-button .mdc-form-field {
+    color: $color-primary;
+    @extend %text-button;
+  }
+
+  .mdc-list-item__primary-text {
+    color: $color-primary;
+  }
+
+  .mat-mdc-select-invalid:not(.mat-focused) .mat-mdc-select-arrow {
+    color: $color-neutral100;
+  }
 }
