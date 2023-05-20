@@ -1,15 +1,13 @@
-/* eslint-disable class-methods-use-this */
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
 import dayjs from 'dayjs';
-import { FormDataService } from '../../booking/services/form-data.service';
 
 @Component({
   selector: 'app-ticket-date-slider',
   templateUrl: './ticket-date-slider.component.html',
   styleUrls: ['./ticket-date-slider.component.scss'],
 })
-export class TicketDateSliderComponent {
-  @Input() selectedDate: string = '';
+export class TicketDateSliderComponent implements OnChanges {
+  @Input() selectedDate!: string;
 
   @Input() set ticketsData(value: { date: string; cost: string }[] | null) {
     const dates = [
@@ -25,18 +23,26 @@ export class TicketDateSliderComponent {
     });
   }
 
-  constructor(private formDataService: FormDataService) {}
-
   @Output() nextDateButtonClick: EventEmitter<void> = new EventEmitter<void>();
-  
+
   @Output() prevDateButtonClick: EventEmitter<void> = new EventEmitter<void>();
 
   onNextDateButtonClick(): void {
     this.nextDateButtonClick.emit();
   }
 
+  isDisablePrevBtn: boolean = false;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['selectedDate'] && this.selectedDate) {
+      this.isDisablePrevBtn = !dayjs().isBefore(dayjs(this.selectedDate).toDate());
+    }
+  }
+
   onPrevDateButtonClick(): void {
-    this.prevDateButtonClick.emit();
+    if (!this.isDisablePrevBtn) {
+      this.prevDateButtonClick.emit();
+    }
   }
 
   boundColor: string = 'rgb(255, 153, 0)';
