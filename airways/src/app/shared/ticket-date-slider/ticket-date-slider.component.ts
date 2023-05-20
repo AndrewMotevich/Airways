@@ -66,7 +66,7 @@ export class TicketDateSliderComponent implements OnChanges {
       this.prevDateButtonClick.emit();
     }
   }
-
+  
   boundColor: string = 'rgb(255, 153, 0)';
 
   selectedDates: { date: string; cost: string | null }[] = [];
