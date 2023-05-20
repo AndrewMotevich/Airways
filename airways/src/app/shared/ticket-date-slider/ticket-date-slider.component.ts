@@ -1,6 +1,11 @@
 import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
 import dayjs from 'dayjs';
 
+export const enum CurrentDateStateEnum {
+  PAST = 'past',
+  CURRENT = 'current',
+  FUTURE = 'future',
+}
 @Component({
   selector: 'app-ticket-date-slider',
   templateUrl: './ticket-date-slider.component.html',
@@ -20,6 +25,23 @@ export class TicketDateSliderComponent implements OnChanges {
     this.selectedDates = dates.map((date) => {
       const ticket = value?.find((t) => t.date === date.format('YYYY-MM-DD'));
       return { date: date.format('DD MMM dddd'), cost: ticket ? ticket.cost : null };
+    });
+
+    this.dateStates = dates.map((date) => {
+      if (
+        dayjs().isBefore(dayjs(date).toDate(), 'day') ||
+        dayjs().isSame(dayjs(date, 'day').toDate())
+      ) {
+        return CurrentDateStateEnum.FUTURE;
+      }
+
+      if (
+        dayjs().isAfter(dayjs(date).toDate(), 'day') &&
+        !dayjs().isSame(dayjs(date, 'day').toDate())
+      ) {
+        return CurrentDateStateEnum.PAST;
+      }
+      return CurrentDateStateEnum.FUTURE;
     });
   }
 
@@ -48,4 +70,6 @@ export class TicketDateSliderComponent implements OnChanges {
   boundColor: string = 'rgb(255, 153, 0)';
 
   selectedDates: { date: string; cost: string | null }[] = [];
+
+  dateStates: CurrentDateStateEnum[] = [];
 }

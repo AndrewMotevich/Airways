@@ -3,7 +3,8 @@
     <mat-icon class="arrow-icon arrow-icon--left" (click)="onPrevDateButtonClick()"
       [class.disable]="isDisablePrevBtn">keyboard_arrow_left</mat-icon>
     <div *ngFor="let card of selectedDates; let i = index">
-      <app-ticket-date-card [card]="selectedDates[i]" [boundColor]="boundColor" [index]="i">
+      <app-ticket-date-card [card]="selectedDates[i]" [boundColor]="boundColor" [index]="i"
+        [currentDateState]="dateStates[i]">
       </app-ticket-date-card>
     </div>
     <mat-icon class="arrow-icon arrow-icon--right" (click)="onNextDateButtonClick()">keyboard_arrow_right</mat-icon>
