@@ -1,47 +1,49 @@
-<div *ngIf="isLoading" class="loading"><mat-spinner strokeWidth="2" diameter="50"
-    aria-label="Loading form"></mat-spinner></div>
+<div *ngIf="isLoading" class="loading">
+  <mat-spinner strokeWidth="2" diameter="50" aria-label="Loading form"></mat-spinner>
+</div>
+
 <form class="form-container" *ngIf="!isLoading" [formGroup]="form" (ngSubmit)="submit()">
   <mat-radio-group aria-label="Select an option" formControlName="roundedTrip">
     <mat-radio-button color="primary" value="both">Round Trip</mat-radio-button>
     <mat-radio-button color="primary" value="one">One Way</mat-radio-button>
   </mat-radio-group>
 
-  <div class="origin-destination-container">
+  <div class="form-container_inner">
+    <div class="origin-destination-container">
+      <mat-form-field appearance="outline" hideRequiredMarker>
+        <mat-label>From</mat-label>
+        <input type="text" placeholder="Chose your origin" aria-label="From" matInput formControlName="from"
+          [matAutocomplete]="autoFrom">
+        <mat-autocomplete #autoFrom="matAutocomplete">
+          <mat-option class="comment" *ngFor="let option of filteredFromOptions | async"
+            [value]="option.city_name + ' (' + option.code + ')'">
+            <div>
+              {{option.city_name}} <span class="airport">({{option.code}}) <span
+                  class="clue">{{option.name}}</span></span>
+            </div>
+            <small>{{option.time_zone}}</small>
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="form.controls.from.hasError('required')">Chose from</mat-error>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline" hideRequiredMarker>
-      <mat-label>From</mat-label>
-      <input type="text" placeholder="Chose your origin" aria-label="From" matInput formControlName="from"
-        [matAutocomplete]="autoFrom">
-      <mat-autocomplete #autoFrom="matAutocomplete">
-        <mat-option class="comment" *ngFor="let option of filteredFromOptions | async"
-          [value]="option.city_name + ' (' + option.code + ')'">
-          <div>
-            {{option.city_name}} <span class="airport">({{option.code}}) <span
-                class="clue">{{option.name}}</span></span>
-          </div>
-          <small>{{option.time_zone}}</small>
-        </mat-option>
-      </mat-autocomplete>
-      <mat-error *ngIf="form.controls.from.hasError('required')">Chose from</mat-error>
-    </mat-form-field>
 
-
-    <mat-form-field appearance="outline" hideRequiredMarker>
-      <mat-label>Destination</mat-label>
-      <input type="text" placeholder="Chose your origin" aria-label="Destination" matInput formControlName="destination"
-        [matAutocomplete]="autoDestination">
-      <mat-autocomplete #autoDestination="matAutocomplete">
-        <mat-option class="comment" *ngFor="let option of filteredDestinationOptions | async"
-          [value]="option.city_name + ' (' + option.code + ')'">
-          <div>
-            {{option.city_name}} <span class="airport">({{option.code}}) <span
-                class="clue">{{option.name}}</span></span>
-          </div>
-          <small>{{option.time_zone}}</small>
-        </mat-option>
-      </mat-autocomplete>
-      <mat-error *ngIf="form.controls.destination.hasError('required')">Chose destination</mat-error>
-    </mat-form-field>
+      <mat-form-field appearance="outline" hideRequiredMarker>
+        <mat-label>Destination</mat-label>
+        <input type="text" placeholder="Chose your origin" aria-label="Destination" matInput formControlName="destination"
+          [matAutocomplete]="autoDestination">
+        <mat-autocomplete #autoDestination="matAutocomplete">
+          <mat-option class="comment" *ngFor="let option of filteredDestinationOptions | async"
+            [value]="option.city_name + ' (' + option.code + ')'">
+            <div>
+              {{option.city_name}} <span class="airport">({{option.code}}) <span
+                  class="clue">{{option.name}}</span></span>
+            </div>
+            <small>{{option.time_zone}}</small>
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="form.controls.destination.hasError('required')">Chose destination</mat-error>
+      </mat-form-field>
 
       <button
         color="basic"
