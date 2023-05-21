@@ -5,7 +5,7 @@
   --mdc-typography-body1-line-height: 24px;
   --mdc-typography-body2-font-size: 12px;
   --mdc-switch-track-width: 52px;
-  --mdc-switch-track-height: 32px;
+  --mdc-switch-track-height: 28px;
   --mdc-switch-track-shape: 100px;
   --mdc-switch-handle-height: 24px;
   --mdc-switch-handle-width: 24px;
@@ -14,8 +14,9 @@
   --mdc-plain-tooltip-supporting-text-tracking: 0.4px;
   --mdc-plain-tooltip-container-shape: 8px;
   --mat-mdc-form-field-label-transform: 28px;
-  --mdc-shape-medium: 0;
+  --mdc-shape-medium: 0;  
 }
+
 
 html,
 body,
@@ -35,6 +36,10 @@ body {
 
 h2 {
   color: $color-primary;
+}
+
+.btn.mdc-button--raised {
+  min-width: 126px;
 }
 
 .mdc-button.btn-with-gradient {
@@ -116,7 +121,7 @@ h2 {
   left: 4px !important;
 }
 
-.needhelp label {
+.needhelp .mdc-form-field>label {
   display: flex;
   align-items: center;
   gap: 0.3rem;
@@ -244,6 +249,10 @@ h2 {
   padding-top: 8px;
 }
 
+.mdc-switch__track {
+  border: 2px solid $color-neutral30;
+}
+
 .light-theme {
   .mat-mdc-radio-button .mdc-form-field {
     color: $color-primary;
@@ -257,4 +266,6 @@ h2 {
   .mat-mdc-select-invalid:not(.mat-focused) .mat-mdc-select-arrow {
     color: $color-neutral100;
   }
+
+
 }

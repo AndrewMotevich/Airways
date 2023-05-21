@@ -52,13 +52,18 @@ header {
   top: 0;
   left: 0;
   right: 0;
-  height: 92px;
+  height: 85px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   z-index: 1;
   padding: 0 2rem;
+
+  .logo {
+    margin-top: .5rem;
+    margin-right: .9rem;
+  }
 }
 .header-main-color {
   color: $color-neutral100 !important;
@@ -80,18 +85,33 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media screen and (max-width: 680px) {
+    flex-wrap: wrap;
+  }
 }
-.header-items-wrapper {  
-  display: flex;
-  justify-content: flex-end;
+
+.header-items-wrapper {
+  display: flex;    
   align-items: center;
+  padding-right: 0.7rem;  
+}
+
+.header-main-page .header-items-wrapper {
   gap: 1.3rem;
-  padding-right: .7rem;
+  justify-content: flex-end;
 
   .currency-select {
     margin: 0 1.1rem 0 2rem;
   }
 }
+
+.header-with-stepper .header-items-wrapper {
+    justify-content: space-between;
+    max-width: 450px;
+    gap: 1.1rem;
+    margin-left: 2rem;
+  }
 
 ::ng-deep.currency-select {
   &:not(.mat-focused) .mat-mdc-select-placeholder {
@@ -128,7 +148,7 @@ header {
   .mat-mdc-select-placeholder {
     color: $color-neutral10;
   }
-  
+
   &:not(.date-select-main) .mat-mdc-select-value {
     color: $color-primary;
   }
@@ -175,6 +195,15 @@ header {
   background-color: $color-neutral90;
 }
 .stepper {
+  flex-grow: 1;
+
+  @media screen and (max-width: 680px) {
+    order: 3;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
   ::ng-deep.mat-horizontal-content-container {
     padding: 0;
   }
@@ -190,7 +219,7 @@ header {
   background-color: $color-secondary80;
   border-radius: 50%;
 }
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 1090px) {
   .hidden-mat-menu {
     display: block;
   }

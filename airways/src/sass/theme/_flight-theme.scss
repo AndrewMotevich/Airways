@@ -9,21 +9,21 @@ $dark-dividers: rgba($dark-primary-text, 0.12);
 $dark-focused: rgba($dark-primary-text, 0.12);
 
 $mat-light-theme-foreground: (
-  base:              black,
-  divider:           $dark-dividers,
-  dividers:          $dark-dividers,
-  disabled:          $dark-disabled-text,
-  disabled-button:   rgba($dark-text, 0.26),
-  disabled-text:     $dark-disabled-text,
-  elevation:         black,
-  secondary-text:    $dark-accent-text,
-  hint-text:         $dark-disabled-text,
-  accent-text:       $dark-accent-text,
-  icon:              $dark-accent-text,
-  icons:             $dark-accent-text,
-  text:              $dark-primary-text,
-  slider-min:        $dark-primary-text,
-  slider-off:        rgba($dark-text, 0.26),
+  base: black,
+  divider: $dark-dividers,
+  dividers: $dark-dividers,
+  disabled: $dark-disabled-text,
+  disabled-button: rgba($dark-text, 0.26),
+  disabled-text: $dark-disabled-text,
+  elevation: black,
+  secondary-text: $dark-accent-text,
+  hint-text: $dark-disabled-text,
+  accent-text: $dark-accent-text,
+  icon: $dark-accent-text,
+  icons: $dark-accent-text,
+  text: $dark-primary-text,
+  slider-min: $dark-primary-text,
+  slider-off: rgba($dark-text, 0.26),
   slider-off-active: $dark-disabled-text,
 );
 
@@ -31,21 +31,25 @@ $flight-primary: mat.define-palette(palette.$primary, 500);
 $flight-accent: mat.define-palette(palette.$accent, 500);
 $flight-warn: mat.define-palette(palette.$warn, 500);
 
-$light-theme: mat.define-light-theme((
- color: (
-   primary: $flight-primary,
-   accent: $flight-accent,
-   warn: $flight-warn,
- ),
- typography: mat.define-typography-config(),
- density: 0,
-));
+$light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $flight-primary,
+      accent: $flight-accent,
+      warn: $flight-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
 
-$dark-theme: mat.define-dark-theme((
- color: (
-   primary: mat.define-palette(mat.$blue-grey-palette),
-   accent: mat.define-palette(mat.$pink-palette),
-   warn: mat.define-palette(mat.$red-palette),
- ),
- typography: mat.define-typography-config(),
- ));
+$dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: mat.define-palette(mat.$blue-grey-palette),
+      accent: mat.define-palette(mat.$pink-palette),
+      warn: mat.define-palette(mat.$red-palette),
+    ),
+    typography: mat.define-typography-config(),
+  )
+);

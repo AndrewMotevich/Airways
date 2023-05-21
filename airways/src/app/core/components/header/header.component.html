@@ -3,11 +3,11 @@
   'header-with-stepper' : currentUrl !== '/'
 }">
   <div class="container header-wrapper" [formGroup]="headerData">
-    <a routerLink="/">
+    <a routerLink="/" class="logo">
       <img src="../../../../../assets/images/logo.svg" width="131" alt="Logo Airways">
     </a>
 
-    <app-stepper
+    <app-stepper class="stepper"
       *ngIf="currentUrl === '/select-flight' || currentUrl === '/booking-process' || currentUrl === '/summary'"></app-stepper>
 
     <div class="header-items-wrapper">

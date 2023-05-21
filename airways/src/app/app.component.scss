@@ -2,8 +2,7 @@
   main {
     box-sizing: border-box;
     background-image: url(../assets/images/main-bg.png);    
-    background-repeat: no-repeat;    
-    padding: 9.4rem 2rem 2rem;
+    background-repeat: no-repeat;        
 
     @media screen and (min-width: 1330px) {
       background-size: 100% auto;
@@ -27,6 +26,14 @@
   &.main-page {
     display: flex;
     flex-direction: column;
+  }
+
+  &.main-page main {
+    padding: 9.4rem 2rem 2rem;
+  }
+
+  &:not(.main-page) main {
+    padding: 8.3rem 2rem 2rem;
   }
 
   .footer {
