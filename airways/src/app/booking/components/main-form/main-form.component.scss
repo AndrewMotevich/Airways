@@ -124,3 +124,18 @@
   align-items: center;
   height: 60vh;
 }
+.comment {
+  position: relative;
+  .airport:hover {
+    cursor: pointer;
+    .clue {
+      margin: 0;
+      padding: 0;
+      display: inline;
+    }
+  }
+  .clue {
+    display: none;
+    font-size: 10px;
+  }
+}
