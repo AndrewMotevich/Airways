@@ -261,33 +261,31 @@ h2 {
     color: $color-primary-dark;
   }
 
-  .section-bg {
-    background-color: $color-neutral100;
+  .stepper-wrapper {
+    color: $color-neutral30;
   }
 
+  .section-bg,
   .header-inner-bg {
     background-color: $color-neutral100;
-  }  
+  }   
 
   .mdc-text-field {
     background-color: $color-secondary90;
   }
 
-  .mat-mdc-radio-button .mdc-form-field {
+  .mat-mdc-radio-button .mdc-form-field,
+  .mdc-list-item__primary-text  {
     color: $color-primary;
-  }
-
-  .mdc-list-item__primary-text {
-    color: $color-primary;
-  }
+  }  
 
   .mat-mdc-select-invalid:not(.mat-focused) .mat-mdc-select-arrow {
     color: $color-neutral100;
-  }
+  }  
 }
 
 .dark-theme {
-  h2 {
+  h2, h3, .stepper-wrapper {
     color: $color-neutral100;    
   }
 
@@ -297,24 +295,20 @@ h2 {
 
   .svg-stroke {
     stroke: $color-neutral100;
-  }
-
-  h3 {
-    color: $color-neutral100;
-  }
+  }  
 
   .section-bg {
-    background: $color-neutral20 !important;
+    background: $color-neutral20;
   }
 
   .header-inner-bg {
     background-color: $color-neutral10;
-  }
+  }  
 
-  .mat-date-range-input-separator {
-    color:$color-neutral0;
-  }
-
+  header:not(.header-with-stepper) .mat-mdc-select-value,
+  .constact-details_code .mat-mdc-select-value,
+  .constact-details_code .mat-mdc-select-arrow,
+  .mat-date-range-input-separator,
   .mat-date-range-input-inner,
   .mat-mdc-radio-button .mdc-form-field,
   .mat-datepicker-toggle,
@@ -330,5 +324,5 @@ h2 {
   .mat-mdc-icon-button {
     --mat-mdc-button-persistent-ripple-color: $color-neutral0;
     --mat-mdc-button-ripple-color: $color-neutral0;
-  }
+  }   
 }
