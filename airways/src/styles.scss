@@ -10,7 +10,7 @@
 
 .dark-theme {
   @include mat.all-component-colors(flight-theme.$dark-theme);
-  @include form-field.color(flight-theme.$light-theme);
+  @include form-field.color(flight-theme.$dark-theme);
 }
 
 // base

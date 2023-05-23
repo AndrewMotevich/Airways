@@ -117,18 +117,6 @@ h2 {
   color: $color-error;
 }
 
-.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
-.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
-.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
-  border-color: $color-neutral40;
-}
-
-.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
-.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing,
-.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-notched-outline__notch {
-  border-color: $color-error;
-}
-
 .form-tooltip {
   .mdc-tooltip__surface {
     color: $color-neutral0;
@@ -306,6 +294,7 @@ h2 {
   }  
 
   .passengers .mat-mdc-select-value,
+  .passengers .mat-mdc-select-arrow,
   .constact-details_code .mat-mdc-select-value,
   .constact-details_code .mat-mdc-select-arrow,
   .mat-date-range-input-separator,
@@ -324,5 +313,5 @@ h2 {
   .mat-mdc-icon-button {
     --mat-mdc-button-persistent-ripple-color: $color-neutral0;
     --mat-mdc-button-ripple-color: $color-neutral0;
-  }   
+  }    
 }
