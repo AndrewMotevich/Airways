@@ -1,8 +1,10 @@
+@import '../sass/abstracts/variables';
+
 .main-page {
   main {
     box-sizing: border-box;
-    background-image: url(../assets/images/main-bg.png);    
-    background-repeat: no-repeat;        
+    background-image: url(../assets/images/main-bg.png);
+    background-repeat: no-repeat;
 
     @media screen and (min-width: 1330px) {
       background-size: 100% auto;
@@ -18,27 +20,43 @@
 
     @media screen and (max-width: 980px) {
       background-position: 70% top;
+      min-height: 702px;
     }
   }
 }
 
 .page {
-  &.main-page {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+
+  main {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
+
+    @media screen and (max-width: 426px) {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
   }
 
   &.main-page main {
-    padding: 9.4rem 2rem 2rem;
+    @media screen and (min-width: 427px) {
+      padding-top: 9.4rem;
+    }
+
+    @media screen and (max-width: 426px) {
+      padding-top: 7rem;
+    }
   }
 
   &:not(.main-page) main {
-    padding: 8.3rem 2rem 2rem;
+    padding-top: 8.3rem;
   }
 
   .footer {
     flex-grow: 1;
-    display: flex;
-    align-items: flex-end;
+    padding: 0 2rem;
+    border-top: 1px solid $color-secondary40;
   }
 }

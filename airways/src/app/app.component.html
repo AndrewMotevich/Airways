@@ -1,4 +1,11 @@
-<div [class.main-page]="isMain" class="page" [class]="theme">
+<div
+  [ngClass]="{
+  'mat-app-background': true,
+  'page': true,
+  'main-page': isMain,
+}"
+  [class]="theme"
+>  
   <app-header></app-header>
   <main>
     <div class="container">

@@ -1,20 +1,17 @@
 // MUI
 @use '@angular/material' as mat;
 @use './sass/theme/flight-theme';
+@use './sass/theme/form-field-theme' as form-field;
 
 @include mat.core();
 // theme init
 
 @include mat.all-component-themes(flight-theme.$light-theme);
 
-// .light-theme {
-//   @include mat.all-component-colors(flight-theme.$light-theme);
-// }
-
 .dark-theme {
   @include mat.all-component-colors(flight-theme.$dark-theme);
+  @include form-field.color(flight-theme.$light-theme);
 }
-
 
 // base
 @import './sass/base/normalize';

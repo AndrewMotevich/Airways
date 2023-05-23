@@ -14,14 +14,7 @@
   --mdc-plain-tooltip-supporting-text-tracking: 0.4px;
   --mdc-plain-tooltip-container-shape: 8px;
   --mat-mdc-form-field-label-transform: 28px;
-  --mdc-shape-medium: 0;  
-}
-
-
-html,
-body,
-.main-page {
-  height: 100%;
+  --mdc-shape-medium: 0;
 }
 
 body {
@@ -31,11 +24,6 @@ body {
   font-style: normal;
   font-weight: 400;
   letter-spacing: 0.5px;
-  background-color: $color-neutral80;
-}
-
-h2 {
-  color: $color-primary;
 }
 
 .btn.mdc-button--raised {
@@ -71,8 +59,8 @@ h2 {
   color: $color-neutral100;
 }
 
-.mat-typography h2 {
-  @include title-h2;
+h2 {
+  @extend %text-title-large;
 }
 
 .mat-mdc-form-field-icon-suffix {
@@ -87,10 +75,6 @@ h2 {
 .mat-mdc-standard-chip.mdc-evolution-chip--with-primary-graphic
   .mdc-evolution-chip__action--primary {
   margin: 0 auto;
-}
-
-.mdc-text-field {
-  background-color: $color-secondary90;
 }
 
 .mat-mdc-slide-toggle.mat-accent {
@@ -121,7 +105,7 @@ h2 {
   left: 4px !important;
 }
 
-.needhelp .mdc-form-field>label {
+.needhelp .mdc-form-field > label {
   display: flex;
   align-items: center;
   gap: 0.3rem;
@@ -214,13 +198,8 @@ h2 {
   width: 100%;
 }
 
-.mat-mdc-option:hover:not(.mdc-list-item--disabled),
-.mat-mdc-option:focus:not(.mdc-list-item--disabled),
-.mat-mdc-option.mat-mdc-option-active,
-.mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple):not(
-    .mdc-list-item--disabled
-  ) {
-  background: none;
+.mat-primary .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+  color: $color-neutral10;
 }
 
 .mat-mdc-option {
@@ -253,10 +232,49 @@ h2 {
   border: 2px solid $color-neutral30;
 }
 
+.mat-calendar-body-label {
+  display: none;
+}
+
+.mat-mdc-radio-button .mdc-form-field {
+  @extend %text-button;
+}
+
 .light-theme {
+  h2 {
+    color: $color-primary;    
+
+    &.dark-color {
+      color: $color-primary-dark;
+    }
+  }
+
+  .svg-color {
+    fill: $color-primary;
+  }
+
+  .svg-stroke {
+    stroke: $color-primary;
+  }
+
+  h3 {
+    color: $color-primary-dark;
+  }
+
+  .section-bg {
+    background-color: $color-neutral100;
+  }
+
+  .header-inner-bg {
+    background-color: $color-neutral100;
+  }  
+
+  .mdc-text-field {
+    background-color: $color-secondary90;
+  }
+
   .mat-mdc-radio-button .mdc-form-field {
     color: $color-primary;
-    @extend %text-button;
   }
 
   .mdc-list-item__primary-text {
@@ -266,6 +284,51 @@ h2 {
   .mat-mdc-select-invalid:not(.mat-focused) .mat-mdc-select-arrow {
     color: $color-neutral100;
   }
+}
 
+.dark-theme {
+  h2 {
+    color: $color-neutral100;    
+  }
 
+  .svg-color {
+    fill: $color-neutral100;
+  }
+
+  .svg-stroke {
+    stroke: $color-neutral100;
+  }
+
+  h3 {
+    color: $color-neutral100;
+  }
+
+  .section-bg {
+    background: $color-neutral20 !important;
+  }
+
+  .header-inner-bg {
+    background-color: $color-neutral10;
+  }
+
+  .mat-date-range-input-separator {
+    color:$color-neutral0;
+  }
+
+  .mat-date-range-input-inner,
+  .mat-mdc-radio-button .mdc-form-field,
+  .mat-datepicker-toggle,
+  .mat-datepicker-content .mat-calendar-next-button,
+  .mat-datepicker-content .mat-calendar-previous-button {
+    color: $color-neutral0;
+  }
+
+  .mat-mdc-radio-button.mat-primary {
+    --mdc-radio-unselected-icon-color: $accent;
+  }
+
+  .mat-mdc-icon-button {
+    --mat-mdc-button-persistent-ripple-color: $color-neutral0;
+    --mat-mdc-button-ripple-color: $color-neutral0;
+  }
 }

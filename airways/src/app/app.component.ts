@@ -1,5 +1,6 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { HeaderDataService } from './core/services/header-data.service';
 
 @Component({
   selector: 'app-root',
@@ -7,11 +8,11 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  @HostBinding('class.main-page') isMain: boolean = true;
+  isMain: boolean = false;
 
-  @HostBinding('class') theme: 'light-theme' | 'dark-theme' = 'light-theme';
+  @HostBinding('class') theme!: string;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private headerData: HeaderDataService) { }
 
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
@@ -19,5 +20,9 @@ export class AppComponent implements OnInit {
         this.isMain = event.url === '/';
       }
     });
+
+    this.headerData.currentTheme.subscribe(theme => {
+      this.theme = theme;
+    })
   }
 }
