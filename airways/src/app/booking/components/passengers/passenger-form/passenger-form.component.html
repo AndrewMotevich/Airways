@@ -1,7 +1,7 @@
 <ng-container [formGroup]="form" *ngIf="passenger">
   <ng-container [formGroupName]="id">
-    <section class="passenger-form">
-      <h2>{{ id + 1 }}. {{ category }}</h2>
+    <section class="passenger-form section-bg">
+      <h2 class="dark-color">{{ id + 1 }}. {{ category }}</h2>
 
       <div class="passenger-form_wrapper">
         <mat-form-field appearance="outline" *ngIf="firstName">

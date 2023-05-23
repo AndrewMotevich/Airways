@@ -1,22 +1,38 @@
-<header [ngClass]="{
-  'header-main-page header-main-color' : currentUrl === '/',
-  'header-with-stepper' : currentUrl !== '/'
-}">
+<header
+  [ngClass]="{
+    'header-main-page header-main-color': currentUrl === '/',
+    'header-with-stepper header-inner-bg': currentUrl !== '/'
+  }"
+>
   <div class="container header-wrapper" [formGroup]="headerData">
     <a routerLink="/" class="logo">
-      <img src="../../../../../assets/images/logo.svg" width="131" alt="Logo Airways">
+      <mat-icon svgIcon="icon-logo" color="primary"></mat-icon>
     </a>
 
-    <app-stepper class="stepper"
-      *ngIf="currentUrl === '/select-flight' || currentUrl === '/booking-process' || currentUrl === '/summary'"></app-stepper>
+    <app-stepper
+      class="stepper"
+      *ngIf="
+        currentUrl === '/select-flight' ||
+        currentUrl === '/booking-process' ||
+        currentUrl === '/summary'
+      "
+    ></app-stepper>
 
     <div class="header-items-wrapper">
       <mat-label *ngIf="currentUrl === '/'">Book flights</mat-label>
 
-      <mat-form-field [ngClass]="{'date-select-main' : currentUrl === '/'}" class="date-select" appearance="outline"
-        hideRequiredMarker>
-        <mat-select hideSingleSelectionIndicator formControlName="dateFormat" placeholder="MM/DD/YYYY"
-          [(value)]="this.headerDataService.currentDataFormat">
+      <mat-form-field
+        [ngClass]="{ 'date-select-main': currentUrl === '/' }"
+        class="date-select"
+        appearance="outline"
+        hideRequiredMarker
+      >
+        <mat-select
+          hideSingleSelectionIndicator
+          formControlName="dateFormat"
+          placeholder="MM/DD/YYYY"
+          [(value)]="this.headerDataService.currentDataFormat"
+        >
           <mat-option value="MM/DD/YYYY">MM/DD/YYYY</mat-option>
           <mat-option value="DD/MM/YYYY">DD/MM/YYYY</mat-option>
           <mat-option value="YYYY/DD/MM">YYYY/DD/MM</mat-option>
@@ -24,10 +40,19 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field [ngClass]="{'currency-select-main' : currentUrl === '/'}" class="currency-select"
-        appearance="outline" hideRequiredMarker>
-        <mat-select hideSingleSelectionIndicator class="select" formControlName="currencyFormat" placeholder="EUR"
-          [(value)]="this.headerDataService.currentCurrency">
+      <mat-form-field
+        [ngClass]="{ 'currency-select-main': currentUrl === '/' }"
+        class="currency-select"
+        appearance="outline"
+        hideRequiredMarker
+      >
+        <mat-select
+          hideSingleSelectionIndicator
+          class="select"
+          formControlName="currencyFormat"
+          placeholder="EUR"
+          [(value)]="this.headerDataService.currentCurrency"
+        >
           <mat-option value="EUR">EUR</mat-option>
           <mat-option value="USA">USA</mat-option>
           <mat-option value="RUB">RUB</mat-option>
@@ -35,32 +60,62 @@
         </mat-select>
       </mat-form-field>
 
-      <button mat-button class="sign-button-wrapper" *ngIf="authApiService.getIsLogin() === false"
-        (click)="modalWindowServices.switchModal()">
-        <mat-icon [ngClass]="{'color-100' : currentUrl === '/'}" fontIcon="person_outline"></mat-icon>
-        <span [ngClass]="{
-          'header-main-color' : currentUrl === '/',
-          'header-neutral10-color' : currentUrl !== '/'
-        }">Sign in</span>
+      <button
+        mat-button
+        class="sign-button-wrapper"
+        *ngIf="authApiService.getIsLogin() === false"
+        (click)="modalWindowServices.switchModal()"
+      >
+        <mat-icon
+          [ngClass]="{ 'color-100': currentUrl === '/' }"
+          fontIcon="person_outline"
+        ></mat-icon>
+        <span
+          [ngClass]="{
+            'header-main-color': currentUrl === '/',
+            'header-neutral10-color': currentUrl !== '/'
+          }"
+          >Sign in</span
+        >
       </button>
 
-      <button mat-button class="sign-button-wrapper" *ngIf="authApiService.getIsLogin()"
-        [matMenuTriggerFor]="accountMenu">
-        <mat-icon color="primary" [ngClass]="{
+      <button
+        mat-button
+        class="sign-button-wrapper"
+        *ngIf="authApiService.getIsLogin()"
+        [matMenuTriggerFor]="accountMenu"
+      >
+        <mat-icon
+          color="primary"
+          [ngClass]="{
           'account-icon' : currentUrl !== '/',
-        }" fontIcon="person_outline"></mat-icon>
-        <span class="color-primary">{{authApiService.tokenData?.firstName}}</span>
+        }"
+          fontIcon="person_outline"
+        ></mat-icon>
+        <span class="color-primary">{{ authApiService.tokenData?.firstName }}</span>
       </button>
 
-      <button mat-icon-button routerLink="/shopping-card"><mat-icon fontIcon="shopping_basket"></mat-icon></button>
+      <button mat-icon-button routerLink="/shopping-card">
+        <mat-icon fontIcon="shopping_basket"></mat-icon>
+      </button>
+
+      <button mat-mini-fab color="primary" aria-label="Change theme" (click)="changeTheme()">
+        <mat-icon *ngIf="!isDarkMode">light_mode</mat-icon>
+        <mat-icon *ngIf="isDarkMode">dark_mode</mat-icon>
+      </button>
     </div>
 
-    <button class="hidden-mat-menu" mat-icon-button [matMenuTriggerFor]="mobileMenu"
-      aria-label="Example icon-button with a menu">
+    <button
+      class="hidden-mat-menu"
+      mat-icon-button
+      [matMenuTriggerFor]="mobileMenu"
+      aria-label="Example icon-button with a menu"
+    >
       <mat-icon>more_vert</mat-icon>
     </button>
   </div>
 </header>
+
 <app-login-form *ngIf="modalWindowServices.getModal()"></app-login-form>
 
 <!-- mat menu -->
@@ -69,36 +124,55 @@
   <button mat-menu-item routerLink="/user-account">Account history</button>
   <button mat-menu-item (click)="logOut()">Logout</button>
   <button routerLink="/shopping-card" mat-menu-item>
-    <span class="mat-menu-container"><mat-icon color="primary" fontIcon="shopping_basket"></mat-icon>Basket</span>
+    <span class="mat-menu-container"
+      ><mat-icon color="primary" fontIcon="shopping_basket"></mat-icon>Basket</span
+    >
   </button>
 </mat-menu>
 
 <mat-menu #mobileMenu="matMenu">
-  <button mat-menu-item *ngIf="authApiService.getIsLogin() === false" (click)="modalWindowServices.switchModal()">
+  <button
+    mat-menu-item
+    *ngIf="authApiService.getIsLogin() === false"
+    (click)="modalWindowServices.switchModal()"
+  >
     <span>Sign in</span>
   </button>
 
   <button mat-menu-item *ngIf="authApiService.getIsLogin()" [matMenuTriggerFor]="accountMenu">
-    <span class="mat-menu-container "><mat-icon color="primary" fontIcon="person_outline"></mat-icon>User</span>
+    <span class="mat-menu-container"
+      ><mat-icon color="primary" fontIcon="person_outline"></mat-icon>User</span
+    >
   </button>
 
   <button mat-menu-item [matMenuTriggerFor]="dateFormatMenu">
-    <span class="mat-menu-container "><mat-icon color="primary"
-        fontIcon="calendar_today"></mat-icon>{{headerDataService.currentDataFormat}}</span>
+    <span class="mat-menu-container"
+      ><mat-icon color="primary" fontIcon="calendar_today"></mat-icon
+      >{{ headerDataService.currentDataFormat }}</span
+    >
   </button>
 
   <button mat-menu-item [matMenuTriggerFor]="currencyFormatMenu">
-    <span class="mat-menu-container "><mat-icon color="primary"
-        fontIcon="money"></mat-icon>{{headerDataService.currentCurrency}}</span>
+    <span class="mat-menu-container"
+      ><mat-icon color="primary" fontIcon="money"></mat-icon
+      >{{ headerDataService.currentCurrency }}</span
+    >
   </button>
-
 </mat-menu>
 
 <mat-menu #dateFormatMenu="matMenu">
-  <button mat-menu-item (click)="headerDataService.currentDataFormat = 'MM/DD/YYYY'">MM/DD/YYYY</button>
-  <button mat-menu-item (click)="headerDataService.currentDataFormat = 'DD/MM/YYYY'">DD/MM/YYYY</button>
-  <button mat-menu-item (click)="headerDataService.currentDataFormat = 'YYYY/DD/MM'">YYYY/DD/MM</button>
-  <button mat-menu-item (click)="headerDataService.currentDataFormat = 'YYYY/MM/DD'">YYYY/MM/DD</button>
+  <button mat-menu-item (click)="headerDataService.currentDataFormat = 'MM/DD/YYYY'">
+    MM/DD/YYYY
+  </button>
+  <button mat-menu-item (click)="headerDataService.currentDataFormat = 'DD/MM/YYYY'">
+    DD/MM/YYYY
+  </button>
+  <button mat-menu-item (click)="headerDataService.currentDataFormat = 'YYYY/DD/MM'">
+    YYYY/DD/MM
+  </button>
+  <button mat-menu-item (click)="headerDataService.currentDataFormat = 'YYYY/MM/DD'">
+    YYYY/MM/DD
+  </button>
 </mat-menu>
 
 <mat-menu #currencyFormatMenu="matMenu">

@@ -3,7 +3,7 @@
 </div>
 
 <form class="form-container" *ngIf="!isLoading" [formGroup]="form" (ngSubmit)="submit()">
-  <mat-radio-group aria-label="Select an option" formControlName="roundedTrip">
+  <mat-radio-group aria-label="Select an option" formControlName="roundedTrip" class="form-container_oneway">
     <mat-radio-button color="primary" value="both">Round Trip</mat-radio-button>
     <mat-radio-button color="primary" value="one">One Way</mat-radio-button>
   </mat-radio-group>

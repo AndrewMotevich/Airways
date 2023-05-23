@@ -47,6 +47,15 @@
   }
 }
 
+.logo-svg {
+  .logo-color {
+    fill: red;
+  }
+  .logo-stroke {
+    stroke: red;
+  }
+}
+
 header {
   position: fixed;
   top: 0;
@@ -57,29 +66,44 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 1;
-  padding: 0 2rem;
+  z-index: 12;
+
+  @media screen and (min-width: 427px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  @media screen and (max-width: 426px) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 
   .logo {
-    margin-top: .5rem;
-    margin-right: .9rem;
+    margin-top: 0.5rem;
+    margin-right: 0.9rem;
+
+    .mat-icon {
+      width: 115px;
+      height: 40px;
+    }
   }
 }
+
 .header-main-color {
   color: $color-neutral100 !important;
 }
+
 .header-main-page {
   background-color: $color-neutral70;
 }
+
 .color-primary {
   color: $color-primary !important;
 }
 .color-100 {
   color: $color-neutral100;
 }
-.header-with-stepper {
-  background-color: $color-neutral100;
-}
+
 .header-wrapper {
   width: 100%;
   display: flex;
@@ -92,34 +116,27 @@ header {
 }
 
 .header-items-wrapper {
-  display: flex;    
+  display: flex;
   align-items: center;
-  padding-right: 0.7rem;  
+  padding-right: 0.7rem;
 }
 
 .header-main-page .header-items-wrapper {
   gap: 1.3rem;
-  justify-content: flex-end;
-
-  .currency-select {
-    margin: 0 1.1rem 0 2rem;
-  }
+  justify-content: flex-end;  
 }
 
 .header-with-stepper .header-items-wrapper {
-    justify-content: space-between;
-    max-width: 450px;
-    gap: 1.1rem;
-    margin-left: 2rem;
-  }
+  justify-content: space-between;  
+  margin-left: 2rem;
+}
+
+.header-with-stepper .currency-select {
+  margin: 0 1.1rem;
+}
 
 ::ng-deep.currency-select {
-  &:not(.mat-focused) .mat-mdc-select-placeholder {
-    color: $color-neutral10;
-  }
-  &:not(.currency-select-main) .mat-mdc-select-value {
-    color: $color-primary;
-  }
+  
   .mdc-text-field {
     width: 64px;
     height: 40px;
@@ -144,14 +161,7 @@ header {
   }
 }
 
-::ng-deep.date-select {
-  .mat-mdc-select-placeholder {
-    color: $color-neutral10;
-  }
-
-  &:not(.date-select-main) .mat-mdc-select-value {
-    color: $color-primary;
-  }
+::ng-deep.date-select {  
   .mdc-text-field {
     width: 162px;
     height: 40px;
