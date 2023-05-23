@@ -1,15 +1,20 @@
-<header></header>
 <app-flight-info-menu></app-flight-info-menu>
-<div class="">select flight works</div>
 <div class="depart">
   <div class="direction-title"><img class='airplane-icon' src="assets/icons/airplane.png"><span>
       {{departure.title}} to {{arrival.title}}
     </span></div>
   <section class="flight">
-    <app-ticket-date-slider [selectedDate]="departureDate" [ticketsData]="ticketsDataDepart"></app-ticket-date-slider>
-    <ng-container *ngFor="let flight of flightsDetailsDepart$ | async">
-      <app-flight-details [flight]="flight"></app-flight-details>
+    <app-ticket-date-slider [selectedDate]="departureDate" [ticketsData]="ticketsDataDepart"
+      (nextDateButtonClick)="handleClickOnNextDepartureDate()"
+      (prevDateButtonClick)="handleClickOnPrevDepartureDate()"></app-ticket-date-slider>
+    <ng-container *ngIf="(flightsDetailsDepart$ | async) as flights; else noDataTemplate">
+      <ng-container *ngIf="flights.length > 0; else noDataTemplate">
+        <app-flight-details *ngFor="let flight of flights" [flight]="flight"></app-flight-details>
+      </ng-container>
     </ng-container>
+    <ng-template #noDataTemplate>
+      <p>No data available for this day</p>
+    </ng-template>
   </section>
 </div>
 
@@ -18,9 +23,13 @@
       {{arrival.title}} to {{departure.title}}
     </span></div>
   <section class="flight">
-    <app-ticket-date-slider [selectedDate]="returnDate" [ticketsData]="ticketsDataReturn"></app-ticket-date-slider>
-    <ng-container *ngFor="let flight of flightsDetailsReturn$ | async">
-      <app-flight-details [flight]="flight"></app-flight-details>
+    <app-ticket-date-slider [selectedDate]="returnDate" [ticketsData]="ticketsDataReturn"
+      (nextDateButtonClick)="handleClickOnNextArrivalDate()"
+      (prevDateButtonClick)="handleClickOnPrevArrivalDate()"></app-ticket-date-slider>
+    <ng-container *ngIf="(flightsDetailsReturn$ | async) as flights; else noDataTemplate">
+      <ng-container *ngIf="flights.length > 0; else noDataTemplate">
+        <app-flight-details *ngFor="let flight of flights" [flight]="flight"></app-flight-details>
+      </ng-container>
     </ng-container>
   </section>
 </div>

@@ -1,17 +1,17 @@
 // MUI
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 
 @include mat.core();
 
 // base
-@import './sass/base/normalize';
-@import './sass/base/typography';
+@import "./sass/base/normalize";
+@import "./sass/base/typography";
 /* abstracts */
-@import './sass/abstracts/variables';
-@import './sass/abstracts/placeholders';
-@import './sass/abstracts/mixins';
+@import "./sass/abstracts/variables";
+@import "./sass/abstracts/placeholders";
+@import "./sass/abstracts/mixins";
 // layout
-@import './sass/layout/grid';
-@import './sass/layout/header';
-@import './sass/layout/footer';
-@import './sass/base/base';
+@import "./sass/layout/grid";
+@import "./sass/layout/header";
+@import "./sass/layout/footer";
+@import "./sass/base/base";
