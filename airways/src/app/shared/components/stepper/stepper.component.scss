@@ -5,7 +5,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  color: $color-neutral30;
+  
   @extend %text-label-medium;
 
   .stepper-line {
