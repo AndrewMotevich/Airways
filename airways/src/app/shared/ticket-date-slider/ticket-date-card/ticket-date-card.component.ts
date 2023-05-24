@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { CurrentDateStateEnum } from '../ticket-date-slider.component';
 
 @Component({
   selector: 'app-ticket-date-card',
@@ -12,4 +13,6 @@ export class TicketDateCardComponent {
   @Input() boundColor: string = 'transparent';
 
   @Input() index!: number;
+
+  @Input() currentDateState!: CurrentDateStateEnum;
 }

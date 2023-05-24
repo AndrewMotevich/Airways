@@ -38,8 +38,8 @@ export class MainFormComponent implements OnInit {
 
   form = new FormGroup({
     roundedTrip: new FormControl<string>('both', [Validators.required]),
-    from: new FormControl<string>('', [Validators.required]),
-    destination: new FormControl<string>('', [Validators.required]),
+    from: new FormControl<string | null>(null, [Validators.required]),
+    destination: new FormControl<string | null>(null, [Validators.required]),
     dateStart: new FormControl<Date>(new Date(), [Validators.required]),
     dateEnd: new FormControl<Date | null>(null, [Validators.required]),
     passengers: new FormControl<number>(1, [Validators.min(1)]),

@@ -1,7 +1,7 @@
 <div class="ticket-date-card card" [ngClass]="{
-'past': index < 2,
+'past': currentDateState === 'past',
 'current': index === 2,
-'future': index > 2
+'future': currentDateState === 'future'
 }">
   <span class="card__date">{{card.date | dateFormat:'DD MMM'}}</span>
   <span class="card__date--day">{{card.date | dateFormat:'dddd'}}</span>
