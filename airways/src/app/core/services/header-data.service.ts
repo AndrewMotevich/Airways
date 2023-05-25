@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, from } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { THEME } from '../models/theme.interface';
 import { EDateFormat } from '../models/date-format.interface';
 

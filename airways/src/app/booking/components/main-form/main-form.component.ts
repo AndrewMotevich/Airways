@@ -5,8 +5,6 @@ import { Observable } from 'rxjs';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { HeaderDataService } from 'src/app/core/services/header-data.service';
-import dayjs from 'dayjs';
 import { AirportsDataType } from '../../models/airports-data-type';
 import { AviaSalesApiService as AviasalesApiService } from '../../services/aviasales-api.service';
 import { CityDateType } from '../../models/city-data-type.model';
