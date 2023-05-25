@@ -22,5 +22,8 @@
     &--right {
       right: 0px;
     }
+    &.disable {
+      cursor: not-allowed;
+    }
   }
 }
