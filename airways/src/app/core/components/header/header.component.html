@@ -21,24 +21,7 @@
     <div class="header-items-wrapper">
       <mat-label *ngIf="currentUrl === '/'">Book flights</mat-label>
 
-      <mat-form-field
-        [ngClass]="{ 'date-select-main': currentUrl === '/' }"
-        class="date-select"
-        appearance="outline"
-        hideRequiredMarker
-      >
-        <mat-select
-          hideSingleSelectionIndicator
-          formControlName="dateFormat"
-          placeholder="MM/DD/YYYY"
-          [(value)]="this.headerDataService.currentDataFormat"
-        >
-          <mat-option value="MM/DD/YYYY">MM/DD/YYYY</mat-option>
-          <mat-option value="DD/MM/YYYY">DD/MM/YYYY</mat-option>
-          <mat-option value="YYYY/DD/MM">YYYY/DD/MM</mat-option>
-          <mat-option value="YYYY/MM/DD">YYYY/MM/DD</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <app-date-format></app-date-format>
 
       <mat-form-field
         [ngClass]="{ 'currency-select-main': currentUrl === '/' }"
@@ -145,12 +128,12 @@
     >
   </button>
 
-  <button mat-menu-item [matMenuTriggerFor]="dateFormatMenu">
+  <!-- <button mat-menu-item [matMenuTriggerFor]="dateFormatMenu">
     <span class="mat-menu-container"
       ><mat-icon color="primary" fontIcon="calendar_today"></mat-icon
       >{{ headerDataService.currentDataFormat }}</span
     >
-  </button>
+  </button> -->
 
   <button mat-menu-item [matMenuTriggerFor]="currencyFormatMenu">
     <span class="mat-menu-container"
@@ -160,7 +143,7 @@
   </button>
 </mat-menu>
 
-<mat-menu #dateFormatMenu="matMenu">
+<!-- <mat-menu #dateFormatMenu="matMenu">
   <button mat-menu-item (click)="headerDataService.currentDataFormat = 'MM/DD/YYYY'">
     MM/DD/YYYY
   </button>
@@ -173,7 +156,7 @@
   <button mat-menu-item (click)="headerDataService.currentDataFormat = 'YYYY/MM/DD'">
     YYYY/MM/DD
   </button>
-</mat-menu>
+</mat-menu> -->
 
 <mat-menu #currencyFormatMenu="matMenu">
   <button mat-menu-item (click)="headerDataService.currentCurrency = 'EUR'">EUR</button>

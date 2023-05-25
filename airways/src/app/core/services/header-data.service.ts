@@ -1,27 +1,36 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, from } from 'rxjs';
 import { THEME } from '../models/theme.interface';
+import { EDateFormat } from '../models/date-format.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HeaderDataService {
-  private _theme: string = THEME.LIGHT;
+  private theme: string = THEME.LIGHT;
 
-  private _themeSubject: BehaviorSubject<string> = new BehaviorSubject<string>(this._theme);
+  private themeSubject$: BehaviorSubject<string> = new BehaviorSubject<string>(this.theme);
 
-  currentDataFormat = 'MM/DD/YYYY';
+  private dateFormat$: BehaviorSubject<string> = new BehaviorSubject<string>(EDateFormat.MM_DD_YYYY);
 
   currentCurrency = 'EUR';
 
   get currentTheme(): BehaviorSubject<string> {
-    return this._themeSubject;
+    return this.themeSubject$;
+  }
+
+  get currentDateFormat(): BehaviorSubject<string> {
+    return this.dateFormat$;
   }
 
   toggleTheme(): void {
-    const currentTheme: string = this._theme === THEME.DARK ? THEME.LIGHT : THEME.DARK;
-    this._theme = currentTheme;
-    this._themeSubject.next(currentTheme);
+    const currentTheme: string = this.theme === THEME.DARK ? THEME.LIGHT : THEME.DARK;
+    this.theme = currentTheme;
+    this.themeSubject$.next(currentTheme);
+  }
+
+  setDateFormat(val: string): void {
+    this.dateFormat$.next(val);
   }
 
 }

@@ -13,9 +13,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { HeaderComponent } from '../../components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { LoginModule } from '../../../auth/modules/login.module';
+import { DateFormatComponent } from '../../components/header/date-format/date-format.component';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent],
+  declarations: [HeaderComponent, FooterComponent, DateFormatComponent],
   imports: [
     CommonModule,
     MatSelectModule,

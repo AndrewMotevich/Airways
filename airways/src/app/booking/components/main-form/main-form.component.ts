@@ -5,16 +5,18 @@ import { Observable } from 'rxjs';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { HeaderDataService } from 'src/app/core/services/header-data.service';
+import dayjs from 'dayjs';
+import { AirportsDataType } from '../../models/airports-data-type';
 import { AviaSalesApiService as AviasalesApiService } from '../../services/aviasales-api.service';
 import { CityDateType } from '../../models/city-data-type.model';
 import { FormDataService } from '../../services/form-data.service';
 import { changeIcon } from '../../../../assets/icons/Vector';
-import { AirportsDataType } from '../../models/airports-data-type';
 
 @Component({
   selector: 'app-main-form',
   templateUrl: './main-form.component.html',
-  styleUrls: ['./main-form.component.scss'],
+  styleUrls: ['./main-form.component.scss'],  
   encapsulation: ViewEncapsulation.None,
 })
 export class MainFormComponent implements OnInit {
@@ -40,8 +42,8 @@ export class MainFormComponent implements OnInit {
     roundedTrip: new FormControl<string>('both', [Validators.required]),
     from: new FormControl<string | null>(null, [Validators.required]),
     destination: new FormControl<string | null>(null, [Validators.required]),
-    dateStart: new FormControl<Date>(new Date(), [Validators.required]),
-    dateEnd: new FormControl<Date | null>(null, [Validators.required]),
+    dateStart: new FormControl<string | null>(null, [Validators.required]),
+    dateEnd: new FormControl<string | null>(null, [Validators.required]),
     passengers: new FormControl<number>(1, [Validators.min(1)]),
     adult: new FormControl<number>(1, [Validators.min(1), Validators.max(9)]),
     child: new FormControl<number>(0, [Validators.min(0), Validators.max(9)]),
@@ -52,10 +54,10 @@ export class MainFormComponent implements OnInit {
     private router: Router,
     private aviasalesApiService: AviasalesApiService,
     private formDataService: FormDataService,
-    iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer
+    private iconRegistry: MatIconRegistry,
+    private sanitizer: DomSanitizer,
   ) {
-    iconRegistry.addSvgIconLiteral('change-icon', sanitizer.bypassSecurityTrustHtml(changeIcon));
+    this.iconRegistry.addSvgIconLiteral('change-icon', this.sanitizer.bypassSecurityTrustHtml(changeIcon));
   }
 
   ngOnInit(): void {
@@ -86,7 +88,7 @@ export class MainFormComponent implements OnInit {
       );
       this.isLoading = false;
     });
-  }
+  }  
 
   public submit(): void {
     if (this.form.valid) {
