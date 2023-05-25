@@ -1,0 +1,10 @@
+<mat-form-field class="date-select" appearance="outline" hideRequiredMarker>
+  <mat-select
+    hideSingleSelectionIndicator
+    placeholder="MM/DD/YYYY"
+    [value]="dateFormat"
+    (selectionChange)="changeDateFormat($event)"
+  >
+    <mat-option *ngFor="let dateFormat of formatsArray" [value]="dateFormat">{{dateFormat}}</mat-option>    
+  </mat-select>
+</mat-form-field>

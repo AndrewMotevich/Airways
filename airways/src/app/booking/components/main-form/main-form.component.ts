@@ -16,7 +16,7 @@ import { changeIcon } from '../../../../assets/icons/Vector';
 @Component({
   selector: 'app-main-form',
   templateUrl: './main-form.component.html',
-  styleUrls: ['./main-form.component.scss'],  
+  styleUrls: ['./main-form.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class MainFormComponent implements OnInit {
@@ -88,7 +88,7 @@ export class MainFormComponent implements OnInit {
       );
       this.isLoading = false;
     });
-  }  
+  }
 
   public submit(): void {
     if (this.form.valid) {
@@ -138,21 +138,30 @@ export class MainFormComponent implements OnInit {
   }
 
   public changeDirectionsHandler(): void {
-    const currentFrom = this.form.controls.from.value;
-    const currentDestination = this.form.controls.destination.value;
-    this.form.controls.from.setValue(currentDestination);
-    this.form.controls.destination.setValue(currentFrom);
+    const { from, destination } = this.form.controls;
+
+    if (!from.hasError('required') && !destination.hasError('required')) {
+      const currentFrom = from.value;
+      const currentDestination = destination.value;
+
+      from.setValue(currentDestination);
+      destination.setValue(currentFrom);
+    }
   }
 
   private filterFrom(value: string): AirportsDataType[] {
-    const filterValue = value.toLowerCase();
-
-    return this.airports.filter((airport) => airport.city_name.toLowerCase().includes(filterValue));
+    if (value.length > 1) {
+      const filterValue = value.toLowerCase();
+      return this.airports.filter((airport) => airport.city_name.toLowerCase().includes(filterValue));
+    }
+    return [];
   }
 
   private filterDestination(value: string): AirportsDataType[] {
-    const filterValue = value.toLowerCase();
-
-    return this.airports.filter((airport) => airport.city_name.toLowerCase().includes(filterValue));
+    if (value.length > 1) {
+      const filterValue = value.toLowerCase();
+      return this.airports.filter((airport) => airport.city_name.toLowerCase().includes(filterValue));
+    }
+    return [];
   }
 }
