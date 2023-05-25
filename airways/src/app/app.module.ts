@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainPageModule } from './booking/pages/main-page/main-page.module';
 import { CoreModule } from './core/modules/core/core.module';
-import { AppDateAdapter } from './booking/components/main-form/date-range/utils/date-format-adapter';
+import { AppDateAdapter } from './shared/utils/date-format-adapter';
 import { FLIGHT_DATE_FORMATS } from './shared/constants';
 
 @NgModule({

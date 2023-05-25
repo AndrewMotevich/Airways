@@ -1,19 +1,19 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import dayjs from 'dayjs';
 import { HeaderDataService } from 'src/app/core/services/header-data.service';
-import { CustomFormat } from '../../../../shared/utils/date-format';
+import { CustomFormat } from 'src/app/shared/utils/date-format';
 
 @Component({
-  selector: 'app-date-range',
-  templateUrl: './date-range.component.html',
-  styleUrls: ['./date-range.component.scss'],
+  selector: 'app-date',
+  templateUrl: './date.component.html',
+  styleUrls: ['./date.component.scss'],
   providers: [
     { provide: MAT_DATE_FORMATS, useClass: CustomFormat },
   ],
 })
-export class DateRangeComponent implements OnInit {
+export class DateComponent implements OnInit {
   formGroup!: FormGroup;
 
   dateFormat!: string;
@@ -36,11 +36,10 @@ export class DateRangeComponent implements OnInit {
   }
 
   formatDates(): void {
-    const dateStart = this.formGroup.get('dateStart')?.value;
     const dateEnd = this.formGroup.get('dateEnd')?.value;
 
     this.formGroup.patchValue({
-      dateStart, dateEnd
+      dateStart: dateEnd, dateEnd
     })
   }
 }

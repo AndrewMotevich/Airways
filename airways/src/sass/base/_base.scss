@@ -273,7 +273,7 @@ h2 {
     color: $color-neutral100;
   }
 
-  .date-select {
+  &.main-page .date-select {
     .mat-mdc-select-value,
     .mat-mdc-select-arrow {
       color: $color-neutral100;
