@@ -5,6 +5,9 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
+import { BehaviorSubject } from 'rxjs';
+import { MatSelectChange } from '@angular/material/select';
+import { CURRENCY } from '../../../shared/constants';
 import { ModalWindowService } from '../../../auth/services/modal-window.service';
 import { AuthApiService } from '../../../auth/services/auth-api.service';
 import { HeaderDataService } from '../../services/header-data.service';
@@ -24,6 +27,10 @@ import { THEME } from '../../models/theme.interface';
 export class HeaderComponent implements OnInit {
   currentUrl: string = '';
 
+  currentCurrency$: BehaviorSubject<string>;
+
+  currencyArray = CURRENCY;
+
   headerData = new FormGroup({
     dateFormat: new FormControl<string>('MM/DD/YYYY', [Validators.required]),
     currencyFormat: new FormControl<string>('EUR', [Validators.required]),
@@ -42,6 +49,8 @@ export class HeaderComponent implements OnInit {
   ) {
     this.matIconRegistry.addSvgIcon('icon-logo',
       this.domSanitizer.bypassSecurityTrustResourceUrl('assets/img/logo.svg'));
+
+    this.currentCurrency$ = this.headerDataService.currentCurrency$;
   }
 
   ngOnInit(): void {
@@ -78,5 +87,9 @@ export class HeaderComponent implements OnInit {
 
   changeTheme(): void {
     this.headerDataService.toggleTheme();
+  }
+
+  changeCurrencyFormat(event: MatSelectChange): void {
+    this.headerDataService.setCurrency(event.value);
   }
 }

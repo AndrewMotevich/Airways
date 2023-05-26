@@ -20,3 +20,5 @@ export const FLIGHT_DATE_FORMATS = {
     monthYearA11yLabel: 'MMMM YYYY',
   },
 };
+
+export const CURRENCY = ["EUR", "USA", "RUB", "PLN"];

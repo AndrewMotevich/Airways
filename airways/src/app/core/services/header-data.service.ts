@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { THEME } from '../models/theme.interface';
 import { EDateFormat } from '../models/date-format.interface';
+import { ECurrency } from '../models/currency.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ export class HeaderDataService {
 
   private dateFormatSubject$: BehaviorSubject<string> = new BehaviorSubject<string>(EDateFormat.MM_DD_YYYY);
 
-  currentCurrency = 'EUR';
+  private currentCurrencySubject$: BehaviorSubject<string> = new BehaviorSubject<string>(ECurrency.EUR);
 
   get currentTheme(): BehaviorSubject<string> {
     return this.themeSubject$;
@@ -23,14 +24,21 @@ export class HeaderDataService {
     return this.dateFormatSubject$;
   }
 
+  get currentCurrency$(): BehaviorSubject<string> {
+    return this.currentCurrencySubject$;
+  }  
+
   toggleTheme(): void {
     const currentTheme: string = this.theme === THEME.DARK ? THEME.LIGHT : THEME.DARK;
     this.theme = currentTheme;
     this.themeSubject$.next(currentTheme);
   }
 
-  setDateFormat(val: string): void {
-    this.dateFormatSubject$.next(val);
+  setDateFormat(dFormat: string): void {
+    this.dateFormatSubject$.next(dFormat);
   }
 
+  setCurrency(currency: string): void {
+    this.currentCurrencySubject$.next(currency);
+  }
 }

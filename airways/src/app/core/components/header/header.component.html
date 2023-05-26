@@ -34,12 +34,10 @@
           class="select"
           formControlName="currencyFormat"
           placeholder="EUR"
-          [(value)]="this.headerDataService.currentCurrency"
+          [value]="currentCurrency$ | async"
+          (selectionChange)="changeCurrencyFormat($event)"
         >
-          <mat-option value="EUR">EUR</mat-option>
-          <mat-option value="USA">USA</mat-option>
-          <mat-option value="RUB">RUB</mat-option>
-          <mat-option value="PLN">PLN</mat-option>
+          <mat-option *ngFor="let currency of currencyArray" [value]="currency">{{currency}}</mat-option>          
         </mat-select>
       </mat-form-field>
 
@@ -135,12 +133,12 @@
     >
   </button> -->
 
-  <button mat-menu-item [matMenuTriggerFor]="currencyFormatMenu">
+  <!-- <button mat-menu-item [matMenuTriggerFor]="currencyFormatMenu">
     <span class="mat-menu-container"
       ><mat-icon color="primary" fontIcon="money"></mat-icon
       >{{ headerDataService.currentCurrency }}</span
     >
-  </button>
+  </button> -->
 </mat-menu>
 
 <!-- <mat-menu #dateFormatMenu="matMenu">
@@ -158,9 +156,9 @@
   </button>
 </mat-menu> -->
 
-<mat-menu #currencyFormatMenu="matMenu">
+<!-- <mat-menu #currencyFormatMenu="matMenu">
   <button mat-menu-item (click)="headerDataService.currentCurrency = 'EUR'">EUR</button>
   <button mat-menu-item (click)="headerDataService.currentCurrency = 'USA'">USA</button>
   <button mat-menu-item (click)="headerDataService.currentCurrency = 'RUB'">RUB</button>
   <button mat-menu-item (click)="headerDataService.currentCurrency = 'PLN'">PLN</button>
-</mat-menu>
+</mat-menu> -->
