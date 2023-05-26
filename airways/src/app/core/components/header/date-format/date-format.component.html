@@ -2,9 +2,9 @@
   <mat-select
     hideSingleSelectionIndicator
     placeholder="MM/DD/YYYY"
-    [value]="dateFormat"
+    [value]="dateFormat$ | async"
     (selectionChange)="changeDateFormat($event)"
   >
-    <mat-option *ngFor="let dateFormat of formatsArray" [value]="dateFormat">{{dateFormat}}</mat-option>    
+    <mat-option *ngFor="let dFormat of formatsArray" [value]="dFormat">{{dFormat}}</mat-option>    
   </mat-select>
 </mat-form-field>
