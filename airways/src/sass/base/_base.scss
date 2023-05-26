@@ -273,9 +273,14 @@ h2 {
     color: $color-neutral100;
   }
 
-  &.main-page .date-select {
-    .mat-mdc-select-value,
-    .mat-mdc-select-arrow {
+  &.main-page {
+    .date-select {
+      .mat-mdc-select-value,
+      .mat-mdc-select-arrow {
+        color: $color-neutral100;
+      }
+    }
+    .sign-button-wrapper {
       color: $color-neutral100;
     }
   }

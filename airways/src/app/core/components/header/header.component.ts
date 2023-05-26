@@ -52,7 +52,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const authApiServiceSubscribe = this.authApiService.refresh().subscribe();
-    this.subscriptions.add(authApiServiceSubscribe);
+    this.subscriptions?.add(authApiServiceSubscribe);
 
     const routerSubscribe = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -61,12 +61,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.isMainPage = url === '/';
       }
     });
-    this.subscriptions.add(routerSubscribe);
+    this.subscriptions?.add(routerSubscribe);
 
     const headerDataServiceSubscribe = this.headerDataService.currentTheme.subscribe(theme => {
       this.isDarkMode = (theme === THEME.DARK)
     });
-    this.subscriptions.add(headerDataServiceSubscribe);
+    this.subscriptions?.add(headerDataServiceSubscribe);
   }
 
   logOut(): void {

@@ -32,13 +32,13 @@
         (click)="modalWindowServices.switchModal()"
       >
         <mat-icon
-          [ngClass]="{ 'color-100': currentUrl === '/' }"
+          [ngClass]="{ 'color-100': isMainPage }"
           fontIcon="person_outline"
         ></mat-icon>
         <span
           [ngClass]="{
-            'header-main-color': currentUrl === '/',
-            'header-neutral10-color': currentUrl !== '/'
+            'header-main-color': isMainPage,
+            'header-neutral10-color': !isMainPage
           }"
           >Sign in</span
         >
@@ -53,7 +53,7 @@
         <mat-icon
           color="primary"
           [ngClass]="{
-          'account-icon' : currentUrl !== '/',
+          'account-icon': !isMainPage,
         }"
           fontIcon="person_outline"
         ></mat-icon>
