@@ -2,9 +2,10 @@
 @import '../base/typography';
 
 :root {
+  --mdc-typography-body1-line-height: 24px;
   --mdc-typography-body2-font-size: 12px;
   --mdc-switch-track-width: 52px;
-  --mdc-switch-track-height: 32px;
+  --mdc-switch-track-height: 28px;
   --mdc-switch-track-shape: 100px;
   --mdc-switch-handle-height: 24px;
   --mdc-switch-handle-width: 24px;
@@ -13,25 +14,20 @@
   --mdc-plain-tooltip-supporting-text-tracking: 0.4px;
   --mdc-plain-tooltip-container-shape: 8px;
   --mat-mdc-form-field-label-transform: 28px;
-}
-
-html,
-body {
-  // height: 100%;
+  --mdc-shape-medium: 0;
 }
 
 body {
-  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
   font-size: 14px;
   line-height: 20px;
   font-style: normal;
   font-weight: 400;
   letter-spacing: 0.5px;
-  background-color: $color-neutral80;
 }
 
-h2 {
-  color: $color-primary;
+.btn.mdc-button--raised {
+  min-width: 126px;
 }
 
 .mdc-button.btn-with-gradient {
@@ -63,8 +59,8 @@ h2 {
   color: $color-neutral100;
 }
 
-.mat-typography h2 {
-  @include title-h2;
+h2 {
+  @extend %text-title-large;
 }
 
 .mat-mdc-form-field-icon-suffix {
@@ -79,10 +75,6 @@ h2 {
 .mat-mdc-standard-chip.mdc-evolution-chip--with-primary-graphic
   .mdc-evolution-chip__action--primary {
   margin: 0 auto;
-}
-
-.mdc-text-field {
-  background-color: $color-secondary90;
 }
 
 .mat-mdc-slide-toggle.mat-accent {
@@ -113,7 +105,7 @@ h2 {
   left: 4px !important;
 }
 
-.needhelp label {
+.needhelp .mdc-form-field > label {
   display: flex;
   align-items: center;
   gap: 0.3rem;
@@ -123,18 +115,6 @@ h2 {
 .mat-mdc-form-field-error,
 .mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-floating-label {
   color: $color-error;
-}
-
-.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
-.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
-.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
-  border-color: $color-neutral40;
-}
-
-.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
-.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing,
-.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-notched-outline__notch {
-  border-color: $color-error;
 }
 
 .form-tooltip {
@@ -167,8 +147,7 @@ h2 {
 .mat-mdc-text-field-wrapper.mdc-text-field--outlined
   .mdc-notched-outline--upgraded
   .mdc-floating-label--float-above {
-  --mat-mdc-form-field-label-transform: translateY(-24px)
-    scale(var(--mat-mdc-form-field-floating-label-scale, 0.75));
+  --mat-mdc-form-field-label-transform: translateY(-22px);
   transform: var(--mat-mdc-form-field-label-transform);
 }
 
@@ -191,4 +170,148 @@ h2 {
 .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
   padding-top: 22px;
   padding-bottom: 8px;
+}
+
+.mdc-menu-surface {
+  box-shadow: $shadow;
+}
+
+.cdk-overlay-pane:not(.mat-mdc-select-panel-above) .mdc-menu-surface.mat-mdc-select-panel {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  padding: 14px 0 0;
+}
+
+.mat-primary .mat-mdc-option .mdc-list-item__primary-text {
+  width: 100%;
+}
+
+.mat-primary .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+  color: $color-neutral10;
+}
+
+.mat-mdc-option {
+  margin-bottom: 0.5rem;
+}
+
+.mdc-menu-surface::-webkit-scrollbar {
+  width: 4px;
+}
+
+.mdc-menu-surface::-webkit-scrollbar-track {
+  border-radius: 100px;
+}
+
+.mdc-menu-surface::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  background-color: $color-primary;
+}
+
+.mat-mdc-raised-button.mat-mdc-button-base {
+  height: 60px;
+}
+
+.mat-datepicker-actions {
+  border-top: 0.5px solid $color-neutral60;
+  padding-top: 8px;
+}
+
+.mdc-switch__track {
+  border: 2px solid $color-neutral30;
+}
+
+.mat-calendar-body-label {
+  display: none;
+}
+
+.mat-mdc-radio-button .mdc-form-field {
+  @extend %text-button;
+}
+
+.light-theme {
+  h2 {
+    color: $color-primary;    
+
+    &.dark-color {
+      color: $color-primary-dark;
+    }
+  }
+
+  .svg-color {
+    fill: $color-primary;
+  }
+
+  .svg-stroke {
+    stroke: $color-primary;
+  }
+
+  h3 {
+    color: $color-primary-dark;
+  }
+
+  .stepper-wrapper {
+    color: $color-neutral30;
+  }
+
+  .section-bg,
+  .header-inner-bg {
+    background-color: $color-neutral100;
+  }   
+
+  .mdc-text-field {
+    background-color: $color-secondary90;
+  }
+
+  .mat-mdc-radio-button .mdc-form-field,
+  .mdc-list-item__primary-text  {
+    color: $color-primary;
+  }  
+
+  .mat-mdc-select-invalid:not(.mat-focused) .mat-mdc-select-arrow {
+    color: $color-neutral100;
+  }  
+}
+
+.dark-theme {
+  h2, h3, .stepper-wrapper {
+    color: $color-neutral100;    
+  }
+
+  .svg-color {
+    fill: $color-neutral100;
+  }
+
+  .svg-stroke {
+    stroke: $color-neutral100;
+  }  
+
+  .section-bg {
+    background: $color-neutral20;
+  }
+
+  .header-inner-bg {
+    background-color: $color-neutral10;
+  }  
+
+  .passengers .mat-mdc-select-value,
+  .passengers .mat-mdc-select-arrow,
+  .constact-details_code .mat-mdc-select-value,
+  .constact-details_code .mat-mdc-select-arrow,
+  .mat-date-range-input-separator,
+  .mat-date-range-input-inner,
+  .mat-mdc-radio-button .mdc-form-field,
+  .mat-datepicker-toggle,
+  .mat-datepicker-content .mat-calendar-next-button,
+  .mat-datepicker-content .mat-calendar-previous-button {
+    color: $color-neutral0;
+  }
+
+  .mat-mdc-radio-button.mat-primary {
+    --mdc-radio-unselected-icon-color: $accent;
+  }
+
+  .mat-mdc-icon-button {
+    --mat-mdc-button-persistent-ripple-color: $color-neutral0;
+    --mat-mdc-button-ripple-color: $color-neutral0;
+  }    
 }

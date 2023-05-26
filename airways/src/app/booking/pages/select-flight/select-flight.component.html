@@ -1,8 +1,8 @@
 <app-flight-info-menu></app-flight-info-menu>
 <div class="depart">
-  <div class="direction-title"><img class='airplane-icon' src="assets/icons/airplane.png"><span>
+  <h2 class="direction-title"><img class='airplane-icon' src="assets/icons/airplane.png"><span>
       {{departure.title}} to {{arrival.title}}
-    </span></div>
+    </span></h2>
   <section class="flight">
     <app-ticket-date-slider [selectedDate]="departureDate" [ticketsData]="ticketsDataDepart"
       (nextDateButtonClick)="handleClickOnNextDepartureDate()"

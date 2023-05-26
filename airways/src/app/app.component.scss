@@ -1,11 +1,62 @@
-.container {
-  max-width: 1128px;
-  min-height: 690px;
-  margin: 0 auto;
-  margin-top: 88px;
-  box-sizing: border-box;
+@import '../sass/abstracts/variables';
 
-  @media screen and (max-width: 1150px) {
+.main-page {
+  main {
+    box-sizing: border-box;
+    background-image: url(../assets/images/main-bg.png);
+    background-repeat: no-repeat;
+
+    @media screen and (min-width: 1330px) {
+      background-size: 100% auto;
+      background-position: top center;
+      min-height: max(702px, 100vh);
+    }
+
+    @media screen and (max-width: 1329px) {
+      background-size: auto 100%;
+      background-position: top center;
+      min-height: min(702px, 100vh);
+    }
+
+    @media screen and (max-width: 980px) {
+      background-position: 70% top;
+      min-height: 702px;
+    }
+  }
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+
+  main {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
+
+    @media screen and (max-width: 426px) {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
+  &.main-page main {
+    @media screen and (min-width: 427px) {
+      padding-top: 9.4rem;
+    }
+
+    @media screen and (max-width: 426px) {
+      padding-top: 7rem;
+    }
+  }
+
+  &:not(.main-page) main {
+    padding-top: 8.3rem;
+  }
+
+  .footer {
+    flex-grow: 1;
     padding: 0 2rem;
+    border-top: 1px solid $color-secondary40;
   }
 }
