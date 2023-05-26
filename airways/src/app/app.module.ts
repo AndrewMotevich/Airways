@@ -6,13 +6,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainPageModule } from './booking/pages/main-page/main-page.module';
 import { CoreModule } from './core/modules/core/core.module';
-import { ShoppingCartPageComponent } from './booking/pages/shopping-cart-page/shopping-cart-page.component';
-import { UserAccountPageComponent } from './booking/pages/user-account-page/user-account-page.component';
-import { ShoppingCartTableComponent } from './booking/components/shopping-cart-table/shopping-cart-table.component';
-import { UserAccountTableComponent } from './booking/components/user-account-table/user-account-table.component';
+import { ShoppingCartPageModule } from './booking/pages/shopping-cart-page/shopping-cart-page.module';
+import { UserAccountPageModule } from './booking/pages/user-account-page/user-account-page.module';
 
 @NgModule({
-  declarations: [AppComponent, ShoppingCartPageComponent, UserAccountPageComponent, ShoppingCartTableComponent, UserAccountTableComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -20,6 +18,8 @@ import { UserAccountTableComponent } from './booking/components/user-account-tab
     BrowserAnimationsModule,
     MainPageModule,
     CoreModule,
+    ShoppingCartPageModule,
+    UserAccountPageModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,1 +1,87 @@
-<p>shopping-cart-table works!</p>
+<div class="page-wrapper">
+  <div class="cart-table-wrapper">
+    <h2>Cart</h2>
+
+    <div class="table-wrapper">
+      <div class="table">
+        <div class="table-header">
+          <p style="padding-left: 72px;">No.
+            <span class="arrow-icons">
+              <mat-icon>arrow_drop_up</mat-icon>
+              <mat-icon>arrow_drop_down</mat-icon>
+            </span>
+          </p>
+          <p>Flight
+            <span class="arrow-icons">
+              <mat-icon>arrow_drop_up</mat-icon>
+              <mat-icon>arrow_drop_down</mat-icon>
+            </span>
+          </p>
+          <p>Type trip <span class="arrow-icons">
+              <mat-icon>arrow_drop_up</mat-icon>
+              <mat-icon>arrow_drop_down</mat-icon>
+            </span></p>
+          <p>Data & type <span class="arrow-icons">
+              <mat-icon>arrow_drop_up</mat-icon>
+              <mat-icon>arrow_drop_down</mat-icon>
+            </span></p>
+          <p>Passengers</p>
+          <p>Price <span class="arrow-icons">
+              <mat-icon>arrow_drop_up</mat-icon>
+              <mat-icon>arrow_drop_down</mat-icon>
+            </span></p>
+        </div>
+        <div class="table-content">
+          <p>
+            <mat-checkbox color="primary" class="example-margin"></mat-checkbox>
+            <span style="padding-left: 30px;">FR 1925</span>
+          </p>
+          <p>Flight</p>
+          <p>Type trip</p>
+          <p>Data & type</p>
+          <p>Passengers</p>
+          <p class="price"><span>&#8364; Price</span>
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </p>
+        </div>
+        <mat-divider class="divider"></mat-divider>
+      </div>
+    </div>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <span>Edit</span>
+      </button>
+      <button mat-menu-item>
+        <span>Delete</span>
+      </button>
+    </mat-menu>
+
+    <div class="total-wrapper">
+      <div class="total-container">
+        <button class="new-trip-button">+ Add new trip</button>
+        <div class="total-sum">
+          <p>Total</p><span>&#8364; 572.34</span>
+        </div>
+      </div>
+      <mat-divider class="divider"></mat-divider>
+    </div>
+
+
+    <div class="bottom-wrapper">
+      <mat-form-field class="promo-input" appearance="outline">
+        <mat-label>Promo Code</mat-label>
+        <input matInput type="text">
+        <button matSuffix color="primary" mat-button aria-label="Clear">
+          APPLY
+        </button>
+      </mat-form-field>
+      <div class="payment">
+        <p style="margin-left: 10px;">2 selected</p>
+        <button class="payment-button">Payment</button>
+      </div>
+    </div>
+  </div>
+</div>
