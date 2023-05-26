@@ -1,5 +1,9 @@
 @import "../../../../sass/abstracts/_variables";
 
+.select-flight {
+  padding-top: 8px;
+}
+
 .return {
   .direction-title {
     .airplane-icon {
@@ -26,4 +30,26 @@
   margin-right: 12px;
   height: 24px;
   width: 24px;
+}
+
+.no-data-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 40px 0 8px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 40px;
+  color: $color-primary;
+
+  .no-data-icon {
+    margin: 0 10px;
+    height: 50px;
+    width: 50px;
+    font-size: 50px;
+  }
 }

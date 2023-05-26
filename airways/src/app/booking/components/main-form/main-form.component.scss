@@ -1,4 +1,4 @@
-@import '../../../../sass/abstracts/variables';
+@import "../../../../sass/abstracts/variables";
 
 .form-container {
   margin-top: 150px;
@@ -13,6 +13,12 @@
   padding: 24px;
   .mat-mdc-text-field-wrapper {
     background-color: $color-secondary90;
+  }
+
+  .btn {
+    width: 126px;
+    height: 60px !important;
+    align-self: flex-end;
   }
 }
 
@@ -56,12 +62,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.btn {
-  width: 126px;
-  height: 60px !important;
-  align-self: flex-end;
 }
 
 .date-passengers-container {

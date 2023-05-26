@@ -14,6 +14,14 @@ import { PointModel, FormDataModel, FlightDirection } from '../../models/form-da
   providers: [FlightsDataService],
 })
 export class SelectFlightComponent implements OnInit {
+  private departureDateSubject: Subject<string> = new Subject<string>();
+
+  private returnDateSubject: Subject<string> = new Subject<string>();
+
+  private previousDepartureDate: string;
+
+  private previousReturnDate: string;
+
   flightsDetailsDepart$!: Observable<IFlightDetails[]>;
 
   departure: PointModel;
@@ -28,15 +36,7 @@ export class SelectFlightComponent implements OnInit {
 
   @Output() departureDate: string;
 
-  private departureDateSubject: Subject<string> = new Subject<string>();
-
   @Output() returnDate: string;
-
-  private returnDateSubject: Subject<string> = new Subject<string>();
-
-  private previousDepartureDate: string;
-
-  private previousReturnDate: string;
 
   constructor(
     private flightsDataService: FlightsDataService,

@@ -13,9 +13,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { HeaderComponent } from '../../components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { LoginModule } from '../../../auth/modules/login.module';
+import { FlightInfoMenuComponent } from '../../../shared/flight-info-menu/flight-info-menu.component';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent],
+  declarations: [HeaderComponent, FooterComponent, FlightInfoMenuComponent],
   imports: [
     CommonModule,
     MatSelectModule,

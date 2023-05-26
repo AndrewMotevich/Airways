@@ -61,6 +61,10 @@
     </button>
   </div>
 </header>
+
+<app-flight-info-menu
+  *ngIf="currentUrl === '/select-flight' || currentUrl === '/booking-process' "></app-flight-info-menu>
+
 <app-login-form *ngIf="modalWindowServices.getModal()"></app-login-form>
 
 <!-- mat menu -->

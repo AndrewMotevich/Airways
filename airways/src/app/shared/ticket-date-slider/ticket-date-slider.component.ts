@@ -55,6 +55,12 @@ export class TicketDateSliderComponent implements OnChanges {
 
   isDisablePrevBtn: boolean = false;
 
+  boundColor: string = 'rgb(255, 153, 0)';
+
+  selectedDates: { date: string; cost: string | null }[] = [];
+
+  dateStates: CurrentDateStateEnum[] = [];
+  
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['selectedDate'] && this.selectedDate) {
       this.isDisablePrevBtn = !dayjs().isBefore(dayjs(this.selectedDate).toDate());
@@ -67,9 +73,4 @@ export class TicketDateSliderComponent implements OnChanges {
     }
   }
   
-  boundColor: string = 'rgb(255, 153, 0)';
-
-  selectedDates: { date: string; cost: string | null }[] = [];
-
-  dateStates: CurrentDateStateEnum[] = [];
 }
