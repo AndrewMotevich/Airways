@@ -11,7 +11,7 @@ export class HeaderDataService {
 
   private themeSubject$: BehaviorSubject<string> = new BehaviorSubject<string>(this.theme);
 
-  private dateFormat$: BehaviorSubject<string> = new BehaviorSubject<string>(EDateFormat.MM_DD_YYYY);
+  private dateFormatSubject$: BehaviorSubject<string> = new BehaviorSubject<string>(EDateFormat.MM_DD_YYYY);
 
   currentCurrency = 'EUR';
 
@@ -19,8 +19,8 @@ export class HeaderDataService {
     return this.themeSubject$;
   }
 
-  get currentDateFormat(): BehaviorSubject<string> {
-    return this.dateFormat$;
+  get currentDateFormat$(): BehaviorSubject<string> {
+    return this.dateFormatSubject$;
   }
 
   toggleTheme(): void {
@@ -30,7 +30,7 @@ export class HeaderDataService {
   }
 
   setDateFormat(val: string): void {
-    this.dateFormat$.next(val);
+    this.dateFormatSubject$.next(val);
   }
 
 }

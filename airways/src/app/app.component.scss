@@ -9,7 +9,7 @@
     @media screen and (min-width: 1330px) {
       background-size: 100% auto;
       background-position: top center;
-      min-height: max(702px, 100vh);
+      min-height: min(702px, calc(100vh - 100px));
     }
 
     @media screen and (max-width: 1329px) {
@@ -28,8 +28,10 @@
 .page {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 
   main {
+    flex-grow: 1;
     padding-left: 2rem;
     padding-right: 2rem;
     padding-bottom: 2rem;
@@ -55,7 +57,6 @@
   }
 
   .footer {
-    flex-grow: 1;
     padding: 0 2rem;
     border-top: 1px solid $color-secondary40;
   }

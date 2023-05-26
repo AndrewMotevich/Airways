@@ -27,9 +27,7 @@
     }
   }
   
-  .mat-mdc-form-field-subscript-wrapper {
-    display: none;
-  }
+  
 }
 
 .rounded-input {
@@ -43,6 +41,10 @@
   flex-direction: column;
   gap: 0.3rem;
   padding-bottom: 1.7rem;
+  
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
 }
 
 .change-direction-btn.mdc-fab {
@@ -97,7 +99,7 @@
   flex-direction: row;
   justify-content: space-between;
   gap: 1.2rem;
-  margin-bottom: 2rem;
+  margin-bottom: .6rem;
 
   .date {
     flex-grow: 1;
@@ -124,6 +126,7 @@
 @media screen and (max-width: 500px) {
   .date-passengers-container {
     flex-direction: column;
+    gap:0;
   }
 }
 
