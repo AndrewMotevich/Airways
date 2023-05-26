@@ -14,19 +14,21 @@ export class StepperComponent implements OnInit {
 
   ngOnInit(): void {
     this.stepperService.setStepOne();
+    this.stepperService.setStepTwo();
+    this.stepperService.setStepThree();
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        const { url } = event;
-        if (url === '/select-flight') {
-          this.stepperService.setStepOne();
-        } else if (url === '/summary') {
-          this.stepperService.setStepOne();
-          this.stepperService.setStepTwo();
-          this.stepperService.setStepThree();
-        } else if (url === '/booking-process') {
-          this.stepperService.setStepOne();
-          this.stepperService.setStepTwo();
-        }
+        // const { url } = event;
+        // if (url === '/select-flight') {
+        //   this.stepperService.setStepOne();
+        // } else if (url === '/summary') {
+        //   this.stepperService.setStepOne();
+        //   this.stepperService.setStepTwo();
+        //   this.stepperService.setStepThree();
+        // } else if (url === '/booking') {
+        //   this.stepperService.setStepOne();
+        //   this.stepperService.setStepTwo();
+        // }
       }
     });
   }

@@ -168,6 +168,10 @@
 }
 
 @media screen and (max-width: 540px) {
+  .total-container {
+    margin-top: 35px;
+    flex-direction: column;
+  }
   .payment {
     margin-top: 10px;
   }
