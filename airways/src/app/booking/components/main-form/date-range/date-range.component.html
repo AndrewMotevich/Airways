@@ -2,8 +2,8 @@
   <mat-form-field appearance="outline" (click)="rangePicker.open()" hideRequiredMarker>
     <mat-label>Dates</mat-label>
     <mat-date-range-input [rangePicker]="rangePicker" [min]="minDate" [max]="maxDate">
-      <input matStartDate [placeholder]="dateFormat" formControlName="dateStart" readonly/>
-      <input matEndDate [placeholder]="dateFormat" formControlName="dateEnd" readonly/>
+      <input matStartDate [placeholder]="dateFormat$ | async" formControlName="dateStart" readonly/>
+      <input matEndDate [placeholder]="dateFormat$ | async" formControlName="dateEnd" readonly/>
     </mat-date-range-input>
     <mat-datepicker-toggle matIconSuffix [for]="rangePicker"></mat-datepicker-toggle>
     <mat-date-range-picker #rangePicker>
@@ -12,6 +12,6 @@
         <button mat-button color="primary" matDateRangePickerApply>OK</button>
       </mat-date-range-picker-actions>
     </mat-date-range-picker>
-    <!-- <mat-error *ngIf="form.controls.dateEnd.hasError('required')">Chose End Date</mat-error> -->
+    <mat-error *ngIf="dateEnd.hasError('required')">Select return date</mat-error>
   </mat-form-field>
 </ng-container>
