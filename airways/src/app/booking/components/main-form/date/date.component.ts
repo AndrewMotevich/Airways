@@ -1,7 +1,8 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import dayjs from 'dayjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { HeaderDataService } from 'src/app/core/services/header-data.service';
 import { CustomFormat } from 'src/app/shared/utils/date-format';
 
@@ -13,24 +14,26 @@ import { CustomFormat } from 'src/app/shared/utils/date-format';
     { provide: MAT_DATE_FORMATS, useClass: CustomFormat },
   ],
 })
-export class DateComponent implements OnInit {
+export class DateComponent implements OnInit, OnDestroy {
+  private subcription!: Subscription | null;
+
   formGroup!: FormGroup;
 
-  dateFormat!: string;
+  dateFormat$: BehaviorSubject<string>;
 
   minDate = dayjs().toDate();
 
   maxDate = dayjs().add(1, 'y').toDate();
 
-  constructor(private fg: FormGroupDirective, private headerDateService: HeaderDataService, @Inject(MAT_DATE_FORMATS) public config: any) { }
+  constructor(private fg: FormGroupDirective, private headerDateService: HeaderDataService, @Inject(MAT_DATE_FORMATS) public config: any) {
+    this.dateFormat$ = this.headerDateService.currentDateFormat$;
+  }  
 
   ngOnInit(): void {
     this.formGroup = this.fg.control;
 
-    this.headerDateService.currentDateFormat.subscribe((newDateFormat: string) => {
-      this.dateFormat = newDateFormat;
+    this.subcription = this.dateFormat$.subscribe((newDateFormat: string) => {
       this.config.currentDateFormat = newDateFormat;
-
       this.formatDates();
     });
   }
@@ -41,5 +44,12 @@ export class DateComponent implements OnInit {
     this.formGroup.patchValue({
       dateStart: dateEnd, dateEnd
     })
+  }
+
+  ngOnDestroy(): void {
+    if (this.subcription) {
+      this.subcription.unsubscribe();
+      this.subcription = null;
+    }
   }
 }

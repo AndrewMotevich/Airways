@@ -9,10 +9,8 @@
       [min]="minDate" 
       [max]="maxDate"
       (click)="picker.open()"
-      [placeholder]="dateFormat"
       readonly
     />
-    <mat-hint>{{dateFormat}}</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
