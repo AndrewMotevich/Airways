@@ -1,0 +1,11 @@
+@import '../../../../../sass/abstracts/variables';
+
+.mat-mdc-menu-item {
+  &.selected {
+    background-color: $color-neutral80;
+  }
+}
+
+.currency-select {
+  margin: 0 1.1rem;
+}

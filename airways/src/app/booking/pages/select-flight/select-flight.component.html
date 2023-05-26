@@ -19,9 +19,9 @@
 </div>
 
 <div class="return">
-  <div class="direction-title"><img class='airplane-icon' src="assets/icons/airplane.png"><span>
+  <h2 class="direction-title"><img class='airplane-icon' src="assets/icons/airplane.png"><span>
       {{arrival.title}} to {{departure.title}}
-    </span></div>
+    </span></h2>
   <section class="flight">
     <app-ticket-date-slider [selectedDate]="returnDate" [ticketsData]="ticketsDataReturn"
       (nextDateButtonClick)="handleClickOnNextArrivalDate()"

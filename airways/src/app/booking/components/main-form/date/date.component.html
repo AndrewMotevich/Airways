@@ -1,0 +1,17 @@
+<ng-container [formGroup]="formGroup">
+  <mat-form-field appearance="outline" hideRequiredMarker>
+    <mat-label>Choose a date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      formControlName="dateStart"
+      formControlName="dateEnd"
+      [min]="minDate" 
+      [max]="maxDate"
+      (click)="picker.open()"
+      readonly
+    />
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</ng-container>

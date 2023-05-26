@@ -16,7 +16,7 @@
         mat-raised-button
         color="primary"
         type="submit"
-        [disabled]="this.passengersFormGroup.valid"
+        [disabled]="!this.passengersFormGroup.valid"
         class="btn">
         Continue
       </button>

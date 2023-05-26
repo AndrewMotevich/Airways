@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { ModalWindowService } from '../../../auth/services/modal-window.service';
 import { AuthApiService } from '../../../auth/services/auth-api.service';
 import { HeaderDataService } from '../../services/header-data.service';
@@ -21,15 +21,18 @@ import { THEME } from '../../models/theme.interface';
     },
   ],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   currentUrl: string = '';
 
-  headerData = new FormGroup({
-    dateFormat: new FormControl<string>('MM/DD/YYYY', [Validators.required]),
-    currencyFormat: new FormControl<string>('EUR', [Validators.required]),
-  });
+  currentCurrency$: BehaviorSubject<string>;
+
+  currentDateFormat$: BehaviorSubject<string>;
 
   isDarkMode: boolean = false;
+
+  isMainPage: boolean = true;
+
+  subscriptions!: Subscription;
 
   constructor(
     public modalWindowServices: ModalWindowService,
@@ -42,20 +45,28 @@ export class HeaderComponent implements OnInit {
   ) {
     this.matIconRegistry.addSvgIcon('icon-logo',
       this.domSanitizer.bypassSecurityTrustResourceUrl('assets/img/logo.svg'));
+
+    this.currentCurrency$ = this.headerDataService.currentCurrency$;
+    this.currentDateFormat$ = this.headerDataService.currentDateFormat$;
   }
 
   ngOnInit(): void {
-    this.authApiService.refresh().subscribe();
-    this.router.events.subscribe((event) => {
+    const authApiServiceSubscribe = this.authApiService.refresh().subscribe();
+    this.subscriptions?.add(authApiServiceSubscribe);
+
+    const routerSubscribe = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const { url } = event;
         this.currentUrl = url;
+        this.isMainPage = url === '/';
       }
     });
+    this.subscriptions?.add(routerSubscribe);
 
-    this.headerDataService.currentTheme.subscribe(theme => {
+    const headerDataServiceSubscribe = this.headerDataService.currentTheme.subscribe(theme => {
       this.isDarkMode = (theme === THEME.DARK)
     });
+    this.subscriptions?.add(headerDataServiceSubscribe);
   }
 
   logOut(): void {
@@ -78,5 +89,9 @@ export class HeaderComponent implements OnInit {
 
   changeTheme(): void {
     this.headerDataService.toggleTheme();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }
