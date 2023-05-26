@@ -9,14 +9,15 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedModule } from '../../../shared/shared.module';
 import { HeaderComponent } from '../../components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { LoginModule } from '../../../auth/modules/login.module';
 import { DateFormatComponent } from '../../components/header/date-format/date-format.component';
+import { CurrencyComponent } from '../../components/header/currency/currency.component';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, DateFormatComponent],
+  declarations: [HeaderComponent, FooterComponent, DateFormatComponent, CurrencyComponent],
   imports: [
     CommonModule,
     MatSelectModule,
