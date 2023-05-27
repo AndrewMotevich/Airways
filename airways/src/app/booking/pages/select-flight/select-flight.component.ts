@@ -6,6 +6,8 @@ import { IFlightDetails } from '../../models/flight-details.interface';
 import { FlightsDataService } from '../../services/flightsData.service';
 import { FormDataService } from '../../services/form-data.service';
 import { PointModel, FormDataModel, FlightDirection } from '../../models/form-data.model';
+import { ECurrency } from '../../../core/models/currency.interface';
+import { HeaderDataService } from '../../../core/services/header-data.service';
 
 @Component({
   selector: 'app-select-flight',
@@ -28,6 +30,10 @@ export class SelectFlightComponent implements OnInit {
 
   departure: PointModel = { title: '', code: '' };
 
+  currency$: Observable<ECurrency>;
+
+  currency: ECurrency = ECurrency.EUR;
+
   ticketsDataDepart: { date: string; cost: string }[] = [];
 
   flightsDetailsReturn$!: Observable<IFlightDetails[]>;
@@ -42,9 +48,12 @@ export class SelectFlightComponent implements OnInit {
 
   constructor(
     private flightsDataService: FlightsDataService,
-    private formDataService: FormDataService
+    private formDataService: FormDataService,
+    private headerDataService: HeaderDataService
   ) {
     this.flightData$ = this.formDataService.getObservableMainFormData();
+
+    this.currency$ = this.headerDataService.currentCurrency$;
 
     this.flightData$.subscribe((formData: FormDataModel<PointModel>) => {
       this.departure =
@@ -71,6 +80,11 @@ export class SelectFlightComponent implements OnInit {
       this.fetchFlightsData();
     });
 
+    this.headerDataService.currentCurrency$.subscribe((currency) => {
+      this.currency = currency;
+      this.fetchFlightsData();
+    });
+
     this.fetchFlightsData();
   }
 
@@ -89,7 +103,7 @@ export class SelectFlightComponent implements OnInit {
           this.departure.code ?? '',
           this.arrival.code ?? '',
           departureDate,
-          'eur', // add real data
+          this.currency,
           true
         )
       );
@@ -115,7 +129,7 @@ export class SelectFlightComponent implements OnInit {
                 this.departure.code ?? '',
                 this.arrival.code ?? '',
                 this.departureDate,
-                'eur',
+                this.currency,
                 true
               );
             },
@@ -137,7 +151,7 @@ export class SelectFlightComponent implements OnInit {
           this.arrival.code ?? '',
           this.departure.code ?? '',
           returnDate,
-          'eur', // add real data
+          this.currency,
           true
         )
       );
@@ -163,7 +177,7 @@ export class SelectFlightComponent implements OnInit {
                 this.arrival.code ?? '',
                 this.departure.code ?? '',
                 this.returnDate,
-                'eur',
+                this.currency,
                 true
               );
             },
