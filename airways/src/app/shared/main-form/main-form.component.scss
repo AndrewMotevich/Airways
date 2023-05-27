@@ -1,0 +1,145 @@
+@import "../../../sass/abstracts/variables";
+
+.form-container {
+  margin-top: 150px;
+  max-width: 580px;
+  width: 100%;
+  height: 390px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 8px;
+  background-color: $color-secondary85;
+  padding: 24px;
+  .mat-mdc-text-field-wrapper {
+    background-color: $color-secondary90;
+  }
+
+  .btn {
+    width: 126px;
+    height: 60px !important;
+    align-self: flex-end;
+  }
+  .rounded-input {
+    border-radius: 4px !important;
+    border: 0.5px solid rgba(116, 118, 122, 0.6) !important;
+  }
+  .origin-destination-container {
+    position: relative;
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .change-direction-btn {
+    position: absolute !important;
+    top: 40px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+  }
+}
+.edit-form-container {
+  .form-container_inner {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: 1fr;
+    grid-column-gap: 10px;
+    padding: 0 10px;
+  }
+
+  .origin-destination-container,
+  .date-passengers-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto;
+    grid-column-gap: 10px;
+    width: 100%;
+    & > * {
+      width: 100%;
+    }
+  }
+
+  .btn {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+    margin-bottom: 5px;
+  }
+}
+
+.hidden {
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  visibility: hidden;
+}
+.passengers-button {
+  width: 24px;
+  height: 24px;
+  border: none;
+  cursor: pointer;
+}
+.selection-option {
+  width: 169px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.date-passengers-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.select-panel.mat-mdc-select-panel {
+  .mat-mdc-option-active {
+    background-color: $color-neutral100 !important;
+  }
+  .mdc-list-item__primary-text {
+    color: rgba(0, 0, 0, 0.87) !important;
+  }
+
+  .mat-mdc-option:hover {
+    cursor: default;
+    background-color: $color-neutral100 !important;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .form-container {
+    max-width: 400px;
+    .date-passengers-container {
+      flex-direction: column;
+    }
+  }
+}
+@media screen and (max-width: 540px) {
+  .form-container {
+    width: 80%;
+    max-width: 300px;
+  }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+.comment {
+  position: relative;
+  .airport:hover {
+    cursor: pointer;
+    .clue {
+      margin: 0;
+      padding: 0;
+      display: inline;
+    }
+  }
+  .clue {
+    display: none;
+    font-size: 10px;
+  }
+}

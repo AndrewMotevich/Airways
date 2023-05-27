@@ -1,4 +1,11 @@
-@import '../sass/abstracts/variables';
+@import "../sass/abstracts/variables";
+
+.container {
+  max-width: 1128px;
+  min-height: 670px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
 
 .main-page {
   main {

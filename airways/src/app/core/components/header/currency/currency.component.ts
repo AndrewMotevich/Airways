@@ -3,25 +3,26 @@ import { MatSelectChange } from '@angular/material/select';
 import { BehaviorSubject } from 'rxjs';
 import { HeaderDataService } from 'src/app/core/services/header-data.service';
 import { CURRENCY } from 'src/app/shared/constants';
+import { ECurrency } from '../../../models/currency.interface';
 
 enum ECurrencyView {
   SELECT = 'select',
-  LIST = 'list'
+  LIST = 'list',
 }
 
 @Component({
   selector: 'app-currency',
   templateUrl: './currency.component.html',
-  styleUrls: ['./currency.component.scss']
+  styleUrls: ['./currency.component.scss'],
 })
 export class CurrencyComponent implements OnInit {
   @Input() currencyView: string = ECurrencyView.SELECT;
 
   @Input() isMainPage!: boolean;
 
-  currentCurrency$: BehaviorSubject<string>;
+  currentCurrency$: BehaviorSubject<ECurrency>;
 
-  currencyArray = CURRENCY;
+  currencyArray: ECurrency[] = CURRENCY;
 
   isSelect: boolean = true;
 
@@ -37,7 +38,7 @@ export class CurrencyComponent implements OnInit {
     this.headerDataService.setCurrency(event.value);
   }
 
-  setCurrency(currency: string): void {
+  setCurrency(currency: ECurrency): void {
     this.headerDataService.setCurrency(currency);
   }
 }

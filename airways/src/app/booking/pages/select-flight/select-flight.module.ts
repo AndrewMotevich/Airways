@@ -3,20 +3,22 @@ import { CommonModule } from '@angular/common';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { SelectFlightRoutingModule } from './select-flight-routing.module';
-import { FlightInfoMenuComponent } from '../../../shared/flight-info-menu/flight-info-menu.component';
 import { TicketDateSliderModule } from '../../../shared/ticket-date-slider/ticket-date-slider.module';
 import { DurationPipe } from '../../pipe/duration.pipe';
 import { ColoredDirective } from '../../directives/colored.directive';
 import { FlightDetailsComponent } from '../../components/flight-details/flight-details.component';
 import { FormatPricePipe } from '../../pipe/format-price.pipe';
 import { SelectFlightComponent } from './select-flight.component';
+import { FlightDataEditFormComponent } from '../../../shared/flight-data-edit-form/flight-data-edit-form.component';
+import { SharedModule } from '../../../shared/shared.module';
 
 @NgModule({
   declarations: [
     SelectFlightComponent,
-    FlightInfoMenuComponent,
     FlightDetailsComponent,
+    FlightDataEditFormComponent,
     DurationPipe,
     ColoredDirective,
     FormatPricePipe,
@@ -27,7 +29,9 @@ import { SelectFlightComponent } from './select-flight.component';
     TicketDateSliderModule,
     MatIconModule,
     MatButtonModule,
+    MatCardModule,
+    SharedModule,
   ],
-  exports: [SelectFlightComponent, FlightInfoMenuComponent, FlightDetailsComponent, TicketDateSliderModule],
+  exports: [SelectFlightComponent, FlightDetailsComponent, TicketDateSliderModule],
 })
 export class SelectFlightModule {}

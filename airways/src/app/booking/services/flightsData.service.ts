@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { IFlightsData } from '../models/flights-data.interface';
 import { IFlightDetails } from '../models/flight-details.interface';
+import { ECurrency } from '../../core/models/currency.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -20,9 +21,13 @@ export class FlightsDataService {
     origin: string,
     destination: string,
     departureAt: string,
-    currency: string,
+    currency: ECurrency,
     isOneWay: boolean
   ): Observable<IFlightDetails[]> {
+    if (!origin || !destination || !departureAt || !currency || !isOneWay) {
+      return [] as unknown as Observable<IFlightDetails[]>;
+    }
+
     let url = `${this.proxyURL}${this.basePricesUrl}?origin=${origin}&destination=${destination}&unique=false&sorting=price&direct=false&currency=${currency}&market=ru&limit=30&page=1&one_way=${isOneWay}&token=${this.token}`;
 
     if (departureAt) {

@@ -4,14 +4,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
-import { MainFormComponent } from '../../components/main-form/main-form.component';
 import { MainPageComponent } from './main-page.component';
 import { MaterialMainPageModule } from '../../../core/modules/material/material-main-page.module';
-import { DateRangeComponent } from '../../components/main-form/date-range/date-range.component';
-import { DateComponent } from '../../components/main-form/date/date.component';
+import { SharedModule } from '../../../shared/shared.module';
 
 @NgModule({
-  declarations: [MainFormComponent, MainPageComponent, DateRangeComponent, DateComponent],
+  declarations: [MainPageComponent],
   imports: [
     CommonModule,
     MaterialMainPageModule,
@@ -20,6 +18,7 @@ import { DateComponent } from '../../components/main-form/date/date.component';
     RouterModule,
     MatProgressSpinnerModule,
     MatMenuModule,
+    SharedModule,
   ],
 })
 export class MainPageModule {}
