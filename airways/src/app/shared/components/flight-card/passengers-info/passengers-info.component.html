@@ -4,6 +4,7 @@
       <h4>{{ person.firstName }} {{ person.lastName }}</h4>
       <p *ngIf="person.checkedInBag; else nobag">1 checked bag (total {{ person.checkedInBag }} kg) included</p>
       <p>1 cabin bag + 1 personal item(max. 8kg) included</p>
+      <p *ngIf="person.needHelp">Need a special assistance</p>
       <p>Seat 19E</p>
     </li>
     

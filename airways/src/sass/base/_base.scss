@@ -26,8 +26,13 @@ body {
   letter-spacing: 0.5px;
 }
 
-.btn.mdc-button--raised {
-  min-width: 126px;
+.btn {
+  min-height: 60px;
+  @extend %text-button;
+
+  &.mdc-button--raised {
+    min-width: 126px;
+  }
 }
 
 .mdc-button.btn-with-gradient {
@@ -282,6 +287,13 @@ h2 {
     }
     .sign-button-wrapper {
       color: $color-neutral100;
+    }
+  }
+
+  .btn {
+    &.mat-mdc-outlined-button {
+      color: $color-primary;
+      border-color: $color-primary;
     }
   }
 }

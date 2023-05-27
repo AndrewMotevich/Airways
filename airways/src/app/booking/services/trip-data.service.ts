@@ -43,7 +43,12 @@ export class TripDataService {
     private ticketsData: FlightsDataService,
     private passengersData: PassengersDataService,
     private history: HistoryApiService
-  ) {}
+  ) {
+    this.trip = {
+      ...this.trip,
+      passengersData: this.passengersData.getPassengersData()
+    }
+  }
 
   getTripData = new BehaviorSubject(this.trip);
 
@@ -111,7 +116,6 @@ export class TripDataService {
           },
         ],
       },
-      // data from passengers !!!(now mocked)!!!
       passengersData: this.passengersData.getPassengersData(),
     };
   }
