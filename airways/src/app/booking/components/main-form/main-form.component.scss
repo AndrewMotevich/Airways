@@ -1,19 +1,33 @@
 @import '../../../../sass/abstracts/variables';
+@import '../../../../sass/base/typography';
 
 .form-container {
-  margin-top: 150px;
-  max-width: 580px;
-  width: 100%;
-  height: 390px;
+  max-width: 550px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 1rem;
   border-radius: 8px;
-  background-color: $color-secondary85;
-  padding: 24px;
-  .mat-mdc-text-field-wrapper {
-    background-color: $color-secondary90;
+  background-color: $main-form-bg;
+  padding: 17px 14px 23px;
+
+  &_inner {
+    padding: 0 10px 0;
+    text-align: right;
   }
+
+  &_oneway {
+    display: flex;
+    align-items: center;
+    gap: 3.3rem;
+
+    @media screen and (max-width: 375px) {
+      gap: 1rem;
+      justify-content: space-between;
+      padding-right: .8rem;
+    }
+  }
+  
+  
 }
 
 .rounded-input {
@@ -23,17 +37,26 @@
 
 .origin-destination-container {
   position: relative;
-  width: inherit;
   display: flex;
   flex-direction: column;
+  gap: 0.3rem;
+  padding-bottom: 1.7rem;
+  
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
 }
 
-.change-direction-btn {
+.change-direction-btn.mdc-fab {
   position: absolute !important;
   top: 40px;
   right: 20px;
   width: 40px;
   height: 40px;
+  background-color: $color-neutral100;
+  border: 0.5px solid $color-neutral40;
+  box-shadow: none;
+  z-index: 1001;
 }
 
 .hidden {
@@ -42,6 +65,8 @@
   margin: 0;
   padding: 0;
   visibility: hidden;
+  position: absolute;
+  left: -3px;
 }
 
 .passengers-button {
@@ -49,33 +74,47 @@
   height: 24px;
   border: none;
   cursor: pointer;
+  background-color: transparent;
 }
 
 .selection-option {
-  width: 169px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
 
-.btn {
-  width: 126px;
-  height: 60px !important;
-  align-self: flex-end;
+  &_type {
+    margin: 0;
+    line-height: 1rem;
+    color: $color-primary;
+  }
+
+  small {
+    color: $color-neutral30;
+    @extend %text-body-medium;
+  }
 }
 
 .date-passengers-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  gap: 1.2rem;
+  margin-bottom: .6rem;
+
+  .date {
+    flex-grow: 1;
+  }
+
+  .passengers {
+    @media screen and (min-width: 501px) {
+      width: 12.5rem;
+    }
+  }
 }
 
 .select-panel.mat-mdc-select-panel {
   .mat-mdc-option-active {
     background-color: $color-neutral100 !important;
-  }
-  .mdc-list-item__primary-text {
-    color: rgba(0, 0, 0, 0.87) !important;
   }
 
   .mat-mdc-option:hover {
@@ -84,18 +123,10 @@
   }
 }
 
-@media screen and (max-width: 960px) {
-  .form-container {
-    max-width: 400px;
-  }
+@media screen and (max-width: 500px) {
   .date-passengers-container {
     flex-direction: column;
-  }
-}
-@media screen and (max-width: 540px) {
-  .form-container {
-    width: 80%;
-    max-width: 300px;
+    gap:0;
   }
 }
 
@@ -118,5 +149,6 @@
   .clue {
     display: none;
     font-size: 10px;
+    line-height: 1.2rem;
   }
 }

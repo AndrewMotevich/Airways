@@ -1,0 +1,7 @@
+@import '../../../../../sass/abstracts/variables';
+
+.mat-mdc-menu-item {
+  &.selected {
+    background-color: $color-neutral80;
+  }
+}

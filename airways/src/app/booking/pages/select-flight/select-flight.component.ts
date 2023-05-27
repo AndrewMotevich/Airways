@@ -179,7 +179,7 @@ export class SelectFlightComponent implements OnInit {
     if (nextDate < this.departureDate) {
       this.departureDateSubject.next(nextDate);
     }
-    this.formDataService.setFlightDataDate(dayjs(nextDate).toDate(), FlightDirection.ARRIVAL);
+    this.formDataService.setFlightDataDate(dayjs(nextDate).toString(), FlightDirection.ARRIVAL);
   }
 
   handleClickOnPrevArrivalDate(): void {
@@ -188,7 +188,7 @@ export class SelectFlightComponent implements OnInit {
     if (prevDate < this.departureDate) {
       this.departureDateSubject.next(prevDate);
     }
-    this.formDataService.setFlightDataDate(dayjs(prevDate).toDate(), FlightDirection.ARRIVAL);
+    this.formDataService.setFlightDataDate(dayjs(prevDate).toString(), FlightDirection.ARRIVAL);
   }
 
   handleClickOnNextDepartureDate(): void {
@@ -197,7 +197,7 @@ export class SelectFlightComponent implements OnInit {
     if (nextDate > this.returnDate) {
       this.returnDateSubject.next(nextDate);
     }
-    this.formDataService.setFlightDataDate(dayjs(nextDate).toDate(), FlightDirection.DEPARTURE);
+    this.formDataService.setFlightDataDate(dayjs(nextDate).toString(), FlightDirection.DEPARTURE);
   }
 
   handleClickOnPrevDepartureDate(): void {
@@ -206,6 +206,6 @@ export class SelectFlightComponent implements OnInit {
     if (prevDate > this.returnDate) {
       this.returnDateSubject.next(prevDate);
     }
-    this.formDataService.setFlightDataDate(dayjs(prevDate).toDate(), FlightDirection.DEPARTURE);
+    this.formDataService.setFlightDataDate(dayjs(prevDate).toString(), FlightDirection.DEPARTURE);
   }
 }
