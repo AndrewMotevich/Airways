@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { ECurrency } from 'src/app/core/models/currency.interface';
 import { FormDataService } from './form-data.service';
 import { FlightsDataService } from './flightsData.service';
 import { PassengersDataService } from './passengers-data.service';
@@ -29,7 +30,7 @@ export class TripDataService {
     ticketsData: {
       success: false,
       data: [],
-      currency: 'eur',
+      currency: ECurrency.EUR,
     },
     // data from passengers
     passengersData: {},
@@ -89,7 +90,7 @@ export class TripDataService {
       // data from selectFlight !!!(now mocked)!!!
       ticketsData: {
         success: true,
-        currency: 'eur',
+        currency: ECurrency.EUR,
         data: [
           {
             origin: 'string',
