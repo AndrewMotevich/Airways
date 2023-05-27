@@ -1,8 +1,14 @@
 @import '../../../../sass/abstracts/variables';
 
 h2 {
-  color: $color-primary;
   display: flex;
   align-items: flex-end;
-  gap: 1rem;
+  gap: .6rem;
+  margin-bottom: .6rem;
+  margin-top: 0;
+}
+
+.subtitle {
+  margin-top: 0;
+  margin-bottom: 1.4rem;
 }

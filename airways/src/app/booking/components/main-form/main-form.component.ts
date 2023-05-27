@@ -41,8 +41,8 @@ export class MainFormComponent implements OnInit {
     roundedTrip: new FormControl<string>('both', [Validators.required]),
     from: new FormControl<string | null>(null, [Validators.required]),
     destination: new FormControl<string | null>(null, [Validators.required]),
-    dateStart: new FormControl<Date>(new Date(), [Validators.required]),
-    dateEnd: new FormControl<Date | null>(null, [Validators.required]),
+    dateStart: new FormControl<string | null>(null, [Validators.required]),
+    dateEnd: new FormControl<string | null>(null, [Validators.required]),
     passengers: new FormControl<number>(1, [Validators.min(1)]),
     adult: new FormControl<number>(1, [Validators.min(1), Validators.max(9)]),
     child: new FormControl<number>(0, [Validators.min(0), Validators.max(9)]),
@@ -54,10 +54,13 @@ export class MainFormComponent implements OnInit {
     private aviasalesApiService: AviasalesApiService,
     private formDataService: FormDataService,
     private tripData: TripDataService,
-    iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer
+    private iconRegistry: MatIconRegistry,
+    private sanitizer: DomSanitizer
   ) {
-    iconRegistry.addSvgIconLiteral('change-icon', sanitizer.bypassSecurityTrustHtml(changeIcon));
+    this.iconRegistry.addSvgIconLiteral(
+      'change-icon',
+      this.sanitizer.bypassSecurityTrustHtml(changeIcon)
+    );
   }
 
   ngOnInit(): void {
@@ -141,21 +144,34 @@ export class MainFormComponent implements OnInit {
   }
 
   public changeDirectionsHandler(): void {
-    const currentFrom = this.form.controls.from.value;
-    const currentDestination = this.form.controls.destination.value;
-    this.form.controls.from.setValue(currentDestination);
-    this.form.controls.destination.setValue(currentFrom);
+    const { from, destination } = this.form.controls;
+
+    if (!from.hasError('required') && !destination.hasError('required')) {
+      const currentFrom = from.value;
+      const currentDestination = destination.value;
+
+      from.setValue(currentDestination);
+      destination.setValue(currentFrom);
+    }
   }
 
   private filterFrom(value: string): AirportsDataType[] {
-    const filterValue = value.toLowerCase();
-
-    return this.airports.filter((airport) => airport.city_name.toLowerCase().includes(filterValue));
+    if (value.length > 1) {
+      const filterValue = value.toLowerCase();
+      return this.airports.filter((airport) =>
+        airport.city_name.toLowerCase().includes(filterValue)
+      );
+    }
+    return [];
   }
 
   private filterDestination(value: string): AirportsDataType[] {
-    const filterValue = value.toLowerCase();
-
-    return this.airports.filter((airport) => airport.city_name.toLowerCase().includes(filterValue));
+    if (value.length > 1) {
+      const filterValue = value.toLowerCase();
+      return this.airports.filter((airport) =>
+        airport.city_name.toLowerCase().includes(filterValue)
+      );
+    }
+    return [];
   }
 }

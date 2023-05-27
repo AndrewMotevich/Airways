@@ -1,135 +1,177 @@
-<div *ngIf="isLoading" class="loading"><mat-spinner strokeWidth="2" diameter="50"
-    aria-label="Loading form"></mat-spinner></div>
-<form class="form-container" *ngIf="!isLoading" [formGroup]="form" (ngSubmit)="submit()">
+<div *ngIf="isLoading" class="loading">
+  <mat-spinner strokeWidth="2" diameter="50" aria-label="Loading form"></mat-spinner>
+</div>
 
-  <mat-radio-group aria-label="Select an option" formControlName="roundedTrip">
+<form class="form-container" *ngIf="!isLoading" [formGroup]="form">
+  <mat-radio-group
+    aria-label="Select an option"
+    formControlName="roundedTrip"
+    class="form-container_oneway"
+  >
     <mat-radio-button color="primary" value="both">Round Trip</mat-radio-button>
     <mat-radio-button color="primary" value="one">One Way</mat-radio-button>
   </mat-radio-group>
 
-  <div class="origin-destination-container">
+  <div class="form-container_inner">
+    <div class="origin-destination-container">
+      <mat-form-field appearance="outline" hideRequiredMarker>
+        <mat-label>From</mat-label>
+        <input
+          type="text"
+          placeholder="Chose your origin"
+          aria-label="From"
+          matInput
+          formControlName="from"
+          [matAutocomplete]="autoFrom"
+        />
+        <mat-autocomplete #autoFrom="matAutocomplete">
+          <mat-option
+            class="comment"
+            *ngFor="let option of filteredFromOptions | async"
+            [value]="option.city_name + ' ' + option.code"
+          >
+            <div>
+              {{ option.city_name }}
+              <span class="airport">({{ option.code }}) <span class="clue">{{ option.name }}</span></span>
+            </div>
+            <small>{{ option.time_zone }}</small>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline" hideRequiredMarker>
-      <mat-label>From</mat-label>
-      <input type="text" placeholder="Chose your origin" aria-label="From" matInput formControlName="from"
-        [matAutocomplete]="autoFrom">
-      <mat-autocomplete #autoFrom="matAutocomplete">
-        <mat-option class="comment" *ngFor="let option of filteredFromOptions | async"
-          [value]="option.city_name + ' (' + option.code + ')'">
-          <div>
-            {{option.city_name}} <span class="airport">({{option.code}}) <span
-                class="clue">{{option.name}}</span></span>
-          </div>
-          <small>{{option.time_zone}}</small>
-        </mat-option>
-      </mat-autocomplete>
-      <mat-error *ngIf="form.controls.from.hasError('required')">Chose from</mat-error>
-    </mat-form-field>
+      <mat-form-field appearance="outline" hideRequiredMarker>
+        <mat-label>Destination</mat-label>
+        <input
+          type="text"
+          placeholder="Chose your origin"
+          aria-label="Destination"
+          matInput
+          formControlName="destination"
+          [matAutocomplete]="autoDestination"
+        />
+        <mat-autocomplete #autoDestination="matAutocomplete">
+          <mat-option
+            class="comment"
+            *ngFor="let option of filteredDestinationOptions | async"
+            [value]="option.city_name + ' ' + option.code"
+          >
+            <div>
+              {{ option.city_name }}
+              <span class="airport"
+                >({{ option.code }}) <span class="clue">{{ option.name }}</span></span
+              >
+            </div>
+            <small>{{ option.time_zone }}</small>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
 
+      <button
+        color="basic"
+        mat-fab
+        class="change-direction-btn"
+        (click)="changeDirectionsHandler()"
+      >
+        <mat-icon svgIcon="change-icon"></mat-icon>
+      </button>
+    </div>
 
-    <mat-form-field appearance="outline" hideRequiredMarker>
-      <mat-label>Destination</mat-label>
-      <input type="text" placeholder="Chose your origin" aria-label="Destination" matInput formControlName="destination"
-        [matAutocomplete]="autoDestination">
-      <mat-autocomplete #autoDestination="matAutocomplete">
-        <mat-option class="comment" *ngFor="let option of filteredDestinationOptions | async"
-          [value]="option.city_name + ' (' + option.code + ')'">
-          <div>
-            {{option.city_name}} <span class="airport">({{option.code}}) <span
-                class="clue">{{option.name}}</span></span>
-          </div>
-          <small>{{option.time_zone}}</small>
-        </mat-option>
-      </mat-autocomplete>
-      <mat-error *ngIf="form.controls.destination.hasError('required')">Chose destination</mat-error>
-    </mat-form-field>
+    <div class="date-passengers-container">
+      <app-date-range *ngIf="form.controls.roundedTrip.value === 'both'" class="date"></app-date-range>
+      
+      <app-date *ngIf="form.controls.roundedTrip.value === 'one'" class="date"></app-date>
 
-    <button color="basic" mat-fab class="change-direction-btn" (click)="changeDirectionsHandler()">
-      <mat-icon svgIcon="change-icon"></mat-icon>
-    </button>
+      <mat-form-field appearance="outline" class="passengers" hideRequiredMarker>
+        <mat-label>Passengers</mat-label>
+        <mat-select [value]="1" hideSingleSelectionIndicator panelClass="select-panel">
+          <mat-select-trigger>
+            <ng-container>
+              {{ adult > 0 ? adult : '' }}
+              {{ adult > 1 && adult > 0 ? 'Adults' : adult === 0 ? '' : 'Adult' }}
+              {{ child > 0 ? child : '' }}
+              {{ child > 1 && child > 0 ? 'Children' : child === 0 ? '' : 'Child' }}
+              {{ infant > 0 ? infant : '' }}
+              {{ infant > 1 && infant > 0 ? 'Infants' : infant === 0 ? '' : 'Infant' }}
+            </ng-container>
+          </mat-select-trigger>
+          <mat-option [value]="1">
+            <div class="selection-option">
+              <div>
+                <input type="number" formControlName="adult" class="hidden" />
+                <p class="selection-option_type">Adults</p>
+                <small>14+ years</small>
+              </div>
+              <div>
+                <button
+                  class="passengers-button"
+                  (click)="passengersHandler($event, false, 'adult')"
+                >
+                  –
+                </button>
+                {{ adult }}
+                <button
+                  class="passengers-button"
+                  (click)="passengersHandler($event, true, 'adult')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          </mat-option>
+          <mat-option [value]="1">
+            <div class="selection-option">
+              <div>
+                <input type="number" formControlName="child" class="hidden" />
+                <p class="selection-option_type">Child</p>
+                <small>2-14 years</small>
+              </div>
+              <div>
+                <button
+                  class="passengers-button"
+                  (click)="passengersHandler($event, false, 'child')"
+                >
+                  –
+                </button>
+                {{ child }}
+                <button
+                  class="passengers-button"
+                  (click)="passengersHandler($event, true, 'child')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          </mat-option>
+          <mat-option [value]="adult">
+            <div class="selection-option">
+              <div>
+                <input type="number" formControlName="infant" class="hidden" />
+                <p class="selection-option_type">Infant</p>
+                <small>0-2 years</small>
+              </div>
+              <div>
+                <button
+                  class="passengers-button"
+                  (click)="passengersHandler($event, false, 'infant')"
+                >
+                  –
+                </button>
+                {{ infant }}
+                <button
+                  class="passengers-button"
+                  (click)="passengersHandler($event, true, 'infant')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          </mat-option>
+        </mat-select>
+        <mat-hint style="color: red" *ngIf="form.controls.adult.hasError('min')"
+          ><span>Minimum one adult</span></mat-hint
+        >
+      </mat-form-field>
+    </div>
+    <button class="btn" mat-raised-button color="primary" (click)="submit()">Search</button>
   </div>
-
-
-  <div class="date-passengers-container">
-
-    <mat-form-field *ngIf="form.controls.roundedTrip.value === 'both'" appearance="outline" class="example-form-field"
-      hideRequiredMarker>
-      <mat-label>Dates</mat-label>
-      <mat-date-range-input [rangePicker]="rangePicker">
-        <input matStartDate placeholder="Start date" formControlName="dateStart">
-        <input matEndDate placeholder="End date" formControlName="dateEnd">
-      </mat-date-range-input>
-      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matIconSuffix [for]="rangePicker"></mat-datepicker-toggle>
-      <mat-date-range-picker #rangePicker>
-        <mat-date-range-picker-actions>
-          <button mat-button matDateRangePickerCancel>Cancel</button>
-          <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
-        </mat-date-range-picker-actions>
-      </mat-date-range-picker>
-      <mat-error *ngIf="form.controls.dateEnd.hasError('required')">Chose End Date</mat-error>
-    </mat-form-field>
-
-    <mat-form-field *ngIf="form.controls.roundedTrip.value === 'one'" appearance="outline" hideRequiredMarker>
-      <mat-label>Choose a date</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="dateStart" formControlName="dateEnd">
-      <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" hideRequiredMarker>
-      <mat-label>Passengers</mat-label>
-      <mat-select [value]="1" hideSingleSelectionIndicator panelClass="select-panel">
-        <mat-select-trigger>
-          <ng-container>
-            {{ adult > 0 ? adult : '' }} {{(adult > 1 && adult > 0) ? 'Adults' : adult === 0 ? '' :'Adult'}}
-            {{ child > 0 ? child : '' }} {{(child > 1 && child > 0) ? 'Children' : child === 0 ? '' : 'Child'}}
-            {{ infant > 0 ? infant : '' }} {{(infant > 1 && infant > 0) ? 'Infants' : infant === 0 ? '' : 'Infant'}}
-          </ng-container>
-        </mat-select-trigger>
-        <mat-option [value]="1">
-          <div class="selection-option">
-            <input type="number" formControlName="adult" class="hidden">
-            <div>
-              <div>Adults</div>
-              <small>14+ years</small>
-            </div>
-            <button class="passengers-button"
-              (click)="passengersHandler($event, true, 'adult')">+</button>{{adult}}<button class="passengers-button"
-              (click)="passengersHandler($event, false, 'adult')">-</button>
-          </div>
-        </mat-option>
-        <mat-option [value]="1">
-          <div class="selection-option">
-            <input type="number" formControlName="child" class="hidden">
-            <div>
-              <div>Child</div>
-              <small>2-14 years</small>
-            </div>
-            <button class="passengers-button"
-              (click)="passengersHandler($event, true, 'child')">+</button>{{child}}<button class="passengers-button"
-              (click)="passengersHandler($event, false, 'child')">-</button>
-          </div>
-        </mat-option>
-        <mat-option [value]="adult">
-          <div class="selection-option">
-            <input type="number" formControlName="infant" class="hidden">
-            <div>
-              <div>Infant</div>
-              <small>0-2 years</small>
-            </div>
-            <button class="passengers-button"
-              (click)="passengersHandler($event, true, 'infant')">+</button>{{infant}}<button class="passengers-button"
-              (click)="passengersHandler($event, false, 'infant')">-</button>
-          </div>
-        </mat-option>
-      </mat-select>
-      <mat-hint style="color: red" *ngIf="form.controls.adult.hasError('min')"><span>Minimum one
-          adult</span></mat-hint>
-    </mat-form-field>
-
-  </div>
-
-  <button class="btn" mat-raised-button color="primary">Search</button>
 </form>

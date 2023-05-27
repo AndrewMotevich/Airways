@@ -1,7 +1,7 @@
 <ng-container [formGroup]="form" *ngIf="passenger">
   <ng-container [formGroupName]="id">
-    <section class="passenger-form">
-      <h2>{{ id + 1 }} {{ category }}</h2>
+    <section class="passenger-form section-bg">
+      <h2 class="dark-color">{{ id + 1 }}. {{ category }}</h2>
 
       <div class="passenger-form_wrapper">
         <mat-form-field appearance="outline" *ngIf="firstName">
@@ -89,7 +89,7 @@
           <mat-error *ngIf="dp.hasError('required')">Please enter your date of birth</mat-error>
         </mat-form-field>
 
-        <section class="needhelp">
+        <section class="needhelp" [ngClass]="category">
           <mat-slide-toggle name="needHelp" formControlName="needHelp">
             <mat-icon matSuffix>accessible</mat-icon>Need a special assistance?</mat-slide-toggle
           >
