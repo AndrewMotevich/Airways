@@ -1,22 +1,17 @@
-<header
-  [ngClass]="{
+<header [ngClass]="{
     'header-main-page header-main-color': isMainPage,
     'header-with-stepper header-inner-bg': !isMainPage
-  }"
->
+  }">
   <div class="container header-wrapper">
     <a routerLink="/" class="logo">
       <mat-icon svgIcon="icon-logo" color="primary"></mat-icon>
     </a>
 
-    <app-stepper
-      class="stepper"
-      *ngIf="
+    <app-stepper class="stepper" *ngIf="
         currentUrl === '/select-flight' ||
         currentUrl === '/booking-process' ||
         currentUrl === '/summary'
-      "
-    ></app-stepper>
+      "></app-stepper>
 
     <div class="header-items-wrapper">
       <mat-label *ngIf="isMainPage">Book flights</mat-label>
@@ -25,38 +20,20 @@
 
       <app-currency [isMainPage]="isMainPage"></app-currency>
 
-      <button
-        mat-button
-        class="sign-button-wrapper"
-        *ngIf="!authApiService.getIsLogin()"
-        (click)="modalWindowServices.switchModal()"
-      >
-        <mat-icon
-          [ngClass]="{ 'color-100': isMainPage }"
-          fontIcon="person_outline"
-        ></mat-icon>
-        <span
-          [ngClass]="{
+      <button mat-button class="sign-button-wrapper" *ngIf="!authApiService.getIsLogin()"
+        (click)="modalWindowServices.switchModal()">
+        <mat-icon [ngClass]="{ 'color-100': isMainPage }" fontIcon="person_outline"></mat-icon>
+        <span [ngClass]="{
             'header-main-color': isMainPage,
             'header-neutral10-color': !isMainPage
-          }"
-          >Sign in</span
-        >
+          }">Sign in</span>
       </button>
 
-      <button
-        mat-button
-        class="sign-button-wrapper"
-        *ngIf="authApiService.getIsLogin()"
-        [matMenuTriggerFor]="accountMenu"
-      >
-        <mat-icon
-          color="primary"
-          [ngClass]="{
+      <button mat-button class="sign-button-wrapper" *ngIf="authApiService.getIsLogin()"
+        [matMenuTriggerFor]="accountMenu">
+        <mat-icon color="primary" [ngClass]="{
           'account-icon': !isMainPage,
-        }"
-          fontIcon="person_outline"
-        ></mat-icon>
+        }" fontIcon="person_outline"></mat-icon>
         <span class="color-primary">{{ authApiService.tokenData?.firstName }}</span>
       </button>
 
@@ -70,16 +47,15 @@
       </button>
     </div>
 
-    <button
-      class="hidden-mat-menu"
-      mat-icon-button
-      [matMenuTriggerFor]="mobileMenu"
-      aria-label="Example icon-button with a menu"
-    >
+    <button class="hidden-mat-menu" mat-icon-button [matMenuTriggerFor]="mobileMenu"
+      aria-label="Example icon-button with a menu">
       <mat-icon>more_vert</mat-icon>
     </button>
   </div>
 </header>
+
+<app-flight-info-menu
+  *ngIf="currentUrl === '/select-flight' || currentUrl === '/booking-process' "></app-flight-info-menu>
 
 <app-login-form *ngIf="modalWindowServices.getModal()"></app-login-form>
 
@@ -96,11 +72,7 @@
 </mat-menu>
 
 <mat-menu #mobileMenu="matMenu">
-  <button
-    mat-menu-item
-    *ngIf="authApiService.getIsLogin() === false"
-    (click)="modalWindowServices.switchModal()"
-  >
+  <button mat-menu-item *ngIf="authApiService.getIsLogin() === false" (click)="modalWindowServices.switchModal()">
     <span>Sign in</span>
   </button>
 
@@ -112,8 +84,7 @@
 
   <button mat-menu-item [matMenuTriggerFor]="dateFormatMenu">
     <span class="mat-menu-container">
-      <mat-icon color="primary" fontIcon="calendar_today"></mat-icon
-      >{{ currentDateFormat$ | async }}
+      <mat-icon color="primary" fontIcon="calendar_today"></mat-icon>{{ currentDateFormat$ | async }}
     </span>
   </button>
 

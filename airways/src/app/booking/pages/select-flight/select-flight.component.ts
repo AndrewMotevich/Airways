@@ -6,6 +6,8 @@ import { IFlightDetails } from '../../models/flight-details.interface';
 import { FlightsDataService } from '../../services/flightsData.service';
 import { FormDataService } from '../../services/form-data.service';
 import { PointModel, FormDataModel, FlightDirection } from '../../models/form-data.model';
+import { ECurrency } from '../../../core/models/currency.interface';
+import { HeaderDataService } from '../../../core/services/header-data.service';
 
 @Component({
   selector: 'app-select-flight',
@@ -14,23 +16,7 @@ import { PointModel, FormDataModel, FlightDirection } from '../../models/form-da
   providers: [FlightsDataService],
 })
 export class SelectFlightComponent implements OnInit {
-  flightsDetailsDepart$!: Observable<IFlightDetails[]>;
-
-  departure: PointModel;
-
-  ticketsDataDepart: { date: string; cost: string }[] = [];
-
-  flightsDetailsReturn$!: Observable<IFlightDetails[]>;
-
-  arrival: PointModel;
-
-  ticketsDataReturn: { date: string; cost: string }[] = [];
-
-  @Output() departureDate: string;
-
   private departureDateSubject: Subject<string> = new Subject<string>();
-
-  @Output() returnDate: string;
 
   private returnDateSubject: Subject<string> = new Subject<string>();
 
@@ -38,34 +24,66 @@ export class SelectFlightComponent implements OnInit {
 
   private previousReturnDate: string;
 
+  flightData$: Observable<FormDataModel<PointModel>>;
+
+  flightsDetailsDepart$!: Observable<IFlightDetails[]>;
+
+  departure: PointModel = { title: '', code: '' };
+
+  currency$: Observable<ECurrency>;
+
+  currency: ECurrency = ECurrency.EUR;
+
+  ticketsDataDepart: { date: string; cost: string }[] = [];
+
+  flightsDetailsReturn$!: Observable<IFlightDetails[]>;
+
+  arrival: PointModel = { title: '', code: '' };
+
+  ticketsDataReturn: { date: string; cost: string }[] = [];
+
+  flightDataCurrency: ECurrency = ECurrency.EUR;
+
+  @Output() departureDate: string = '';
+
+  @Output() returnDate: string = '';
+
   constructor(
     private flightsDataService: FlightsDataService,
-    private formDataService: FormDataService
+    private formDataService: FormDataService,
+    private headerDataService: HeaderDataService
   ) {
-    const formData: FormDataModel<PointModel> = this.formDataService.getMainFormData();
-    this.departure =
-      formData.from === null
-        ? { title: '', code: '' }
-        : { title: formData.from.title, code: formData.from.code };
-    this.arrival =
-      formData.destination === null
-        ? { title: '', code: '' }
-        : { title: formData.destination.title, code: formData.destination.code };
+    this.flightData$ = this.formDataService.getObservableMainFormData();
 
-    this.departureDate = dayjs(formData?.dateStart).format('YYYY-MM-DD').toString() ?? '';
-    this.returnDate = dayjs(formData?.dateEnd).format('YYYY-MM-DD').toString() ?? '';
+    this.currency$ = this.headerDataService.currentCurrency$;
+
+    this.flightData$.subscribe((formData: FormDataModel<PointModel>) => {
+      this.departure =
+        formData.from === null
+          ? { title: '', code: '' }
+          : { title: formData.from.title, code: formData.from.code };
+      this.arrival =
+        formData.destination === null
+          ? { title: '', code: '' }
+          : { title: formData.destination.title, code: formData.destination.code };
+
+      this.departureDate = dayjs(formData?.dateStart).format('YYYY-MM-DD').toString() ?? '';
+      this.returnDate = dayjs(formData?.dateEnd).format('YYYY-MM-DD').toString() ?? '';
+    });
+
     this.previousDepartureDate = '';
     this.previousReturnDate = '';
   }
 
   ngOnInit(): void {
-    this.departureDateSubject.subscribe((date: string) => {
-      this.departureDate = date;
+    this.formDataService.flightData$.subscribe((flightData) => {
+      this.departureDate = dayjs(flightData?.dateStart).format('YYYY-MM-DD').toString() ?? '';
+      this.returnDate = dayjs(flightData?.dateEnd).format('YYYY-MM-DD').toString() ?? '';
       this.fetchFlightsData();
     });
 
-    this.returnDateSubject.subscribe((date: string) => {
-      this.returnDate = date;
+    this.headerDataService.currentCurrency$.subscribe((currency) => {
+      this.currency = currency;
       this.fetchFlightsData();
     });
 
@@ -87,7 +105,7 @@ export class SelectFlightComponent implements OnInit {
           this.departure.code ?? '',
           this.arrival.code ?? '',
           departureDate,
-          'eur', // add real data
+          this.currency,
           true
         )
       );
@@ -113,7 +131,7 @@ export class SelectFlightComponent implements OnInit {
                 this.departure.code ?? '',
                 this.arrival.code ?? '',
                 this.departureDate,
-                'eur',
+                this.currency,
                 true
               );
             },
@@ -135,7 +153,7 @@ export class SelectFlightComponent implements OnInit {
           this.arrival.code ?? '',
           this.departure.code ?? '',
           returnDate,
-          'eur', // add real data
+          this.currency,
           true
         )
       );
@@ -161,7 +179,7 @@ export class SelectFlightComponent implements OnInit {
                 this.arrival.code ?? '',
                 this.departure.code ?? '',
                 this.returnDate,
-                'eur',
+                this.currency,
                 true
               );
             },
