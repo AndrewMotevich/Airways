@@ -89,6 +89,12 @@ export class MainFormComponent implements OnInit {
   }
 
   public submit(): void {
+    if (this.form.get('roundedTrip')?.value === 'one') {
+      this.form.patchValue({
+        'dateEnd': this.form.get('dateStart')?.value
+      })
+    }
+
     if (this.form.valid) {
       this.formDataService.setMainFormData(this.form.getRawValue());
       this.router.navigate(['/select-flight']);
