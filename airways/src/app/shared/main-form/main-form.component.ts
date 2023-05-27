@@ -5,11 +5,11 @@ import { Observable } from 'rxjs';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { AviaSalesApiService as AviasalesApiService } from '../../services/aviasales-api.service';
-import { CityDateType } from '../../models/city-data-type.model';
-import { FormDataService } from '../../services/form-data.service';
-import { changeIcon } from '../../../../assets/icons/Vector';
-import { AirportsDataType } from '../../models/airports-data-type';
+import { AviaSalesApiService as AviasalesApiService } from '../../booking/services/aviasales-api.service';
+import { CityDateType } from '../../booking/models/city-data-type.model';
+import { FormDataService } from '../../booking/services/form-data.service';
+import { changeIcon } from '../../../assets/icons/Vector';
+import { AirportsDataType } from '../../booking/models/airports-data-type';
 
 @Component({
   selector: 'app-main-form',
@@ -48,6 +48,8 @@ export class MainFormComponent implements OnInit {
     infant: new FormControl<number>(0, [Validators.min(0), Validators.max(9)]),
   });
 
+  currentUrl: string;
+
   constructor(
     private router: Router,
     private aviasalesApiService: AviasalesApiService,
@@ -56,6 +58,7 @@ export class MainFormComponent implements OnInit {
     sanitizer: DomSanitizer
   ) {
     iconRegistry.addSvgIconLiteral('change-icon', sanitizer.bypassSecurityTrustHtml(changeIcon));
+    this.currentUrl = this.router.url;
   }
 
   ngOnInit(): void {

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import dayjs from 'dayjs';
 import { FormDataModel, PointModel } from '../../booking/models/form-data.model';
 import { FormDataService } from '../../booking/services/form-data.service';
+import { EditFormService } from '../../auth/services/edit-form.service';
 
 @Component({
   selector: 'app-flight-info-menu',
@@ -19,7 +20,7 @@ export class FlightInfoMenuComponent {
 
   passengersCount: number;
 
-  constructor(private formDataService: FormDataService) {
+  constructor(private formDataService: FormDataService, private editFormService: EditFormService) {
     const formData: FormDataModel<PointModel> = this.formDataService.getMainFormData();
     this.departure =
       formData.from === null
@@ -32,6 +33,10 @@ export class FlightInfoMenuComponent {
 
     this.departureDate = dayjs(formData?.dateStart).format('DD MMM').toString() ?? '';
     this.returnDate = dayjs(formData?.dateEnd).format('DD MMM').toString() ?? '';
-    this.passengersCount = formData.passengers ?? 3;
+    this.passengersCount = formData.passengers ?? 0;
+  }
+
+  toggleEditForm(): void {
+    this.editFormService.toggleEditForm();
   }
 }

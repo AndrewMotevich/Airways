@@ -1,4 +1,4 @@
-@import "../../../../sass/abstracts/variables";
+@import "../../../sass/abstracts/variables";
 
 .form-container {
   margin-top: 150px;
@@ -20,26 +20,43 @@
     height: 60px !important;
     align-self: flex-end;
   }
-}
+  .rounded-input {
+    border-radius: 4px !important;
+    border: 0.5px solid rgba(116, 118, 122, 0.6) !important;
+  }
+  .origin-destination-container {
+    position: relative;
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+  }
 
-.rounded-input {
-  border-radius: 4px !important;
-  border: 0.5px solid rgba(116, 118, 122, 0.6) !important;
+  .change-direction-btn {
+    position: absolute !important;
+    top: 40px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+  }
 }
+.edit-form-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: 1fr;
+  grid-gap: 10px;
+  padding: 0 10px;
 
-.origin-destination-container {
-  position: relative;
-  width: inherit;
-  display: flex;
-  flex-direction: column;
-}
-
-.change-direction-btn {
-  position: absolute !important;
-  top: 40px;
-  right: 20px;
-  width: 40px;
-  height: 40px;
+  .origin-destination-container,
+  .date-passengers-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 10px;
+    width: 100%;
+    & > * {
+      width: 100%;
+    }
+  }
 }
 
 .hidden {
@@ -49,14 +66,12 @@
   padding: 0;
   visibility: hidden;
 }
-
 .passengers-button {
   width: 24px;
   height: 24px;
   border: none;
   cursor: pointer;
 }
-
 .selection-option {
   width: 169px;
   display: flex;
@@ -87,9 +102,9 @@
 @media screen and (max-width: 960px) {
   .form-container {
     max-width: 400px;
-  }
-  .date-passengers-container {
-    flex-direction: column;
+    .date-passengers-container {
+      flex-direction: column;
+    }
   }
 }
 @media screen and (max-width: 540px) {

@@ -1,17 +1,20 @@
 <div *ngIf="isLoading" class="loading"><mat-spinner strokeWidth="2" diameter="50"
     aria-label="Loading form"></mat-spinner></div>
-<form class="form-container" *ngIf="!isLoading" [formGroup]="form" (ngSubmit)="submit()">
+<form [ngClass]="{ 'edit-form-container': currentUrl === '/select-flight', 'form-container': currentUrl === '/' }"
+  *ngIf="!isLoading" [formGroup]="form" (ngSubmit)="submit()">
 
-  <mat-radio-group aria-label="Select an option" formControlName="roundedTrip">
-    <mat-radio-button color="primary" value="both">Round Trip</mat-radio-button>
-    <mat-radio-button color="primary" value="one">One Way</mat-radio-button>
-  </mat-radio-group>
+  <ng-container *ngIf="currentUrl === '/'">
+    <mat-radio-group aria-label="Select an option" formControlName="roundedTrip">
+      <mat-radio-button color="primary" value="both">Round Trip</mat-radio-button>
+      <mat-radio-button color="primary" value="one">One Way</mat-radio-button>
+    </mat-radio-group>
+  </ng-container>
 
   <div class="origin-destination-container">
 
     <mat-form-field appearance="outline" hideRequiredMarker>
       <mat-label>From</mat-label>
-      <input type="text" placeholder="Chose your origin" aria-label="From" matInput formControlName="from"
+      <input type="text" placeholder="Choose your origin" aria-label="From" matInput formControlName="from"
         [matAutocomplete]="autoFrom">
       <mat-autocomplete #autoFrom="matAutocomplete">
         <mat-option class="comment" *ngFor="let option of filteredFromOptions | async"
@@ -23,7 +26,7 @@
           <small>{{option.time_zone}}</small>
         </mat-option>
       </mat-autocomplete>
-      <mat-error *ngIf="form.controls.from.hasError('required')">Chose from</mat-error>
+      <mat-error *ngIf="form.controls.from.hasError('required')">Choose from</mat-error>
     </mat-form-field>
 
 
@@ -41,14 +44,14 @@
           <small>{{option.time_zone}}</small>
         </mat-option>
       </mat-autocomplete>
-      <mat-error *ngIf="form.controls.destination.hasError('required')">Chose destination</mat-error>
+      <mat-error *ngIf="form.controls.destination.hasError('required')">Choose destination</mat-error>
     </mat-form-field>
-
-    <button color="basic" mat-fab class="change-direction-btn" (click)="changeDirectionsHandler()">
-      <mat-icon svgIcon="change-icon"></mat-icon>
-    </button>
+    <ng-container *ngIf="currentUrl === '/'">
+      <button color="basic" mat-fab class="change-direction-btn" (click)="changeDirectionsHandler()">
+        <mat-icon svgIcon="change-icon"></mat-icon>
+      </button>
+    </ng-container>
   </div>
-
 
   <div class="date-passengers-container">
 
@@ -67,7 +70,7 @@
           <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
         </mat-date-range-picker-actions>
       </mat-date-range-picker>
-      <mat-error *ngIf="form.controls.dateEnd.hasError('required')">Chose End Date</mat-error>
+      <mat-error *ngIf="form.controls.dateEnd.hasError('required')">Choose End Date</mat-error>
     </mat-form-field>
 
     <mat-form-field *ngIf="form.controls.roundedTrip.value === 'one'" appearance="outline" hideRequiredMarker>
@@ -96,8 +99,8 @@
               <small>14+ years</small>
             </div>
             <button class="passengers-button"
-              (click)="passengersHandler($event, true, 'adult')">+</button>{{adult}}<button class="passengers-button"
-              (click)="passengersHandler($event, false, 'adult')">-</button>
+              (click)="passengersHandler($event, false, 'adult')">-</button>{{adult}}<button class="passengers-button"
+              (click)="passengersHandler($event, true, 'adult')">+</button>
           </div>
         </mat-option>
         <mat-option [value]="1">
@@ -108,8 +111,8 @@
               <small>2-14 years</small>
             </div>
             <button class="passengers-button"
-              (click)="passengersHandler($event, true, 'child')">+</button>{{child}}<button class="passengers-button"
-              (click)="passengersHandler($event, false, 'child')">-</button>
+              (click)="passengersHandler($event, false, 'child')">-</button>{{child}}<button class="passengers-button"
+              (click)="passengersHandler($event, true, 'child')">+</button>
           </div>
         </mat-option>
         <mat-option [value]="adult">
@@ -120,8 +123,8 @@
               <small>0-2 years</small>
             </div>
             <button class="passengers-button"
-              (click)="passengersHandler($event, true, 'infant')">+</button>{{infant}}<button class="passengers-button"
-              (click)="passengersHandler($event, false, 'infant')">-</button>
+              (click)="passengersHandler($event, false, 'infant')">-</button>{{infant}}<button class="passengers-button"
+              (click)="passengersHandler($event, true, 'infant')">+</button>
           </div>
         </mat-option>
       </mat-select>
@@ -130,6 +133,7 @@
     </mat-form-field>
 
   </div>
-
-  <button class="btn" mat-raised-button color="primary">Search</button>
+  <ng-container *ngIf="currentUrl === '/'">
+    <button class="btn" mat-raised-button color="primary">Search</button>
+  </ng-container>
 </form>
