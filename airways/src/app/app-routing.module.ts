@@ -18,7 +18,11 @@ const routes: Routes = [
     loadChildren: () => import('./booking/pages/booking-flight/booking-flight.module').then((m) => m.BookingFlightModule),
     //canActivate: [IsLoginGuard]
   },
-  { path: 'summary', component: Page404Component, canActivate: [IsLoginGuard] },
+  {
+    path: 'summary',
+    loadChildren: () => import('./booking/pages/summary/summary.module').then((m) => m.SummaryModule),
+    //canActivate: [IsLoginGuard] 
+  },
   { path: 'shopping-card', component: Page404Component, canActivate: [IsLoginGuard] },
   { path: 'user-account', component: Page404Component, canActivate: [IsLoginGuard] },
   { path: '404', component: Page404Component },
