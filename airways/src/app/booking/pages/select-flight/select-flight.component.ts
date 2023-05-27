@@ -42,6 +42,8 @@ export class SelectFlightComponent implements OnInit {
 
   ticketsDataReturn: { date: string; cost: string }[] = [];
 
+  flightDataCurrency: ECurrency = ECurrency.EUR;
+
   @Output() departureDate: string = '';
 
   @Output() returnDate: string = '';
