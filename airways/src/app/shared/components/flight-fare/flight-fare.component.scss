@@ -1,0 +1,6 @@
+@import '../../../../sass/abstracts/mixins';
+@import '../../../../sass/abstracts/variables';
+
+.flight-fare {
+   @include section-style(8px);
+}

@@ -1,0 +1,25 @@
+<section class="flight-fare">
+  <ul>
+    <li>
+      <p class="flight-fare_title">{{ adult }} x Adult Fare <span class="price">{{price}}{{currency$ | async}}</span></p>
+      <ul>
+        <li>Fare <span class="price">€98.00</span></li>
+        <li>Tax & Service Charge <span class="price">€98.00</span></li>
+      </ul>
+    </li>
+    <li *ngIf="child">
+      <p class="flight-fare_title">{{ child }} x Child Fare <span class="price">{{price}}{{currency$ | async}}</span></p>
+      <ul>
+        <li>Fare <span class="price">€88.00</span></li>
+        <li>Tax & Service Charge <span class="price">€98.00</span></li>
+      </ul>
+    </li>
+    <li *ngIf="infant">
+      <p class="flight-fare_title">{{infant}} x Infant Fare <span class="price">{{price}}{{currency$ | async}}</span></p>
+      <ul>
+        <li>Fare <span class="price">€88.00</span></li>
+        <li>Tax & Service Charge <span class="price">€10.00</span></li>
+      </ul>
+    </li>
+  </ul>
+</section>
