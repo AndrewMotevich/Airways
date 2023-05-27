@@ -4,12 +4,13 @@ import { map, mergeMap, toArray } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Router } from '@angular/router';
-import { AviaSalesApiService as AviasalesApiService } from '../../booking/services/aviasales-api.service';
+import { NavigationEnd, Router } from '@angular/router';
+import { AviaSalesApiService } from '../../booking/services/aviasales-api.service';
 import { CityDateType } from '../../booking/models/city-data-type.model';
 import { FormDataService } from '../../booking/services/form-data.service';
 import { changeIcon } from '../../../assets/icons/Vector';
 import { AirportsDataType } from '../../booking/models/airports-data-type';
+import { TripDataService } from '../../booking/services/trip-data.service';
 
 @Component({
   selector: 'app-main-form',
@@ -48,17 +49,25 @@ export class MainFormComponent implements OnInit {
     infant: new FormControl<number>(0, [Validators.min(0), Validators.max(9)]),
   });
 
-  currentUrl: string;
+  currentUrl?: string;
 
   constructor(
     private router: Router,
-    private aviasalesApiService: AviasalesApiService,
+    private aviasalesApiService: AviaSalesApiService,
     private formDataService: FormDataService,
+    private tripData: TripDataService,
     private iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer
   ) {
-    iconRegistry.addSvgIconLiteral('change-icon', sanitizer.bypassSecurityTrustHtml(changeIcon));
-    this.currentUrl = this.router.url;
+    this.iconRegistry.addSvgIconLiteral(
+      'change-icon',
+      this.sanitizer.bypassSecurityTrustHtml(changeIcon)
+    );
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.currentUrl = event.url;
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -94,6 +103,9 @@ export class MainFormComponent implements OnInit {
   public submit(): void {
     if (this.form.valid) {
       this.formDataService.setMainFormData(this.form.getRawValue());
+      this.tripData.addNewTrip();
+      // should delete below string
+      this.tripData.addTripToStack();
       this.router.navigate(['/select-flight']);
     }
   }

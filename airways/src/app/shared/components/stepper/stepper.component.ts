@@ -10,10 +10,7 @@ import { StepperService } from '../../services/stepper.service';
 export class StepperComponent implements OnInit {
   stepperStatus = this.stepperService.stepperStatus;
 
-  constructor(private stepperService: StepperService, private router: Router) {}
-
-  ngOnInit(): void {
-    this.stepperService.setStepOne();
+  constructor(private stepperService: StepperService, private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const { url } = event;
@@ -23,11 +20,15 @@ export class StepperComponent implements OnInit {
           this.stepperService.setStepOne();
           this.stepperService.setStepTwo();
           this.stepperService.setStepThree();
-        } else if (url === '/booking-process') {
+        } else if (url === '/booking') {
           this.stepperService.setStepOne();
           this.stepperService.setStepTwo();
         }
       }
     });
+  }
+
+  ngOnInit(): void {
+    this.stepperService.setStepOne();
   }
 }
