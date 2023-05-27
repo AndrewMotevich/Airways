@@ -12,8 +12,6 @@ export class ShoppingCartTableComponent implements OnInit {
 
   currentMenuItem = 0;
 
-  currentTripData = this.tripData.getTripData();
-
   currentTripStack: TripDataType[] = [];
 
   currentTripItems: { id: number; checked: boolean }[] = [];
@@ -21,7 +19,7 @@ export class ShoppingCartTableComponent implements OnInit {
   constructor(private tripData: TripDataService) {}
 
   ngOnInit(): void {
-    this.tripData.getTripStack().subscribe((res) => {
+    this.tripData.getTripStack.subscribe((res) => {
       this.currentTripStack = res;
       this.currentTripItems = this.currentTripStack.map((elem) => ({
         id: elem.id,
@@ -64,7 +62,7 @@ export class ShoppingCartTableComponent implements OnInit {
 
   deleteItem(): void {
     this.tripData.deleteFromStack(this.currentMenuItem);
-    this.tripData.getTripStack().subscribe((res) => {
+    this.tripData.getTripStack.subscribe((res) => {
       this.currentTripStack = res;
       this.currentTripItems = this.currentTripStack.map((elem) => ({
         id: elem.id,
@@ -81,7 +79,7 @@ export class ShoppingCartTableComponent implements OnInit {
       }
     });
     this.tripData.saveFromStack(...totalCheckedItems);
-    this.tripData.getTripStack().subscribe((res) => {
+    this.tripData.getTripStack.subscribe((res) => {
       this.currentTripStack = res;
       this.currentTripItems = this.currentTripStack.map((elem) => ({
         id: elem.id,

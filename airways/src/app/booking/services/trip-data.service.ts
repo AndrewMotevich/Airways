@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { FormDataService } from './form-data.service';
 import { FlightsDataService } from './flightsData.service';
 import { PassengersDataService } from './passengers-data.service';
@@ -44,17 +44,14 @@ export class TripDataService {
     private history: HistoryApiService
   ) {}
 
-  getTripData(): TripDataType {
-    return this.trip;
-  }
+  getTripData = new BehaviorSubject(this.trip);
 
-  getTripStack(): Observable<TripDataType[]> {
-    return new BehaviorSubject(this.tripStack);
-  }
+  getTripStack = new BehaviorSubject(this.tripStack);
 
   addTripToStack(): void {
     this.trip.completed = true;
     this.tripStack?.push(this.trip);
+    this.getTripStack.next(this.tripStack);
   }
 
   deleteFromStack(id: number): void {
@@ -62,6 +59,7 @@ export class TripDataService {
       if (elem.id === id) return false;
       return true;
     });
+    this.getTripStack.next(this.tripStack);
   }
 
   saveFromStack(...idArray: number[]): void {
@@ -77,6 +75,7 @@ export class TripDataService {
       return unEqual;
     });
     this.tripStack = tempArray;
+    this.getTripStack.next(this.tripStack);
     // save in history
     // this.history.saveHistory(deletedArray);
   }
@@ -118,5 +117,6 @@ export class TripDataService {
 
   updateTrip(updatedTrip: TripDataType): void {
     this.trip = updatedTrip;
+    this.getTripData.next(this.trip);
   }
 }

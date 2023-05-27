@@ -52,7 +52,8 @@
         <span class="color-primary">{{authApiService.tokenData?.firstName}}</span>
       </button>
 
-      <button mat-icon-button routerLink="/shopping-card"><mat-icon fontIcon="shopping_basket"></mat-icon></button>
+      <button mat-icon-button routerLink="/shopping-card"><mat-icon [matBadge]="basketQnt" matBadgeColor="warn"
+          fontIcon="shopping_basket"></mat-icon></button>
     </div>
 
     <button class="hidden-mat-menu" mat-icon-button [matMenuTriggerFor]="mobileMenu"

@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ModalWindowService } from '../../../auth/services/modal-window.service';
 import { AuthApiService } from '../../../auth/services/auth-api.service';
 import { HeaderDataService } from '../../services/header-data.service';
+import { TripDataService } from '../../../booking/services/trip-data.service';
 
 @Component({
   selector: 'app-header',
@@ -21,6 +22,8 @@ import { HeaderDataService } from '../../services/header-data.service';
 export class HeaderComponent implements OnInit {
   currentUrl: string = '';
 
+  basketQnt: number = 0;
+
   headerData = new FormGroup({
     dateFormat: new FormControl<string>('', [Validators.required]),
     currencyFormat: new FormControl<string>('', [Validators.required]),
@@ -31,7 +34,8 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     public headerDataService: HeaderDataService,
     public authApiService: AuthApiService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private tripData: TripDataService
   ) {}
 
   ngOnInit(): void {
@@ -41,6 +45,9 @@ export class HeaderComponent implements OnInit {
         const { url } = event;
         this.currentUrl = url;
       }
+    });
+    this.tripData.getTripStack.subscribe((res) => {
+      this.basketQnt = res.length;
     });
   }
 
