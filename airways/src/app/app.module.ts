@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { MainPageModule } from './booking/pages/main-page/main-page.module';
 import { CoreModule } from './core/modules/core/core.module';
 import { ShoppingCartPageModule } from './booking/pages/shopping-cart-page/shopping-cart-page.module';
-import { UserAccountPageModule } from './booking/pages/user-account-page/user-account-page.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +18,6 @@ import { UserAccountPageModule } from './booking/pages/user-account-page/user-ac
     MainPageModule,
     CoreModule,
     ShoppingCartPageModule,
-    UserAccountPageModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
