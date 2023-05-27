@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import dayjs from 'dayjs';
 import { MAX_PHONE_LENGTH } from '../../../shared/constants';
 import { TPassengersData } from '../../models/passengers-data.interface';
-import { PassengersService } from '../../services/passengers.service';
-import { Router } from '@angular/router';
+import { PassengersDataService } from '../../services/passengers-data.service';
 
 @Component({
   selector: 'app-booking-flight',
@@ -20,7 +21,7 @@ export class BookingFlightComponent implements OnInit {
 
   currentPhoneCode = 'CY';
 
-  constructor(private fb: FormBuilder, private passengersService: PassengersService, private router: Router) { }
+  constructor(private fb: FormBuilder, private passengersService: PassengersDataService, private router: Router) { }
 
   ngOnInit(): void {
     this.passengersFormGroup = this.fb.nonNullable.group({
@@ -44,7 +45,7 @@ export class BookingFlightComponent implements OnInit {
           firstName: 'Harry',
           lastName: 'Potter',
           gender: 'male',
-          dateOfBirth: '',
+          dateOfBirth: dayjs().toDate(),
           needHelp: true,
           checkedInBag: 0
         },
@@ -53,7 +54,7 @@ export class BookingFlightComponent implements OnInit {
           firstName: 'Lilly',
           lastName: 'Potter',
           gender: 'male',
-          dateOfBirth: '',
+          dateOfBirth: dayjs().toDate(),
           needHelp: false,
           checkedInBag: 10
         },
@@ -62,7 +63,7 @@ export class BookingFlightComponent implements OnInit {
           firstName: 'James',
           lastName: 'Potter',
           gender: 'male',
-          dateOfBirth: '',
+          dateOfBirth: dayjs().toDate(),
           needHelp: true,
           checkedInBag: 32
         }
@@ -71,9 +72,8 @@ export class BookingFlightComponent implements OnInit {
   }
 
   onSubmit(): void {
-
     console.log(this.passengersFormGroup?.value);
-    this.passengersService.setPassengersInformation(this.passengersFormGroup?.value);
-    this.router.navigateByUrl('summary');
+    this.passengersService.setPassengersData(this.passengersFormGroup?.value);
+    this.router.navigateByUrl('/summary');
   }
 }
