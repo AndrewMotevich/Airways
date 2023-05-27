@@ -1,5 +1,6 @@
 import { Component, DEFAULT_CURRENCY_CODE, Input } from '@angular/core';
 import { IFlightDetails } from '../../models/flight-details.interface';
+import { ECurrency } from '../../../core/models/currency.interface';
 
 @Component({
   selector: 'app-flight-details',
@@ -9,4 +10,6 @@ import { IFlightDetails } from '../../models/flight-details.interface';
 })
 export class FlightDetailsComponent {
   @Input() flight!: IFlightDetails;
+
+  @Input() currency!: ECurrency;
 }

@@ -40,7 +40,7 @@
       </div>
       <div class="flight-price">
         <span class="flight-price_label">Price</span>
-        <span class="flight-price_price">{{flight.price | currency | formatPrice}}</span>
+        <span class="flight-price_price">{{flight.price | customCurrency: this.currency | formatPrice}}</span>
       </div>
     </div>
     <button mat-button class="btn-with-gradient">Select</button>

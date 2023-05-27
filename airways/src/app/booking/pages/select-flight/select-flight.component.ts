@@ -24,6 +24,10 @@ export class SelectFlightComponent implements OnInit {
 
   private previousReturnDate: string;
 
+  private previousArrivalCode: string;
+
+  private previousDepartureCode: string;
+
   flightData$: Observable<FormDataModel<PointModel>>;
 
   flightsDetailsDepart$!: Observable<IFlightDetails[]>;
@@ -32,7 +36,7 @@ export class SelectFlightComponent implements OnInit {
 
   currency$: Observable<ECurrency>;
 
-  currency: ECurrency = ECurrency.EUR;
+  currency!: ECurrency;
 
   ticketsDataDepart: { date: string; cost: string }[] = [];
 
@@ -42,7 +46,9 @@ export class SelectFlightComponent implements OnInit {
 
   ticketsDataReturn: { date: string; cost: string }[] = [];
 
-  flightDataCurrency: ECurrency = ECurrency.EUR;
+  flightDepartureCurrency!: ECurrency;
+
+  flightReturnCurrency!: ECurrency;
 
   @Output() departureDate: string = '';
 
@@ -73,6 +79,8 @@ export class SelectFlightComponent implements OnInit {
 
     this.previousDepartureDate = '';
     this.previousReturnDate = '';
+    this.previousArrivalCode = '';
+    this.previousDepartureCode = '';
   }
 
   ngOnInit(): void {
@@ -91,7 +99,11 @@ export class SelectFlightComponent implements OnInit {
   }
 
   private fetchFlightsData(): void {
-    if (this.departureDate !== this.previousDepartureDate) {
+    if (
+      this.departureDate !== this.previousDepartureDate ||
+      this.previousArrivalCode !== this.arrival.code ||
+      this.previousDepartureCode !== this.departure.code
+    ) {
       const departureDates = [
         dayjs(this.departureDate).subtract(2, 'day').format('YYYY-MM-DD'),
         dayjs(this.departureDate).subtract(1, 'day').format('YYYY-MM-DD'),
@@ -111,7 +123,7 @@ export class SelectFlightComponent implements OnInit {
       );
 
       forkJoin(flightDepartureRequests).subscribe((responses: IFlightDetails[][]) => {
-        const ticketsDataDepart$ = responses.map((flightsData) =>
+        const ticketsDataDepart$ = responses?.map((flightsData) =>
           flightsData.map((flight) => ({
             date: dayjs(flight.departure_at).format('YYYY-MM-DD'),
             cost: flight.price.toString(),
@@ -137,9 +149,14 @@ export class SelectFlightComponent implements OnInit {
             },
           });
       });
+      this.flightDepartureCurrency = this.currency;
     }
 
-    if (this.returnDate !== this.previousReturnDate) {
+    if (
+      this.returnDate !== this.previousReturnDate ||
+      this.previousArrivalCode !== this.arrival.code ||
+      this.previousDepartureCode !== this.departure.code
+    ) {
       const returnDates = [
         dayjs(this.returnDate).subtract(2, 'day').format('YYYY-MM-DD'),
         dayjs(this.returnDate).subtract(1, 'day').format('YYYY-MM-DD'),
@@ -147,7 +164,6 @@ export class SelectFlightComponent implements OnInit {
         dayjs(this.returnDate).add(1, 'day').format('YYYY-MM-DD'),
         dayjs(this.returnDate).add(2, 'day').format('YYYY-MM-DD'),
       ];
-
       const flightReturnRequests = returnDates.map((returnDate) =>
         this.flightsDataService.getFlightsData(
           this.arrival.code ?? '',
@@ -157,17 +173,14 @@ export class SelectFlightComponent implements OnInit {
           true
         )
       );
-
       forkJoin(flightReturnRequests).subscribe((responses: IFlightDetails[][]) => {
-        const ticketsDataReturn$ = responses.map((flightsData) =>
+        const ticketsDataReturn$ = responses?.map((flightsData) =>
           flightsData.map((flight) => ({
             date: dayjs(flight.departure_at).format('YYYY-MM-DD'),
             cost: flight.price.toString(),
           }))
         );
-
         this.ticketsDataReturn = [];
-
         from(ticketsDataReturn$)
           .pipe(
             mergeMap((ticketsData$) => ticketsData$),
@@ -185,10 +198,14 @@ export class SelectFlightComponent implements OnInit {
             },
           });
       });
+
+      this.flightReturnCurrency = this.currency;
     }
 
     this.previousDepartureDate = this.departureDate;
     this.previousReturnDate = this.returnDate;
+    this.previousArrivalCode = this.arrival.code ?? '';
+    this.previousDepartureCode = this.departure.code ?? '';
   }
 
   handleClickOnNextArrivalDate(): void {
