@@ -34,16 +34,14 @@ export class FlightsDataService {
       url += `&departure_at=${departureAt}`;
     }
 
-    return this.http
-      .get<IFlightsData>(url)
-      .pipe(
-        map((response: IFlightsData) =>
-          response.data.map((item) => ({
-            ...item,
-            seats: Math.trunc(Math.random() * 150),
-            currency: response.currency,
-          }))
-        )
-      );
+    return this.http.get<IFlightsData>(url).pipe(
+      map((response: IFlightsData) =>
+        response.data?.map((item) => ({
+          ...item,
+          seats: Math.trunc(Math.random() * 150),
+          currency: response.currency,
+        }))
+      )
+    );
   }
 }

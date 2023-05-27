@@ -28,6 +28,10 @@ export class SelectFlightComponent implements OnInit {
 
   private previousDepartureCode: string;
 
+  private previousReturnCurrency?: ECurrency;
+
+  private previousDepartureCurrency?: ECurrency;
+
   flightData$: Observable<FormDataModel<PointModel>>;
 
   flightsDetailsDepart$!: Observable<IFlightDetails[]>;
@@ -102,7 +106,8 @@ export class SelectFlightComponent implements OnInit {
     if (
       this.departureDate !== this.previousDepartureDate ||
       this.previousArrivalCode !== this.arrival.code ||
-      this.previousDepartureCode !== this.departure.code
+      this.previousDepartureCode !== this.departure.code ||
+      this.previousDepartureCurrency !== this.currency
     ) {
       const departureDates = [
         dayjs(this.departureDate).subtract(2, 'day').format('YYYY-MM-DD'),
@@ -123,39 +128,48 @@ export class SelectFlightComponent implements OnInit {
       );
 
       forkJoin(flightDepartureRequests).subscribe((responses: IFlightDetails[][]) => {
-        const ticketsDataDepart$ = responses?.map((flightsData) =>
-          flightsData.map((flight) => ({
-            date: dayjs(flight.departure_at).format('YYYY-MM-DD'),
-            cost: flight.price.toString(),
-          }))
-        );
+        if (responses) {
+          const ticketsDataDepart$ = responses
+            ?.map((flightsData) =>
+              flightsData?.map((flight) => ({
+                date: dayjs(flight.departure_at).format('YYYY-MM-DD'),
+                cost: flight.price.toString(),
+              }))
+            )
+            .filter(Boolean);
 
-        this.ticketsDataDepart = [];
+          if (ticketsDataDepart$) {
+            this.ticketsDataDepart = [];
 
-        from(ticketsDataDepart$)
-          .pipe(
-            mergeMap((ticketsData$) => ticketsData$),
-            tap((ticketsData) => this.ticketsDataDepart.push(ticketsData))
-          )
-          .subscribe({
-            complete: () => {
-              this.flightsDetailsDepart$ = this.flightsDataService.getFlightsData(
-                this.departure.code ?? '',
-                this.arrival.code ?? '',
-                this.departureDate,
-                this.currency,
-                true
-              );
-            },
-          });
+            from(ticketsDataDepart$)
+              .pipe(
+                mergeMap((ticketsData$) => ticketsData$),
+                tap((ticketsData) => this.ticketsDataDepart.push(ticketsData))
+              )
+              .subscribe({
+                complete: () => {
+                  this.flightsDetailsDepart$ = this.flightsDataService.getFlightsData(
+                    this.departure.code ?? '',
+                    this.arrival.code ?? '',
+                    this.departureDate,
+                    this.currency,
+                    true
+                  );
+                },
+              });
+          }
+        }
       });
+
       this.flightDepartureCurrency = this.currency;
+      this.previousDepartureCurrency = this.currency;
     }
 
     if (
       this.returnDate !== this.previousReturnDate ||
       this.previousArrivalCode !== this.arrival.code ||
-      this.previousDepartureCode !== this.departure.code
+      this.previousDepartureCode !== this.departure.code ||
+      this.previousReturnCurrency !== this.currency
     ) {
       const returnDates = [
         dayjs(this.returnDate).subtract(2, 'day').format('YYYY-MM-DD'),
@@ -174,32 +188,40 @@ export class SelectFlightComponent implements OnInit {
         )
       );
       forkJoin(flightReturnRequests).subscribe((responses: IFlightDetails[][]) => {
-        const ticketsDataReturn$ = responses?.map((flightsData) =>
-          flightsData.map((flight) => ({
-            date: dayjs(flight.departure_at).format('YYYY-MM-DD'),
-            cost: flight.price.toString(),
-          }))
-        );
-        this.ticketsDataReturn = [];
-        from(ticketsDataReturn$)
-          .pipe(
-            mergeMap((ticketsData$) => ticketsData$),
-            tap((ticketsData) => this.ticketsDataReturn.push(ticketsData))
-          )
-          .subscribe({
-            complete: () => {
-              this.flightsDetailsReturn$ = this.flightsDataService.getFlightsData(
-                this.arrival.code ?? '',
-                this.departure.code ?? '',
-                this.returnDate,
-                this.currency,
-                true
-              );
-            },
-          });
+        if (responses) {
+          const ticketsDataReturn$ = responses
+            ?.map((flightsData) =>
+              flightsData?.map((flight) => ({
+                date: dayjs(flight.departure_at).format('YYYY-MM-DD'),
+                cost: flight.price.toString(),
+              }))
+            )
+            .filter(Boolean);
+
+          if (ticketsDataReturn$) {
+            this.ticketsDataReturn = [];
+            from(ticketsDataReturn$)
+              .pipe(
+                mergeMap((ticketsData$) => ticketsData$),
+                tap((ticketsData) => this.ticketsDataReturn.push(ticketsData))
+              )
+              .subscribe({
+                complete: () => {
+                  this.flightsDetailsReturn$ = this.flightsDataService.getFlightsData(
+                    this.arrival.code ?? '',
+                    this.departure.code ?? '',
+                    this.returnDate,
+                    this.currency,
+                    true
+                  );
+                },
+              });
+          }
+        }
       });
 
       this.flightReturnCurrency = this.currency;
+      this.previousReturnCurrency = this.currency;
     }
 
     this.previousDepartureDate = this.departureDate;
