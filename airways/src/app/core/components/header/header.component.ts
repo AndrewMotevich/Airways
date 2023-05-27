@@ -11,6 +11,7 @@ import { AuthApiService } from '../../../auth/services/auth-api.service';
 import { HeaderDataService } from '../../services/header-data.service';
 import { TripDataService } from '../../../booking/services/trip-data.service';
 import { THEME } from '../../models/theme.interface';
+import { ECurrency } from '../../models/currency.interface';
 
 @Component({
   selector: 'app-header',
@@ -33,7 +34,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     currencyFormat: new FormControl<string>('', [Validators.required]),
   });
 
-  currentCurrency$: BehaviorSubject<string>;
+  currentCurrency$: BehaviorSubject<ECurrency>;
 
   currentDateFormat$: BehaviorSubject<string>;
 

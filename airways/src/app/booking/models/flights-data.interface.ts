@@ -1,7 +1,8 @@
-import { IFlightDetails } from "./flight-details.interface";
+import { ECurrency } from '../../core/models/currency.interface';
+import { IFlightDetails } from './flight-details.interface';
 
 export interface IFlightsData {
   success: boolean;
   data: IFlightDetails[];
-  currency: "eur" | "rub";
+  currency: ECurrency;
 }
