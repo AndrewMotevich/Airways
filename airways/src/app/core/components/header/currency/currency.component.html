@@ -1,0 +1,32 @@
+<ng-container *ngIf="isSelect; else list">
+  <mat-form-field
+    [ngClass]="{ 'currency-select-main': isMainPage }"
+    class="currency-select"
+    appearance="outline"
+    hideRequiredMarker
+  >
+    <mat-select
+      hideSingleSelectionIndicator
+      class="select"
+      [value]="currentCurrency$ | async"
+      (selectionChange)="changeCurrencyFormat($event)"
+    >
+      <mat-option *ngFor="let currency of currencyArray" [value]="currency">{{
+        currency
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</ng-container>
+
+<ng-template #list matMenuContent>
+  <ng-container *ngIf="currentCurrency$ | async as currentCurrency">
+    <button
+      mat-menu-item
+      *ngFor="let currency of currencyArray"
+      (click)="setCurrency(currency)"
+      [ngClass]="{ 'selected': currentCurrency === currency }"
+    >
+      {{ currency }}
+    </button>
+  </ng-container>
+</ng-template>

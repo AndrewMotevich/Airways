@@ -3,8 +3,7 @@
 @import "/src/sass/base/typography";
 
 .flight {
-  @include white-block;  
-  max-width: 1128px;  
+  @include section-style;  
   margin: 8px auto 2rem;
 
   @media screen and (min-width: 960px) {
@@ -23,7 +22,7 @@
 
     @media screen and (min-width: 960px) {
       padding-top: 1.9rem;
-      padding-bottom: 1.5rem;
+      padding-bottom: 1.2rem;
       padding-left: 2.5rem;
     }
 

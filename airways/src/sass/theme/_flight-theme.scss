@@ -1,0 +1,30 @@
+@use '@angular/material' as mat;
+@use '../palette/flight-palette' as palette;
+
+$flight-primary: mat.define-palette(palette.$primary, 500);
+$flight-accent: mat.define-palette(palette.$accent, 500);
+$flight-warn: mat.define-palette(palette.$warn, 500);
+
+$light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $flight-primary,
+      accent: $flight-accent,
+      warn: $flight-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+$dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: mat.define-palette(mat.$blue-grey-palette),
+      accent: mat.define-palette(mat.$green-palette),
+      warn: mat.define-palette(mat.$red-palette),      
+    ),
+    typography: mat.define-typography-config(),
+  )
+);
+

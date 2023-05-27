@@ -40,11 +40,13 @@
   }
 }
 .edit-form-container {
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: 1fr;
-  grid-gap: 10px;
-  padding: 0 10px;
+  .form-container_inner {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: 1fr;
+    grid-gap: 10px;
+    padding: 0 10px;
+  }
 
   .origin-destination-container,
   .date-passengers-container {

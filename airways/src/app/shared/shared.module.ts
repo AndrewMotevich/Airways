@@ -17,9 +17,17 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MainFormComponent } from './main-form/main-form.component';
 import { FlightInfoMenuComponent } from './flight-info-menu/flight-info-menu.component';
 import { StepperComponent } from './components/stepper/stepper.component';
+import { DateRangeComponent } from '../booking/components/main-form/date-range/date-range.component';
+import { DateComponent } from '../booking/components/main-form/date/date.component';
 
 @NgModule({
-  declarations: [StepperComponent, FlightInfoMenuComponent, MainFormComponent],
+  declarations: [
+    StepperComponent,
+    FlightInfoMenuComponent,
+    MainFormComponent,
+    DateRangeComponent,
+    DateComponent,
+  ],
   imports: [
     CommonModule,
     MatButtonModule,

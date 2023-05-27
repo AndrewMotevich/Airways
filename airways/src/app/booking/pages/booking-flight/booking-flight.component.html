@@ -5,13 +5,21 @@
       [formGroup]="passengersFormGroup"
       [maxLength]="maxLength"
     ></app-contact-details>
-    <button
-      mat-button
-      type="submit"
-      [disabled]="!this.passengersFormGroup.valid"
-      class="btn-with-gradient"
-    >
-      send
-    </button>
+    <div class="passengers-form_btns">
+      <button
+        mat-button
+        type="submit"
+        [disabled]="this.passengersFormGroup.valid">
+        Back
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!this.passengersFormGroup.valid"
+        class="btn">
+        Continue
+      </button>
+    </div>
   </form>
 </section>

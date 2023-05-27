@@ -33,13 +33,12 @@ export class FormDataService {
         title: null,
         code: null,
       };
-    const matchCity = combinedString.match(/^(.*?)\s*\([^)]*\)/);
-    const matchCode = combinedString.match(/\((.*?)\)/);
 
-    return {
-      title: matchCity ? matchCity[1] : null,
-      code: matchCode ? matchCode[1] : null,
-    };
+    const cityCodeArray = combinedString.split(' ');
+    const code = cityCodeArray.pop() || null;
+    const title = cityCodeArray.join(' ') || null;
+
+    return { title, code };
   };
 
   getObservableMainFormData(): Observable<FormDataModel<PointModel>> {
@@ -60,7 +59,7 @@ export class FormDataService {
     return this.flightData;
   }
 
-  setFlightDataDate(date: Date, direction: FlightDirection): void {
+  setFlightDataDate(date: string, direction: FlightDirection): void {
     const currentFlightDataState: FormDataModel<PointModel> = this.flightData;
     const newFlightDataState: FormDataModel<PointModel> = { ...currentFlightDataState };
     if (direction === FlightDirection.DEPARTURE) {

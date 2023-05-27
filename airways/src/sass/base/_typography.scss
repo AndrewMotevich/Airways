@@ -2,7 +2,7 @@
 
 // Title
 %text-title-large {
-  @include typography(400, 24px, 28px, 0px);
+  @include typography(700, 24px, 28px);
 }
 %text-title-medium {
   @include typography(400, 20px, 24px, 0.5px);

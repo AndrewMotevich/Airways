@@ -36,8 +36,8 @@ export class FlightInfoMenuComponent {
           ? { title: '', code: '' }
           : { title: formData.destination.title, code: formData.destination.code };
 
-      this.departureDate = dayjs(formData?.dateStart).format('YYYY-MM-DD').toString() ?? '';
-      this.returnDate = dayjs(formData?.dateEnd).format('YYYY-MM-DD').toString() ?? '';
+      this.departureDate = dayjs(formData?.dateStart).format('DD MMM').toString() ?? '';
+      this.returnDate = dayjs(formData?.dateEnd).format('DD MMM').toString() ?? '';
       this.passengersCount = formData.passengers ?? 0;
     });
   }
