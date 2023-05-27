@@ -1,0 +1,12 @@
+@import '../../../../sass/abstracts/variables';
+@import '../../../../sass/abstracts/mixins';
+
+.flight-card {
+  @include section-style(8px);
+
+  .mat-mdc-card-header {
+    background-color: $color-secondary80;
+    border-top: 3px solid $color-primary;
+    border-radius: 8px;
+  }
+}
