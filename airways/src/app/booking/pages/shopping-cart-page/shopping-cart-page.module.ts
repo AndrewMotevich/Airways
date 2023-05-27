@@ -7,11 +7,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
+import { RouterModule } from '@angular/router';
 import { ShoppingCartPageComponent } from './shopping-cart-page.component';
 import { ShoppingCartTableComponent } from '../../components/shopping-cart-table/shopping-cart-table.component';
+import { RoundedTripPipe } from '../../pipe/rounded-trip.pipe';
 
 @NgModule({
-  declarations: [ShoppingCartPageComponent, ShoppingCartTableComponent],
+  declarations: [ShoppingCartPageComponent, ShoppingCartTableComponent, RoundedTripPipe],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -21,6 +23,7 @@ import { ShoppingCartTableComponent } from '../../components/shopping-cart-table
     MatDividerModule,
     MatMenuModule,
     MatInputModule,
+    RouterModule,
   ],
 })
 export class ShoppingCartPageModule {}

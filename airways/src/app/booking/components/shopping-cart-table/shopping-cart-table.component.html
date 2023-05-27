@@ -5,7 +5,9 @@
     <div class="table-wrapper">
       <div class="table">
         <div class="table-header">
-          <p style="padding-left: 72px;">No.
+          <p>
+            <mat-checkbox color="primary" class="example-margin" (change)="checkUncheckAllItems()"></mat-checkbox>
+            <span style="padding-left: 30px;">No.</span>
             <span class="arrow-icons">
               <mat-icon>arrow_drop_up</mat-icon>
               <mat-icon>arrow_drop_down</mat-icon>
@@ -21,7 +23,7 @@
               <mat-icon>arrow_drop_up</mat-icon>
               <mat-icon>arrow_drop_down</mat-icon>
             </span></p>
-          <p>Data & type <span class="arrow-icons">
+          <p>Data & time <span class="arrow-icons">
               <mat-icon>arrow_drop_up</mat-icon>
               <mat-icon>arrow_drop_down</mat-icon>
             </span></p>
@@ -31,17 +33,31 @@
               <mat-icon>arrow_drop_down</mat-icon>
             </span></p>
         </div>
-        <div class="table-content">
+
+
+        <div class="table-content" *ngFor="let trip of currentTripStack, index as i">
           <p>
-            <mat-checkbox color="primary" class="example-margin"></mat-checkbox>
-            <span style="padding-left: 30px;">FR 1925</span>
+            <mat-checkbox color="primary" class="example-margin" [checked]="currentTripItems[i].checked"
+              (change)="checkUncheckItems(trip.id)"></mat-checkbox>
+            <span style="padding-left: 30px;">{{trip.ticketsData.data[0].flight_number}}</span>
           </p>
-          <p>Flight</p>
-          <p>Type trip</p>
-          <p>Data & type</p>
-          <p>Passengers</p>
-          <p class="price"><span>&#8364; Price</span>
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <p>{{trip.mainData.from?.title}} - {{trip.mainData.destination?.title}}</p>
+          <p>{{trip.mainData.roundedTrip | roundedTrip}}</p>
+          <p class="date">
+            <span>{{trip.mainData.dateStart?.toString() | date}}, 8:40 -
+              12:00</span>
+            <span *ngIf="trip.mainData.roundedTrip !== 'one'">{{trip.mainData.dateEnd?.toString() | date}},
+              7:40 - 11:00</span>
+          </p>
+          <p class="passengers"><span>{{trip.mainData.adult}} x Adult</span><span
+              *ngIf="trip.mainData.child !== 0">{{trip.mainData.child}}
+              x
+              Child</span>
+            <span *ngIf="trip.mainData.infant !== 0">{{trip.mainData.infant}} x Infant</span>
+          </p>
+          <p class="price"><span>&#8364; {{elemSum(trip)}}</span>
+            <button mat-icon-button [matMenuTriggerFor]="menu" (click)="currentMenuItem = trip.id"
+              aria-label="Example icon-button with a menu">
               <mat-icon>more_vert</mat-icon>
             </button>
           </p>
@@ -54,16 +70,16 @@
       <button mat-menu-item>
         <span>Edit</span>
       </button>
-      <button mat-menu-item>
+      <button mat-menu-item (click)="deleteItem()">
         <span>Delete</span>
       </button>
     </mat-menu>
 
     <div class="total-wrapper">
       <div class="total-container">
-        <button class="new-trip-button">+ Add new trip</button>
+        <button class="new-trip-button" routerLink="/">+ Add new trip</button>
         <div class="total-sum">
-          <p>Total</p><span>&#8364; 572.34</span>
+          <p>Total</p><span>&#8364; {{totalSum()}}</span>
         </div>
       </div>
       <mat-divider class="divider"></mat-divider>
@@ -79,8 +95,8 @@
         </button>
       </mat-form-field>
       <div class="payment">
-        <p style="margin-left: 10px;">2 selected</p>
-        <button class="payment-button">Payment</button>
+        <p style="margin-left: 10px;">{{getTotalChecked()}} selected</p>
+        <button class="payment-button" (click)="saveItems()">Payment</button>
       </div>
     </div>
   </div>

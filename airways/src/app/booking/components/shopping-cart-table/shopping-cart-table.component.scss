@@ -89,6 +89,7 @@
   width: 1128px;
   display: grid;
   @extend %text-body-XLarge;
+  font-weight: 500;
   .table-header {
     height: 67px;
     display: grid;
@@ -132,8 +133,22 @@
   }
 }
 
+.date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.passengers {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .total-wrapper {
   padding: 0 34px;
+  margin-bottom: 139px;
   .total-container {
     width: 100%;
     display: flex;

@@ -1,20 +1,26 @@
 import { Injectable } from '@angular/core';
 
+type PassengerDataType = {
+  adult: { name: string }[];
+  child: { name: string }[];
+  infant: { name: string }[];
+};
+
 @Injectable({
   providedIn: 'root',
 })
 export class PassengersDataService {
-  private passengersData = {
+  private passengersData: PassengerDataType = {
     adult: [{ name: 'Harry' }],
     child: [{ name: 'Lily' }],
     infant: [{ name: 'James' }],
   };
 
-  getPassengersData(): typeof this.passengersData {
+  getPassengersData(): PassengerDataType {
     return this.passengersData;
   }
 
-  setPassengersData(passengers: typeof this.passengersData): void {
+  setPassengersData(passengers: PassengerDataType): void {
     this.passengersData = passengers;
   }
 }

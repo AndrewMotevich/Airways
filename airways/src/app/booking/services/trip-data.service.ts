@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { FormDataService } from './form-data.service';
 import { FlightsDataService } from './flightsData.service';
 import { PassengersDataService } from './passengers-data.service';
@@ -13,14 +14,28 @@ export class TripDataService {
     id: 0,
     completed: false,
     // data from main
-    mainData: {},
+    mainData: {
+      roundedTrip: null,
+      from: null,
+      destination: null,
+      dateStart: null,
+      dateEnd: null,
+      passengers: null,
+      adult: null,
+      child: null,
+      infant: null,
+    },
     // data from selectFlight
-    ticketsData: {},
+    ticketsData: {
+      success: false,
+      data: [],
+      currency: 'eur',
+    },
     // data from passengers
     passengersData: {},
   };
 
-  private tripStack?: TripDataType[];
+  private tripStack: TripDataType[] = [];
 
   constructor(
     private mainData: FormDataService,
@@ -29,8 +44,12 @@ export class TripDataService {
     private history: HistoryApiService
   ) {}
 
-  getTripData(): typeof this.trip {
+  getTripData(): TripDataType {
     return this.trip;
+  }
+
+  getTripStack(): Observable<TripDataType[]> {
+    return new BehaviorSubject(this.tripStack);
   }
 
   addTripToStack(): void {
@@ -38,9 +57,16 @@ export class TripDataService {
     this.tripStack?.push(this.trip);
   }
 
-  deleteFromStack(...idArray: number[]): void {
+  deleteFromStack(id: number): void {
+    this.tripStack = this.tripStack.filter((elem) => {
+      if (elem.id === id) return false;
+      return true;
+    });
+  }
+
+  saveFromStack(...idArray: number[]): void {
     const deletedArray: TripDataType[] = [];
-    this.tripStack?.filter((elem) => {
+    const tempArray = this.tripStack.filter((elem) => {
       let unEqual = true;
       idArray.forEach((id) => {
         if (elem.id === id) {
@@ -50,8 +76,9 @@ export class TripDataService {
       });
       return unEqual;
     });
+    this.tripStack = tempArray;
     // save in history
-    this.history.saveHistory(deletedArray);
+    // this.history.saveHistory(deletedArray);
   }
 
   addNewTrip(): void {
@@ -60,10 +87,32 @@ export class TripDataService {
       completed: false,
       // data from main
       mainData: this.mainData.getMainFormData(),
-      // data from selectFlight
-      ticketsData: {},
-      // data from passengers
-      passengersData: this.passengersData,
+      // data from selectFlight !!!(now mocked)!!!
+      ticketsData: {
+        success: true,
+        currency: 'eur',
+        data: [
+          {
+            origin: 'string',
+            destination: 'string',
+            origin_airport: 'string',
+            destination_airport: 'string',
+            price: 100,
+            airline: 'string',
+            flight_number: 'FR 1925',
+            departure_at: 'string',
+            return_at: 'string',
+            duration: 0,
+            transfers: 0,
+            return_transfers: 0,
+            duration_to: 0,
+            duration_back: 0,
+            link: 'string',
+          },
+        ],
+      },
+      // data from passengers !!!(now mocked)!!!
+      passengersData: this.passengersData.getPassengersData(),
     };
   }
 

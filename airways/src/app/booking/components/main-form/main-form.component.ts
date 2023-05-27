@@ -10,6 +10,7 @@ import { CityDateType } from '../../models/city-data-type.model';
 import { FormDataService } from '../../services/form-data.service';
 import { changeIcon } from '../../../../assets/icons/Vector';
 import { AirportsDataType } from '../../models/airports-data-type';
+import { TripDataService } from '../../services/trip-data.service';
 
 @Component({
   selector: 'app-main-form',
@@ -52,6 +53,7 @@ export class MainFormComponent implements OnInit {
     private router: Router,
     private aviasalesApiService: AviasalesApiService,
     private formDataService: FormDataService,
+    private tripData: TripDataService,
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer
   ) {
@@ -91,6 +93,9 @@ export class MainFormComponent implements OnInit {
   public submit(): void {
     if (this.form.valid) {
       this.formDataService.setMainFormData(this.form.getRawValue());
+      this.tripData.addNewTrip();
+      // should delete below string
+      this.tripData.addTripToStack();
       this.router.navigate(['/select-flight']);
     }
   }
