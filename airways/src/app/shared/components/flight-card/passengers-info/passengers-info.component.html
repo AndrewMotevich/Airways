@@ -1,0 +1,14 @@
+<ng-container *ngIf="passengers">
+  <ul class="passengers-list">
+    <li *ngFor="let person of passengers" class="person">
+      <h4>{{ person.firstName }} {{ person.lastName }}</h4>
+      <p *ngIf="person.checkedInBag; else nobag">1 checked bag (total {{ person.checkedInBag }} kg) included</p>
+      <p>1 cabin bag + 1 personal item(max. 8kg) included</p>
+      <p>Seat 19E</p>
+    </li>
+    
+    
+  </ul>
+</ng-container>
+
+<ng-template #nobag>No checked bag included</ng-template>

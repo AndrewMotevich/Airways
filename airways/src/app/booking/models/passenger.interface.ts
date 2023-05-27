@@ -10,3 +10,9 @@ export interface IPassengerDetails {
   checkedInBag?: any;
 }
 
+export type TPassengersInformation = {
+  passengers: IPassengerDetails[];
+  phoneCode: string;
+  phone: string;
+  email: string;
+}
