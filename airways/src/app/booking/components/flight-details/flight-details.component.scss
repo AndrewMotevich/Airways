@@ -71,7 +71,6 @@
 
     .time {
       @extend %text-subtitle-large;
-      color: $color-dark;
 
       @media screen and (min-width: 601px) {
         font-size: 30px;
@@ -124,15 +123,9 @@
         height: 20px;
       }
 
-      &_duration {
+      &_duration, &_direction {
         @extend %text-label-small;
-        color: $color-dark;
-      }
-
-      &_direction {
-        @extend %text-label-small;
-        color: $color-dark;
-      }
+      }      
     }
   }
 
