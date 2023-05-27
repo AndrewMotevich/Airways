@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnChanges, OnInit, Output } from '@angular/core';
 import { Observable, forkJoin, from, mergeMap, tap, Subject } from 'rxjs';
 
 import dayjs from 'dayjs';
@@ -13,7 +13,7 @@ import { PointModel, FormDataModel, FlightDirection } from '../../models/form-da
   styleUrls: ['./select-flight.component.scss'],
   providers: [FlightsDataService],
 })
-export class SelectFlightComponent implements OnInit {
+export class SelectFlightComponent implements OnInit, OnChanges {
   private departureDateSubject: Subject<string> = new Subject<string>();
 
   private returnDateSubject: Subject<string> = new Subject<string>();
@@ -22,54 +22,60 @@ export class SelectFlightComponent implements OnInit {
 
   private previousReturnDate: string;
 
+  flightData$: Observable<FormDataModel<PointModel>>;
+
   flightsDetailsDepart$!: Observable<IFlightDetails[]>;
 
-  departure: PointModel;
+  departure: PointModel = { title: '', code: '' };
 
   ticketsDataDepart: { date: string; cost: string }[] = [];
 
   flightsDetailsReturn$!: Observable<IFlightDetails[]>;
 
-  arrival: PointModel;
+  arrival: PointModel = { title: '', code: '' };
 
   ticketsDataReturn: { date: string; cost: string }[] = [];
 
-  @Output() departureDate: string;
+  @Output() departureDate: string = '';
 
-  @Output() returnDate: string;
+  @Output() returnDate: string = '';
 
   constructor(
     private flightsDataService: FlightsDataService,
     private formDataService: FormDataService
   ) {
-    const formData: FormDataModel<PointModel> = this.formDataService.getMainFormData();
-    this.departure =
-      formData.from === null
-        ? { title: '', code: '' }
-        : { title: formData.from.title, code: formData.from.code };
-    this.arrival =
-      formData.destination === null
-        ? { title: '', code: '' }
-        : { title: formData.destination.title, code: formData.destination.code };
+    this.flightData$ = this.formDataService.getObservableMainFormData();
 
-    this.departureDate = dayjs(formData?.dateStart).format('YYYY-MM-DD').toString() ?? '';
-    this.returnDate = dayjs(formData?.dateEnd).format('YYYY-MM-DD').toString() ?? '';
+    this.flightData$.subscribe((formData: FormDataModel<PointModel>) => {
+      this.departure =
+        formData.from === null
+          ? { title: '', code: '' }
+          : { title: formData.from.title, code: formData.from.code };
+      this.arrival =
+        formData.destination === null
+          ? { title: '', code: '' }
+          : { title: formData.destination.title, code: formData.destination.code };
+
+      this.departureDate = dayjs(formData?.dateStart).format('YYYY-MM-DD').toString() ?? '';
+      this.returnDate = dayjs(formData?.dateEnd).format('YYYY-MM-DD').toString() ?? '';
+    });
+
     this.previousDepartureDate = '';
     this.previousReturnDate = '';
   }
 
   ngOnInit(): void {
-    this.departureDateSubject.subscribe((date: string) => {
-      this.departureDate = date;
-      this.fetchFlightsData();
-    });
-
-    this.returnDateSubject.subscribe((date: string) => {
-      this.returnDate = date;
+    this.formDataService.flightData$.subscribe((flightData) => {
+      this.departureDate = dayjs(flightData?.dateStart).format('YYYY-MM-DD').toString() ?? '';
+      this.returnDate = dayjs(flightData?.dateEnd).format('YYYY-MM-DD').toString() ?? '';
       this.fetchFlightsData();
     });
 
     this.fetchFlightsData();
+  }
+
+  ngOnChanges(): void {
+    console.log(this.formDataService.getMainFormData());
   }
 
   private fetchFlightsData(): void {

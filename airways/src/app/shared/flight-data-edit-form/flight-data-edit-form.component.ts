@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { EditFormService } from '../../auth/services/edit-form.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { EditFormService } from '../../auth/services/edit-form.service';
   styleUrls: ['./flight-data-edit-form.component.scss'],
 })
 export class FlightDataEditFormComponent {
-  isEditFormOpen$ = this.editFormService.isEditFormOpen$;
+  isEditFormOpen$: Observable<boolean> = this.editFormService.isEditFormOpen$;
 
   constructor(private editFormService: EditFormService) {}
 }
