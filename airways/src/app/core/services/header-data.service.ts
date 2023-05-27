@@ -12,9 +12,13 @@ export class HeaderDataService {
 
   private themeSubject$: BehaviorSubject<string> = new BehaviorSubject<string>(this.theme);
 
-  private dateFormatSubject$: BehaviorSubject<string> = new BehaviorSubject<string>(EDateFormat.MM_DD_YYYY);
+  private dateFormatSubject$: BehaviorSubject<string> = new BehaviorSubject<string>(
+    EDateFormat.MM_DD_YYYY
+  );
 
-  private currentCurrencySubject$: BehaviorSubject<string> = new BehaviorSubject<string>(ECurrency.EUR);
+  private currentCurrencySubject$: BehaviorSubject<ECurrency> = new BehaviorSubject<ECurrency>(
+    ECurrency.EUR
+  );
 
   get currentTheme(): BehaviorSubject<string> {
     return this.themeSubject$;
@@ -24,9 +28,9 @@ export class HeaderDataService {
     return this.dateFormatSubject$;
   }
 
-  get currentCurrency$(): BehaviorSubject<string> {
+  get currentCurrency$(): BehaviorSubject<ECurrency> {
     return this.currentCurrencySubject$;
-  }  
+  }
 
   toggleTheme(): void {
     const currentTheme: string = this.theme === THEME.DARK ? THEME.LIGHT : THEME.DARK;
@@ -38,7 +42,7 @@ export class HeaderDataService {
     this.dateFormatSubject$.next(dFormat);
   }
 
-  setCurrency(currency: string): void {
+  setCurrency(currency: ECurrency): void {
     this.currentCurrencySubject$.next(currency);
   }
 }

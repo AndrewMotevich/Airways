@@ -1,0 +1,66 @@
+<div class="page-wrapper">
+  <div class="cart-table-wrapper">
+    <h2>User account page</h2>
+
+    <div class="table-wrapper">
+      <div class="table">
+        <div class="table-header">
+          <p>
+            <span style="padding-left: 30px;">No.</span>
+            <span class="arrow-icons">
+              <mat-icon>arrow_drop_up</mat-icon>
+              <mat-icon>arrow_drop_down</mat-icon>
+            </span>
+          </p>
+          <p>Flight
+            <span class="arrow-icons">
+              <mat-icon>arrow_drop_up</mat-icon>
+              <mat-icon>arrow_drop_down</mat-icon>
+            </span>
+          </p>
+          <p>Type trip <span class="arrow-icons">
+              <mat-icon>arrow_drop_up</mat-icon>
+              <mat-icon>arrow_drop_down</mat-icon>
+            </span></p>
+          <p>Data & time <span class="arrow-icons">
+              <mat-icon>arrow_drop_up</mat-icon>
+              <mat-icon>arrow_drop_down</mat-icon>
+            </span></p>
+          <p>Passengers</p>
+          <p>Price <span class="arrow-icons">
+              <mat-icon>arrow_drop_up</mat-icon>
+              <mat-icon>arrow_drop_down</mat-icon>
+            </span></p>
+        </div>
+
+
+        <div class="spinner-wrapper">
+          <mat-spinner *ngIf="this.historyApi.isLoading"></mat-spinner>
+        </div>
+        <div class="table-content" *ngFor="let trip of currentHistoryStack, index as i" routerLink="/summary">
+          <p>
+            <span style="padding-left: 30px;">{{trip.ticketsData.data[0].flight_number}}</span>
+          </p>
+          <p>{{trip.mainData.from?.title}} - {{trip.mainData.destination?.title}}</p>
+          <p>{{trip.mainData.roundedTrip | roundedTrip}}</p>
+          <p class="date">
+            <span>{{trip.mainData.dateStart?.toString() | date}}, 8:40 -
+              12:00</span>
+            <span *ngIf="trip.mainData.roundedTrip !== 'one'">{{trip.mainData.dateEnd?.toString() | date}},
+              7:40 - 11:00</span>
+          </p>
+          <p class="passengers"><span>{{trip.mainData.adult}} x Adult</span><span
+              *ngIf="trip.mainData.child !== 0">{{trip.mainData.child}}
+              x
+              Child</span>
+            <span *ngIf="trip.mainData.infant !== 0">{{trip.mainData.infant}} x Infant</span>
+          </p>
+          <p class="price"><span>&#8364; {{elemSum(trip)}}</span>
+          </p>
+        </div>
+        <mat-divider class="divider"></mat-divider>
+      </div>
+    </div>
+
+  </div>
+</div>

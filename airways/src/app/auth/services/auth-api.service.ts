@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { tap, Observable } from 'rxjs';
+import { tap, Observable, BehaviorSubject, mergeMap } from 'rxjs';
 import { AuthFormDataService } from './auth-form-data.service';
 import { ModalWindowService } from './modal-window.service';
 import { RegisterFormDataType } from '../models/login-form-data-type.model';
@@ -25,7 +25,7 @@ function parseJwt(token: string): { firstName: string } {
 export class AuthApiService {
   private isLogin = false;
 
-  accessToken = '';
+  private accessToken = '';
 
   tokenData?: { email: string; firstName: string; lastName: string };
 
@@ -42,6 +42,8 @@ export class AuthApiService {
   getIsLogin(): boolean {
     return this.isLogin;
   }
+
+  getAccessToken = new BehaviorSubject(this.accessToken).pipe(mergeMap(() => this.refresh()));
 
   register(): Observable<{ message: string }> {
     const registerData = this.authLoginData.getRegisterFormData() as RegisterFormDataType;

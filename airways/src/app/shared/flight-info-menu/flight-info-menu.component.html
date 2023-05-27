@@ -1,1 +1,15 @@
-<p>flight-info-menu works!</p>
+<div class="flight-info-menu">
+  <div class="container">
+    <div class="flight-info-group">
+      <div class="cities">
+        {{departure.title}} <img class='from-to-icon' src="/assets/icons/return_trip.png" alt="to"> {{arrival.title}}
+      </div>
+      <div class="dates">
+        Return <div class="divider--dot"></div> {{departureDate}} - {{returnDate}} <div class="divider--dot"></div>
+        {{passengersCount}} <img class='passengers-icon' src="/assets/icons/icon-passengers--black.png"
+          alt="passengers">
+      </div>
+      <button mat-stroked-button class="btn" (click)="toggleEditForm()">Edit </button>
+    </div>
+  </div>
+</div>

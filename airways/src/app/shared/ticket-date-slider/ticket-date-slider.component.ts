@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
 import dayjs from 'dayjs';
+import { ECurrency } from '../../core/models/currency.interface';
 
 export const enum CurrentDateStateEnum {
   PAST = 'past',
@@ -45,6 +46,8 @@ export class TicketDateSliderComponent implements OnChanges {
     });
   }
 
+  @Input() currency!: ECurrency;
+
   @Output() nextDateButtonClick: EventEmitter<void> = new EventEmitter<void>();
 
   @Output() prevDateButtonClick: EventEmitter<void> = new EventEmitter<void>();
@@ -54,6 +57,13 @@ export class TicketDateSliderComponent implements OnChanges {
   }
 
   isDisablePrevBtn: boolean = false;
+
+  boundColor: string = 'rgb(255, 153, 0)';
+
+  selectedDates: { date: string; cost: string | null }[] = [];
+
+  dateStates: CurrentDateStateEnum[] = [];
+
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['selectedDate'] && this.selectedDate) {
@@ -66,10 +76,5 @@ export class TicketDateSliderComponent implements OnChanges {
       this.prevDateButtonClick.emit();
     }
   }
-  
-  boundColor: string = 'rgb(255, 153, 0)';
 
-  selectedDates: { date: string; cost: string | null }[] = [];
-
-  dateStates: CurrentDateStateEnum[] = [];
 }

@@ -5,10 +5,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 import { BehaviorSubject, Subscription } from 'rxjs';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalWindowService } from '../../../auth/services/modal-window.service';
 import { AuthApiService } from '../../../auth/services/auth-api.service';
 import { HeaderDataService } from '../../services/header-data.service';
+import { TripDataService } from '../../../booking/services/trip-data.service';
 import { THEME } from '../../models/theme.interface';
+import { ECurrency } from '../../models/currency.interface';
 
 @Component({
   selector: 'app-header',
@@ -24,7 +27,14 @@ import { THEME } from '../../models/theme.interface';
 export class HeaderComponent implements OnInit, OnDestroy {
   currentUrl: string = '';
 
-  currentCurrency$: BehaviorSubject<string>;
+  basketQnt: number = 0;
+
+  headerData = new FormGroup({
+    dateFormat: new FormControl<string>('', [Validators.required]),
+    currencyFormat: new FormControl<string>('', [Validators.required]),
+  });
+
+  currentCurrency$: BehaviorSubject<ECurrency>;
 
   currentDateFormat$: BehaviorSubject<string>;
 
@@ -40,11 +50,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     public headerDataService: HeaderDataService,
     public authApiService: AuthApiService,
     private snackBar: MatSnackBar,
+    private tripData: TripDataService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
   ) {
-    this.matIconRegistry.addSvgIcon('icon-logo',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/img/logo.svg'));
+    this.matIconRegistry.addSvgIcon(
+      'icon-logo',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/img/logo.svg')
+    );
 
     this.currentCurrency$ = this.headerDataService.currentCurrency$;
     this.currentDateFormat$ = this.headerDataService.currentDateFormat$;
@@ -61,10 +74,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.isMainPage = url === '/';
       }
     });
+
+    this.tripData.getTripStack.subscribe((res) => {
+      this.basketQnt = res.length;
+    });
+
     this.subscriptions?.add(routerSubscribe);
 
-    const headerDataServiceSubscribe = this.headerDataService.currentTheme.subscribe(theme => {
-      this.isDarkMode = (theme === THEME.DARK)
+    const headerDataServiceSubscribe = this.headerDataService.currentTheme.subscribe((theme) => {
+      this.isDarkMode = theme === THEME.DARK;
     });
     this.subscriptions?.add(headerDataServiceSubscribe);
   }

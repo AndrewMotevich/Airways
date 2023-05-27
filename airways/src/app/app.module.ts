@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainPageModule } from './booking/pages/main-page/main-page.module';
 import { CoreModule } from './core/modules/core/core.module';
+import { ShoppingCartPageModule } from './booking/pages/shopping-cart-page/shopping-cart-page.module';
 import { AppDateAdapter } from './shared/utils/date-format-adapter';
 import { FLIGHT_DATE_FORMATS } from './shared/constants';
 
@@ -19,14 +20,15 @@ import { FLIGHT_DATE_FORMATS } from './shared/constants';
     BrowserAnimationsModule,
     MainPageModule,
     CoreModule,
+    ShoppingCartPageModule,
   ],
   providers: [
     {
       provide: DateAdapter,
       useClass: AppDateAdapter,
-      deps: [MAT_DATE_LOCALE]
+      deps: [MAT_DATE_LOCALE],
     },
-    { provide: MAT_DATE_FORMATS, useValue: FLIGHT_DATE_FORMATS }
+    { provide: MAT_DATE_FORMATS, useValue: FLIGHT_DATE_FORMATS },
   ],
   bootstrap: [AppComponent],
 })
