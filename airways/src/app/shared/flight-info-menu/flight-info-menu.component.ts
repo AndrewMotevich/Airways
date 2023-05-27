@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import dayjs from 'dayjs';
+import { Observable } from 'rxjs';
 import { FormDataModel, PointModel } from '../../booking/models/form-data.model';
 import { FormDataService } from '../../booking/services/form-data.service';
 import { EditFormService } from '../../auth/services/edit-form.service';
@@ -10,30 +11,35 @@ import { EditFormService } from '../../auth/services/edit-form.service';
   styleUrls: ['./flight-info-menu.component.scss'],
 })
 export class FlightInfoMenuComponent {
-  departure: PointModel;
+  flightData$: Observable<FormDataModel<PointModel>>;
 
-  arrival: PointModel;
+  departure: PointModel = { title: '', code: '' };
 
-  departureDate: string;
+  arrival: PointModel = { title: '', code: '' };
 
-  returnDate: string;
+  departureDate: string = '';
 
-  passengersCount: number;
+  returnDate: string = '';
+
+  passengersCount: number = 0;
 
   constructor(private formDataService: FormDataService, private editFormService: EditFormService) {
-    const formData: FormDataModel<PointModel> = this.formDataService.getMainFormData();
-    this.departure =
-      formData.from === null
-        ? { title: '', code: '' }
-        : { title: formData.from.title, code: formData.from.code };
-    this.arrival =
-      formData.destination === null
-        ? { title: '', code: '' }
-        : { title: formData.destination.title, code: formData.destination.code };
+    this.flightData$ = this.formDataService.getObservableMainFormData();
 
-    this.departureDate = dayjs(formData?.dateStart).format('DD MMM').toString() ?? '';
-    this.returnDate = dayjs(formData?.dateEnd).format('DD MMM').toString() ?? '';
-    this.passengersCount = formData.passengers ?? 0;
+    this.flightData$.subscribe((formData: FormDataModel<PointModel>) => {
+      this.departure =
+        formData.from === null
+          ? { title: '', code: '' }
+          : { title: formData.from.title, code: formData.from.code };
+      this.arrival =
+        formData.destination === null
+          ? { title: '', code: '' }
+          : { title: formData.destination.title, code: formData.destination.code };
+
+      this.departureDate = dayjs(formData?.dateStart).format('YYYY-MM-DD').toString() ?? '';
+      this.returnDate = dayjs(formData?.dateEnd).format('YYYY-MM-DD').toString() ?? '';
+      this.passengersCount = formData.passengers ?? 0;
+    });
   }
 
   toggleEditForm(): void {
