@@ -1,19 +1,20 @@
 <section class="flights-summary">
-  <app-flight-card [passengers]="passengersInfo" [flight]="flightDetails"></app-flight-card>
-  <app-flight-card [passengers]="passengersInfo" [flight]="flightDetails"></app-flight-card>  
+  <div>
+    <app-flight-card [passengers]="passengersInfo" [flight]="flightDetails"></app-flight-card>
+  </div>
+  <div>
+    <app-flight-card [passengers]="passengersInfo" [flight]="flightDetails"></app-flight-card>
+    <app-flight-fare
+      [adult]="adultTotal"
+      [child]="childTotal"
+      [infant]="infantTotal"
+      [price]="ticketPrice"
+    ></app-flight-fare>
+  </div>
 </section>
 
-<section>
-  1 x Adult Fare 
-  Fare 
-Tax & Service Charge  
-
-1 x Child Fare 
-
-1 x Infant Fare 
-€98.00
-Fare 
-€88.00
-Tax & Service Charge  
-€10.00
+<section class="flight-action">
+  <a [routerLink]="['/booking']">Back</a>
+  <button mat-stroked-button (click)="addToCart()" class="btn">Add to order cart</button>
+  <button mat-raised-button color="primary" (click)="onBuy()" class="btn">Buy</button>
 </section>
