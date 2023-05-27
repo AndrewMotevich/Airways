@@ -4,10 +4,10 @@ export interface FormDataModel<T> {
   destination: T | null;
   dateStart: string | null;
   dateEnd: string | null;
-  passengers: number | null;
-  adult: number | null;
-  child: number | null;
-  infant: number | null;
+  passengers: number;
+  adult: number;
+  child: number;
+  infant: number;
 }
 
 export interface PointModel {

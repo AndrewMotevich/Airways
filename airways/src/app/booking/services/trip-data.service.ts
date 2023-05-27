@@ -21,10 +21,10 @@ export class TripDataService {
       destination: null,
       dateStart: null,
       dateEnd: null,
-      passengers: null,
-      adult: null,
-      child: null,
-      infant: null,
+      passengers: 1,
+      adult: 1,
+      child: 0,
+      infant: 0,
     },
     // data from selectFlight
     ticketsData: {

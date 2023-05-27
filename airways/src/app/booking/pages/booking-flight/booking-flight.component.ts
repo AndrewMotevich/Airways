@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import dayjs from 'dayjs';
+import { Subscription } from 'rxjs';
 import { MAX_PHONE_LENGTH } from '../../../shared/constants';
 import { TPassengersData } from '../../models/passengers-data.interface';
 import { PassengersDataService } from '../../services/passengers-data.service';
+import { FormDataService } from '../../services/form-data.service';
 
 @Component({
   selector: 'app-booking-flight',
@@ -21,7 +23,22 @@ export class BookingFlightComponent implements OnInit {
 
   currentPhoneCode = 'CY';
 
-  constructor(private fb: FormBuilder, private passengersService: PassengersDataService, private router: Router) { }
+  subscription: Subscription;
+
+  constructor(
+    private fb: FormBuilder,
+    private passengersService: PassengersDataService,
+    private router: Router,
+    private dataServise: FormDataService
+  ) {
+    this.subscription = this.dataServise.flightData$.subscribe(data => {
+      if (!data)
+        return;
+
+      const { adult, child, infant } = data;
+      this.passengersData = { adult, child, infant };
+    });
+  }
 
   ngOnInit(): void {
     this.passengersFormGroup = this.fb.nonNullable.group({
@@ -72,7 +89,6 @@ export class BookingFlightComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.passengersFormGroup?.value);
     this.passengersService.setPassengersData(this.passengersFormGroup?.value);
     this.router.navigateByUrl('/summary');
   }
