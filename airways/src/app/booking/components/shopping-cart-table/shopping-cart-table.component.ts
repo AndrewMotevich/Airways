@@ -100,7 +100,6 @@ export class ShoppingCartTableComponent implements OnInit {
     this.mainFormService.setMainFormData(
       this.currentTrip.mainData as unknown as FormDataModel<string>
     );
-    this.mainFormService.flightData$.subscribe((res) => console.log(res));
   }
 
   saveItems(): void {
