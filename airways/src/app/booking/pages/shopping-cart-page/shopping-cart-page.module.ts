@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
 import { CustomPipesModule } from 'src/app/shared/custom-pipes.module';
@@ -34,6 +35,7 @@ import { UserAccountTableComponent } from '../../components/user-account-table/u
     MatDividerModule,
     MatMenuModule,
     MatInputModule,
+    MatSnackBarModule,
     RouterModule,
     CustomPipesModule,
   ],

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormDataModel } from 'src/app/booking/models/form-data.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TripDataService } from '../../services/trip-data.service';
 import { TripDataType } from '../../models/trip-data-type';
 import { HeaderDataService } from '../../../core/services/header-data.service';
@@ -29,13 +30,22 @@ export class ShoppingCartTableComponent implements OnInit {
     private tripData: TripDataService,
     public headerService: HeaderDataService,
     private passengersService: PassengersDataService,
-    private mainFormService: FormDataService
+    private mainFormService: FormDataService,
+    private snackBar: MatSnackBar
+
   ) {
     this.headerService.currentCurrency$.subscribe((res) => {
       this.currency = res;
     });
     this.tripData.getTripData.subscribe((res) => {
       this.currentTrip = res;
+    });
+  }
+
+  openSnack(): void {
+    this.snackBar.open('Successfully payment, item(s) added to history' || 'Error', 'Ok', {
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
     });
   }
 
@@ -117,6 +127,7 @@ export class ShoppingCartTableComponent implements OnInit {
         checked: false,
       }));
     });
+    this.openSnack();
   }
 
   // eslint-disable-next-line class-methods-use-this
