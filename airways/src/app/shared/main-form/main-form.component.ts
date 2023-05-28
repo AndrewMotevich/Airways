@@ -13,6 +13,7 @@ import { changeIcon } from '../../../assets/icons/Vector';
 import { AirportsDataType } from '../../booking/models/airports-data-type';
 import { TripDataService } from '../../booking/services/trip-data.service';
 import { StepperService } from '../services/stepper.service';
+import { TicketsDataService } from '../../booking/services/tickets-data.service';
 
 @Component({
   selector: 'app-main-form',
@@ -60,7 +61,8 @@ export class MainFormComponent implements OnInit {
     private tripData: TripDataService,
     private iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer,
-    private stepper: StepperService
+    private stepper: StepperService,
+    private ticketsDataService: TicketsDataService
   ) {
     this.iconRegistry.addSvgIconLiteral(
       'change-icon',
@@ -122,6 +124,8 @@ export class MainFormComponent implements OnInit {
   }
 
   public submit(): void {
+    this.ticketsDataService.setTickets([]);
+
     if (this.form.get('roundedTrip')?.value === 'one') {
       this.form.patchValue({
         'dateEnd': this.form.get('dateStart')?.value,
