@@ -4,11 +4,33 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class StepperService {
+  init: boolean = false;
+
+  canNavigate: boolean = false;
+
   stepperStatus = {
-    flight: { edit: false, completed: false, disabled: false },
-    passengers: { edit: false, completed: false, disabled: false },
-    summary: { edit: false, completed: false, disabled: false },
+    flight: { edit: true, completed: false, disabled: false },
+    passengers: { edit: false, completed: false, disabled: true },
+    summary: { edit: false, completed: false, disabled: true },
   };
+
+  editStepOne(): void {
+    this.clearEditStepperStatus();
+    this.stepperStatus.flight.edit = true;
+    this.stepperStatus.flight.completed = false;
+  }
+
+  editStepTwo(): void {
+    this.clearEditStepperStatus();
+    this.stepperStatus.passengers.edit = true;
+    this.stepperStatus.passengers.completed = false;
+  }
+
+  editStepThree(): void {
+    this.clearEditStepperStatus();
+    this.stepperStatus.summary.edit = true;
+    this.stepperStatus.summary.completed = false;
+  }
 
   setStepOne(): void {
     this.stepperStatus.flight.edit = true;
@@ -30,5 +52,21 @@ export class StepperService {
     this.stepperStatus.passengers.completed = true;
     this.stepperStatus.summary.disabled = false;
     this.stepperStatus.summary.edit = true;
+  }
+
+  clearStepperStatus(): void {
+    this.stepperStatus = {
+      flight: { edit: true, completed: false, disabled: false },
+      passengers: { edit: false, completed: false, disabled: true },
+      summary: { edit: false, completed: false, disabled: true },
+    };
+  }
+
+  clearEditStepperStatus(): void {
+    this.stepperStatus = {
+      flight: { edit: false, completed: true, disabled: false },
+      passengers: { edit: false, completed: true, disabled: false },
+      summary: { edit: false, completed: true, disabled: false },
+    };
   }
 }

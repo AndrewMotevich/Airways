@@ -56,6 +56,7 @@ export class TripDataService {
 
   addTripToStack(): void {
     this.trip.completed = true;
+    this.updateTrip(this.trip);
     this.tripStack?.push(this.trip);
     this.getTripStack.next(this.tripStack);
   }
