@@ -15,7 +15,7 @@ export const enum CurrentDateStateEnum {
 export class TicketDateSliderComponent implements OnChanges {
   @Input() selectedDate!: string;
 
-  @Input() set ticketsData(value: { date: string; cost: string }[] | null) {
+  @Input() set ticketsData(value: { date: string; cost: string; seats: number }[] | null) {
     const dates = [
       dayjs(this.selectedDate).subtract(2, 'day'),
       dayjs(this.selectedDate).subtract(1, 'day'),
@@ -25,7 +25,11 @@ export class TicketDateSliderComponent implements OnChanges {
     ];
     this.selectedDates = dates.map((date) => {
       const ticket = value?.find((t) => t.date === date.format('YYYY-MM-DD'));
-      return { date: date.format('DD MMM dddd'), cost: ticket ? ticket.cost : null };
+      return {
+        date: date.format('DD MMM dddd'),
+        cost: ticket ? ticket.cost : null,
+        seats: ticket?.seats ?? 0,
+      };
     });
 
     this.dateStates = dates.map((date) => {
@@ -58,12 +62,9 @@ export class TicketDateSliderComponent implements OnChanges {
 
   isDisablePrevBtn: boolean = false;
 
-  boundColor: string = 'rgb(255, 153, 0)';
-
-  selectedDates: { date: string; cost: string | null }[] = [];
+  selectedDates: { date: string; cost: string | null; seats: number }[] = [];
 
   dateStates: CurrentDateStateEnum[] = [];
-
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['selectedDate'] && this.selectedDate) {
@@ -76,5 +77,4 @@ export class TicketDateSliderComponent implements OnChanges {
       this.prevDateButtonClick.emit();
     }
   }
-
 }

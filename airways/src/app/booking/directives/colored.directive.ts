@@ -1,7 +1,7 @@
 import { Directive, HostBinding, Input, OnInit } from '@angular/core';
 
 @Directive({
-  selector: '[appColored]'
+  selector: '[appColored]',
 })
 export class ColoredDirective implements OnInit {
   @Input('appColored') value?: number;
@@ -13,8 +13,7 @@ export class ColoredDirective implements OnInit {
   @HostBinding('class.enough') classEnough: boolean = false;
 
   ngOnInit(): void {
-    if (!this.value)
-      return;
+    if (!this.value) return;
 
     this.classPlenty = this.value >= 100;
 

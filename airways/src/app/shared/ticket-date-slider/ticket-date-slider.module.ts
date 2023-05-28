@@ -5,6 +5,7 @@ import { TicketDateCardComponent } from './ticket-date-card/ticket-date-card.com
 import { TicketDateSliderComponent } from './ticket-date-slider.component';
 import { DateFormatPipe } from '../../core/pipes/date-format.pipe';
 import { CustomCurrencyPipe } from '../../booking/pipe/custom-currency.pipe';
+import { ColoredDirective } from '../../booking/directives/colored.directive';
 
 @NgModule({
   declarations: [
@@ -12,8 +13,9 @@ import { CustomCurrencyPipe } from '../../booking/pipe/custom-currency.pipe';
     TicketDateSliderComponent,
     DateFormatPipe,
     CustomCurrencyPipe,
+    ColoredDirective,
   ],
   imports: [CommonModule, MatIconModule],
-  exports: [TicketDateSliderComponent, CustomCurrencyPipe],
+  exports: [TicketDateSliderComponent, CustomCurrencyPipe, ColoredDirective],
 })
 export class TicketDateSliderModule {}

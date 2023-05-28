@@ -101,6 +101,24 @@ export class MainFormComponent implements OnInit {
       );
       this.isLoading = false;
     });
+
+    this.formDataService.flightData$.subscribe((data) => {
+      if (data.from) {
+        this.form.patchValue({
+          roundedTrip: data.roundedTrip,
+          from: data.from ? `${data.from.title} ${data.from.code}` : null,
+          destination: data.destination
+            ? `${data.destination.title} ${data.destination.code}`
+            : null,
+          dateStart: data.dateStart,
+          dateEnd: data.dateEnd,
+          passengers: data.passengers,
+          adult: data.adult,
+          child: data.child,
+          infant: data.infant,
+        });
+      }
+    });
   }
 
   public submit(): void {

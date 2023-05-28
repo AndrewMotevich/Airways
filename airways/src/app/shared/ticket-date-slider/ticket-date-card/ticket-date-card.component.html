@@ -7,5 +7,5 @@
   <span class="card__date--day">{{card.date | dateFormat:'dddd'}}</span>
   <span class="card__cost">{{card.cost | customCurrency: this.currency }}</span>
   <img *ngIf="card.cost === null" src="assets/img/icon-doNotFly.png" alt="no tickets for this date">
-  <div class="bound" [style.background-color]="index === 2 ? boundColor : null"></div>
+  <div class="bound" [ngClass]="index === 2 ? boundColorClass : ''"></div>
 </div>
