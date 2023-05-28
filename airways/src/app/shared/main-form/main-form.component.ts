@@ -111,8 +111,6 @@ export class MainFormComponent implements OnInit {
     if (this.form.valid) {
       this.formDataService.setMainFormData(this.form.getRawValue() as FormDataModel<string>);
       this.tripData.addNewTrip();
-      // should delete below string
-      this.tripData.addTripToStack();
       this.router.navigate(['/select-flight']);
     }
   }

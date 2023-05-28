@@ -13,8 +13,10 @@ import { FormatPricePipe } from '../../pipe/format-price.pipe';
 import { SelectFlightComponent } from './select-flight.component';
 import { FlightDataEditFormComponent } from '../../../shared/flight-data-edit-form/flight-data-edit-form.component';
 import { SharedModule } from '../../../shared/shared.module';
+import { TicketsDataService } from '../../services/tickets-data.service';
 
 @NgModule({
+  providers: [TicketsDataService],
   declarations: [
     SelectFlightComponent,
     FlightDetailsComponent,

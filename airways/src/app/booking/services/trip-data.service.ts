@@ -113,6 +113,7 @@ export class TripDataService {
             duration_to: 0,
             duration_back: 0,
             link: 'string',
+            currency: 'ANY',
           },
         ],
       },

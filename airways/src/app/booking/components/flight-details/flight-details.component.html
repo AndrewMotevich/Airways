@@ -25,7 +25,7 @@
         <span class="offset">{{ flight.return_at | date : "z" }}</span>
         <span class="time">{{ flight.return_at | date : "HH:mm" }}</span>
       </span>
-      <span class="station">{{flight.destination}}</span>
+      <span class="station">{{flight.destination_airport}}</span>
     </div>
   </div>
   <div class="flight-order">
@@ -34,15 +34,26 @@
       <span class="flight-number_number">{{flight.airline}} {{flight.flight_number}}</span>
     </div>
     <div class="flight-info">
-      <div class="flight-availability" [appColored]="flight.seats">
-        {{flight.seats}} seats <br />
-        available
-      </div>
+      <ng-container *ngIf="!isSelected">
+        <div class="flight-availability" [appColored]="flight.seats">
+          {{flight.seats}} seats <br />
+          available
+        </div>
+      </ng-container>
       <div class="flight-price">
-        <span class="flight-price_label">Price</span>
-        <span class="flight-price_price">{{flight.price | currency | formatPrice}}</span>
+        <ng-container *ngIf="!isSelected">
+          <span class="flight-price_label">Price</span>
+        </ng-container>
+        <span class="flight-price_price">{{flight.price | customCurrency: this.flight.currency | formatPrice}}</span>
       </div>
     </div>
-    <button mat-button class="btn-with-gradient">Select</button>
+    <ng-container *ngIf="!isSelected; else editButtonTemplate">
+      <button mat-button class="btn-with-gradient" (click)="selectTicketHandler()"
+        [disabled]="isSelected">Select</button>
+    </ng-container>
+
+    <ng-template #editButtonTemplate>
+      <button mat-stroked-button class="button--edit" (click)="unselectTicket()">Edit</button>
+    </ng-template>
   </div>
 </section>
