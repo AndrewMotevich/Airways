@@ -1,0 +1,14 @@
+<section class="flights-summary">
+  <div>
+    <app-flight-card [passengers]="passengersInfo" [flight]="ticketFrom"></app-flight-card>
+  </div>
+  <div>
+    <app-flight-card [passengers]="passengersInfo" [flight]="ticketTo" *ngIf="ticketTo"></app-flight-card>
+    <app-flight-fare [passengersTotal]="passengersNumber" [price]="ticketPrice"
+      [currentCurrency]="ticketCurrency"></app-flight-fare>
+  </div>
+</section>
+
+<section class="flight-action">
+  <a [routerLink]="['/user-account']" class="back-link">Back</a>
+</section>

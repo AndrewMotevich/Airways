@@ -1,7 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { ECurrency } from 'src/app/core/models/currency.interface';
-import { HeaderDataService } from 'src/app/core/services/header-data.service';
 
 type TFareItem = {
   title: string;
@@ -9,15 +6,15 @@ type TFareItem = {
   price: number;
   tax: number;
   fare: number;
-}
+};
 
 @Component({
   selector: 'app-flight-fare',
   templateUrl: './flight-fare.component.html',
-  styleUrls: ['./flight-fare.component.scss']
+  styleUrls: ['./flight-fare.component.scss'],
 })
 export class FlightFareComponent implements OnInit {
-  @Input() passengersTotal!: { adult: number, child: number, infant: number };
+  @Input() passengersTotal!: { adult: number; child: number; infant: number };
 
   @Input() price!: number;
 
@@ -26,21 +23,21 @@ export class FlightFareComponent implements OnInit {
   priceDecrease: { [key: string]: number } = {
     adult: 1,
     child: 0.7,
-    infant: 0.5
-  }
+    infant: 0.5,
+  };
 
   taxDecrease: { [key: string]: number } = {
     adult: 0.4,
     child: 0.3,
-    infant: 0.2
-  }
+    infant: 0.2,
+  };
 
   total: number = 0;
 
   fareInfo: TFareItem[] = [];
 
   ngOnInit(): void {
-    Object.entries(this.passengersTotal).map(([key, count]) => {
+    Object.entries(this.passengersTotal).forEach(([key, count]) => {
       if (!count) return;
 
       const price = parseFloat((this.price * this.priceDecrease[key]).toFixed(2));
@@ -54,8 +51,8 @@ export class FlightFareComponent implements OnInit {
         count,
         price,
         tax,
-        fare
+        fare,
       });
-    })
+    });
   }
 }

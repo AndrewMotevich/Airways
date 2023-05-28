@@ -103,16 +103,14 @@ export class TripDataService {
     this.tripStack = tempArray;
     this.getTripStack.next(this.tripStack);
     // save in history
-    // this.history.saveHistory(deletedArray);
+    this.history.saveHistory(deletedArray);
   }
 
   addNewTrip(): void {
     this.trip = {
       id: Date.now(),
       completed: false,
-      // data from main
       mainData: this.mainData.getMainFormData(),
-      // data from selectFlight !!!(now mocked)!!!
       ticketsData: {
         success: true,
         currency: ECurrency.EUR,
