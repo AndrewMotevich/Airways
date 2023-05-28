@@ -11,6 +11,8 @@ import { TicketsDataService } from '../../services/tickets-data.service';
 export class FlightDetailsComponent {
   @Input() flight!: IFlightDetails;
 
+  @Input() allTicketsSelected!: boolean;
+
   isSelected: boolean = false;
 
   constructor(private ticketsDataService: TicketsDataService) {}

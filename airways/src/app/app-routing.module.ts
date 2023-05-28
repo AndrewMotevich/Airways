@@ -25,9 +25,10 @@ const routes: Routes = [
   },
   {
     path: 'summary',
-    loadChildren: () => import('./booking/pages/summary/summary.module').then((m) => m.SummaryModule),
-    //canActivate: [IsLoginGuard] 
-  },  
+    loadChildren: () =>
+      import('./booking/pages/summary/summary.module').then((m) => m.SummaryModule),
+    canActivate: [IsLoginGuard],
+  },
   {
     path: 'shopping-card',
     component: ShoppingCartPageComponent,
@@ -36,7 +37,7 @@ const routes: Routes = [
   {
     path: 'user-account',
     component: UserAccountPageComponent,
-    // canActivate: [IsLoginGuard]
+    canActivate: [IsLoginGuard],
   },
   { path: '404', component: Page404Component },
   { path: '**', redirectTo: '/404' },

@@ -6,12 +6,15 @@
         {{departure.title}} to {{arrival.title}}
       </span></h2>
     <section class="flight">
-      <app-ticket-date-slider [selectedDate]="departureDate" [ticketsData]="ticketsDataDepart"
-        [currency]="flightDepartureCurrency" (nextDateButtonClick)="handleClickOnNextDepartureDate()"
-        (prevDateButtonClick)="handleClickOnPrevDepartureDate()"></app-ticket-date-slider>
+      <ng-container *ngIf='!allDepartureTicketsSelected'>
+        <app-ticket-date-slider [selectedDate]="departureDate" [ticketsData]="ticketsDataDepart"
+          [currency]="flightDepartureCurrency" (nextDateButtonClick)="handleClickOnNextDepartureDate()"
+          (prevDateButtonClick)="handleClickOnPrevDepartureDate()"></app-ticket-date-slider>
+      </ng-container>
       <ng-container *ngIf="(flightsDetailsDepart$ | async) as flights; else noDataTemplate">
         <ng-container *ngIf="flights.length > 0; else noDataTemplate">
-          <app-flight-details *ngFor="let flight of flights" [flight]="flight"></app-flight-details>
+          <app-flight-details *ngFor="let flight of flights" [flight]="flight"
+            [allTicketsSelected]="allDepartureTicketsSelected"></app-flight-details>
         </ng-container>
       </ng-container>
       <ng-template #noDataTemplate>
@@ -22,17 +25,20 @@
     </section>
   </div>
 
-  <div class="return">
+  <div class="return" *ngIf="!isOneWay">
     <h2 class="direction-title"><img class='airplane-icon' src="assets/icons/airplane.png"><span>
         {{arrival.title}} to {{departure.title}}
       </span></h2>
     <section class="flight">
-      <app-ticket-date-slider [selectedDate]="returnDate" [ticketsData]="ticketsDataReturn"
-        [currency]="flightReturnCurrency" (nextDateButtonClick)="handleClickOnNextArrivalDate()"
-        (prevDateButtonClick)="handleClickOnPrevArrivalDate()"></app-ticket-date-slider>
+      <ng-container *ngIf='!allReturnTicketsSelected'>
+        <app-ticket-date-slider [selectedDate]="returnDate" [ticketsData]="ticketsDataReturn"
+          [currency]="flightReturnCurrency" (nextDateButtonClick)="handleClickOnNextArrivalDate()"
+          (prevDateButtonClick)="handleClickOnPrevArrivalDate()"></app-ticket-date-slider>
+      </ng-container>
       <ng-container *ngIf="(flightsDetailsReturn$ | async) as flights; else noDataTemplate">
         <ng-container *ngIf="flights.length > 0; else noDataTemplate">
-          <app-flight-details *ngFor="let flight of flights" [flight]="flight"></app-flight-details>
+          <app-flight-details *ngFor="let flight of flights" [flight]="flight"
+            [allTicketsSelected]="allReturnTicketsSelected"></app-flight-details>
         </ng-container>
       </ng-container>
     </section>

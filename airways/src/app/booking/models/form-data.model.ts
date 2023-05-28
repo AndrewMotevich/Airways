@@ -1,5 +1,5 @@
 export interface FormDataModel<T> {
-  roundedTrip: string | null;
+  roundedTrip: string;
   from: T | null;
   destination: T | null;
   dateStart: string | null;
