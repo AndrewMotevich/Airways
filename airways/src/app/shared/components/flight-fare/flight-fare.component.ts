@@ -21,7 +21,7 @@ export class FlightFareComponent implements OnInit {
 
   @Input() price!: number;
 
-  currency$: BehaviorSubject<ECurrency>;
+  @Input() currentCurrency!: string;
 
   priceDecrease: { [key: string]: number } = {
     adult: 1,
@@ -38,10 +38,6 @@ export class FlightFareComponent implements OnInit {
   total: number = 0;
 
   fareInfo: TFareItem[] = [];
-
-  constructor(private dataService: HeaderDataService) {
-    this.currency$ = this.dataService.currentCurrency$;
-  }
 
   ngOnInit(): void {
     Object.entries(this.passengersTotal).map(([key, count]) => {

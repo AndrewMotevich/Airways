@@ -8,6 +8,11 @@
 
   &_table {
     padding: 0.6rem 2.6rem;
+
+    @media screen and (max-width: 400px) {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
   }
 
   .line {
@@ -25,9 +30,16 @@
   .sub-line {
     display: flex;
     justify-content: space-between;
-    padding-left: 2.5rem;
     margin-top: 0;
     margin-bottom: 0.5rem;
+
+    @media screen and (max-width: 401px) {
+      padding-left: 2.5rem;
+    }
+
+    @media screen and (max-width: 400px) {
+      padding-left: 1rem;
+    }
   }
 
   ul {
@@ -36,21 +48,32 @@
   }
 
   .fare-total {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   padding: 1.2rem 2.6rem;
-   border-top: 1px solid $color-secondary50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
+    border-top: 1px solid $color-secondary50;
 
-   .title {
+    @media screen and (min-width: 400px) {
+      padding-left: 2.6rem;
+      padding-right: 2.6rem;
+    }
+
+    @media screen and (max-width: 400px) {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .title {
       @extend %text-title-medium;
       text-transform: uppercase;
-      margin: 0;      
-   }
-   
-   .price {
-       @extend %text-title-medium;
-       color: $color-primary;
-   }
+      margin: 0;
+    }
+
+    .price {
+      @extend %text-title-medium;
+      color: $color-primary;
+    }
   }
 }
