@@ -39,7 +39,7 @@ export class TripDataService {
   private tripStack: TripDataType[] = [];
 
   constructor(
-    private ticketsDataService: TicketsDataService,
+    private ticketsData: TicketsDataService,
     private mainData: FormDataService,
     private passengersData: PassengersDataService,
     private history: HistoryApiService
@@ -56,7 +56,7 @@ export class TripDataService {
 
   addTripToStack(): void {
     console.log('trip:', this.trip);
-    this.ticketsDataService.getObservableTickets().subscribe((res) => console.log(res));
+    this.ticketsData.getObservableTickets().subscribe((res) => console.log(res));
     this.trip.completed = true;
     this.updateTrip(this.trip);
     this.tripStack?.push(this.trip);

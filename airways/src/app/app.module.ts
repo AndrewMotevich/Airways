@@ -10,6 +10,7 @@ import { CoreModule } from './core/modules/core/core.module';
 import { ShoppingCartPageModule } from './booking/pages/shopping-cart-page/shopping-cart-page.module';
 import { AppDateAdapter } from './shared/utils/date-format-adapter';
 import { FLIGHT_DATE_FORMATS } from './shared/constants';
+import { TicketsDataService } from './booking/services/tickets-data.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +30,7 @@ import { FLIGHT_DATE_FORMATS } from './shared/constants';
       deps: [MAT_DATE_LOCALE],
     },
     { provide: MAT_DATE_FORMATS, useValue: FLIGHT_DATE_FORMATS },
+    TicketsDataService
   ],
   bootstrap: [AppComponent],
 })

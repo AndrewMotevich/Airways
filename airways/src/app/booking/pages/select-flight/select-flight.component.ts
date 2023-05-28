@@ -47,13 +47,13 @@ export class SelectFlightComponent implements OnInit {
 
   currency!: ECurrency;
 
-  ticketsDataDepart: { date: string; cost: string }[] = [];
+  ticketsDataDepart: { date: string; cost: string; seats: number }[] = [];
 
   flightsDetailsReturn$!: Observable<IFlightDetails[]>;
 
   arrival: PointModel = { title: '', code: '' };
 
-  ticketsDataReturn: { date: string; cost: string }[] = [];
+  ticketsDataReturn: { date: string; cost: string; seats: number }[] = [];
 
   flightDepartureCurrency!: ECurrency;
 
@@ -130,10 +130,8 @@ export class SelectFlightComponent implements OnInit {
       this.passengersCount = formData.passengers;
       this.isOneWay = formData.roundedTrip === 'one';
 
-      this.allDepartureTicketsSelected = this.passengersCount <= this.departureTicketsCount;
-
-      this.allReturnTicketsSelected = this.passengersCount <= this.returnTicketsCount;
-
+      this.allDepartureTicketsSelected = this.departureTicketsCount >= 1;
+      this.allReturnTicketsSelected = this.returnTicketsCount >= 1;
       this.allTicketsSelected = this.allDepartureTicketsSelected && this.allReturnTicketsSelected;
     });
 
@@ -146,9 +144,8 @@ export class SelectFlightComponent implements OnInit {
         (ticket) => ticket.destination_airport === this.departure.code
       ).length;
 
-      this.allDepartureTicketsSelected = this.passengersCount <= this.departureTicketsCount;
-
-      this.allReturnTicketsSelected = this.passengersCount <= this.returnTicketsCount;
+      this.allDepartureTicketsSelected = this.departureTicketsCount >= 1;
+      this.allReturnTicketsSelected = this.returnTicketsCount >= 1;
       this.allTicketsSelected = this.allDepartureTicketsSelected && this.allReturnTicketsSelected;
     });
   }
@@ -185,6 +182,7 @@ export class SelectFlightComponent implements OnInit {
               flightsData?.map((flight) => ({
                 date: dayjs(flight.departure_at).format('YYYY-MM-DD'),
                 cost: flight.price.toString(),
+                seats: flight.seats ?? 0,
               }))
             )
             .filter(Boolean);
@@ -246,6 +244,7 @@ export class SelectFlightComponent implements OnInit {
               flightsData?.map((flight) => ({
                 date: dayjs(flight.departure_at).format('YYYY-MM-DD'),
                 cost: flight.price.toString(),
+                seats: flight.seats ?? 0,
               }))
             )
             .filter(Boolean);

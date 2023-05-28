@@ -96,4 +96,15 @@
   bottom: 0px;
   height: 4px;
   width: 100%;
+  &.plenty {
+    background-color: $color-highlight-green30;
+  }
+
+  &.few {
+    background-color: $color-highlight-red30;
+  }
+
+  &.enough {
+    background-color: $color-highlight-yellow30;
+  }
 }
