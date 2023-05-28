@@ -20,13 +20,14 @@ export class FlightDetailsComponent {
   selectTicketHandler(): void {
     // здесь можно посмотреть, какие данные из билета сохраняются:
     // console.log(this.flight);
-    this.isSelected = true;
     this.ticketsDataService.updateTickets(this.flight);
+    this.isSelected = this.ticketsDataService.checkTicketSelected(this.flight);
     // здесь можно увидеть все сохраненные на данный момент билеты:
     // console.log(this.ticketsDataService.getTickets());
   }
 
   unselectTicket(): void {
     this.isSelected = false;
+    this.ticketsDataService.deleteTickets([this.flight]);
   }
 }

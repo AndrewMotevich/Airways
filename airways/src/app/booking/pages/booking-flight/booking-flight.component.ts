@@ -7,13 +7,13 @@ import { MAX_PHONE_LENGTH } from '../../../shared/constants';
 import { TPassengersData } from '../../models/passengers-data.interface';
 import { PassengersDataService } from '../../services/passengers-data.service';
 import { FormDataService } from '../../services/form-data.service';
+import { TicketsDataService } from '../../services/tickets-data.service';
 
 @Component({
   selector: 'app-booking-flight',
   templateUrl: './booking-flight.component.html',
-  styleUrls: ['./booking-flight.component.scss']
+  styleUrls: ['./booking-flight.component.scss'],
 })
-
 export class BookingFlightComponent implements OnInit {
   passengersData: TPassengersData = { adult: 2, child: 1, infant: 0 };
 
@@ -29,11 +29,11 @@ export class BookingFlightComponent implements OnInit {
     private fb: FormBuilder,
     private passengersService: PassengersDataService,
     private router: Router,
-    private dataServise: FormDataService
+    private dataService: FormDataService,
+    private ticketsDataService: TicketsDataService
   ) {
-    this.subscription = this.dataServise.flightData$.subscribe(data => {
-      if (!data)
-        return;
+    this.subscription = this.dataService.flightData$.subscribe((data) => {
+      if (!data) return;
 
       const { adult, child, infant } = data;
       this.passengersData = { adult, child, infant };
@@ -53,5 +53,10 @@ export class BookingFlightComponent implements OnInit {
   onSubmit(): void {
     this.passengersService.setPassengersData(this.passengersFormGroup?.value);
     this.router.navigateByUrl('/summary');
+  }
+
+  backClickHandler(): void {
+    this.ticketsDataService.setTickets([]);
+    this.router.navigateByUrl('/select-flight');
   }
 }

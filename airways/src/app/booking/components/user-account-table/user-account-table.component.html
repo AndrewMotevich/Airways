@@ -1,10 +1,10 @@
 <div class="page-wrapper">
-  <div class="cart-table-wrapper">
+  <div class="cart-table-wrapper section-bg">
     <h2>User account page</h2>
 
     <div class="table-wrapper">
       <div class="table">
-        <div class="table-header">
+        <div class="table-header table-head-bg">
           <p>
             <span style="padding-left: 30px;">No.</span>
             <span class="arrow-icons">
@@ -55,7 +55,7 @@
               Child</span>
             <span *ngIf="trip.mainData.infant !== 0">{{trip.mainData.infant}} x Infant</span>
           </p>
-          <p class="price"><span>&#8364; {{elemSum(trip)}}</span>
+          <p class="price"><span>{{'' | customCurrency:trip.ticketsData.data[0].currency}} {{elemSum(trip)}}</span>
           </p>
         </div>
         <mat-divider class="divider"></mat-divider>

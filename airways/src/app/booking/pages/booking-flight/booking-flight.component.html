@@ -6,7 +6,9 @@
       [maxLength]="maxLength"
     ></app-contact-details>
     <div class="passengers-form_btns">
-      <a routerLink="/select-flight">Back</a>
+      <button mat-button (click)="backClickHandler()">
+        Back
+      </button>
       <button
         mat-raised-button
         color="primary"
