@@ -2,12 +2,14 @@ import { Component, OnInit, Output } from '@angular/core';
 import { Observable, forkJoin, from, mergeMap, tap, Subject } from 'rxjs';
 
 import dayjs from 'dayjs';
+import { Router } from '@angular/router';
 import { IFlightDetails } from '../../models/flight-details.interface';
 import { FlightsDataService } from '../../services/flightsData.service';
 import { FormDataService } from '../../services/form-data.service';
 import { PointModel, FormDataModel, FlightDirection } from '../../models/form-data.model';
 import { ECurrency } from '../../../core/models/currency.interface';
 import { HeaderDataService } from '../../../core/services/header-data.service';
+import { TripDataService } from '../../services/trip-data.service';
 
 @Component({
   selector: 'app-select-flight',
@@ -54,6 +56,8 @@ export class SelectFlightComponent implements OnInit {
 
   flightReturnCurrency!: ECurrency;
 
+  allTicketsSelected: boolean = true;
+
   @Output() departureDate: string = '';
 
   @Output() returnDate: string = '';
@@ -61,7 +65,9 @@ export class SelectFlightComponent implements OnInit {
   constructor(
     private flightsDataService: FlightsDataService,
     private formDataService: FormDataService,
-    private headerDataService: HeaderDataService
+    private headerDataService: HeaderDataService,
+    private tripData: TripDataService,
+    private router: Router
   ) {
     this.flightData$ = this.formDataService.getObservableMainFormData();
 
@@ -264,5 +270,20 @@ export class SelectFlightComponent implements OnInit {
       this.returnDateSubject.next(prevDate);
     }
     this.formDataService.setFlightDataDate(dayjs(prevDate).toString(), FlightDirection.DEPARTURE);
+  }
+
+  private goToBookingPage(): void {
+    this.router.navigate(['/booking']);
+  }
+
+  goToMainFlightFormPage(): void {
+    this.router.navigate(['/']);
+  }
+
+  continueButtonHandler(): void {
+    // мне кажется, эту логику надо перенести в Booking Process Page
+    // this.tripData.addTripToStack();
+    // send form to store bucket and:
+    this.goToBookingPage();
   }
 }

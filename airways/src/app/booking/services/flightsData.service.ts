@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
+import dayjs from 'dayjs';
 import { IFlightsData } from '../models/flights-data.interface';
 import { IFlightDetails } from '../models/flight-details.interface';
 import { ECurrency } from '../../core/models/currency.interface';
@@ -40,6 +41,7 @@ export class FlightsDataService {
           ...item,
           seats: Math.trunc(Math.random() * 150),
           currency: response.currency,
+          return_at: dayjs(item.departure_at).add(item.duration, 'm').toString(),
         }))
       )
     );

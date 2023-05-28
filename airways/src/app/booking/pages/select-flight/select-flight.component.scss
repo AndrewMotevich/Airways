@@ -1,5 +1,15 @@
 @import "../../../../sass/abstracts/_variables";
 
+.select-flight {
+  .buttons-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4.3rem;
+    margin-top: 2.6rem;
+  }
+}
+
 .return {
   .direction-title {
     .airplane-icon {
