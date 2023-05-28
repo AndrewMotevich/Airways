@@ -59,7 +59,7 @@ export class SelectFlightComponent implements OnInit {
 
   flightReturnCurrency!: ECurrency;
 
-  isOneWay: boolean = false;
+  isOneWay!: boolean;
 
   passengersCount: number = 0;
 
@@ -103,6 +103,7 @@ export class SelectFlightComponent implements OnInit {
 
       this.departureDate = dayjs(formData?.dateStart).format('YYYY-MM-DD').toString() ?? '';
       this.returnDate = dayjs(formData?.dateEnd).format('YYYY-MM-DD').toString() ?? '';
+      this.isOneWay = formData.roundedTrip === 'one';
     });
 
     this.previousDepartureDate = '';
@@ -220,7 +221,7 @@ export class SelectFlightComponent implements OnInit {
         this.previousArrivalCode !== this.arrival.code ||
         this.previousDepartureCode !== this.departure.code ||
         this.previousReturnCurrency !== this.currency) &&
-      this.isOneWay
+      !this.isOneWay
     ) {
       const returnDates = [
         dayjs(this.returnDate).subtract(2, 'day').format('YYYY-MM-DD'),
