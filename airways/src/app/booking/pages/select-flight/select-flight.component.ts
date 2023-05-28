@@ -81,7 +81,6 @@ export class SelectFlightComponent implements OnInit {
     private flightsDataService: FlightsDataService,
     private formDataService: FormDataService,
     private headerDataService: HeaderDataService,
-    // private tripData: TripDataService,
     private ticketsDataService: TicketsDataService,
     private router: Router
   ) {
@@ -136,6 +135,7 @@ export class SelectFlightComponent implements OnInit {
     });
 
     this.ticketsData$.subscribe((tickets: IFlightDetails[]) => {
+      console.log(tickets);
       this.departureTicketsCount = tickets.filter(
         (ticket) => ticket.destination_airport === this.arrival.code
       ).length;
@@ -145,8 +145,14 @@ export class SelectFlightComponent implements OnInit {
       ).length;
 
       this.allDepartureTicketsSelected = this.departureTicketsCount >= 1;
-      this.allReturnTicketsSelected = this.returnTicketsCount >= 1;
+      this.allReturnTicketsSelected = this.isOneWay ? this.isOneWay : this.returnTicketsCount >= 1;
       this.allTicketsSelected = this.allDepartureTicketsSelected && this.allReturnTicketsSelected;
+      console.log(
+        this.allTicketsSelected,
+        this.allDepartureTicketsSelected,
+        this.allReturnTicketsSelected,
+        this.isOneWay
+      );
     });
   }
 
