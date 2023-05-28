@@ -6,7 +6,7 @@
       <div class="passenger-form_wrapper">
         <mat-form-field appearance="outline" *ngIf="firstName">
           <mat-label>First name</mat-label>
-          <input matInput type="text" formControlName="firstName" />
+          <input matInput type="text" formControlName="firstName" autocomplete="off"/>
           <mat-icon
             *ngIf="!(firstName.invalid && (firstName.dirty || firstName.touched))"
             matSuffix
@@ -33,7 +33,7 @@
 
         <mat-form-field appearance="outline" *ngIf="lastName">
           <mat-label>Last name</mat-label>
-          <input matInput type="text" formControlName="lastName" />
+          <input matInput type="text" formControlName="lastName" autocomplete="off"/>
           <mat-icon
             *ngIf="!(lastName.invalid && (lastName.dirty || lastName.touched))"
             matSuffix
@@ -43,6 +43,7 @@
             svgIcon="icon_info"
             class="icon-info"
             aria-label="Info icon"
+            showDelay="1000"
             ></mat-icon
           >
           <mat-icon
@@ -57,14 +58,14 @@
           >
         </mat-form-field>
 
-        <section class="gender-section" [class.error]="passenger.get('gender')?.hasError('required') && passenger.touched">
-          <mat-chip-listbox aria-label="Gender selection" class="gender" formControlName="gender">
+        <section class="gender-section" [class.error]="gender.hasError('required') && passenger.touched">
+          <mat-chip-listbox aria-label="Gender selection" class="gender" formControlName="gender" [value]="gender.value">
             <div>
-              <mat-chip-option class="gender-male" [selected]="passenger.get('gender')?.value === 'male'">Male</mat-chip-option>
-              <mat-chip-option class="gender-female" [selected]="passenger.get('gender')?.value === 'female'">Female</mat-chip-option>
+              <mat-chip-option class="gender-male" [selected]="isMale">Male</mat-chip-option>
+              <mat-chip-option class="gender-female" [selected]="!isMale">Female</mat-chip-option>
             </div>           
           </mat-chip-listbox>
-          <mat-error *ngIf="passenger.get('gender')?.hasError('required') && passenger.touched"
+          <mat-error *ngIf="gender.hasError('required') && passenger.touched"
              >This field is required</mat-error
            >
         </section>
@@ -83,6 +84,7 @@
             placeholder="MM/DD/YYYY"
             (click)="picker.open()"
             autocomplete="off"
+            readonly
           />
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>

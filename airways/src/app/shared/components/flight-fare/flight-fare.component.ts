@@ -40,11 +40,11 @@ export class FlightFareComponent implements OnInit {
     Object.entries(this.passengersTotal).forEach(([key, count]) => {
       if (!count) return;
 
-      const price = this.price * this.priceDecrease[key];
-      const tax = price * this.taxDecrease[key];
+      const price = parseFloat((this.price * this.priceDecrease[key]).toFixed(2));
+      const tax = parseFloat((price * this.taxDecrease[key]).toFixed(2));
       const fare = price - tax;
 
-      this.total += price * count;
+      this.total += parseFloat((price * count).toFixed(2));
 
       this.fareInfo.push({
         title: `${count} x ${key} Fare`,

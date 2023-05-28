@@ -32,6 +32,7 @@ export class ShoppingCartTableComponent implements OnInit {
     private passengersService: PassengersDataService,
     private mainFormService: FormDataService,
     private snackBar: MatSnackBar
+
   ) {
     this.headerService.currentCurrency$.subscribe((res) => {
       this.currency = res;

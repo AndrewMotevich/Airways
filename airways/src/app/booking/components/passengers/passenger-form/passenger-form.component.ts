@@ -36,6 +36,14 @@ export class PassengerFormComponent implements OnInit {
     return this.category !== EPassenger.INFANT;
   } 
 
+  get gender(): FormControl {
+    return this.passenger.get('gender') as unknown as FormControl<string>;
+  }
+
+  get isMale(): boolean {
+    return this.gender.value === 'male';
+  }
+
   constructor(private rootFormGroup: FormGroupDirective) { }
 
   ngOnInit(): void {
