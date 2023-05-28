@@ -49,7 +49,7 @@
     </div>
     <ng-container *ngIf="!isSelected; else editButtonTemplate">
       <button mat-button class="btn-with-gradient" (click)="selectTicketHandler()"
-        [disabled]="isSelected">Select</button>
+        [disabled]="isSelected || allTicketsSelected">Select</button>
     </ng-container>
 
     <ng-template #editButtonTemplate>

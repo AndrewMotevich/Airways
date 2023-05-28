@@ -9,7 +9,8 @@ import { FormDataService } from '../../services/form-data.service';
 import { PointModel, FormDataModel, FlightDirection } from '../../models/form-data.model';
 import { ECurrency } from '../../../core/models/currency.interface';
 import { HeaderDataService } from '../../../core/services/header-data.service';
-import { TripDataService } from '../../services/trip-data.service';
+// import { TripDataService } from '../../services/trip-data.service';
+import { TicketsDataService } from '../../services/tickets-data.service';
 
 @Component({
   selector: 'app-select-flight',
@@ -38,9 +39,11 @@ export class SelectFlightComponent implements OnInit {
 
   flightsDetailsDepart$!: Observable<IFlightDetails[]>;
 
-  departure: PointModel = { title: '', code: '' };
-
   currency$: Observable<ECurrency>;
+
+  ticketsData$: Observable<IFlightDetails[]>;
+
+  departure: PointModel = { title: '', code: '' };
 
   currency!: ECurrency;
 
@@ -56,7 +59,19 @@ export class SelectFlightComponent implements OnInit {
 
   flightReturnCurrency!: ECurrency;
 
-  allTicketsSelected: boolean = true;
+  isOneWay: boolean = false;
+
+  passengersCount: number = 0;
+
+  departureTicketsCount: number = 0;
+
+  returnTicketsCount: number = 0;
+
+  allDepartureTicketsSelected: boolean = false;
+
+  allReturnTicketsSelected: boolean = false;
+
+  allTicketsSelected: boolean = this.allDepartureTicketsSelected && this.allReturnTicketsSelected;
 
   @Output() departureDate: string = '';
 
@@ -66,10 +81,13 @@ export class SelectFlightComponent implements OnInit {
     private flightsDataService: FlightsDataService,
     private formDataService: FormDataService,
     private headerDataService: HeaderDataService,
-    private tripData: TripDataService,
+    // private tripData: TripDataService,
+    private ticketsDataService: TicketsDataService,
     private router: Router
   ) {
     this.flightData$ = this.formDataService.getObservableMainFormData();
+
+    this.ticketsData$ = this.ticketsDataService.getObservableTickets();
 
     this.currency$ = this.headerDataService.currentCurrency$;
 
@@ -106,6 +124,32 @@ export class SelectFlightComponent implements OnInit {
     });
 
     this.fetchFlightsData();
+
+    this.flightData$.subscribe((formData: FormDataModel<PointModel>) => {
+      this.passengersCount = formData.passengers;
+      this.isOneWay = formData.roundedTrip === 'one';
+
+      this.allDepartureTicketsSelected = this.passengersCount <= this.departureTicketsCount;
+
+      this.allReturnTicketsSelected = this.passengersCount <= this.returnTicketsCount;
+
+      this.allTicketsSelected = this.allDepartureTicketsSelected && this.allReturnTicketsSelected;
+    });
+
+    this.ticketsData$.subscribe((tickets: IFlightDetails[]) => {
+      this.departureTicketsCount = tickets.filter(
+        (ticket) => ticket.destination_airport === this.arrival.code
+      ).length;
+
+      this.returnTicketsCount = tickets.filter(
+        (ticket) => ticket.destination_airport === this.departure.code
+      ).length;
+
+      this.allDepartureTicketsSelected = this.passengersCount <= this.departureTicketsCount;
+
+      this.allReturnTicketsSelected = this.passengersCount <= this.returnTicketsCount;
+      this.allTicketsSelected = this.allDepartureTicketsSelected && this.allReturnTicketsSelected;
+    });
   }
 
   private fetchFlightsData(): void {
@@ -129,7 +173,7 @@ export class SelectFlightComponent implements OnInit {
           this.arrival.code ?? '',
           departureDate,
           this.currency,
-          true
+          this.isOneWay
         )
       );
 
@@ -159,7 +203,7 @@ export class SelectFlightComponent implements OnInit {
                     this.arrival.code ?? '',
                     this.departureDate,
                     this.currency,
-                    true
+                    this.isOneWay
                   );
                 },
               });
@@ -172,10 +216,11 @@ export class SelectFlightComponent implements OnInit {
     }
 
     if (
-      this.returnDate !== this.previousReturnDate ||
-      this.previousArrivalCode !== this.arrival.code ||
-      this.previousDepartureCode !== this.departure.code ||
-      this.previousReturnCurrency !== this.currency
+      (this.returnDate !== this.previousReturnDate ||
+        this.previousArrivalCode !== this.arrival.code ||
+        this.previousDepartureCode !== this.departure.code ||
+        this.previousReturnCurrency !== this.currency) &&
+      this.isOneWay
     ) {
       const returnDates = [
         dayjs(this.returnDate).subtract(2, 'day').format('YYYY-MM-DD'),
@@ -190,7 +235,7 @@ export class SelectFlightComponent implements OnInit {
           this.departure.code ?? '',
           returnDate,
           this.currency,
-          true
+          this.isOneWay
         )
       );
       forkJoin(flightReturnRequests).subscribe((responses: IFlightDetails[][]) => {
@@ -218,7 +263,7 @@ export class SelectFlightComponent implements OnInit {
                     this.departure.code ?? '',
                     this.returnDate,
                     this.currency,
-                    true
+                    this.isOneWay
                   );
                 },
               });
