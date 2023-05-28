@@ -16,7 +16,7 @@ export class TripDataService {
     completed: false,
     // data from main
     mainData: {
-      roundedTrip: null,
+      roundedTrip: 'both',
       from: null,
       destination: null,
       dateStart: null,

@@ -25,7 +25,7 @@ export class FlightsDataService {
     currency: ECurrency,
     isOneWay: boolean
   ): Observable<IFlightDetails[]> {
-    if (!origin || !destination || !departureAt || !currency || !isOneWay) {
+    if (!origin || !destination || !departureAt || !currency) {
       return [] as unknown as Observable<IFlightDetails[]>;
     }
 

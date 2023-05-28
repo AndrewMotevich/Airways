@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { FlightDirection, FormDataModel, PointModel } from '../models/form-data.model';
 
 const initialFormDataValues: FormDataModel<PointModel> = {
-  roundedTrip: null,
+  roundedTrip: 'both',
   from: null,
   destination: null,
   dateStart: null,
@@ -25,8 +25,6 @@ export class FormDataService {
     FormDataModel<PointModel>
   >(initialFormDataValues);
 
-  public flightData$ = this.flightDataSubject.asObservable();
-
   private getCityAndCodeFromString = (combinedString: string | null): PointModel => {
     if (combinedString === null)
       return {
@@ -40,6 +38,8 @@ export class FormDataService {
 
     return { title, code };
   };
+
+  public flightData$ = this.flightDataSubject.asObservable();
 
   getObservableMainFormData(): Observable<FormDataModel<PointModel>> {
     return this.flightData$;
