@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { IPassengerDetails } from '../../models/passenger.interface';
 import { FormDataService } from '../../services/form-data.service';
 import { FormDataModel, PointModel } from '../../models/form-data.model';
@@ -8,7 +9,6 @@ import { EPassenger } from '../../models/passengers-data.interface';
 import { TripDataService } from '../../services/trip-data.service';
 import { TicketsDataService } from '../../services/tickets-data.service';
 import { IFlightDetails } from '../../models/flight-details.interface';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-summary',
@@ -28,6 +28,8 @@ export class SummaryComponent implements OnInit, OnDestroy {
 
   subscription!: Subscription | null;
 
+  isDisabledAddToCart: boolean = false;
+
   constructor(
     private passengersService: PassengersDataService,
     private dataService: FormDataService,
@@ -39,7 +41,6 @@ export class SummaryComponent implements OnInit, OnDestroy {
     this.flightDetails = this.dataService.getMainFormData();   
 
     this.ticketPrice = 167;
-    console.log('summary flightDetails: ', this.flightDetails);
   }
 
   ngOnInit(): void {
@@ -64,17 +65,22 @@ export class SummaryComponent implements OnInit, OnDestroy {
   }
 
   onBuy(): void {
+    if (!this.isDisabledAddToCart) {
+      this.addToCart();
+    }
+
     this.router.navigateByUrl('/shopping-card');
   }
 
   addToCart(): void {
     this.tripData.addTripToStack();
+    this.isDisabledAddToCart = true;
   }
 
   ngOnDestroy(): void {
-    // if (this.subscription) {
-    //   this.subscription.unsubscribe();
-    //   this.subscription = null;
-    // }
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+      this.subscription = null;
+    }
   }
 }

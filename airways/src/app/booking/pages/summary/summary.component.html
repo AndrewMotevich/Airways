@@ -13,6 +13,6 @@
 
 <section class="flight-action">
   <a [routerLink]="['/booking']" class="back-link">Back</a>
-  <button mat-stroked-button (click)="addToCart()" class="btn">Add to order cart</button>
+  <button mat-stroked-button (click)="addToCart()" class="btn" [disabled]="isDisabledAddToCart">Add order to cart</button>
   <button mat-raised-button color="primary" (click)="onBuy()" class="btn">Buy now</button>
 </section>
