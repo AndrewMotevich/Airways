@@ -46,8 +46,8 @@ export class TripDataService {
   ) {
     this.trip = {
       ...this.trip,
-      passengersData: this.passengersData.getPassengersData()
-    }
+      passengersData: this.passengersData.getPassengersData(),
+    };
   }
 
   getTripData = new BehaviorSubject(this.trip);
@@ -56,6 +56,7 @@ export class TripDataService {
 
   addTripToStack(): void {
     this.trip.completed = true;
+    this.updateTrip(this.trip);
     this.tripStack?.push(this.trip);
     this.getTripStack.next(this.tripStack);
   }
