@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IPassengerDetails } from '../../models/passenger.interface';
 import { FormDataService } from '../../services/form-data.service';
@@ -8,22 +8,25 @@ import { EPassenger } from '../../models/passengers-data.interface';
 import { TripDataService } from '../../services/trip-data.service';
 import { TicketsDataService } from '../../services/tickets-data.service';
 import { IFlightDetails } from '../../models/flight-details.interface';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-summary',
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.scss']
 })
-export class SummaryComponent implements OnInit {
+export class SummaryComponent implements OnInit, OnDestroy {
   passengersInfo!: IPassengerDetails[];
 
-  flightDetails!: FormDataModel<PointModel>;  
+  flightDetails!: FormDataModel<PointModel>;
 
   passengersNumber = { 'adult': 0, 'child': 0, 'infant': 0 };
 
   ticketPrice: number;
 
-  tickets: IFlightDetails[];
+  ticketsData!: IFlightDetails[];
+
+  subscription!: Subscription | null;
 
   constructor(
     private passengersService: PassengersDataService,
@@ -33,12 +36,10 @@ export class SummaryComponent implements OnInit {
     private ticketDataService: TicketsDataService,
   ) {
     this.passengersInfo = this.passengersService.getPassengersData().passengers;
-    this.flightDetails = this.dataService.getMainFormData();
-    this.tickets = this.ticketDataService.getTickets();
+    this.flightDetails = this.dataService.getMainFormData();   
 
     this.ticketPrice = 167;
-    console.log('flightDetails: ', this.flightDetails);
-    console.log('tickets: ', this.tickets);
+    console.log('summary flightDetails: ', this.flightDetails);
   }
 
   ngOnInit(): void {
@@ -54,7 +55,12 @@ export class SummaryComponent implements OnInit {
       }
       this.passengersNumber.infant += 1;
     });
-    console.log(this.passengersNumber);
+
+    this.subscription = this.ticketDataService.getObservableTickets().subscribe((tickets: IFlightDetails[]) => {
+      console.log('summary tickets: ', tickets);
+
+      this.ticketsData = tickets;
+    });
   }
 
   onBuy(): void {
@@ -63,5 +69,12 @@ export class SummaryComponent implements OnInit {
 
   addToCart(): void {
     this.tripData.addTripToStack();
+  }
+
+  ngOnDestroy(): void {
+    // if (this.subscription) {
+    //   this.subscription.unsubscribe();
+    //   this.subscription = null;
+    // }
   }
 }
