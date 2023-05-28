@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import dayjs from 'dayjs';
+import { IFlightDetails } from 'src/app/booking/models/flight-details.interface';
 import { FormDataModel, PointModel } from 'src/app/booking/models/form-data.model';
 import { IPassengerDetails } from 'src/app/booking/models/passenger.interface';
 
@@ -11,7 +12,7 @@ import { IPassengerDetails } from 'src/app/booking/models/passenger.interface';
 export class FlightCardComponent implements OnInit {
   @Input() passengers!: IPassengerDetails[];
 
-  @Input() flight!: FormDataModel<PointModel>;
+  @Input() flight!: IFlightDetails;
 
   from!: PointModel | null;
 
@@ -21,10 +22,8 @@ export class FlightCardComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('flight:', this.flight);
-    const { from, destination, dateStart, dateEnd } = this.flight;
-    this.from = from;
-    this.destination = destination;
-    this.departureDate = dayjs(dateStart).format('dddd, D MMMM, YYYY HH:mm').toString();
+
+    this.departureDate = `${dayjs(this.flight.departure_at).format('dddd, D MMMM, YYYY HH:mm').toString()} — ${dayjs(this.flight.departure_at).add(this.flight.duration_to, 'm').format('HH:mm').toString()}`;
 
   }
 }

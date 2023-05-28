@@ -299,7 +299,7 @@ h2 {
   }
 
   .btn {
-    &.mat-mdc-outlined-button {
+    &.mat-mdc-outlined-button:not([disabled]) {
       color: $color-primary;
       border-color: $color-primary;
     }
