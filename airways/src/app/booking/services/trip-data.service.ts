@@ -6,6 +6,7 @@ import { PassengersDataService } from './passengers-data.service';
 import { TripDataType } from '../models/trip-data-type';
 import { HistoryApiService } from './history-api.service';
 import { TicketsDataService } from './tickets-data.service';
+import { IFlightDetails } from '../models/flight-details.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -55,8 +56,12 @@ export class TripDataService {
   getTripStack = new BehaviorSubject(this.tripStack);
 
   addTripToStack(): void {
-    console.log('trip:', this.trip);
-    this.ticketsData.getObservableTickets().subscribe((res) => console.log(res));
+    let ticketsData: IFlightDetails[] = [];
+    this.ticketsData.getObservableTickets().subscribe((res) => {
+      ticketsData = res;
+    });
+    this.trip.passengersData = this.passengersData.getPassengersData();
+    this.trip.ticketsData.data = ticketsData;
     this.trip.completed = true;
     this.updateTrip(this.trip);
     this.tripStack?.push(this.trip);
