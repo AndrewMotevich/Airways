@@ -77,7 +77,6 @@ export class TripDataService {
   }
 
   editFromStack(id: number): void {
-    console.log('previous', this.trip.mainData);
     this.tripStack = this.tripStack.filter((elem) => {
       if (elem.id === id) {
         this.trip = elem;
@@ -87,7 +86,6 @@ export class TripDataService {
     });
     this.getTripStack.next(this.tripStack);
     this.getTripData.next(this.trip);
-    console.log('After', this.trip.mainData);
   }
 
   saveFromStack(...idArray: number[]): void {

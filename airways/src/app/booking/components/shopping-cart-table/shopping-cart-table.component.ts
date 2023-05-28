@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FlightDirection, FormDataModel } from 'src/app/booking/models/form-data.model';
+import { FormDataModel } from 'src/app/booking/models/form-data.model';
 import { TripDataService } from '../../services/trip-data.service';
 import { TripDataType } from '../../models/trip-data-type';
 import { HeaderDataService } from '../../../core/services/header-data.service';
@@ -100,16 +100,7 @@ export class ShoppingCartTableComponent implements OnInit {
     this.mainFormService.setMainFormData(
       this.currentTrip.mainData as unknown as FormDataModel<string>
     );
-    this.mainFormService.setFlightDataDate(
-      this.currentTrip.ticketsData.data[0].departure_at,
-      FlightDirection.DEPARTURE
-    );
-    if (this.currentTrip.mainData.roundedTrip === 'both') {
-      this.mainFormService.setFlightDataDate(
-        this.currentTrip.ticketsData.data[1].departure_at,
-        FlightDirection.ARRIVAL
-      );
-    }
+    this.mainFormService.flightData$.subscribe((res) => console.log(res));
   }
 
   saveItems(): void {

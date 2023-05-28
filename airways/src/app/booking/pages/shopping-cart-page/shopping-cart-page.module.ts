@@ -9,12 +9,12 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
+import { CustomPipesModule } from 'src/app/shared/custom-pipes.module';
 import { ShoppingCartPageComponent } from './shopping-cart-page.component';
 import { ShoppingCartTableComponent } from '../../components/shopping-cart-table/shopping-cart-table.component';
 import { RoundedTripPipe } from '../../pipe/rounded-trip.pipe';
 import { UserAccountPageComponent } from '../user-account-page/user-account-page.component';
 import { UserAccountTableComponent } from '../../components/user-account-table/user-account-table.component';
-import { TicketDateSliderModule } from '../../../shared/ticket-date-slider/ticket-date-slider.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ import { TicketDateSliderModule } from '../../../shared/ticket-date-slider/ticke
     MatMenuModule,
     MatInputModule,
     RouterModule,
-    TicketDateSliderModule,
+    CustomPipesModule,
   ],
 })
 export class ShoppingCartPageModule {}
