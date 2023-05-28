@@ -3,4 +3,30 @@
 
 .flight-fare {
    @include section-style(8px);
+   padding: .6rem 2.6rem;
+   background-color: $color-neutral100;
+
+   .line {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0;
+      margin-bottom: .5rem;
+
+      .title, .price {
+         font-weight: bold;
+      }
+   }
+
+   .sub-line {
+      display: flex;
+      justify-content: space-between;
+      padding-left: 2.5rem;
+      margin-top: 0;
+      margin-bottom: .5rem;
+   }
+
+   ul {
+      list-style: none;
+      padding-left: 0;
+   }
 }

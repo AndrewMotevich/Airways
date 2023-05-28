@@ -3,6 +3,7 @@
 
 .flight-card {
   @include section-style(8px);
+  margin-bottom: 2rem;
 
   .mat-mdc-card-header {
     background-color: $color-secondary80;

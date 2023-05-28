@@ -34,6 +34,7 @@ export class SummaryComponent implements OnInit {
     this.passengersInfo = this.passengersService.getPassengersData().passengers;
     this.flightDetails = this.dataService.getMainFormData();
     this.ticketPrice = 167;
+    console.log('flightDetails: ', this.flightDetails);
   }
 
   ngOnInit(): void {

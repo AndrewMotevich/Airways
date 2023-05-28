@@ -1,25 +1,28 @@
 <section class="flight-fare">
   <ul>
     <li>
-      <p class="flight-fare_title">{{ adult }} x Adult Fare <span class="price">{{price}}{{currency$ | async}}</span></p>
-      <ul>
-        <li>Fare <span class="price">€98.00</span></li>
-        <li>Tax & Service Charge <span class="price">€98.00</span></li>
-      </ul>
+      <p class="line">
+        <span class="title">{{ adult }} x Adult Fare</span>
+        <span class="price">{{ price }}{{ currency$ | async }}</span>
+      </p>
+      <p class="sub-line">Fare <span class="price">€98.00</span></p>
+      <p class="sub-line">Tax & Service Charge <span class="price">€98.00</span></p>
     </li>
     <li *ngIf="child">
-      <p class="flight-fare_title">{{ child }} x Child Fare <span class="price">{{price}}{{currency$ | async}}</span></p>
-      <ul>
-        <li>Fare <span class="price">€88.00</span></li>
-        <li>Tax & Service Charge <span class="price">€98.00</span></li>
-      </ul>
+      <p class="line">
+        <span class="title">{{ child }} x Child Fare</span>
+        <span class="price">{{ price }}{{ currency$ | async }}</span>
+      </p>
+      <p class="sub-line">Fare <span class="price">€88.00</span></p>
+      <p class="sub-line">Tax & Service Charge <span class="price">€98.00</span></p>
     </li>
     <li *ngIf="infant">
-      <p class="flight-fare_title">{{infant}} x Infant Fare <span class="price">{{price}}{{currency$ | async}}</span></p>
-      <ul>
-        <li>Fare <span class="price">€88.00</span></li>
-        <li>Tax & Service Charge <span class="price">€10.00</span></li>
-      </ul>
+      <p class="line">
+        <span class="title">{{ infant }} x Infant Fare</span>
+        <span class="price">{{ price }}{{ currency$ | async }}</span>
+      </p>
+      <p class="sub-line">Fare <span class="price">€88.00</span></p>
+      <p class="sub-line">Tax & Service Charge <span class="price">€10.00</span></p>
     </li>
   </ul>
 </section>
