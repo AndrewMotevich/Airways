@@ -1,4 +1,3 @@
-
 export interface IFlightDetails {
   origin: string;
   destination: string;
@@ -16,4 +15,5 @@ export interface IFlightDetails {
   duration_back: number;
   link: string;
   seats?: number;
-};
+  currency: string;
+}

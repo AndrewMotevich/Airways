@@ -2,12 +2,14 @@ import { Component, OnInit, Output } from '@angular/core';
 import { Observable, forkJoin, from, mergeMap, tap, Subject } from 'rxjs';
 
 import dayjs from 'dayjs';
+import { Router } from '@angular/router';
 import { IFlightDetails } from '../../models/flight-details.interface';
 import { FlightsDataService } from '../../services/flightsData.service';
 import { FormDataService } from '../../services/form-data.service';
 import { PointModel, FormDataModel, FlightDirection } from '../../models/form-data.model';
 import { ECurrency } from '../../../core/models/currency.interface';
 import { HeaderDataService } from '../../../core/services/header-data.service';
+import { TripDataService } from '../../services/trip-data.service';
 
 @Component({
   selector: 'app-select-flight',
@@ -24,6 +26,14 @@ export class SelectFlightComponent implements OnInit {
 
   private previousReturnDate: string;
 
+  private previousArrivalCode: string;
+
+  private previousDepartureCode: string;
+
+  private previousReturnCurrency?: ECurrency;
+
+  private previousDepartureCurrency?: ECurrency;
+
   flightData$: Observable<FormDataModel<PointModel>>;
 
   flightsDetailsDepart$!: Observable<IFlightDetails[]>;
@@ -32,7 +42,7 @@ export class SelectFlightComponent implements OnInit {
 
   currency$: Observable<ECurrency>;
 
-  currency: ECurrency = ECurrency.EUR;
+  currency!: ECurrency;
 
   ticketsDataDepart: { date: string; cost: string }[] = [];
 
@@ -42,7 +52,11 @@ export class SelectFlightComponent implements OnInit {
 
   ticketsDataReturn: { date: string; cost: string }[] = [];
 
-  flightDataCurrency: ECurrency = ECurrency.EUR;
+  flightDepartureCurrency!: ECurrency;
+
+  flightReturnCurrency!: ECurrency;
+
+  allTicketsSelected: boolean = true;
 
   @Output() departureDate: string = '';
 
@@ -51,7 +65,9 @@ export class SelectFlightComponent implements OnInit {
   constructor(
     private flightsDataService: FlightsDataService,
     private formDataService: FormDataService,
-    private headerDataService: HeaderDataService
+    private headerDataService: HeaderDataService,
+    private tripData: TripDataService,
+    private router: Router
   ) {
     this.flightData$ = this.formDataService.getObservableMainFormData();
 
@@ -73,6 +89,8 @@ export class SelectFlightComponent implements OnInit {
 
     this.previousDepartureDate = '';
     this.previousReturnDate = '';
+    this.previousArrivalCode = '';
+    this.previousDepartureCode = '';
   }
 
   ngOnInit(): void {
@@ -91,7 +109,12 @@ export class SelectFlightComponent implements OnInit {
   }
 
   private fetchFlightsData(): void {
-    if (this.departureDate !== this.previousDepartureDate) {
+    if (
+      this.departureDate !== this.previousDepartureDate ||
+      this.previousArrivalCode !== this.arrival.code ||
+      this.previousDepartureCode !== this.departure.code ||
+      this.previousDepartureCurrency !== this.currency
+    ) {
       const departureDates = [
         dayjs(this.departureDate).subtract(2, 'day').format('YYYY-MM-DD'),
         dayjs(this.departureDate).subtract(1, 'day').format('YYYY-MM-DD'),
@@ -111,35 +134,49 @@ export class SelectFlightComponent implements OnInit {
       );
 
       forkJoin(flightDepartureRequests).subscribe((responses: IFlightDetails[][]) => {
-        const ticketsDataDepart$ = responses.map((flightsData) =>
-          flightsData.map((flight) => ({
-            date: dayjs(flight.departure_at).format('YYYY-MM-DD'),
-            cost: flight.price.toString(),
-          }))
-        );
+        if (responses) {
+          const ticketsDataDepart$ = responses
+            ?.map((flightsData) =>
+              flightsData?.map((flight) => ({
+                date: dayjs(flight.departure_at).format('YYYY-MM-DD'),
+                cost: flight.price.toString(),
+              }))
+            )
+            .filter(Boolean);
 
-        this.ticketsDataDepart = [];
+          if (ticketsDataDepart$) {
+            this.ticketsDataDepart = [];
 
-        from(ticketsDataDepart$)
-          .pipe(
-            mergeMap((ticketsData$) => ticketsData$),
-            tap((ticketsData) => this.ticketsDataDepart.push(ticketsData))
-          )
-          .subscribe({
-            complete: () => {
-              this.flightsDetailsDepart$ = this.flightsDataService.getFlightsData(
-                this.departure.code ?? '',
-                this.arrival.code ?? '',
-                this.departureDate,
-                this.currency,
-                true
-              );
-            },
-          });
+            from(ticketsDataDepart$)
+              .pipe(
+                mergeMap((ticketsData$) => ticketsData$),
+                tap((ticketsData) => this.ticketsDataDepart.push(ticketsData))
+              )
+              .subscribe({
+                complete: () => {
+                  this.flightsDetailsDepart$ = this.flightsDataService.getFlightsData(
+                    this.departure.code ?? '',
+                    this.arrival.code ?? '',
+                    this.departureDate,
+                    this.currency,
+                    true
+                  );
+                },
+              });
+          }
+        }
       });
+
+      this.flightDepartureCurrency = this.currency;
+      this.previousDepartureCurrency = this.currency;
     }
 
-    if (this.returnDate !== this.previousReturnDate) {
+    if (
+      this.returnDate !== this.previousReturnDate ||
+      this.previousArrivalCode !== this.arrival.code ||
+      this.previousDepartureCode !== this.departure.code ||
+      this.previousReturnCurrency !== this.currency
+    ) {
       const returnDates = [
         dayjs(this.returnDate).subtract(2, 'day').format('YYYY-MM-DD'),
         dayjs(this.returnDate).subtract(1, 'day').format('YYYY-MM-DD'),
@@ -147,7 +184,6 @@ export class SelectFlightComponent implements OnInit {
         dayjs(this.returnDate).add(1, 'day').format('YYYY-MM-DD'),
         dayjs(this.returnDate).add(2, 'day').format('YYYY-MM-DD'),
       ];
-
       const flightReturnRequests = returnDates.map((returnDate) =>
         this.flightsDataService.getFlightsData(
           this.arrival.code ?? '',
@@ -157,38 +193,47 @@ export class SelectFlightComponent implements OnInit {
           true
         )
       );
-
       forkJoin(flightReturnRequests).subscribe((responses: IFlightDetails[][]) => {
-        const ticketsDataReturn$ = responses.map((flightsData) =>
-          flightsData.map((flight) => ({
-            date: dayjs(flight.departure_at).format('YYYY-MM-DD'),
-            cost: flight.price.toString(),
-          }))
-        );
+        if (responses) {
+          const ticketsDataReturn$ = responses
+            ?.map((flightsData) =>
+              flightsData?.map((flight) => ({
+                date: dayjs(flight.departure_at).format('YYYY-MM-DD'),
+                cost: flight.price.toString(),
+              }))
+            )
+            .filter(Boolean);
 
-        this.ticketsDataReturn = [];
-
-        from(ticketsDataReturn$)
-          .pipe(
-            mergeMap((ticketsData$) => ticketsData$),
-            tap((ticketsData) => this.ticketsDataReturn.push(ticketsData))
-          )
-          .subscribe({
-            complete: () => {
-              this.flightsDetailsReturn$ = this.flightsDataService.getFlightsData(
-                this.arrival.code ?? '',
-                this.departure.code ?? '',
-                this.returnDate,
-                this.currency,
-                true
-              );
-            },
-          });
+          if (ticketsDataReturn$) {
+            this.ticketsDataReturn = [];
+            from(ticketsDataReturn$)
+              .pipe(
+                mergeMap((ticketsData$) => ticketsData$),
+                tap((ticketsData) => this.ticketsDataReturn.push(ticketsData))
+              )
+              .subscribe({
+                complete: () => {
+                  this.flightsDetailsReturn$ = this.flightsDataService.getFlightsData(
+                    this.arrival.code ?? '',
+                    this.departure.code ?? '',
+                    this.returnDate,
+                    this.currency,
+                    true
+                  );
+                },
+              });
+          }
+        }
       });
+
+      this.flightReturnCurrency = this.currency;
+      this.previousReturnCurrency = this.currency;
     }
 
     this.previousDepartureDate = this.departureDate;
     this.previousReturnDate = this.returnDate;
+    this.previousArrivalCode = this.arrival.code ?? '';
+    this.previousDepartureCode = this.departure.code ?? '';
   }
 
   handleClickOnNextArrivalDate(): void {
@@ -225,5 +270,20 @@ export class SelectFlightComponent implements OnInit {
       this.returnDateSubject.next(prevDate);
     }
     this.formDataService.setFlightDataDate(dayjs(prevDate).toString(), FlightDirection.DEPARTURE);
+  }
+
+  private goToBookingPage(): void {
+    this.router.navigate(['/booking']);
+  }
+
+  goToMainFlightFormPage(): void {
+    this.router.navigate(['/']);
+  }
+
+  continueButtonHandler(): void {
+    // мне кажется, эту логику надо перенести в Booking Process Page
+    // this.tripData.addTripToStack();
+    // send form to store bucket and:
+    this.goToBookingPage();
   }
 }
