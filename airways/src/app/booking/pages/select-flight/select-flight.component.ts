@@ -130,10 +130,8 @@ export class SelectFlightComponent implements OnInit {
       this.passengersCount = formData.passengers;
       this.isOneWay = formData.roundedTrip === 'one';
 
-      this.allDepartureTicketsSelected = this.passengersCount <= this.departureTicketsCount;
-
-      this.allReturnTicketsSelected = this.passengersCount <= this.returnTicketsCount;
-
+      this.allDepartureTicketsSelected = this.departureTicketsCount >= 1;
+      this.allReturnTicketsSelected = this.returnTicketsCount >= 1;
       this.allTicketsSelected = this.allDepartureTicketsSelected && this.allReturnTicketsSelected;
     });
 
@@ -146,9 +144,8 @@ export class SelectFlightComponent implements OnInit {
         (ticket) => ticket.destination_airport === this.departure.code
       ).length;
 
-      this.allDepartureTicketsSelected = this.passengersCount <= this.departureTicketsCount;
-
-      this.allReturnTicketsSelected = this.passengersCount <= this.returnTicketsCount;
+      this.allDepartureTicketsSelected = this.departureTicketsCount >= 1;
+      this.allReturnTicketsSelected = this.returnTicketsCount >= 1;
       this.allTicketsSelected = this.allDepartureTicketsSelected && this.allReturnTicketsSelected;
     });
   }
