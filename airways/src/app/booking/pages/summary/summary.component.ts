@@ -18,13 +18,15 @@ import { IFlightDetails } from '../../models/flight-details.interface';
 export class SummaryComponent implements OnInit, OnDestroy {
   passengersInfo!: IPassengerDetails[];
 
-  flightDetails!: FormDataModel<PointModel>;
-
   passengersNumber = { 'adult': 0, 'child': 0, 'infant': 0 };
 
   ticketPrice: number;
 
-  ticketsData!: IFlightDetails[];
+  ticketCurrency!: string;
+
+  ticketFrom!: IFlightDetails;
+
+  ticketTo!: IFlightDetails;
 
   subscription!: Subscription | null;
 
@@ -32,14 +34,11 @@ export class SummaryComponent implements OnInit, OnDestroy {
 
   constructor(
     private passengersService: PassengersDataService,
-    private dataService: FormDataService,
     private router: Router,
     private tripData: TripDataService,
     private ticketDataService: TicketsDataService,
   ) {
     this.passengersInfo = this.passengersService.getPassengersData().passengers;
-    this.flightDetails = this.dataService.getMainFormData();
-
     this.ticketPrice = 167;
   }
 
@@ -59,8 +58,18 @@ export class SummaryComponent implements OnInit, OnDestroy {
 
     this.subscription = this.ticketDataService.getObservableTickets().subscribe((tickets: IFlightDetails[]) => {
       console.log('summary tickets: ', tickets);
+      if (!tickets) return;
 
-      this.ticketsData = tickets;
+      const [ticketFrom, ticketTo] = tickets;
+      this.ticketFrom = ticketFrom;
+      this.ticketPrice = ticketFrom.price;
+
+      if (ticketTo) {
+        this.ticketTo = ticketTo;
+        this.ticketPrice += ticketTo.price;
+      }
+
+      this.ticketCurrency = ticketFrom.currency;
     });
   }
 
