@@ -110,9 +110,7 @@ export class TripDataService {
     this.trip = {
       id: Date.now(),
       completed: false,
-      // data from main
       mainData: this.mainData.getMainFormData(),
-      // data from selectFlight !!!(now mocked)!!!
       ticketsData: {
         success: true,
         currency: ECurrency.EUR,

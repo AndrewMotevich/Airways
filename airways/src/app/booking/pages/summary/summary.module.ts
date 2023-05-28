@@ -8,16 +8,17 @@ import { PassengersInfoComponent } from '../../../shared/components/flight-card/
 import { FlightCardComponent } from '../../../shared/components/flight-card/flight-card.component';
 import { FlightFareComponent } from '../../../shared/components/flight-fare/flight-fare.component';
 import { CustomPipesModule } from '../../../shared/custom-pipes.module';
+import { HistorySummaryPageComponent } from '../history-summary-page/history-summary-page.component';
 
 @NgModule({
-  declarations: [SummaryComponent, PassengersInfoComponent, FlightCardComponent, FlightFareComponent],
-  imports: [
-    CommonModule,
-    SummaryRoutingModule,
-    MatCardModule,
-    MatButtonModule,
-    CustomPipesModule
+  declarations: [
+    SummaryComponent,
+    PassengersInfoComponent,
+    FlightCardComponent,
+    FlightFareComponent,
+    HistorySummaryPageComponent,
   ],
-  exports: [SummaryComponent, PassengersInfoComponent]
+  imports: [CommonModule, SummaryRoutingModule, MatCardModule, MatButtonModule, CustomPipesModule],
+  exports: [SummaryComponent, PassengersInfoComponent],
 })
-export class SummaryModule { }
+export class SummaryModule {}

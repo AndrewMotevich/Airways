@@ -1,6 +1,8 @@
 import { AfterViewInit, Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { TripDataType } from '../../models/trip-data-type';
 import { HistoryApiService } from '../../services/history-api.service';
+import { HistoryDataService } from '../../services/history-data.service';
 
 @Component({
   selector: 'app-user-account-table',
@@ -10,7 +12,16 @@ import { HistoryApiService } from '../../services/history-api.service';
 export class UserAccountTableComponent implements AfterViewInit {
   currentHistoryStack: TripDataType[] = [];
 
-  constructor(public historyApi: HistoryApiService) {}
+  constructor(
+    public historyApi: HistoryApiService,
+    public historyData: HistoryDataService,
+    private router: Router
+  ) {}
+
+  setCurrentHistory(trip: TripDataType): void {
+    this.historyData.setHistoryItem(trip);
+    this.router.navigate(['/history-summary']);
+  }
 
   ngAfterViewInit(): void {
     this.historyApi.history.subscribe((res) => {

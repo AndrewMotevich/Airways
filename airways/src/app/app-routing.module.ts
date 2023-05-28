@@ -5,6 +5,7 @@ import { Page404Component } from './booking/pages/page404/page404.component';
 import { IsLoginGuard } from './auth/guard/is-login.guard';
 import { ShoppingCartPageComponent } from './booking/pages/shopping-cart-page/shopping-cart-page.component';
 import { UserAccountPageComponent } from './booking/pages/user-account-page/user-account-page.component';
+import { HistorySummaryPageComponent } from './booking/pages/history-summary-page/history-summary-page.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent, pathMatch: 'full' },
@@ -21,12 +22,17 @@ const routes: Routes = [
       import('./booking/pages/booking-flight/booking-flight.module').then(
         (m) => m.BookingFlightModule
       ),
-    canActivate: [IsLoginGuard]
+    canActivate: [IsLoginGuard],
   },
   {
     path: 'summary',
     loadChildren: () =>
       import('./booking/pages/summary/summary.module').then((m) => m.SummaryModule),
+    canActivate: [IsLoginGuard],
+  },
+  {
+    path: 'history-summary',
+    component: HistorySummaryPageComponent,
     canActivate: [IsLoginGuard],
   },
   {

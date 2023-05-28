@@ -30,7 +30,7 @@ import { TicketsDataService } from './booking/services/tickets-data.service';
       deps: [MAT_DATE_LOCALE],
     },
     { provide: MAT_DATE_FORMATS, useValue: FLIGHT_DATE_FORMATS },
-    TicketsDataService
+    TicketsDataService,
   ],
   bootstrap: [AppComponent],
 })

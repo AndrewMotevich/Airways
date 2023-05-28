@@ -37,7 +37,8 @@
         <div class="spinner-wrapper">
           <mat-spinner *ngIf="this.historyApi.isLoading"></mat-spinner>
         </div>
-        <div class="table-content" *ngFor="let trip of currentHistoryStack, index as i" routerLink="/summary">
+        <div class="table-content" *ngFor="let trip of currentHistoryStack, index as i"
+          (click)="setCurrentHistory(trip)">
           <p>
             <span style="padding-left: 30px;">{{trip.ticketsData.data[0].flight_number}}</span>
           </p>
