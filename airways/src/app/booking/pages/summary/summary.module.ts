@@ -7,8 +7,10 @@ import { SummaryRoutingModule } from './summary-routing.module';
 import { PassengersInfoComponent } from '../../../shared/components/flight-card/passengers-info/passengers-info.component';
 import { FlightCardComponent } from '../../../shared/components/flight-card/flight-card.component';
 import { FlightFareComponent } from '../../../shared/components/flight-fare/flight-fare.component';
+import { TicketsDataService } from '../../services/tickets-data.service';
 
 @NgModule({
+  providers: [TicketsDataService],
   declarations: [SummaryComponent, PassengersInfoComponent, FlightCardComponent, FlightFareComponent],
   imports: [
     CommonModule,

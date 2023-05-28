@@ -54,7 +54,6 @@
   background-color: $color-neutral100;
   border: 0.5px solid $color-neutral40;
   box-shadow: none;
-  z-index: 1001;
 }
 
 .hidden {
@@ -186,17 +185,6 @@
   }
 }
 
-@media screen and (max-width: 960px) {
-  .form-container {
-    max-width: 400px;
-    .date-passengers-container {
-      flex-direction: column;
-    }
-  }
-}
-@media screen and (max-width: 540px) {
-  .form-container {
-    width: 80%;
-    max-width: 300px;
-  }
+.mdc-menu-surface.mat-mdc-autocomplete-panel {
+  width: 88%!important;
 }

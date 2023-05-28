@@ -31,10 +31,10 @@
 
       <button mat-button class="sign-button-wrapper" *ngIf="authApiService.getIsLogin()"
         [matMenuTriggerFor]="accountMenu">
-        <mat-icon color="primary" [ngClass]="{
+        <mat-icon [ngClass]="{
           'account-icon': !isMainPage,
         }" fontIcon="person_outline"></mat-icon>
-        <span class="color-primary">{{ authApiService.tokenData?.firstName }}</span>
+        <span>{{ authApiService.tokenData?.firstName }}</span>
       </button>
 
       <button mat-icon-button routerLink="/shopping-card"><mat-icon [matBadge]="basketQnt" matBadgeColor="warn"
