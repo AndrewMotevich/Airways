@@ -39,7 +39,7 @@ export class FlightsDataService {
       map((response: IFlightsData) =>
         response.data?.map((item) => ({
           ...item,
-          seats: Math.trunc(Math.random() * 150),
+          seats: Math.abs(item.duration_to - item.duration_back),  // synthetic data
           currency: response.currency,
           return_at: dayjs(item.departure_at).add(item.duration, 'm').toString(),
         }))

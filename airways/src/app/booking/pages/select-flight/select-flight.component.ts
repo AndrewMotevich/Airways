@@ -47,13 +47,13 @@ export class SelectFlightComponent implements OnInit {
 
   currency!: ECurrency;
 
-  ticketsDataDepart: { date: string; cost: string }[] = [];
+  ticketsDataDepart: { date: string; cost: string; seats: number }[] = [];
 
   flightsDetailsReturn$!: Observable<IFlightDetails[]>;
 
   arrival: PointModel = { title: '', code: '' };
 
-  ticketsDataReturn: { date: string; cost: string }[] = [];
+  ticketsDataReturn: { date: string; cost: string; seats: number }[] = [];
 
   flightDepartureCurrency!: ECurrency;
 
@@ -185,6 +185,7 @@ export class SelectFlightComponent implements OnInit {
               flightsData?.map((flight) => ({
                 date: dayjs(flight.departure_at).format('YYYY-MM-DD'),
                 cost: flight.price.toString(),
+                seats: flight.seats ?? 0,
               }))
             )
             .filter(Boolean);
@@ -246,6 +247,7 @@ export class SelectFlightComponent implements OnInit {
               flightsData?.map((flight) => ({
                 date: dayjs(flight.departure_at).format('YYYY-MM-DD'),
                 cost: flight.price.toString(),
+                seats: flight.seats ?? 0,
               }))
             )
             .filter(Boolean);

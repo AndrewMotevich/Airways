@@ -7,7 +7,6 @@ import { MatCardModule } from '@angular/material/card';
 import { SelectFlightRoutingModule } from './select-flight-routing.module';
 import { TicketDateSliderModule } from '../../../shared/ticket-date-slider/ticket-date-slider.module';
 import { DurationPipe } from '../../pipe/duration.pipe';
-import { ColoredDirective } from '../../directives/colored.directive';
 import { FlightDetailsComponent } from '../../components/flight-details/flight-details.component';
 import { FormatPricePipe } from '../../pipe/format-price.pipe';
 import { SelectFlightComponent } from './select-flight.component';
@@ -22,7 +21,6 @@ import { TicketsDataService } from '../../services/tickets-data.service';
     FlightDetailsComponent,
     FlightDataEditFormComponent,
     DurationPipe,
-    ColoredDirective,
     FormatPricePipe,
   ],
   imports: [
