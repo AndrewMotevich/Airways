@@ -12,6 +12,7 @@ import { FormatPricePipe } from '../../pipe/format-price.pipe';
 import { SelectFlightComponent } from './select-flight.component';
 import { FlightDataEditFormComponent } from '../../../shared/flight-data-edit-form/flight-data-edit-form.component';
 import { SharedModule } from '../../../shared/shared.module';
+import { CustomPipesModule } from '../../../shared/custom-pipes.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { SharedModule } from '../../../shared/shared.module';
     FlightDetailsComponent,
     FlightDataEditFormComponent,
     DurationPipe,
-    FormatPricePipe,
+    FormatPricePipe    
   ],
   imports: [
     CommonModule,
@@ -29,7 +30,8 @@ import { SharedModule } from '../../../shared/shared.module';
     MatButtonModule,
     MatCardModule,
     SharedModule,
+    CustomPipesModule
   ],
-  exports: [SelectFlightComponent, FlightDetailsComponent, TicketDateSliderModule],
+  exports: [SelectFlightComponent, FlightDetailsComponent],
 })
 export class SelectFlightModule {}

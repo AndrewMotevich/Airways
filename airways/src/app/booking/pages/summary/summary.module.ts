@@ -7,7 +7,7 @@ import { SummaryRoutingModule } from './summary-routing.module';
 import { PassengersInfoComponent } from '../../../shared/components/flight-card/passengers-info/passengers-info.component';
 import { FlightCardComponent } from '../../../shared/components/flight-card/flight-card.component';
 import { FlightFareComponent } from '../../../shared/components/flight-fare/flight-fare.component';
-import { CustomPipesModule } from '../../pipe/custom-pipes.module';
+import { CustomPipesModule } from '../../../shared/custom-pipes.module';
 
 @NgModule({
   declarations: [SummaryComponent, PassengersInfoComponent, FlightCardComponent, FlightFareComponent],
