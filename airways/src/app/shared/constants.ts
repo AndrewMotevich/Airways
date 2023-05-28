@@ -23,4 +23,4 @@ export const FLIGHT_DATE_FORMATS = {
   },
 };
 
-export const CURRENCY: ECurrency[] = [ECurrency.EUR, ECurrency.USA, ECurrency.RUB, ECurrency.PLN];
+export const CURRENCY: ECurrency[] = [ECurrency.EUR, ECurrency.RUB, ECurrency.PLN];
