@@ -1,25 +1,22 @@
-<section class="flight-fare">
-  <ul>
-    <li>
-      <p class="flight-fare_title">{{ adult }} x Adult Fare <span class="price">{{price}}{{currency$ | async}}</span></p>
-      <ul>
-        <li>Fare <span class="price">€98.00</span></li>
-        <li>Tax & Service Charge <span class="price">€98.00</span></li>
-      </ul>
-    </li>
-    <li *ngIf="child">
-      <p class="flight-fare_title">{{ child }} x Child Fare <span class="price">{{price}}{{currency$ | async}}</span></p>
-      <ul>
-        <li>Fare <span class="price">€88.00</span></li>
-        <li>Tax & Service Charge <span class="price">€98.00</span></li>
-      </ul>
-    </li>
-    <li *ngIf="infant">
-      <p class="flight-fare_title">{{infant}} x Infant Fare <span class="price">{{price}}{{currency$ | async}}</span></p>
-      <ul>
-        <li>Fare <span class="price">€88.00</span></li>
-        <li>Tax & Service Charge <span class="price">€10.00</span></li>
-      </ul>
-    </li>
-  </ul>
+<section class="flight-fare" *ngIf="currency$ | async as currentCurrency">
+  <div class="flight-fare_table">
+    <ul>
+      <li *ngFor="let fareItem of fareInfo">
+        <p class="line">
+          <span class="title">{{ fareItem.title }}</span>
+          <span class="price">{{ fareItem.price | currency : currentCurrency : 'symbol' }}</span>
+        </p>
+        <p class="sub-line">Fare <span class="price">{{ fareItem.fare | currency : currentCurrency : 'symbol'}}</span>
+        </p>
+        <p class="sub-line">
+          Tax & Service Charge
+          <span class="price">{{ fareItem.tax | currency : currentCurrency : 'symbol' }}</span>
+        </p>
+      </li>
+    </ul>
+  </div>
+  <div class="fare-total">
+    <h3 class="title">total:</h3>
+    <span class="price">{{ total | currency : currentCurrency : 'symbol' }}</span>
+  </div>
 </section>

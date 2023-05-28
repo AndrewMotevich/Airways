@@ -33,6 +33,10 @@ body {
   &.mdc-button--raised {
     min-width: 126px;
   }
+
+  &.mat-mdc-outlined-button {
+    padding: 0 1.4rem;
+  }
 }
 
 .mdc-button.btn-with-gradient {

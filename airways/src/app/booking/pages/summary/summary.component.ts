@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IPassengerDetails } from '../../models/passenger.interface';
 import { FormDataService } from '../../services/form-data.service';
@@ -6,49 +6,61 @@ import { FormDataModel, PointModel } from '../../models/form-data.model';
 import { PassengersDataService } from '../../services/passengers-data.service';
 import { EPassenger } from '../../models/passengers-data.interface';
 import { TripDataService } from '../../services/trip-data.service';
+import { TicketsDataService } from '../../services/tickets-data.service';
+import { IFlightDetails } from '../../models/flight-details.interface';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-summary',
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.scss']
 })
-export class SummaryComponent implements OnInit {
+export class SummaryComponent implements OnInit, OnDestroy {
   passengersInfo!: IPassengerDetails[];
 
   flightDetails!: FormDataModel<PointModel>;
 
-  adultTotal: number = 0;
-
-  childTotal: number = 0;
-
-  infantTotal: number = 0;
+  passengersNumber = { 'adult': 0, 'child': 0, 'infant': 0 };
 
   ticketPrice: number;
+
+  ticketsData!: IFlightDetails[];
+
+  subscription!: Subscription | null;
 
   constructor(
     private passengersService: PassengersDataService,
     private dataService: FormDataService,
     private router: Router,
-    private tripData: TripDataService
+    private tripData: TripDataService,
+    private ticketDataService: TicketsDataService,
   ) {
     this.passengersInfo = this.passengersService.getPassengersData().passengers;
-    this.flightDetails = this.dataService.getMainFormData();
+    this.flightDetails = this.dataService.getMainFormData();   
+
     this.ticketPrice = 167;
+    console.log('summary flightDetails: ', this.flightDetails);
   }
 
   ngOnInit(): void {
     this.passengersInfo.forEach(person => {
       if (person.category === EPassenger.ADULT) {
-        this.adultTotal += 1;
+        this.passengersNumber.adult += 1;
         return;
       }
 
       if (person.category === EPassenger.CHILD) {
-        this.childTotal += 1;
+        this.passengersNumber.child += 1;
         return;
       }
-      this.infantTotal += 1;
-    })
+      this.passengersNumber.infant += 1;
+    });
+
+    this.subscription = this.ticketDataService.getObservableTickets().subscribe((tickets: IFlightDetails[]) => {
+      console.log('summary tickets: ', tickets);
+
+      this.ticketsData = tickets;
+    });
   }
 
   onBuy(): void {
@@ -57,5 +69,12 @@ export class SummaryComponent implements OnInit {
 
   addToCart(): void {
     this.tripData.addTripToStack();
+  }
+
+  ngOnDestroy(): void {
+    // if (this.subscription) {
+    //   this.subscription.unsubscribe();
+    //   this.subscription = null;
+    // }
   }
 }

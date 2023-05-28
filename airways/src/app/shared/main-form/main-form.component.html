@@ -1,7 +1,7 @@
 <div *ngIf="isLoading" class="loading"><mat-spinner strokeWidth="2" diameter="50"
     aria-label="Loading form"></mat-spinner></div>
 <form [ngClass]="{ 'edit-form-container': currentUrl === '/select-flight', 'form-container': currentUrl === '/' }"
-  *ngIf="!isLoading" [formGroup]="form" (ngSubmit)="submit()">
+  *ngIf="!isLoading" [formGroup]="form">
 
   <ng-container *ngIf="currentUrl === '/'">
     <mat-radio-group aria-label="Select an option" formControlName="roundedTrip" class="form-container_oneway">

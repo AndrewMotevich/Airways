@@ -6,11 +6,18 @@
   display: grid;
   gap: 2rem;
   grid-template-columns: 1fr 1fr;
+  margin-bottom: 2.5rem;
 }
 
 .flight-action {
   display: flex;
-  gap: 2rem;
+  gap: 2.5rem;
   justify-content: flex-end;
   align-items: center;
+}
+
+.back-link {
+  @extend %text-button; 
+  text-decoration: none;
+  margin: 0 2.8rem;
 }
