@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Component, Input, OnInit } from '@angular/core';
 import dayjs from 'dayjs';
 import { IFlightDetails } from 'src/app/booking/models/flight-details.interface';

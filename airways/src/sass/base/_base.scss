@@ -264,6 +264,10 @@ h2 {
     color: $color-neutral30;
   }
 
+  .table-head-bg {
+    background-color: $color-neutral80;
+  }
+
   .section-bg,
   .header-inner-bg {
     background-color: $color-neutral100;
@@ -315,6 +319,10 @@ h2 {
 
   .svg-stroke {
     stroke: $color-neutral100;
+  }
+
+  .table-head-bg {
+    background-color: $color-neutral40;
   }
 
   .section-bg {

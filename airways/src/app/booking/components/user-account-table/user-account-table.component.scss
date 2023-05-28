@@ -10,7 +10,6 @@
   max-width: 1128px;
   min-height: 680px;
   width: 100;
-  background-color: $color-neutral100;
   border-radius: 8px;
   box-shadow: $shadow;
   display: flex;
@@ -44,7 +43,6 @@
     justify-content: center;
     align-items: center;
     grid-template-columns: 160px 178px 102px 260px 106px 130px;
-    background-color: $color-neutral80;
   }
   .divider {
     margin: 0 31px;
@@ -58,10 +56,10 @@
     grid-template-columns: 160px 178px 102px 260px 106px 130px;
     padding: 20px 0;
     &:hover {
-      background-color: $color-neutral80;
+      background-color: $color-neutral40;
     }
     &:active {
-      background-color: $color-neutral100;
+      background-color: $color-neutral40;
     }
     .flight-number {
       display: flex;

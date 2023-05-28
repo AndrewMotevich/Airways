@@ -25,14 +25,25 @@ export class FormDataService {
     FormDataModel<PointModel>
   >(initialFormDataValues);
 
-  private getCityAndCodeFromString = (combinedString: string | null): PointModel => {
+  private getCityAndCodeFromString = (
+    combinedString: string | null | { code: string; title: string }
+  ): PointModel => {
+    let destinationString = '';
     if (combinedString === null)
       return {
         title: null,
         code: null,
       };
 
-    const cityCodeArray = combinedString.split(' ');
+    if (typeof combinedString === 'object' && !Array.isArray(combinedString)) {
+      const combinedObj = { ...combinedString };
+      destinationString = `${combinedObj.title} ${combinedObj.code}`;
+    }
+    if (typeof combinedString === 'string') {
+      destinationString = combinedString;
+    }
+
+    const cityCodeArray = destinationString.split(' ');
     const code = cityCodeArray.pop() || null;
     const title = cityCodeArray.join(' ') || null;
 

@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ECurrency } from 'src/app/core/models/currency.interface';
 import { FormDataService } from './form-data.service';
-// import { FlightsDataService } from './flightsData.service';
 import { PassengersDataService } from './passengers-data.service';
 import { TripDataType } from '../models/trip-data-type';
 import { HistoryApiService } from './history-api.service';
 import { TicketsDataService } from './tickets-data.service';
+import { IFlightDetails } from '../models/flight-details.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -40,8 +40,8 @@ export class TripDataService {
   private tripStack: TripDataType[] = [];
 
   constructor(
-    private mainData: FormDataService,
     private ticketsData: TicketsDataService,
+    private mainData: FormDataService,
     private passengersData: PassengersDataService,
     private history: HistoryApiService
   ) {
@@ -56,6 +56,12 @@ export class TripDataService {
   getTripStack = new BehaviorSubject(this.tripStack);
 
   addTripToStack(): void {
+    let ticketsData: IFlightDetails[] = [];
+    this.ticketsData.getObservableTickets().subscribe((res) => {
+      ticketsData = res;
+    });
+    this.trip.passengersData = this.passengersData.getPassengersData();
+    this.trip.ticketsData.data = ticketsData;
     this.trip.completed = true;
     this.updateTrip(this.trip);
     this.tripStack?.push(this.trip);
@@ -68,6 +74,18 @@ export class TripDataService {
       return true;
     });
     this.getTripStack.next(this.tripStack);
+  }
+
+  editFromStack(id: number): void {
+    this.tripStack = this.tripStack.filter((elem) => {
+      if (elem.id === id) {
+        this.trip = elem;
+        return false;
+      }
+      return true;
+    });
+    this.getTripStack.next(this.tripStack);
+    this.getTripData.next(this.trip);
   }
 
   saveFromStack(...idArray: number[]): void {
@@ -100,21 +118,21 @@ export class TripDataService {
         currency: ECurrency.EUR,
         data: [
           {
-            origin: 'string',
-            destination: 'string',
-            origin_airport: 'string',
-            destination_airport: 'string',
-            price: 100,
-            airline: 'string',
-            flight_number: 'FR 1925',
-            departure_at: 'string',
-            return_at: 'string',
+            origin: 'none',
+            destination: 'none',
+            origin_airport: 'none',
+            destination_airport: 'none',
+            price: 0,
+            airline: 'none',
+            flight_number: 'none',
+            departure_at: 'none',
+            return_at: 'none',
             duration: 0,
             transfers: 0,
             return_transfers: 0,
             duration_to: 0,
             duration_back: 0,
-            link: 'string',
+            link: 'none',
             currency: 'ANY',
           },
         ],

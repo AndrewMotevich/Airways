@@ -1,10 +1,10 @@
 <div class="page-wrapper">
-  <div class="cart-table-wrapper">
+  <div class="cart-table-wrapper section-bg">
     <h2>Cart</h2>
 
     <div class="table-wrapper">
       <div class="table">
-        <div class="table-header">
+        <div class="table-header table-head-bg">
           <p>
             <mat-checkbox color="primary" class="example-margin" (change)="checkUncheckAllItems()"></mat-checkbox>
             <span style="padding-left: 30px;">No.</span>
@@ -55,7 +55,7 @@
               Child</span>
             <span *ngIf="trip.mainData.infant !== 0">{{trip.mainData.infant}} x Infant</span>
           </p>
-          <p class="price"><span>&#8364; {{elemSum(trip)}}</span>
+          <p class="price"><span>{{'' | customCurrency:trip.ticketsData.data[0].currency}} {{elemSum(trip)}}</span>
             <button mat-icon-button [matMenuTriggerFor]="menu" (click)="currentMenuItem = trip.id"
               aria-label="Example icon-button with a menu">
               <mat-icon>more_vert</mat-icon>
@@ -67,7 +67,7 @@
     </div>
 
     <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="/booking">
+      <button mat-menu-item routerLink="/booking" (click)="editItem()">
         <span>Edit</span>
       </button>
       <button mat-menu-item (click)="deleteItem()">
@@ -79,7 +79,7 @@
       <div class="total-container">
         <button class="new-trip-button" routerLink="/">+ Add new trip</button>
         <div class="total-sum">
-          <p>Total</p><span>&#8364; {{totalSum()}}</span>
+          <p>Total</p><span>{{'' | customCurrency:currency}} {{totalSum()}}</span>
         </div>
       </div>
       <mat-divider class="divider"></mat-divider>
