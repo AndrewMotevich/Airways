@@ -6,6 +6,8 @@ import { FormDataModel, PointModel } from '../../models/form-data.model';
 import { PassengersDataService } from '../../services/passengers-data.service';
 import { EPassenger } from '../../models/passengers-data.interface';
 import { TripDataService } from '../../services/trip-data.service';
+import { TicketsDataService } from '../../services/tickets-data.service';
+import { IFlightDetails } from '../../models/flight-details.interface';
 
 @Component({
   selector: 'app-summary',
@@ -15,28 +17,28 @@ import { TripDataService } from '../../services/trip-data.service';
 export class SummaryComponent implements OnInit {
   passengersInfo!: IPassengerDetails[];
 
-  flightDetails!: FormDataModel<PointModel>;
-
-  adultTotal: number = 0;
-
-  childTotal: number = 0;
-
-  infantTotal: number = 0;
+  flightDetails!: FormDataModel<PointModel>;  
 
   passengersNumber = { 'adult': 0, 'child': 0, 'infant': 0 };
 
   ticketPrice: number;
 
+  tickets: IFlightDetails[];
+
   constructor(
     private passengersService: PassengersDataService,
     private dataService: FormDataService,
     private router: Router,
-    private tripData: TripDataService
+    private tripData: TripDataService,
+    private ticketDataService: TicketsDataService,
   ) {
     this.passengersInfo = this.passengersService.getPassengersData().passengers;
     this.flightDetails = this.dataService.getMainFormData();
+    this.tickets = this.ticketDataService.getTickets();
+
     this.ticketPrice = 167;
     console.log('flightDetails: ', this.flightDetails);
+    console.log('tickets: ', this.tickets);
   }
 
   ngOnInit(): void {
