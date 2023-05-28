@@ -41,7 +41,7 @@ export class ShoppingCartTableComponent implements OnInit {
     });
   }
 
-  openSnack() {
+  openSnack(): void {
     this.snackBar.open('Successfully payment, item(s) added to history' || 'Error', 'Ok', {
       horizontalPosition: 'center',
       verticalPosition: 'top',
