@@ -38,4 +38,8 @@ export class TicketsDataService {
     this.tickets = newState;
     this.ticketsSubject.next(newState);
   }
+
+  checkTicketSelected(ticket: IFlightDetails): boolean {
+    return this.tickets.some((t) => t.link === ticket.link);
+  }
 }
