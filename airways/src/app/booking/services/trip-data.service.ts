@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ECurrency } from 'src/app/core/models/currency.interface';
 import { FormDataService } from './form-data.service';
-import { FlightsDataService } from './flightsData.service';
 import { PassengersDataService } from './passengers-data.service';
 import { TripDataType } from '../models/trip-data-type';
 import { HistoryApiService } from './history-api.service';
+import { TicketsDataService } from './tickets-data.service';
 
 @Injectable({
   providedIn: 'root',
@@ -39,8 +39,8 @@ export class TripDataService {
   private tripStack: TripDataType[] = [];
 
   constructor(
+    private ticketsDataService: TicketsDataService,
     private mainData: FormDataService,
-    private ticketsData: FlightsDataService,
     private passengersData: PassengersDataService,
     private history: HistoryApiService
   ) {
@@ -55,6 +55,8 @@ export class TripDataService {
   getTripStack = new BehaviorSubject(this.tripStack);
 
   addTripToStack(): void {
+    console.log('trip:', this.trip);
+    this.ticketsDataService.getObservableTickets().subscribe((res) => console.log(res));
     this.trip.completed = true;
     this.updateTrip(this.trip);
     this.tripStack?.push(this.trip);
@@ -99,21 +101,21 @@ export class TripDataService {
         currency: ECurrency.EUR,
         data: [
           {
-            origin: 'string',
-            destination: 'string',
-            origin_airport: 'string',
-            destination_airport: 'string',
-            price: 100,
-            airline: 'string',
-            flight_number: 'FR 1925',
-            departure_at: 'string',
-            return_at: 'string',
+            origin: 'none',
+            destination: 'none',
+            origin_airport: 'none',
+            destination_airport: 'none',
+            price: 0,
+            airline: 'none',
+            flight_number: 'none',
+            departure_at: 'none',
+            return_at: 'none',
             duration: 0,
             transfers: 0,
             return_transfers: 0,
             duration_to: 0,
             duration_back: 0,
-            link: 'string',
+            link: 'none',
             currency: 'ANY',
           },
         ],

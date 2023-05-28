@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IFlightDetails } from '../models/flight-details.interface';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class TicketsDataService {
   private tickets: IFlightDetails[] = [];
 
