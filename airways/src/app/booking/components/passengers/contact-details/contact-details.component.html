@@ -12,14 +12,14 @@
 
     <mat-form-field appearance="outline" class="constact-details_phone">
       <mat-label>Mobile phone number</mat-label>
-      <input matInput appDigitsOnly type="tel" formControlName="phone" autocomplete="off" [maxlength]="maxLength" [size]="maxLength"/>
+      <input matInput appDigitsOnly type="tel" formControlName="phone" autocomplete="off" [maxlength]="maxLength" [value]="phone.value" [size]="maxLength"/>
       <mat-error *ngIf="phone.hasError('required')">This field is required</mat-error>
       <mat-error *ngIf="phone.hasError('pattern')">Only digits, no other characters allowed</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="constact-details_email">
       <mat-label>Email</mat-label>
-      <input matInput placeholder="e.g. example@email.com" type="email" formControlName="email"/>
+      <input matInput placeholder="e.g. example@email.com" type="email" formControlName="email" [value]="email.value"/>
       <mat-error *ngIf="email.hasError('required')">This field is required</mat-error>
       <mat-error *ngIf="email.hasError('email')">Check email</mat-error>
     </mat-form-field>

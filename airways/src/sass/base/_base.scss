@@ -356,8 +356,12 @@ h2 {
     }
   }
 
-  .flight-fare, .flight-fare h3, .back-link { 
+  .flight-fare, .flight-fare h3 { 
     color: $color-neutral0;
+  }
+
+  .back-link {
+    color:$color-neutral100;
   }
   
 }

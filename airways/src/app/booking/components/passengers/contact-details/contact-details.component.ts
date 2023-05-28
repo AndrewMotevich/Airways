@@ -15,8 +15,6 @@ export class ContactDetailsComponent implements OnInit {
 
   @Input() maxLength!: number;
 
-
-
   phoneCodes!: Observable<IPhoneCode[]>;
 
   get email(): FormControl<string> {

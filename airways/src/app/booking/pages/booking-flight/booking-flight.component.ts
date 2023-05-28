@@ -41,50 +41,12 @@ export class BookingFlightComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const { phoneCode, phone, email } = this.passengersService.getPassengersData();
+
     this.passengersFormGroup = this.fb.nonNullable.group({
-      phoneCode: [this.currentPhoneCode, Validators.required],
-      phone: ['', [Validators.required, Validators.maxLength(this.maxLength)]],
-      email: ['', [Validators.required, Validators.email]],
-    });
-    this.passengersFormGroup.patchValue({
-      email: 'bbbom@mail.ru',
-      code: 'CY',
-      phone: '67234256'
-    });
-
-  }
-
-  add(): void {
-    this.passengersFormGroup.patchValue({
-      passengers: [
-        {
-          category: 'adult',
-          firstName: 'Harry',
-          lastName: 'Potter',
-          gender: 'male',
-          dateOfBirth: dayjs().toDate(),
-          needHelp: true,
-          checkedInBag: 0
-        },
-        {
-          category: 'adult',
-          firstName: 'Lilly',
-          lastName: 'Potter',
-          gender: 'male',
-          dateOfBirth: dayjs().toDate(),
-          needHelp: false,
-          checkedInBag: 10
-        },
-        {
-          category: 'child',
-          firstName: 'James',
-          lastName: 'Potter',
-          gender: 'male',
-          dateOfBirth: dayjs().toDate(),
-          needHelp: true,
-          checkedInBag: 32
-        }
-      ]
+      phoneCode: [phoneCode, Validators.required],
+      phone: [phone, [Validators.required, Validators.maxLength(this.maxLength)]],
+      email: [email, [Validators.required, Validators.email]],
     });
   }
 
