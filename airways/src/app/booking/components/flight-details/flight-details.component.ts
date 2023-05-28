@@ -28,5 +28,6 @@ export class FlightDetailsComponent {
 
   unselectTicket(): void {
     this.isSelected = false;
+    this.ticketsDataService.deleteTickets([this.flight]);
   }
 }
