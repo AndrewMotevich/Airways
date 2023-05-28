@@ -3,7 +3,7 @@
 @import "/src/sass/base/typography";
 
 .flight {
-  @include section-style;  
+  @include section-style;
   margin: 8px auto 2rem;
 
   @media screen and (min-width: 960px) {
@@ -283,5 +283,20 @@
         display: none;
       }
     }
+  }
+
+  .button--edit {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    margin-left: 63px;
+
+    color: $color-primary;
+    border: none;
+    background-color: $color-secondary90;
+    border-radius: 4px;
   }
 }

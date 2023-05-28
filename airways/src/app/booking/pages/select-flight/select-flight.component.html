@@ -11,8 +11,7 @@
         (prevDateButtonClick)="handleClickOnPrevDepartureDate()"></app-ticket-date-slider>
       <ng-container *ngIf="(flightsDetailsDepart$ | async) as flights; else noDataTemplate">
         <ng-container *ngIf="flights.length > 0; else noDataTemplate">
-          <app-flight-details *ngFor="let flight of flights" [flight]="flight"
-            [currency]="flightDepartureCurrency"></app-flight-details>
+          <app-flight-details *ngFor="let flight of flights" [flight]="flight"></app-flight-details>
         </ng-container>
       </ng-container>
       <ng-template #noDataTemplate>
@@ -33,8 +32,7 @@
         (prevDateButtonClick)="handleClickOnPrevArrivalDate()"></app-ticket-date-slider>
       <ng-container *ngIf="(flightsDetailsReturn$ | async) as flights; else noDataTemplate">
         <ng-container *ngIf="flights.length > 0; else noDataTemplate">
-          <app-flight-details *ngFor="let flight of flights" [flight]="flight"
-            [currency]="flightReturnCurrency"></app-flight-details>
+          <app-flight-details *ngFor="let flight of flights" [flight]="flight"></app-flight-details>
         </ng-container>
       </ng-container>
     </section>
