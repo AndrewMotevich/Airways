@@ -21,7 +21,7 @@ const routes: Routes = [
       import('./booking/pages/booking-flight/booking-flight.module').then(
         (m) => m.BookingFlightModule
       ),
-    //canActivate: [IsLoginGuard]
+    canActivate: [IsLoginGuard]
   },
   {
     path: 'summary',
