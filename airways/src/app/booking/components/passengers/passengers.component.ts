@@ -58,7 +58,7 @@ export class PassengersComponent implements OnInit {
             gender: ['', [Validators.required]],
             dateOfBirth: ['', [Validators.required]],
             needHelp: false,
-            checkedInBag: [{ value: 0, disabled: false }]
+            checkedInBag: [{ value: null, disabled: false }]
           }));
         });
       });
@@ -73,7 +73,7 @@ export class PassengersComponent implements OnInit {
           lastName: [lastName, [Validators.required, Validators.minLength(3)]],
           gender: [gender, [Validators.required]],
           dateOfBirth: [dateOfBirth, [Validators.required]],
-          checkedInBag: [{ value: checkedInBag, disabled: false }]
+          checkedInBag: [{ value: checkedInBag || 0, disabled: !checkedInBag }]
         }));
       })
     }
