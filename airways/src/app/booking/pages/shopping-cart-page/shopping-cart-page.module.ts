@@ -14,6 +14,7 @@ import { ShoppingCartTableComponent } from '../../components/shopping-cart-table
 import { RoundedTripPipe } from '../../pipe/rounded-trip.pipe';
 import { UserAccountPageComponent } from '../user-account-page/user-account-page.component';
 import { UserAccountTableComponent } from '../../components/user-account-table/user-account-table.component';
+import { TicketDateSliderModule } from '../../../shared/ticket-date-slider/ticket-date-slider.module';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { UserAccountTableComponent } from '../../components/user-account-table/u
     MatMenuModule,
     MatInputModule,
     RouterModule,
+    TicketDateSliderModule,
   ],
 })
 export class ShoppingCartPageModule {}

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TripDataService } from '../../services/trip-data.service';
 import { TripDataType } from '../../models/trip-data-type';
+import { HeaderDataService } from '../../../core/services/header-data.service';
 
 @Component({
   selector: 'app-shopping-cart-table',
@@ -10,13 +11,19 @@ import { TripDataType } from '../../models/trip-data-type';
 export class ShoppingCartTableComponent implements OnInit {
   checkAllItems = { checkAll: true };
 
+  currency = 'EUR';
+
   currentMenuItem = 0;
 
   currentTripStack: TripDataType[] = [];
 
   currentTripItems: { id: number; checked: boolean }[] = [];
 
-  constructor(private tripData: TripDataService) {}
+  constructor(private tripData: TripDataService, public headerService: HeaderDataService) {
+    this.headerService.currentCurrency$.subscribe((res) => {
+      this.currency = res;
+    });
+  }
 
   ngOnInit(): void {
     this.tripData.getTripStack.subscribe((res) => {
