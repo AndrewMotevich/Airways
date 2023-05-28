@@ -57,7 +57,6 @@ export class SummaryComponent implements OnInit, OnDestroy {
     });
 
     this.subscription = this.ticketDataService.getObservableTickets().subscribe((tickets: IFlightDetails[]) => {
-      console.log('summary tickets: ', tickets);
       if (!tickets) return;
 
       const [ticketFrom, ticketTo] = tickets;

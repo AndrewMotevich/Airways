@@ -30,4 +30,16 @@ export class TicketsDataService {
   getObservableTickets(): Observable<IFlightDetails[]> {
     return this.observableTickets$;
   }
+
+  deleteTickets(tickets: IFlightDetails[]): void {
+    const redundantLinks = tickets.map((ticket) => ticket.link);
+    const newState = this.tickets.filter((ticket) => !redundantLinks.includes(ticket.link));
+
+    this.tickets = newState;
+    this.ticketsSubject.next(newState);
+  }
+
+  checkTicketSelected(ticket: IFlightDetails): boolean {
+    return this.tickets.some((t) => t.link === ticket.link);
+  }
 }
