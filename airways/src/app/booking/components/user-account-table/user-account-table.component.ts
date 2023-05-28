@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TripDataType } from '../../models/trip-data-type';
 import { HistoryApiService } from '../../services/history-api.service';
@@ -9,7 +9,7 @@ import { HistoryDataService } from '../../services/history-data.service';
   templateUrl: './user-account-table.component.html',
   styleUrls: ['./user-account-table.component.scss'],
 })
-export class UserAccountTableComponent implements AfterViewInit {
+export class UserAccountTableComponent implements OnInit {
   currentHistoryStack: TripDataType[] = [];
 
   constructor(
@@ -23,7 +23,7 @@ export class UserAccountTableComponent implements AfterViewInit {
     this.router.navigate(['/history-summary']);
   }
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.historyApi.history.subscribe((res) => {
       this.currentHistoryStack = res;
     });

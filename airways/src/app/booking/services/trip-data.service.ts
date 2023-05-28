@@ -103,7 +103,7 @@ export class TripDataService {
     this.tripStack = tempArray;
     this.getTripStack.next(this.tripStack);
     // save in history
-    // this.history.saveHistory(deletedArray);
+    this.history.saveHistory(deletedArray);
   }
 
   addNewTrip(): void {
