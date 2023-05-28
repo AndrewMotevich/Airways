@@ -5,11 +5,22 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  
+
   .person {
+    padding: 0 25px;
+    
+    &:not(:last-child) {
+      border-bottom: solid 1px $color-secondary50;
+    }
+
     h4 {
       @extend %text-title-small;
       text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .line {
+      margin: 0 0 0.5rem 1.8rem;
     }
   }
 }

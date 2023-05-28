@@ -23,6 +23,8 @@ export class SummaryComponent implements OnInit {
 
   infantTotal: number = 0;
 
+  passengersNumber = { 'adult': 0, 'child': 0, 'infant': 0 };
+
   ticketPrice: number;
 
   constructor(
@@ -40,16 +42,17 @@ export class SummaryComponent implements OnInit {
   ngOnInit(): void {
     this.passengersInfo.forEach(person => {
       if (person.category === EPassenger.ADULT) {
-        this.adultTotal += 1;
+        this.passengersNumber.adult += 1;
         return;
       }
 
       if (person.category === EPassenger.CHILD) {
-        this.childTotal += 1;
+        this.passengersNumber.child += 1;
         return;
       }
-      this.infantTotal += 1;
-    })
+      this.passengersNumber.infant += 1;
+    });
+    console.log(this.passengersNumber);
   }
 
   onBuy(): void {
