@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FlightDirection, FormDataModel } from 'src/app/booking/models/form-data.model';
 import { TripDataService } from '../../services/trip-data.service';
 import { TripDataType } from '../../models/trip-data-type';
 import { HeaderDataService } from '../../../core/services/header-data.service';
+import { PassengersDataService } from '../../services/passengers-data.service';
+import { TPassengersInformation } from '../../models/passenger.interface';
+import { FormDataService } from '../../services/form-data.service';
 
 @Component({
   selector: 'app-shopping-cart-table',
@@ -11,6 +15,8 @@ import { HeaderDataService } from '../../../core/services/header-data.service';
 export class ShoppingCartTableComponent implements OnInit {
   checkAllItems = { checkAll: true };
 
+  currentTrip!: TripDataType;
+
   currency = 'EUR';
 
   currentMenuItem = 0;
@@ -19,9 +25,17 @@ export class ShoppingCartTableComponent implements OnInit {
 
   currentTripItems: { id: number; checked: boolean }[] = [];
 
-  constructor(private tripData: TripDataService, public headerService: HeaderDataService) {
+  constructor(
+    private tripData: TripDataService,
+    public headerService: HeaderDataService,
+    private passengersService: PassengersDataService,
+    private mainFormService: FormDataService
+  ) {
     this.headerService.currentCurrency$.subscribe((res) => {
       this.currency = res;
+    });
+    this.tripData.getTripData.subscribe((res) => {
+      this.currentTrip = res;
     });
   }
 
@@ -76,6 +90,26 @@ export class ShoppingCartTableComponent implements OnInit {
         checked: false,
       }));
     });
+  }
+
+  editItem(): void {
+    this.tripData.editFromStack(this.currentMenuItem);
+    this.passengersService.setPassengersData(
+      this.currentTrip.passengersData as TPassengersInformation
+    );
+    this.mainFormService.setMainFormData(
+      this.currentTrip.mainData as unknown as FormDataModel<string>
+    );
+    this.mainFormService.setFlightDataDate(
+      this.currentTrip.ticketsData.data[0].departure_at,
+      FlightDirection.DEPARTURE
+    );
+    if (this.currentTrip.mainData.roundedTrip === 'both') {
+      this.mainFormService.setFlightDataDate(
+        this.currentTrip.ticketsData.data[1].departure_at,
+        FlightDirection.ARRIVAL
+      );
+    }
   }
 
   saveItems(): void {

@@ -76,6 +76,20 @@ export class TripDataService {
     this.getTripStack.next(this.tripStack);
   }
 
+  editFromStack(id: number): void {
+    console.log('previous', this.trip.mainData);
+    this.tripStack = this.tripStack.filter((elem) => {
+      if (elem.id === id) {
+        this.trip = elem;
+        return false;
+      }
+      return true;
+    });
+    this.getTripStack.next(this.tripStack);
+    this.getTripData.next(this.trip);
+    console.log('After', this.trip.mainData);
+  }
+
   saveFromStack(...idArray: number[]): void {
     const deletedArray: TripDataType[] = [];
     const tempArray = this.tripStack.filter((elem) => {

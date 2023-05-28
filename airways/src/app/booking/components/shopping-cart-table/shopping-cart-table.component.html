@@ -67,7 +67,7 @@
     </div>
 
     <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="/booking">
+      <button mat-menu-item routerLink="/booking" (click)="editItem()">
         <span>Edit</span>
       </button>
       <button mat-menu-item (click)="deleteItem()">
