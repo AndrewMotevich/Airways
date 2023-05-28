@@ -14,21 +14,31 @@ export class CheckinBagComponent implements OnInit {
 
   weights = [10, 20, 26, 32];
 
-  isChekedInBag = false;
+  isNoBag = false;
+
+  checkedBag!: number | null;
 
   checkedInBagControl!: AbstractControl | null;
 
   ngOnInit(): void {
     this.checkedInBagControl = this.passenger.get('checkedInBag');
+
+    this.checkedBag = this.checkedInBagControl?.value;
+
+    if (this.checkedBag === 0) {
+      this.checkedInBagControl?.disable();
+      this.isNoBag = true;
+    }
   }
 
   checkBag(): void {
-    this.isChekedInBag = !this.isChekedInBag;
+    this.isNoBag = !this.isNoBag;
 
-    if (this.isChekedInBag) {
+    if (this.isNoBag) {
       this.checkedInBagControl?.disable();
-      this.checkedInBagControl?.setValue(0);
-    } else
+      this.checkedInBagControl?.setValue(0);      
+    } else {
       this.checkedInBagControl?.enable();
+    }
   }
 }

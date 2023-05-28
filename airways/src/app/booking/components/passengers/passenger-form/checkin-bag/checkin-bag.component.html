@@ -6,11 +6,12 @@
       name="checkedInBag"
       aria-label="Choose a checked-in bag"
       formControlName="checkedInBag"
+      [value]="checkedBag"
     >
       <mat-button-toggle [value]="bag" *ngFor="let bag of weights">
         <mat-icon>luggage</mat-icon>{{ bag }}&nbsp;kg</mat-button-toggle
       >
     </mat-button-toggle-group>
   </ng-container>
-  <mat-checkbox (click)="checkBag()" class="primary">I don't want a checked-in bag</mat-checkbox>
+  <mat-checkbox (click)="checkBag()" class="primary" [checked]="isNoBag">I don't want a checked-in bag</mat-checkbox>
 </section>

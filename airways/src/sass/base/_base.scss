@@ -354,4 +354,22 @@ h2 {
     --mat-mdc-button-persistent-ripple-color: $color-neutral0;
     --mat-mdc-button-ripple-color: $color-neutral0;
   }
+
+  .flight-card {
+    .mat-mdc-card-title {
+      color: $color-neutral0;
+    }
+    .mat-mdc-card-subtitle{
+      color: $color-neutral0;
+    }
+  }
+
+  .flight-fare, .flight-fare h3 { 
+    color: $color-neutral0;
+  }
+
+  .back-link {
+    color:$color-neutral100;
+  }
+  
 }
