@@ -15,7 +15,11 @@
     <div class="travel-time">
       <span class="travel-time_duration">{{flight.duration | duration}}</span>
       <mat-icon aria-hidden="true" fontIcon="flight_takeoff" class="plane"></mat-icon>
-      <span class="travel-time_direction">Direct, transfers {{flight.transfers}}</span>
+      <span class="travel-time_direction">
+        <ng-container *ngIf="flight.transfers > 0">transfers {{flight.transfers}}</ng-container>
+        <ng-container *ngIf="flight.transfers <= 0">Direct</ng-container>
+      </span>
+
     </div>
     <div class="flight-details_arrival">
       <span class="date">{{
