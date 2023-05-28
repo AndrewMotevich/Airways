@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ECurrency } from 'src/app/core/models/currency.interface';
 import { FormDataService } from './form-data.service';
-import { FlightsDataService } from './flightsData.service';
+// import { FlightsDataService } from './flightsData.service';
 import { PassengersDataService } from './passengers-data.service';
 import { TripDataType } from '../models/trip-data-type';
 import { HistoryApiService } from './history-api.service';
+import { TicketsDataService } from './tickets-data.service';
 
 @Injectable({
   providedIn: 'root',
@@ -40,7 +41,7 @@ export class TripDataService {
 
   constructor(
     private mainData: FormDataService,
-    private ticketsData: FlightsDataService,
+    private ticketsData: TicketsDataService,
     private passengersData: PassengersDataService,
     private history: HistoryApiService
   ) {

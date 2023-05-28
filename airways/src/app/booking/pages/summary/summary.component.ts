@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { IPassengerDetails } from '../../models/passenger.interface';
 import { FormDataService } from '../../services/form-data.service';
 import { FormDataModel, PointModel } from '../../models/form-data.model';
@@ -38,7 +38,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
     private ticketDataService: TicketsDataService,
   ) {
     this.passengersInfo = this.passengersService.getPassengersData().passengers;
-    this.flightDetails = this.dataService.getMainFormData();   
+    this.flightDetails = this.dataService.getMainFormData();
 
     this.ticketPrice = 167;
   }
