@@ -25,9 +25,9 @@ const routes: Routes = [
   },
   {
     path: 'summary',
-    component: Page404Component,
-    // canActivate: [IsLoginGuard]
-  },
+    loadChildren: () => import('./booking/pages/summary/summary.module').then((m) => m.SummaryModule),
+    //canActivate: [IsLoginGuard] 
+  },  
   {
     path: 'shopping-card',
     component: ShoppingCartPageComponent,

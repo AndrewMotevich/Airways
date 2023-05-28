@@ -5,6 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import * as Constant from '../../../shared/constants';
 import { TPassengersData } from '../../models/passengers-data.interface';
 import { IPassengerDetails } from '../../models/passenger.interface';
+import { PassengersDataService } from '../../services/passengers-data.service';
 
 @Component({
   selector: 'app-passengers',
@@ -20,7 +21,13 @@ export class PassengersComponent implements OnInit {
 
   passengersFormArray: FormArray = this.fb.array([]);
 
-  constructor(private rootFormGroup: FormGroupDirective, private fb: FormBuilder, private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
+  constructor(
+    private rootFormGroup: FormGroupDirective,
+    private fb: FormBuilder,
+    private passengersDataService: PassengersDataService,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer
+  ) {
     this.matIconRegistry.addSvgIcon('icon_passengers',
       this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/icons/passengers.svg'));
 
@@ -36,22 +43,40 @@ export class PassengersComponent implements OnInit {
 
     if (!this.passengersData) return;
 
-    // eslint-disable-next-line array-callback-return
-    Object.entries(this.passengersData).map(([category, total]: [category: string, total: number]) => {
-      if (!total) return;
+    const { passengers } = this.passengersDataService.getPassengersData();
 
-      [...Array(total)].forEach(() => {
-        this.passengersFormArray.push(this.fb.group<IPassengerDetails>({
-          category: [category],
-          firstName: ['', [Validators.required, Validators.minLength(3)]],
-          lastName: ['', [Validators.required, Validators.minLength(3)]],
-          gender: ['', [Validators.required]],
-          dateOfBirth: ['', [Validators.required]],
-          needHelp: false,
-          checkedInBag: [{ value: 0, disabled: false }]
-        }));
+    if (!passengers.length) {
+      // eslint-disable-next-line array-callback-return
+      Object.entries(this.passengersData).map(([category, total]: [category: string, total: number]) => {
+        if (!total) return;
+
+        [...Array(total)].forEach(() => {
+          this.passengersFormArray.push(this.fb.group<IPassengerDetails>({
+            category,
+            firstName: ['', [Validators.required, Validators.minLength(3)]],
+            lastName: ['', [Validators.required, Validators.minLength(3)]],
+            gender: ['', [Validators.required]],
+            dateOfBirth: ['', [Validators.required]],
+            needHelp: false,
+            checkedInBag: [{ value: 0, disabled: false }]
+          }));
+        });
       });
-    });
+    } else {
+      passengers.forEach(person => {
+        const { category, firstName, lastName, gender, dateOfBirth, needHelp, checkedInBag } = person;
+
+        this.passengersFormArray.push(this.fb.group<IPassengerDetails>({
+          category,
+          needHelp,
+          firstName: [firstName, [Validators.required, Validators.minLength(3)]],
+          lastName: [lastName, [Validators.required, Validators.minLength(3)]],
+          gender: [gender, [Validators.required]],
+          dateOfBirth: [dateOfBirth, [Validators.required]],
+          checkedInBag: [{ value: checkedInBag, disabled: false }]
+        }));
+      })
+    }
 
     this.form.addControl(this.formArrayName, this.passengersFormArray);
   }

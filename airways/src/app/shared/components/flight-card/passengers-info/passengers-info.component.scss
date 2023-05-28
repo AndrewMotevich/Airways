@@ -1,0 +1,16 @@
+@import '../../../../../sass/abstracts/variables';
+@import '../../../../../sass/base/typography';
+
+.passengers-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  
+  .person {
+    h4 {
+      @extend %text-title-small;
+      text-transform: uppercase;
+      color: $color-neutral0;
+    }
+  }
+}

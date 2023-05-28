@@ -39,10 +39,10 @@ export class DateComponent implements OnInit, OnDestroy {
   }
 
   formatDates(): void {
-    const dateEnd = this.formGroup.get('dateEnd')?.value;
+    const date = this.formGroup.get('dateStart')?.value;
 
     this.formGroup.patchValue({
-      dateStart: dateEnd, dateEnd
+      dateStart: date, dateEnd: date
     })
   }
 

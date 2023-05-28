@@ -1,0 +1,16 @@
+@import '../../../../sass/abstracts/mixins';
+@import '../../../../sass/base/typography';
+@import '../../../../sass/abstracts/variables';
+
+.flights-summary {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.flight-action {
+  display: flex;
+  gap: 2rem;
+  justify-content: flex-end;
+  align-items: center;
+}

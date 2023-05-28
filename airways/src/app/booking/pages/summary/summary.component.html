@@ -1,0 +1,20 @@
+<section class="flights-summary">
+  <div>
+    <app-flight-card [passengers]="passengersInfo" [flight]="flightDetails"></app-flight-card>
+  </div>
+  <div>
+    <app-flight-card [passengers]="passengersInfo" [flight]="flightDetails"></app-flight-card>
+    <app-flight-fare
+      [adult]="adultTotal"
+      [child]="childTotal"
+      [infant]="infantTotal"
+      [price]="ticketPrice"
+    ></app-flight-fare>
+  </div>
+</section>
+
+<section class="flight-action">
+  <a [routerLink]="['/booking']">Back</a>
+  <button mat-stroked-button (click)="addToCart()" class="btn">Add to order cart</button>
+  <button mat-raised-button color="primary" (click)="onBuy()" class="btn">Buy</button>
+</section>

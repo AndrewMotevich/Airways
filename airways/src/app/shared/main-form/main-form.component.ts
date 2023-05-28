@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
+import { FormDataModel } from '../../booking/models/form-data.model';
 import { AviaSalesApiService } from '../../booking/services/aviasales-api.service';
 import { CityDateType } from '../../booking/models/city-data-type.model';
 import { FormDataService } from '../../booking/services/form-data.service';
@@ -43,10 +44,10 @@ export class MainFormComponent implements OnInit {
     destination: new FormControl<string | null>(null, [Validators.required]),
     dateStart: new FormControl<string | null>(null, [Validators.required]),
     dateEnd: new FormControl<string | null>(null, [Validators.required]),
-    passengers: new FormControl<number>(1, [Validators.min(1)]),
-    adult: new FormControl<number>(1, [Validators.min(1), Validators.max(9)]),
-    child: new FormControl<number>(0, [Validators.min(0), Validators.max(9)]),
-    infant: new FormControl<number>(0, [Validators.min(0), Validators.max(9)]),
+    passengers: new FormControl(1, [Validators.min(1)]),
+    adult: new FormControl(1, [Validators.min(1), Validators.max(9)]),
+    child: new FormControl(0, [Validators.min(0), Validators.max(9)]),
+    infant: new FormControl(0, [Validators.min(0), Validators.max(9)]),
   });
 
   currentUrl?: string;
@@ -101,8 +102,14 @@ export class MainFormComponent implements OnInit {
   }
 
   public submit(): void {
+    if (this.form.get('roundedTrip')?.value === 'one') {
+      this.form.patchValue({
+        'dateEnd': this.form.get('dateStart')?.value
+      })
+    }
+
     if (this.form.valid) {
-      this.formDataService.setMainFormData(this.form.getRawValue());
+      this.formDataService.setMainFormData(this.form.getRawValue() as FormDataModel<string>);
       this.tripData.addNewTrip();
       this.router.navigate(['/select-flight']);
     }

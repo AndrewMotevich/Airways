@@ -21,10 +21,10 @@ export class TripDataService {
       destination: null,
       dateStart: null,
       dateEnd: null,
-      passengers: null,
-      adult: null,
-      child: null,
-      infant: null,
+      passengers: 1,
+      adult: 1,
+      child: 0,
+      infant: 0,
     },
     // data from selectFlight
     ticketsData: {
@@ -43,7 +43,12 @@ export class TripDataService {
     private ticketsData: FlightsDataService,
     private passengersData: PassengersDataService,
     private history: HistoryApiService
-  ) {}
+  ) {
+    this.trip = {
+      ...this.trip,
+      passengersData: this.passengersData.getPassengersData()
+    }
+  }
 
   getTripData = new BehaviorSubject(this.trip);
 
@@ -112,7 +117,6 @@ export class TripDataService {
           },
         ],
       },
-      // data from passengers !!!(now mocked)!!!
       passengersData: this.passengersData.getPassengersData(),
     };
   }

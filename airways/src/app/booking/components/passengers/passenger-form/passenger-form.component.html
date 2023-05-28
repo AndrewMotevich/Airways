@@ -60,8 +60,8 @@
         <section class="gender-section" [class.error]="passenger.get('gender')?.hasError('required') && passenger.touched">
           <mat-chip-listbox aria-label="Gender selection" class="gender" formControlName="gender">
             <div>
-              <mat-chip-option class="gender-male">Male</mat-chip-option>
-              <mat-chip-option class="gender-female">Female</mat-chip-option>
+              <mat-chip-option class="gender-male" [selected]="passenger.get('gender')?.value === 'male'">Male</mat-chip-option>
+              <mat-chip-option class="gender-female" [selected]="passenger.get('gender')?.value === 'female'">Female</mat-chip-option>
             </div>           
           </mat-chip-listbox>
           <mat-error *ngIf="passenger.get('gender')?.hasError('required') && passenger.touched"
