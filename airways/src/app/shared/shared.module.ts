@@ -51,6 +51,7 @@ import { DateComponent } from '../booking/components/main-form/date/date.compone
     StepperComponent,
     FlightInfoMenuComponent,
     MainFormComponent,
+    MatProgressSpinnerModule,
   ],
 })
 export class SharedModule {}
