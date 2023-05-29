@@ -2,15 +2,10 @@
 <section class="baggage" *ngIf="passenger">
   <ng-container [formGroup]="passenger">
     <h3>Checked-in baggage</h3>
-    <mat-button-toggle-group
-      name="checkedInBag"
-      aria-label="Choose a checked-in bag"
-      formControlName="checkedInBag"
-      [value]="checkedBag"
-    >
-      <mat-button-toggle [value]="bag" *ngFor="let bag of weights">
-        <mat-icon>luggage</mat-icon>{{ bag }}&nbsp;kg</mat-button-toggle
-      >
+    <mat-button-toggle-group name="checkedInBag" aria-label="Choose a checked-in bag" formControlName="checkedInBag"
+      [value]="checkedBag" class="baggage-list">
+      <mat-button-toggle [value]="bag" *ngFor="let bag of weights" class="baggage-item">
+        <mat-icon>luggage</mat-icon>{{ bag }}&nbsp;kg</mat-button-toggle>
     </mat-button-toggle-group>
   </ng-container>
   <mat-checkbox (click)="checkBag()" class="primary" [checked]="isNoBag">I don't want a checked-in bag</mat-checkbox>

@@ -16,7 +16,7 @@ export class HistorySummaryPageComponent implements OnInit {
 
   passengersNumber = { 'adult': 0, 'child': 0, 'infant': 0 };
 
-  ticketPrice: number;
+  ticketPrice!: number;
 
   ticketCurrency!: string;
 
@@ -32,7 +32,6 @@ export class HistorySummaryPageComponent implements OnInit {
     this.passengersInfo = (
       this.historyData.getHistoryItem().passengersData as { passengers: IPassengerDetails[] }
     ).passengers;
-    this.ticketPrice = 167;
   }
 
   ngOnInit(): void {
@@ -48,10 +47,15 @@ export class HistorySummaryPageComponent implements OnInit {
       }
       this.passengersNumber.infant += 1;
     });
-    // eslint-disable-next-line prefer-destructuring
-    this.ticketFrom = this.historyData.getHistoryItem().ticketsData.data[0];
-    // eslint-disable-next-line prefer-destructuring
-    this.ticketTo = this.historyData.getHistoryItem().ticketsData.data[1];
-    this.ticketCurrency = this.historyData.getHistoryItem().ticketsData.data[0].currency;
+    const [ticketFrom, ticketTo] = this.historyData.getHistoryItem().ticketsData.data;
+
+    this.ticketFrom = ticketFrom;
+    this.ticketCurrency = ticketFrom.currency;
+    this.ticketPrice = ticketFrom.price;
+
+    if (ticketTo) {
+      this.ticketTo = ticketTo;
+      this.ticketPrice += ticketTo.price;
+    }
   }
 }

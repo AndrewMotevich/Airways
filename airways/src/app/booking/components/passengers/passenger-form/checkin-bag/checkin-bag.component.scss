@@ -1,9 +1,25 @@
-@import '../../../../../../sass/abstracts/mixins';
+@import "../../../../../../sass/abstracts/mixins";
+@import "../../../../../../sass/abstracts/variables";
 
 .baggage {
   margin: 2rem 0 0;
 
   h3 {
     @include title-h3;
+  }
+
+  &-list {
+    @media screen and (max-width: 480px) {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &-item {
+    @media screen and (max-width: 480px) {
+      border-bottom: solid 1px $color-neutral80;
+      padding: 0.5rem;
+    }
   }
 }
