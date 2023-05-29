@@ -1,4 +1,10 @@
 .flight-data-edit-form {
+  position: sticky;
+  z-index: 100;
+  top: 155px;
+  left: 0px;
+  right: 0px;
+
   height: 160px;
   margin-top: 0;
   visibility: visible;
