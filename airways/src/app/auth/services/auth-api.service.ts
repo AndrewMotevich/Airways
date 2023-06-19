@@ -27,6 +27,8 @@ export class AuthApiService {
 
   private accessToken = '';
 
+  private isLoginSubject = new BehaviorSubject<boolean>(false);
+
   tokenData?: { email: string; firstName: string; lastName: string };
 
   constructor(
@@ -37,6 +39,7 @@ export class AuthApiService {
 
   setIsLogin(value: boolean): void {
     this.isLogin = value;
+    this.isLoginSubject.next(value);
   }
 
   getIsLogin(): boolean {
@@ -115,5 +118,9 @@ export class AuthApiService {
           };
         })
       );
+  }
+
+  getIsObservableLogin(): Observable<boolean> {
+    return this.isLoginSubject.asObservable();
   }
 }

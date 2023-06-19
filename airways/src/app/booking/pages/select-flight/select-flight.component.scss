@@ -8,6 +8,16 @@
     gap: 4.3rem;
     margin-top: 2.6rem;
   }
+
+  .continue-group {
+    position: relative;
+    display: grid;
+  }
+
+  .warning {
+    font-weight: 700;
+    color: $color-highlight-yellow0;
+  }
 }
 
 .return {

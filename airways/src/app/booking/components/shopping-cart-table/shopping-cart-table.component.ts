@@ -32,7 +32,6 @@ export class ShoppingCartTableComponent implements OnInit {
     private passengersService: PassengersDataService,
     private mainFormService: FormDataService,
     private snackBar: MatSnackBar
-
   ) {
     this.headerService.currentCurrency$.subscribe((res) => {
       this.currency = res;
@@ -57,6 +56,8 @@ export class ShoppingCartTableComponent implements OnInit {
         checked: false,
       }));
     });
+
+    // console.log(this.getTotalChecked())
   }
 
   checkUncheckItems(id: number): void {

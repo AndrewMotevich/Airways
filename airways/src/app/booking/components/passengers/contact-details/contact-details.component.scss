@@ -1,11 +1,10 @@
-@import '../../../../../sass/abstracts/variables';
-@import '../../../../../sass/abstracts/mixins';
+@import "../../../../../sass/abstracts/variables";
+@import "../../../../../sass/abstracts/mixins";
 
-
-h2 { 
+h2 {
   display: flex;
   align-items: flex-end;
-  gap: .5rem;
+  gap: 0.5rem;
   margin-bottom: 0.6rem;
 }
 
@@ -15,20 +14,53 @@ h2 {
 }
 
 .constact-details {
-  padding: 2rem 2.3rem .5rem 2.5rem;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    gap: 1.2rem;
+  }
 
-  display: flex;
-  gap: 1.2rem;
+  @media screen and (min-width: 541px) and (max-width: 767px) {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    row-gap: 0;
+    column-gap: 1.2rem;
+    padding: 2rem 2.3rem 0.5rem 2.5rem;
+  }
 
-  &_code, &_phone {
-    width: 16rem;
+  @media screen and (max-width: 540px) {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.2rem;
+  }
+
+  &_code,
+  &_phone {
+    @media screen and (min-width: 768px) {
+      width: 16rem;
+    }
+  }
+
+  &_code {
+    @media screen and (min-width: 541px) and (max-width: 767px) {
+      width: 12rem;
+    }
   }
 
   &_phone {
-    margin-right: 1.2rem;
+    @media screen and (min-width: 768px) {
+      margin-right: 1.2rem;
+    }
   }
-  
+
   &_email {
-    width: 40%;
+    @media screen and (min-width: 768px) {
+      width: 40%;
+    }
+
+    @media screen and (max-width: 767px) {
+      width: 100%;
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
   }
 }

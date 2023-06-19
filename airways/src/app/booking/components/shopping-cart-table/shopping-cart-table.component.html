@@ -96,7 +96,7 @@
       </mat-form-field>
       <div class="payment">
         <p style="margin-left: 10px;">{{getTotalChecked()}} selected</p>
-        <button class="payment-button" (click)="saveItems()">Payment</button>
+        <button class="payment-button" (click)="saveItems()" [disabled]="getTotalChecked() === 0">Payment</button>
       </div>
     </div>
   </div>

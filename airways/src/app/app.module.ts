@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,6 +11,7 @@ import { ShoppingCartPageModule } from './booking/pages/shopping-cart-page/shopp
 import { AppDateAdapter } from './shared/utils/date-format-adapter';
 import { FLIGHT_DATE_FORMATS } from './shared/constants';
 import { TicketsDataService } from './booking/services/tickets-data.service';
+import { GlobalErrorHandler } from './core/error-handler/global-error-handler';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,6 +32,7 @@ import { TicketsDataService } from './booking/services/tickets-data.service';
     },
     { provide: MAT_DATE_FORMATS, useValue: FLIGHT_DATE_FORMATS },
     TicketsDataService,
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
   ],
   bootstrap: [AppComponent],
 })

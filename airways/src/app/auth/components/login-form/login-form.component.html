@@ -43,10 +43,11 @@
               <mat-error *ngIf="loginForm.controls.password.hasError('minlength')">Min length 8</mat-error>
             </mat-form-field>
           </div>
+          <div class="login-actions">
+            <a href="#" class="link link-fogot-position">Forgot password?</a>
 
-          <a href="#" class="link link-fogot-position">Forgot password?</a>
-
-          <button mat-raised-button color="primary" class="login-btn">Log in</button>
+            <button mat-raised-button color="primary" class="login-btn btn">Log in</button>
+          </div>
         </form>
 
       </mat-tab>
@@ -198,6 +199,6 @@
       </mat-tab>
     </mat-tab-group>
   </div>
-  <button class="cross-button" mat-icon-button (click)="modalWindowService.switchModal()"><mat-icon
+  <button class="cross-button" mat-icon-button (click)="modalWindowService.switchModal()">close<mat-icon
       fontIcon="clear icon"></mat-icon></button>
 </div>

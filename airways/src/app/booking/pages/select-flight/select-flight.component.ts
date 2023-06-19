@@ -9,8 +9,8 @@ import { FormDataService } from '../../services/form-data.service';
 import { PointModel, FormDataModel, FlightDirection } from '../../models/form-data.model';
 import { ECurrency } from '../../../core/models/currency.interface';
 import { HeaderDataService } from '../../../core/services/header-data.service';
-// import { TripDataService } from '../../services/trip-data.service';
 import { TicketsDataService } from '../../services/tickets-data.service';
+import { AuthApiService } from '../../../auth/services/auth-api.service';
 
 @Component({
   selector: 'app-select-flight',
@@ -73,6 +73,10 @@ export class SelectFlightComponent implements OnInit {
 
   allTicketsSelected: boolean = this.allDepartureTicketsSelected && this.allReturnTicketsSelected;
 
+  isLoading = true;
+
+  isLogin$: Observable<boolean>;
+
   @Output() departureDate: string = '';
 
   @Output() returnDate: string = '';
@@ -82,8 +86,11 @@ export class SelectFlightComponent implements OnInit {
     private formDataService: FormDataService,
     private headerDataService: HeaderDataService,
     private ticketsDataService: TicketsDataService,
+    private authApiService: AuthApiService,
     private router: Router
   ) {
+    this.isLogin$ = this.authApiService.getIsObservableLogin();
+
     this.flightData$ = this.formDataService.getObservableMainFormData();
 
     this.ticketsData$ = this.ticketsDataService.getObservableTickets();
@@ -112,10 +119,17 @@ export class SelectFlightComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // this.isLogin$ = this.authApiService.getIsObservableLogin();
+
+    this.isLoading = true;
     this.formDataService.flightData$.subscribe((flightData) => {
       this.departureDate = dayjs(flightData?.dateStart).format('YYYY-MM-DD').toString() ?? '';
       this.returnDate = dayjs(flightData?.dateEnd).format('YYYY-MM-DD').toString() ?? '';
       this.fetchFlightsData();
+
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 3000);
     });
 
     this.headerDataService.currentCurrency$.subscribe((currency) => {

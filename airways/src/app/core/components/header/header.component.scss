@@ -67,6 +67,7 @@ header {
   @media screen and (max-width: 426px) {
     padding-left: 1rem;
     padding-right: 1rem;
+    height: 90px;
   }
 
   .logo {
@@ -193,11 +194,18 @@ header {
 .stepper {
   flex-grow: 1;
 
-  @media screen and (max-width: 680px) {
+  @media screen and (min-width: 377px) and (max-width: 680px) {
     order: 3;
     width: 100%;
     max-width: 420px;
-    margin: 0 auto;
+    margin: 0.3rem auto;
+    background-color: $color-neutral80;
+    padding: 0.3rem 0.6rem;
+    border-radius: 3px;
+  }
+
+  @media screen and (max-width: 376px) {
+    display: none;
   }
 
   ::ng-deep.mat-horizontal-content-container {

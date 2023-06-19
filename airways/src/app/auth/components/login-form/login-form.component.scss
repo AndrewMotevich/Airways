@@ -1,31 +1,56 @@
-@import '../../../../sass/abstracts/variables';
-@import '../../../../sass/base/typography';
+@import "../../../../sass/abstracts/variables";
+@import "../../../../sass/base/typography";
 
 .login-form-container {
-  max-width: 600px;
-  width: 100%;
-  position: absolute;
-  left: 30%;
-  top: 80px;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
   display: flex;
-  z-index: 100;
+  flex-direction: column;
+  z-index: 999;
+  align-items: center;
+  box-sizing: border-box;
+  justify-items: center;
+  padding: 3rem;
 }
 .login-form-wrapper {
   max-width: 494px;
   width: 100%;
-  padding: 32px 24px;
+  padding: 10px 24px 1rem;
   border-radius: 8px;
   background-color: $color-neutral100;
-  height: calc(100vh - 200px);
   overflow: auto;
+  order: 2;
 }
+
+.login-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2rem;
+}
+.cross-button {
+  display: flex;
+  width: 100px;
+  gap: 1rem;
+  align-items: center;
+  font-size: 1rem;
+  justify-content: space-between;
+  color: #fff;
+}
+
 .tab-login {
   width: 100%;
 }
 .login-btn {
-  margin-top: 24px;
-  width: 100%;
-  height: 44px;
+  @media screen and (max-width: 425px) {
+    height: auto;
+    min-height: 40px;
+    min-width: 110px;
+  }
 }
 .width-100 {
   width: 100%;
@@ -83,9 +108,9 @@
     color: $color-primary;
     @extend %text-label-medium;
   }
-  .link-fogot-position {
-    align-self: flex-end;
-  }
+  // .link-fogot-position {
+  //   align-self: flex-end;
+  // }
 }
 .toggle-gender-button {
   height: 40px;
@@ -126,19 +151,20 @@
 .background-secondary90 {
   background-color: $color-secondary90;
 }
+
 @media screen and (max-width: 960px) {
-  .login-form-container {
-    left: 0%;
-    flex-direction: column;
-  }
-  .login-form-wrapper {
-    width: 80%;
-  }
-  .mobile-container {
-    flex-direction: column;
-  }
-  .cross-button {
-    align-self: flex-end;
-    order: -1;
-  }
+  // .login-form-container {
+  //   left: 0%;
+  //   flex-direction: column;
+  // }
+  // .login-form-wrapper {
+  //   width: 80%;
+  // }
+  // .mobile-container {
+  //   flex-direction: column;
+  // }
+  // .cross-button {
+  //   align-self: flex-end;
+  //   order: -1;
+  // }
 }

@@ -364,12 +364,21 @@ h2 {
     }
   }
 
-  .flight-fare, .flight-fare h3 { 
+  .flight-fare, .flight-fare h3,
+  .mat-mdc-tab .mdc-tab__text-label,
+  .login-form-wrapper .mat-mdc-icon-button,
+  .login-form-wrapper .mat-icon,
+  .login-form-wrapper .mat-button-toggle-checked .mat-button-toggle-label-content,
+  .login-form-wrapper .divider  {
     color: $color-neutral0;
+  }
+
+  .login-form-wrapper .mat-divider {
+    background-color: $color-neutral0;
   }
 
   .back-link {
     color:$color-neutral100;
   }
-  
+
 }
