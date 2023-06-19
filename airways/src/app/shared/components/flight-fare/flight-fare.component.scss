@@ -1,0 +1,79 @@
+@import '../../../../sass/abstracts/mixins';
+@import '../../../../sass/abstracts/variables';
+@import '../../../../sass/base/typography';
+
+.flight-fare {
+  @include section-style(8px);
+  background-color: $color-neutral100;
+
+  &_table {
+    padding: 0.6rem 2.6rem;
+
+    @media screen and (max-width: 400px) {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
+  .line {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+
+    .title,
+    .price {
+      font-weight: bold;
+    }
+  }
+
+  .sub-line {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+
+    @media screen and (max-width: 401px) {
+      padding-left: 2.5rem;
+    }
+
+    @media screen and (max-width: 400px) {
+      padding-left: 1rem;
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .fare-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
+    border-top: 1px solid $color-secondary50;
+
+    @media screen and (min-width: 400px) {
+      padding-left: 2.6rem;
+      padding-right: 2.6rem;
+    }
+
+    @media screen and (max-width: 400px) {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .title {
+      @extend %text-title-medium;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .price {
+      @extend %text-title-medium;
+      color: $color-primary;
+    }
+  }
+}

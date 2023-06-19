@@ -1,0 +1,14 @@
+@import '../../../../sass/abstracts/variables';
+
+h2 {
+  display: flex;
+  align-items: flex-end;
+  gap: .6rem;
+  margin-bottom: .6rem;
+  margin-top: 0;
+}
+
+.subtitle {
+  margin-top: 0;
+  margin-bottom: 1.4rem;
+}

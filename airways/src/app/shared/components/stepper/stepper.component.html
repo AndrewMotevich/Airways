@@ -1,0 +1,25 @@
+<div class="stepper-wrapper">
+  <button mat-mini-fab color="primary" [disabled]="stepperService.stepperStatus.flight.disabled" class="stepper-icon"
+    routerLink="/select-flight">
+    <mat-icon *ngIf="stepperService.stepperStatus.flight.completed">done</mat-icon>
+    <mat-icon *ngIf="stepperService.stepperStatus.flight.edit">edit</mat-icon>
+    <div *ngIf="stepperService.stepperStatus.flight.disabled">1</div>
+  </button>
+  <mat-label class="stepper-label">Flights</mat-label>
+  <mat-divider class="stepper-line"></mat-divider>
+  <button mat-mini-fab color="primary" [disabled]="stepperService.stepperStatus.passengers.disabled"
+    class="stepper-icon" routerLink="/booking">
+    <mat-icon *ngIf="stepperService.stepperStatus.passengers.completed">done</mat-icon>
+    <mat-icon *ngIf="stepperService.stepperStatus.passengers.edit">edit</mat-icon>
+    <div *ngIf="stepperService.stepperStatus.passengers.disabled">2</div>
+  </button>
+  <mat-label class="stepper-label">Passengers</mat-label>
+  <mat-divider class="stepper-line"></mat-divider>
+  <button mat-mini-fab color="primary" [disabled]="stepperService.stepperStatus.summary.disabled" class="stepper-icon"
+    routerLink="/summary">
+    <mat-icon *ngIf="stepperService.stepperStatus.summary.completed">done</mat-icon>
+    <mat-icon *ngIf="stepperService.stepperStatus.summary.edit">edit</mat-icon>
+    <div *ngIf="stepperService.stepperStatus.summary.disabled">3</div>
+  </button>
+  <mat-label class="stepper-label">Review & Payment</mat-label>
+</div>

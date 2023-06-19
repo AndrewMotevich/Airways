@@ -1,0 +1,70 @@
+@import "../../../../sass/abstracts/_variables";
+
+.select-flight {
+  .buttons-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4.3rem;
+    margin-top: 2.6rem;
+  }
+
+  .continue-group {
+    position: relative;
+    display: grid;
+  }
+
+  .warning {
+    font-weight: 700;
+    color: $color-highlight-yellow0;
+  }
+}
+
+.return {
+  .direction-title {
+    .airplane-icon {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.direction-title {
+  display: flex;
+  align-items: center;
+
+  margin: 36px 0 17px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.airplane-icon {
+  margin-right: 12px;
+  height: 24px;
+  width: 24px;
+}
+
+.no-data-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 40px 0 8px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 40px;
+  color: $color-primary;
+
+  .no-data-icon {
+    margin: 0 10px;
+    height: 50px;
+    width: 50px;
+    font-size: 50px;
+  }
+}

@@ -1,0 +1,28 @@
+// MUI
+@use "@angular/material" as mat;
+@use "./sass/theme/flight-theme";
+@use "./sass/theme/form-field-theme" as form-field;
+
+@include mat.core();
+// theme init
+
+@include mat.all-component-themes(flight-theme.$light-theme);
+
+.dark-theme {
+  @include mat.all-component-colors(flight-theme.$dark-theme);
+  @include form-field.color(flight-theme.$dark-theme);
+}
+
+// base
+@import "./sass/base/normalize";
+@import "./sass/base/typography";
+@import "./sass/base/base";
+/* abstracts */
+@import "./sass/abstracts/variables";
+@import "./sass/abstracts/placeholders";
+@import "./sass/abstracts/mixins";
+// layout
+@import "./sass/layout/grid";
+@import "./sass/layout/header";
+@import "./sass/layout/footer";
+@import "./sass/layout/layout";

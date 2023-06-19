@@ -1,0 +1,22 @@
+<section class="flight-fare">
+  <div class="flight-fare_table">
+    <ul>
+      <li *ngFor="let fareItem of fareInfo">
+        <p class="line">
+          <span class="title">{{ fareItem.title }}</span>
+          <span class="price">{{ fareItem.price | customCurrency : currentCurrency }}</span>
+        </p>
+        <p class="sub-line">Fare <span class="price">{{ fareItem.fare | customCurrency : currentCurrency}}</span>
+        </p>
+        <p class="sub-line">
+          Tax & Service Charge
+          <span class="price">{{ fareItem.tax | customCurrency : currentCurrency }}</span>
+        </p>
+      </li>
+    </ul>
+  </div>
+  <div class="fare-total">
+    <h3 class="title">total:</h3>
+    <span class="price">{{ total | customCurrency : currentCurrency }}</span>
+  </div>
+</section>

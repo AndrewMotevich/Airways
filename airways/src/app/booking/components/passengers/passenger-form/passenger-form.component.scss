@@ -1,0 +1,131 @@
+@import "../../../../../sass/abstracts/variables";
+@import "../../../../../sass/abstracts/mixins";
+@import "../../../../../sass/base/typography";
+
+%gender {
+  background-color: $color-secondary90;
+  border: 1px solid $color-neutral40;
+  width: 108px;
+  height: 54px;
+  margin: 0;
+}
+
+.passenger-form {
+  @include section-style(8px);
+  margin-bottom: 2rem;
+  border: none;
+
+  @media screen and (min-width: 377px) {
+    padding: 2rem 2.3rem 2rem 2.7rem;
+  }
+
+  @media screen and (max-width: 376px) {
+    padding: 1rem 1.2rem;
+  }
+
+  &_wrapper {
+    @media screen and (min-width: 1181px) {
+      display: flex;
+      flex-wrap: wrap;
+      row-gap: 0.3rem;
+      column-gap: 1.2rem;
+    }
+
+    @media screen and (max-width: 1180px) {
+      display: grid;
+      column-gap: 1.2rem;
+    }
+
+    @media screen and (min-width: 640px) and (max-width: 1180px) {
+      row-gap: 0;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  h2 {
+    text-transform: capitalize;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    padding-left: 0.4rem;
+  }
+
+  ::ng-deep.gender {
+    margin-left: 0.5rem;
+
+    &-male {
+      @extend %gender;
+      border-radius: 4px 0px 0px 4px;
+    }
+
+    &-female {
+      @extend %gender;
+      border-radius: 0px 4px 4px 0px;
+    }
+
+    &-section {
+      @media screen and (max-width: 1180px) {
+        order: 3;
+      }
+
+      @media screen and (max-width: 640px) {
+        margin-bottom: 1.2rem;
+      }
+
+      .mat-mdc-form-field-error {
+        font-size: 12px;
+        text-align: center;
+      }
+
+      &.error {
+        .mat-mdc-chip {
+          border-color: $color-error;
+        }
+      }
+
+      .mdc-evolution-chip__text-label,
+      .mdc-evolution-chip__checkmark {
+        @extend %text-label-medium;
+      }
+
+      .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled):not(.mat-mdc-chip-selected)
+        .mdc-evolution-chip__text-label,
+      .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled):not(.mat-mdc-chip-selected)
+        .mdc-evolution-chip__checkmark {
+        color: $color-neutral0;
+      }
+
+      .mat-mdc-chip-selected .mdc-evolution-chip__text-label,
+      .mat-mdc-chip-selected .mdc-evolution-chip__checkmark {
+        color: $color-primary;
+      }
+    }
+  }
+
+  .mdc-evolution-chip-set {
+    align-items: flex-start;
+  }
+
+  .needhelp {
+    display: flex;
+    align-items: center;
+
+    &.adult,
+    &.child {
+      padding-bottom: 1.5rem;
+    }
+
+    @media screen and (max-width: 1180px) {
+      order: 4;
+    }
+  }
+}
+
+.icon-error {
+  color: $color-error;
+}
+
+.icon-info {
+  width: 28px;
+  height: 28px;
+  padding: 10px 8px 10px 12px;
+}

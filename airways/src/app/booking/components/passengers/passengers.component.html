@@ -1,0 +1,10 @@
+<h2><mat-icon svgIcon="icon_passengers"></mat-icon>Passengers</h2>
+<p class="subtitle">Enter the passenger's names as they appear on document (passport or ID).</p>
+
+<ng-container [formGroup]="form">
+  <ng-container [formArrayName]="formArrayName">
+    <ng-container *ngFor="let passenger of passengers; index as i" [formGroupName]="i">
+      <app-passenger-form [passenger]="passenger" [id]="i"></app-passenger-form>
+    </ng-container>
+  </ng-container>
+</ng-container>

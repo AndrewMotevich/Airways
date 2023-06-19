@@ -1,0 +1,23 @@
+.flight-data-edit-form {
+  position: sticky;
+  z-index: 100;
+  top: 155px;
+  left: 0px;
+  right: 0px;
+
+  height: 160px;
+  margin-top: 0;
+  visibility: visible;
+  transition: all linear 200ms;
+  .mui-card {
+    padding-top: 30px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+  }
+
+  &.close {
+    margin-top: -101px;
+    visibility: hidden;
+    transition: all linear 200ms;
+  }
+}

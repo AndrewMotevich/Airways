@@ -1,0 +1,41 @@
+// primary
+$color-primary: rgb(17, 57, 126);
+$color-primary-dark: rgba(16, 38, 76);
+// secondary
+$color-secondary0: rgb(0, 144, 189);
+$color-secondary10: rgb(122, 191, 212);
+$color-secondary40: rgb(208, 217, 223);
+$color-secondary50: rgb(225, 229, 235);
+$color-secondary60: rgb(233, 237, 241); 
+$color-secondary80: rgb(241, 243, 246);
+$color-secondary85: rgba(255, 255, 255, 0.85);
+$color-secondary90: hsl(216, 29%, 97%);
+$color-secondary100: rgb(250, 250, 250);
+// highlight
+$color-highlight-gradient: linear-gradient(108.75deg, rgb(0, 144, 189) 59.91%, rgb(7, 53, 144) 95.36%);
+$color-highlight-green0: rgb(127, 137, 6);
+$color-highlight-green30: rgba(127, 137, 6, 0.3);
+$color-highlight-yellow0: rgb(241, 201, 51);
+$color-highlight-yellow30: rgba(241, 201, 51, 0.3);
+$color-highlight-red30: rgba(179, 38, 30, 0.3);
+// error
+$color-error: rgb(179, 38, 30);
+// neutral
+$color-neutral0: rgb(28, 27, 31);
+$color-neutral10: rgb(73, 69, 79);
+$color-neutral20: rgb(69, 74, 83);
+$color-neutral30: rgb(116, 118, 122);
+$color-neutral40: rgb(116, 118, 122, 0.6);
+$color-neutral50: rgba(0, 0, 0, 0.25);
+$color-neutral60: rgb(206, 206, 206);
+$color-neutral70: rgba(116, 118, 122, 0.2);
+$color-neutral80: rgb(245, 245, 245);
+$color-neutral90: rgba(241, 243, 246, 0.15);
+$color-neutral100: rgb(255, 255, 255);
+
+// box-shadow
+$shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+
+$color-dark: rgb(0, 0, 0);
+
+$main-form-bg: $color-secondary85;

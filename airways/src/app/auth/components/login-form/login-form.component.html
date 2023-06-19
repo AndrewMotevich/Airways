@@ -1,0 +1,204 @@
+<div class="login-form-container">
+  <div class="login-form-wrapper">
+    <mat-tab-group dynamicHeight>
+      <mat-tab label="Log in" class="tab-login">
+
+        <div class="login-header-container">
+          <button class="login-header-button" (click)="mockSetLoginForm()">
+            <img width="24px" src="../../../../assets/icons/google_24px.png" alt="google icon">
+            <p>Continue with Google</p>
+          </button>
+
+          <button class="login-header-button" (click)="mockSetLoginForm()">
+            <img width="24px" src="../../../../assets/icons/facebook.png" alt="facebook icon">
+            <p>Continue with Facebook</p>
+          </button>
+        </div>
+
+        <form [formGroup]="loginForm" class="login-footer-container" (submit)="submitLogin()">
+          <div class="divider">
+            <div class="line"><mat-divider></mat-divider></div>
+            <div class="text">or log in with your email</div>
+            <div class="line"><mat-divider></mat-divider></div>
+          </div>
+
+          <div>
+            <mat-form-field appearance="outline" class="width-100">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="Enter your email" formControlName="email">
+              <mat-error *ngIf="loginForm.controls.email.hasError('required')">You mast enter a value</mat-error>
+              <mat-error *ngIf="loginForm.controls.email.hasError('email')">Invalid email</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field appearance="outline" class="width-100">
+              <mat-label>Password</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-error *ngIf="loginForm.controls.password.hasError('required')">You mast enter a value</mat-error>
+              <mat-error *ngIf="loginForm.controls.password.hasError('minlength')">Min length 8</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="login-actions">
+            <a href="#" class="link link-fogot-position">Forgot password?</a>
+
+            <button mat-raised-button color="primary" class="login-btn btn">Log in</button>
+          </div>
+        </form>
+
+      </mat-tab>
+
+      <mat-tab label="Sign up" class="tab-signup">
+
+        <div class="login-header-container">
+          <button class="login-header-button" (click)="mockSetRegisterForm()">
+            <img width="24px" src="../../../../assets/icons/google_24px.png" alt="google icon">
+            <p>Continue with Google</p>
+          </button>
+
+          <button class="login-header-button" (click)="mockSetRegisterForm()">
+            <img width="24px" src="../../../../assets/icons/facebook.png" alt="facebook icon">
+            <p>Continue with Facebook</p>
+          </button>
+        </div>
+
+        <form [formGroup]="registerForm" class="login-footer-container" (submit)="submitRegister()">
+
+          <div class="divider">
+            <div class="line"><mat-divider></mat-divider></div>
+            <div class="text">or sign up in with your email</div>
+            <div class="line"><mat-divider></mat-divider></div>
+          </div>
+
+          <mat-form-field appearance="outline" class="width-100">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="pat@example.com" formControlName="email" required>
+            <mat-error *ngIf="registerForm.controls.email.hasError('required')">You mast enter a value</mat-error>
+            <mat-error *ngIf="registerForm.controls.email.hasError('email')">Invalid email</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="width-100">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password">
+            <mat-icon matSuffix
+              *ngIf="registerForm.controls.password.untouched || !registerForm.controls.password.errors">error_outline</mat-icon>
+            <mat-icon matSuffix *ngIf="registerForm.controls.password.touched && registerForm.controls.password.errors"
+              color="warn">error</mat-icon>
+            <mat-error *ngIf="registerForm.controls.password.hasError('required')">You mast enter a value</mat-error>
+            <mat-error *ngIf="registerForm.controls.password.hasError('minlength')">Min length 8</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="width-100">
+            <mat-label>First name</mat-label>
+            <input matInput placeholder="Enter your first name" formControlName="firstName" required>
+            <mat-icon matSuffix
+              *ngIf="registerForm.controls.firstName.untouched || !registerForm.controls.firstName.errors">error_outline</mat-icon>
+            <mat-icon matSuffix
+              *ngIf="registerForm.controls.firstName.touched && registerForm.controls.firstName.errors"
+              color="warn">error</mat-icon>
+            <mat-error *ngIf="registerForm.controls.firstName.hasError('required')">You mast enter a value</mat-error>
+            <mat-error *ngIf="registerForm.controls.firstName.hasError('pattern')">You mast use only spaces and
+              letters</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="width-100">
+            <mat-label>Last name</mat-label>
+            <input matInput placeholder="Enter your last name" formControlName="lastName" required>
+            <mat-icon matSuffix
+              *ngIf="registerForm.controls.lastName.untouched || !registerForm.controls.lastName.errors">error_outline</mat-icon>
+            <mat-icon matSuffix *ngIf="registerForm.controls.lastName.touched && registerForm.controls.lastName.errors"
+              color="warn">error</mat-icon>
+            <mat-error *ngIf="registerForm.controls.lastName.hasError('required')">You mast enter a
+              value
+            </mat-error>
+            <mat-error *ngIf="registerForm.controls.lastName.hasError('pattern')">You mast use only spaces and
+              letters</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="width-100">
+            <mat-label>Date of birth</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="bthDate" required>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="registerForm.controls.bthDate.hasError('dateError')">You aren't time traveler</mat-error>
+          </mat-form-field>
+
+          <mat-button-toggle-group class="toggle-gender-button" class="background-color100" name="gender"
+            formControlName="gender" [value]="registerForm.controls.gender.value">
+            <mat-button-toggle class="width-100" value="male"><mat-icon
+                *ngIf="registerForm.controls.gender.value === 'male'">check</mat-icon>Male</mat-button-toggle>
+            <mat-button-toggle class="width-100" value="female"><mat-icon
+                *ngIf="registerForm.controls.gender.value === 'female'">check</mat-icon>Female</mat-button-toggle>
+          </mat-button-toggle-group>
+
+          <div class="mobile-container">
+
+            <mat-form-field class="color-100" appearance="outline" hideRequiredMarker>
+              <mat-label>Country code</mat-label>
+              <input type="text" aria-label="country" matInput formControlName="country"
+                [matAutocomplete]="autoCountry">
+              <button mat-icon-button matSuffix>
+                <mat-icon>keyboard_arrow_down</mat-icon>
+              </button>
+              <mat-autocomplete #autoCountry="matAutocomplete">
+                <mat-option *ngFor="let country of filteredCountriesOptions | async"
+                  [value]="country.name + ' (' + country.dial_code + ')'">
+                  <div>
+                    {{country.name}} ({{country.dial_code}})
+                  </div>
+                </mat-option>
+              </mat-autocomplete>
+              <mat-error *ngIf="registerForm.controls.country.hasError('required')">Chose code</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="color-100" appearance="outline">
+              <mat-label>Mobile phone number</mat-label>
+              <input type="tel" matInput placeholder="e.g. 111111111" formControlName="phoneNumber" maxlength="9">
+              <mat-error *ngIf="registerForm.controls.phoneNumber.hasError('required')">Enter phone</mat-error>
+              <mat-error *ngIf="registerForm.controls.phoneNumber.hasError('pattern')">You mast use only
+                numbers</mat-error>
+            </mat-form-field>
+
+          </div>
+
+
+          <mat-form-field class="width-100" appearance="outline" hideRequiredMarker>
+            <mat-label>Citizenship</mat-label>
+            <input type="text" aria-label="citizenship" matInput formControlName="citizenship"
+              [matAutocomplete]="autoCitizenship">
+            <button mat-icon-button matSuffix>
+              <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+            <mat-autocomplete #autoCitizenship="matAutocomplete">
+              <mat-option *ngFor="let citizenship of filteredCitizenshipOptions | async"
+                [value]="citizenship.nationality">
+                <div>
+                  {{citizenship.nationality}}
+                </div>
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="registerForm.controls.citizenship.hasError('required')">Chose citizenship</mat-error>
+          </mat-form-field>
+
+          <div>
+            <mat-checkbox class="example-margin" color="primary" formControlName="acceptTerms" matInput
+              (click)="switchAgreeTermError($event)">
+              <span>I agree to Airway's <a href="#" class="link">Privacy policy</a> and <a href="#" class="link">Terms
+                  of Use</a></span>
+            </mat-checkbox>
+            <mat-error *ngIf="agreeTermError">You should accept</mat-error>
+          </div>
+
+          <button mat-raised-button color="primary" class="login-btn">Sign up</button>
+        </form>
+
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  <button class="cross-button" mat-icon-button (click)="modalWindowService.switchModal()">close<mat-icon
+      fontIcon="clear icon"></mat-icon></button>
+</div>

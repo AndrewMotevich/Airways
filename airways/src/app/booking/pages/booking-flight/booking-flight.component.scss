@@ -1,0 +1,13 @@
+.passengers {
+  padding-bottom: 4.4rem;
+
+  &-form {
+    &_btns {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 4.3rem;
+      margin-top: 2.6rem;
+    }
+  }
+}

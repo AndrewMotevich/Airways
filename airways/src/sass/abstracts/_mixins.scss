@@ -1,0 +1,22 @@
+@mixin typography($weight, $size, $height, $spacing: null) {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: $weight;
+  font-size: $size;
+  line-height: $height;
+  @if ($spacing) {
+    letter-spacing: $spacing;
+  }
+}
+
+@mixin section-style($radius: 5px) {
+  box-shadow: $shadow;
+  border-radius: $radius;
+  box-sizing: border-box;
+}
+
+@mixin title-h3 {
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}

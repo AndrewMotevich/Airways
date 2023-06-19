@@ -1,0 +1,28 @@
+{
+  "printWidth": 100,
+  "singleQuote": true,
+  "useTabs": false,
+  "tabWidth": 2,
+  "semi": true,
+  "bracketSpacing": true,
+  "endOfLine": "auto",
+  "trailingComma": "es5",
+  "arrowParens": "always",
+  "proseWrap": "preserve",
+  "quoteProps": "preserve",
+  "jsxSingleQuote": false,
+  "jsxBracketSameLine": false,
+  "htmlWhitespaceSensitivity": "css",
+  "embeddedLanguageFormatting": "auto",
+  "overrides": [
+    {
+      "files": [
+        "*.html",
+        ".scss"
+      ],
+      "options": {
+        "printWidth": 100
+      }
+    }
+  ]
+}

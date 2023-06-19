@@ -1,0 +1,24 @@
+<ng-container *ngIf="isSelect; else list">
+  <mat-form-field class="date-select" appearance="outline" hideRequiredMarker>
+    <mat-select
+      hideSingleSelectionIndicator
+      [value]="dateFormat$ | async"
+      (selectionChange)="changeDateFormat($event)"
+    >
+      <mat-option *ngFor="let dFormat of formatsArray" [value]="dFormat">{{ dFormat }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</ng-container>
+
+<ng-template #list matMenuContent>
+  <ng-container *ngIf="dateFormat$ | async as currentDateFormat">
+    <button
+      mat-menu-item
+      *ngFor="let dFormat of formatsArray"
+      (click)="setDateFormat(dFormat)"
+      [ngClass]="{ 'selected': currentDateFormat === dFormat }"
+    >
+      {{ dFormat }}
+    </button>
+  </ng-container>
+</ng-template>

@@ -1,0 +1,9 @@
+<mat-card class="flight-card">
+    <mat-card-header>      
+      <mat-card-title>{{flight.airline}} {{flight.flight_number}} {{flight.origin}} — {{flight.destination}}</mat-card-title>
+      <mat-card-subtitle>{{departureDate}}</mat-card-subtitle>      
+    </mat-card-header>
+    <mat-card-content class="flight-card_passengers">
+      <app-passengers-info [passengers]="passengers"></app-passengers-info>
+    </mat-card-content>
+  </mat-card>

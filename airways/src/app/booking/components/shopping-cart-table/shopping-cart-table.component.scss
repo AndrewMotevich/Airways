@@ -1,0 +1,194 @@
+@import "../../../../sass/abstracts/variables";
+@import "../../../../sass/base/typography";
+
+.page-wrapper {
+  padding-top: 40px;
+  padding-bottom: 99px;
+}
+.cart-table-wrapper {
+  position: relative;
+  max-width: 1128px;
+  min-height: 680px;
+  width: 100;
+  border-radius: 8px;
+  box-shadow: $shadow;
+  display: flex;
+  flex-direction: column;
+  h2 {
+    margin-top: 33px;
+    margin-left: 31px;
+    margin-bottom: 0;
+  }
+  p {
+    margin: 0;
+    display: flex;
+    display: flex;
+    align-items: center;
+  }
+}
+.bottom-wrapper {
+  position: absolute;
+  bottom: 0;
+  box-sizing: border-box;
+  align-self: flex-end;
+  width: 100%;
+  padding: 0 28px;
+  margin-bottom: 39px;
+  display: flex;
+  justify-content: space-between;
+}
+
+::ng-deep.promo-input {
+  max-width: 374px;
+  width: 100%;
+  .mat-mdc-form-field-subscript-wrapper {
+    height: 0;
+  }
+
+  button {
+    width: 64px;
+    height: 28px;
+    margin-right: 16px;
+  }
+}
+
+.payment {
+  display: flex;
+  align-items: center;
+  p {
+    margin: 0;
+    color: $color-neutral30;
+    margin-right: 38px;
+    @extend %text-body-large;
+  }
+}
+.payment-button {
+  width: 126px;
+  height: 60px;
+  border: none;
+  border-radius: 4px;
+  background-color: $color-primary;
+  color: $color-neutral100;
+  @extend %text-button;
+}
+.payment-button:hover {
+  cursor: pointer;
+  box-shadow: $shadow;
+}
+.payment-button:disabled {
+  cursor: not-allowed;
+  background-color: $color-neutral40;
+}
+
+.table-wrapper {
+  margin-top: 27px;
+  overflow-x: auto;
+}
+.table {
+  width: 1128px;
+  display: grid;
+  @extend %text-body-XLarge;
+  font-weight: 500;
+  .table-header {
+    height: 67px;
+    display: grid;
+    column-gap: 28px;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 160px 178px 102px 260px 106px 130px;
+  }
+  .divider {
+    margin: 0 31px;
+  }
+  .table-content {
+    width: 100%;
+    display: grid;
+    column-gap: 28px;
+    justify-content: center;
+    grid-template-columns: 160px 178px 102px 260px 106px 130px;
+    padding: 20px 0;
+    .flight-number {
+      display: flex;
+      align-items: center;
+    }
+    .price {
+      span {
+        color: $color-highlight-green0;
+      }
+    }
+  }
+}
+.arrow-icons {
+  height: 24px;
+  display: flex;
+  flex-direction: column;
+  .mat-icon {
+    width: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+  }
+}
+
+.date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.passengers {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.total-wrapper {
+  padding: 0 34px;
+  margin-bottom: 139px;
+  .total-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .new-trip-button {
+      cursor: pointer;
+      height: 28px;
+      border: none;
+      border-radius: 4px;
+      color: $color-primary;
+      @extend %text-button;
+      background: $color-secondary90;
+      &:active {
+        background: $color-neutral100;
+      }
+    }
+    .total-sum {
+      margin: 34px 0;
+      display: flex;
+      align-items: center;
+      @extend %text-subtitle-medium;
+      span {
+        margin-left: 20px;
+        background: $color-highlight-gradient;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        @extend %text-subtitle-large;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .total-container {
+    margin-top: 35px;
+    flex-direction: column;
+  }
+  .payment {
+    margin-top: 10px;
+  }
+  .bottom-wrapper {
+    flex-direction: column;
+  }
+}

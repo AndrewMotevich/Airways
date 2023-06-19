@@ -1,0 +1,19 @@
+<section class="flights-summary">
+  <div>
+    <app-flight-card [passengers]="passengersInfo" [flight]="ticketFrom"></app-flight-card>
+  </div>
+  <div>
+    <app-flight-card [passengers]="passengersInfo" [flight]="ticketTo" *ngIf="ticketTo"></app-flight-card>
+    <app-flight-fare
+      [passengersTotal]="passengersNumber"
+      [price]="ticketPrice" 
+      [currentCurrency]="ticketCurrency"
+    ></app-flight-fare>
+  </div>
+</section>
+
+<section class="flight-action">
+  <a [routerLink]="['/booking']" class="back-link" color="primary">Back</a>
+  <button mat-stroked-button (click)="addToCart()" class="btn" [disabled]="isDisabledAddToCart">Add order to cart</button>
+  <button mat-raised-button color="primary" (click)="onBuy()" class="btn">Buy now</button>
+</section>

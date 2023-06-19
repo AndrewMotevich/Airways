@@ -1,0 +1,384 @@
+@import '../abstracts/variables';
+@import '../base/typography';
+
+:root {
+  --mdc-typography-body1-line-height: 24px;
+  --mdc-typography-body2-font-size: 12px;
+  --mdc-switch-track-width: 52px;
+  --mdc-switch-track-height: 28px;
+  --mdc-switch-track-shape: 100px;
+  --mdc-switch-handle-height: 24px;
+  --mdc-switch-handle-width: 24px;
+  --mdc-switch-handle-shape: 23px;
+  --mdc-plain-tooltip-supporting-text-size: 12px;
+  --mdc-plain-tooltip-supporting-text-tracking: 0.4px;
+  --mdc-plain-tooltip-container-shape: 8px;
+  --mat-mdc-form-field-label-transform: 28px;
+  --mdc-shape-medium: 0;
+}
+
+body {
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+.btn {
+  min-height: 60px;
+  @extend %text-button;
+
+  &.mdc-button--raised {
+    min-width: 126px;
+  }
+
+  &.mat-mdc-outlined-button {
+    padding: 0 1.4rem;
+  }
+}
+
+.mdc-button.btn-with-gradient {
+  @extend %text-button;
+
+  box-sizing: border-box;
+  padding: 8px 16px;
+
+  background: $color-highlight-gradient;
+  transition: 0.5s;
+
+  border-style: solid;
+  border-width: 1px;
+  border-color: $color-primary;
+  border-radius: 4px;
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  &:hover {
+    box-shadow: $shadow;
+    background-size: 200% auto;
+    background-position: right top;
+  }
+}
+
+.mat-mdc-button.btn-with-gradient:not(:disabled) {
+  color: $color-neutral100;
+}
+
+h2 {
+  @extend %text-title-large;
+}
+
+.mat-mdc-form-field-icon-suffix {
+  padding-left: 9px !important;
+}
+.mat-mdc-form-field-icon-suffix > .mat-icon {
+  padding: 10px;
+  font-size: 1.9rem;
+  line-height: 1.5rem;
+}
+
+.mat-mdc-standard-chip.mdc-evolution-chip--with-primary-graphic
+  .mdc-evolution-chip__action--primary {
+  margin: 0 auto;
+}
+
+.mat-mdc-slide-toggle.mat-accent {
+  --mdc-switch-selected-focus-track-color: $color-primary;
+  --mdc-switch-selected-hover-track-color: $color-primary;
+  --mdc-switch-selected-pressed-track-color: $color-primary;
+  --mdc-switch-selected-track-color: $color-primary;
+  --mdc-switch-selected-handle-color: $color-neutral100;
+  --mdc-switch-selected-focus-state-layer-color: $color-neutral100;
+  --mdc-switch-selected-hover-state-layer-color: $color-neutral100;
+  --mdc-switch-selected-pressed-state-layer-color: $color-neutral100;
+  --mdc-switch-selected-focus-handle-color: $color-neutral30;
+  --mdc-switch-selected-hover-handle-color: $color-neutral30;
+  --mdc-switch-selected-pressed-handle-color: $color-neutral30;
+
+  --mdc-switch-selected-icon-color: $color-neutral10;
+}
+
+.mat-mdc-slide-toggle-checked .mdc-switch__track {
+  background-color: $color-primary;
+}
+
+.mat-mdc-slide-toggle .mdc-switch .mdc-switch__handle-track {
+  width: calc(100% - 8px - var(--mdc-switch-handle-width)) !important;
+}
+
+.mdc-switch__handle-track {
+  left: 4px !important;
+}
+
+.needhelp .mdc-form-field > label {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-left: 0.5rem;
+}
+
+.mat-mdc-form-field-error,
+.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: $color-error;
+}
+
+.form-tooltip {
+  .mdc-tooltip__surface {
+    color: $color-neutral0;
+    background-color: $color-neutral100;
+    box-shadow: $shadow;
+    padding: 16px 24px;
+    min-width: 211px;
+  }
+
+  &.mat-mdc-tooltip-show {
+    left: -9px;
+  }
+
+  &::after {
+    width: 0;
+    height: 0;
+    content: '';
+    position: absolute;
+    border-top: 0.3rem solid transparent;
+    border-bottom: 0.3rem solid transparent;
+    border-right: 0.3rem solid $color-neutral100;
+    left: -0.3rem;
+    top: calc(50% - 0.3rem);
+    transform: rotate(0);
+  }
+}
+
+.mat-mdc-text-field-wrapper.mdc-text-field--outlined
+  .mdc-notched-outline--upgraded
+  .mdc-floating-label--float-above {
+  --mat-mdc-form-field-label-transform: translateY(-22px);
+  transform: var(--mat-mdc-form-field-label-transform);
+}
+
+.mat-mdc-form-field
+  .mdc-text-field--outlined
+  .mdc-notched-outline--upgraded
+  .mdc-floating-label--float-above {
+  @extend %text-label-small;
+}
+
+.mdc-notched-outline--notched .mdc-notched-outline__notch {
+  border-top-style: solid !important;
+  border-top-width: 1px !important;
+}
+
+.mdc-text-field--focused .mdc-notched-outline__notch {
+  border-top-width: 2px !important;
+}
+
+.mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+  padding-top: 22px;
+  padding-bottom: 8px;
+}
+
+.mdc-menu-surface {
+  box-shadow: $shadow;
+}
+
+.cdk-overlay-pane:not(.mat-mdc-select-panel-above) .mdc-menu-surface.mat-mdc-select-panel {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  padding: 14px 0 0;
+}
+
+.mat-primary .mat-mdc-option .mdc-list-item__primary-text {
+  width: 100%;
+}
+
+.mat-primary
+  .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled)
+  .mdc-list-item__primary-text {
+  color: $color-neutral10;
+}
+
+.mat-mdc-option {
+  margin-bottom: 0.5rem;
+}
+
+.mdc-menu-surface::-webkit-scrollbar {
+  width: 4px;
+}
+
+.mdc-menu-surface::-webkit-scrollbar-track {
+  border-radius: 100px;
+}
+
+.mdc-menu-surface::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  background-color: $color-primary;
+}
+
+.mat-mdc-raised-button.mat-mdc-button-base {
+  height: 60px;
+}
+
+.mat-datepicker-actions {
+  border-top: 0.5px solid $color-neutral60;
+  padding-top: 8px;
+}
+
+.mdc-switch__track {
+  border: 2px solid $color-neutral30;
+}
+
+.mat-calendar-body-label {
+  display: none;
+}
+
+.mat-mdc-radio-button .mdc-form-field {
+  @extend %text-button;
+}
+
+.light-theme {
+  h2 {
+    color: $color-primary;
+
+    &.dark-color {
+      color: $color-primary-dark;
+    }
+  }
+
+  .svg-color {
+    fill: $color-primary;
+  }
+
+  .svg-stroke {
+    stroke: $color-primary;
+  }
+
+  h3 {
+    color: $color-primary-dark;
+  }
+
+  .stepper-wrapper {
+    color: $color-neutral30;
+  }
+
+  .table-head-bg {
+    background-color: $color-neutral80;
+  }
+
+  .section-bg,
+  .header-inner-bg {
+    background-color: $color-neutral100;
+  }
+
+  .mdc-text-field {
+    background-color: $color-secondary90;
+  }
+
+  .mat-mdc-radio-button .mdc-form-field,
+  .mdc-list-item__primary-text {
+    color: $color-primary;
+  }
+
+  .mat-mdc-select-invalid:not(.mat-focused) .mat-mdc-select-arrow {
+    color: $color-neutral100;
+  }
+
+  &.main-page {
+    .date-select {
+      .mat-mdc-select-value,
+      .mat-mdc-select-arrow {
+        color: $color-neutral100;
+      }
+    }
+    .sign-button-wrapper {
+      color: $color-neutral100;
+    }
+  }
+
+  .btn {
+    &.mat-mdc-outlined-button:not([disabled]) {
+      color: $color-primary;
+      border-color: $color-primary;
+    }
+  }
+}
+
+.dark-theme {
+  h2,
+  h3,
+  .stepper-wrapper {
+    color: $color-neutral100;
+  }
+
+  .svg-color {
+    fill: $color-neutral100;
+  }
+
+  .svg-stroke {
+    stroke: $color-neutral100;
+  }
+
+  .table-head-bg {
+    background-color: $color-neutral40;
+  }
+
+  .section-bg {
+    background: $color-neutral20;
+  }
+
+  .header-inner-bg {
+    background-color: $color-neutral10;
+  }
+
+  .passengers .mat-mdc-select-value,
+  .passengers .mat-mdc-select-arrow,
+  .constact-details_code .mat-mdc-select-value,
+  .constact-details_code .mat-mdc-select-arrow,
+  .mat-date-range-input-separator,
+  .mat-date-range-input-inner,
+  .mat-mdc-radio-button .mdc-form-field,
+  .mat-datepicker-toggle,
+  .mat-datepicker-content .mat-calendar-next-button,
+  .mat-datepicker-content .mat-calendar-previous-button {
+    color: $color-neutral0;
+  }
+
+  .mat-mdc-radio-button.mat-primary {
+    --mdc-radio-unselected-icon-color: $accent;
+  }
+
+  .mat-mdc-icon-button {
+    --mat-mdc-button-persistent-ripple-color: $color-neutral0;
+    --mat-mdc-button-ripple-color: $color-neutral0;
+  }
+
+  .flight-card {
+    .mat-mdc-card-title {
+      color: $color-neutral0;
+    }
+    .mat-mdc-card-subtitle{
+      color: $color-neutral0;
+    }
+  }
+
+  .flight-fare, .flight-fare h3,
+  .mat-mdc-tab .mdc-tab__text-label,
+  .login-form-wrapper .mat-mdc-icon-button,
+  .login-form-wrapper .mat-icon,
+  .login-form-wrapper .mat-button-toggle-checked .mat-button-toggle-label-content,
+  .login-form-wrapper .divider  {
+    color: $color-neutral0;
+  }
+
+  .login-form-wrapper .mat-divider {
+    background-color: $color-neutral0;
+  }
+
+  .back-link {
+    color:$color-neutral100;
+  }
+
+}

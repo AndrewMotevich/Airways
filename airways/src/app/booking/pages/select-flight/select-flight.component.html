@@ -1,0 +1,68 @@
+<div class="select-flight">
+  <app-flight-data-edit-form></app-flight-data-edit-form>
+
+  <div class="depart">
+    <h2 class="direction-title"><img class='airplane-icon' src="assets/icons/airplane.png"><span>
+        {{departure.title}} to {{arrival.title}}
+      </span></h2>
+    <div *ngIf="isLoading" class="loading"><mat-spinner strokeWidth="2" diameter="50"
+        aria-label="Loading form"></mat-spinner>
+    </div>
+    <section class="flight" *ngIf="!isLoading">
+      <ng-container *ngIf='!allDepartureTicketsSelected'>
+        <app-ticket-date-slider [selectedDate]="departureDate" [ticketsData]="ticketsDataDepart"
+          [currency]="flightDepartureCurrency" (nextDateButtonClick)="handleClickOnNextDepartureDate()"
+          (prevDateButtonClick)="handleClickOnPrevDepartureDate()"></app-ticket-date-slider>
+      </ng-container>
+      <ng-container *ngIf="(flightsDetailsDepart$ | async) as flights; else noDataTemplate">
+        <ng-container *ngIf="flights.length > 0; else noDataTemplate">
+          <app-flight-details *ngFor="let flight of flights" [flight]="flight"
+            [allTicketsSelected]="allDepartureTicketsSelected"></app-flight-details>
+        </ng-container>
+      </ng-container>
+
+    </section>
+  </div>
+
+  <div class="return" *ngIf="!isOneWay">
+    <h2 class="direction-title"><img class='airplane-icon' src="assets/icons/airplane.png"><span>
+        {{arrival.title}} to {{departure.title}}
+      </span></h2>
+    <div *ngIf="isLoading" class="loading"><mat-spinner strokeWidth="2" diameter="50"
+        aria-label="Loading form"></mat-spinner>
+    </div>
+    <section class="flight" *ngIf="!isLoading">
+      <ng-container *ngIf='!allReturnTicketsSelected'>
+        <app-ticket-date-slider [selectedDate]="returnDate" [ticketsData]="ticketsDataReturn"
+          [currency]="flightReturnCurrency" (nextDateButtonClick)="handleClickOnNextArrivalDate()"
+          (prevDateButtonClick)="handleClickOnPrevArrivalDate()"></app-ticket-date-slider>
+      </ng-container>
+      <ng-container *ngIf="(flightsDetailsReturn$ | async) as flights; else noDataTemplate">
+        <ng-container *ngIf="flights.length > 0; else noDataTemplate">
+          <app-flight-details *ngFor="let flight of flights" [flight]="flight"
+            [allTicketsSelected]="allReturnTicketsSelected"></app-flight-details>
+        </ng-container>
+      </ng-container>
+    </section>
+  </div>
+  <div class="buttons-group">
+    <button mat-button (click)="goToMainFlightFormPage()">
+      Back
+    </button>
+    <div class="continue-group">
+      <button mat-raised-button color="primary" type="submit"
+        [disabled]="!this.allTicketsSelected || (isLogin$ | async) === false" class="btn"
+        (click)="continueButtonHandler()">
+        Continue
+      </button>
+      <div *ngIf="this.allTicketsSelected && (isLogin$ | async) === false" class="warning">
+        Please login to continue
+      </div>
+    </div>
+</div>
+
+<ng-template #noDataTemplate>
+  <div class="no-data-container">
+    No tickets available for this day <mat-icon class="no-data-icon">airplanemode_inactive</mat-icon>
+  </div>
+</ng-template>

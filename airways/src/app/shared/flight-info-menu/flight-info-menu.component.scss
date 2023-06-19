@@ -1,0 +1,92 @@
+@import "../../../sass/abstracts/variables";
+
+.flight-info-menu {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  top: 88px;
+  height: 68px;
+  // background-color: $color-secondary100;
+  box-shadow: $shadow;
+  z-index: 101;
+
+  .container {
+    width: 1128px;
+    margin: auto;
+    padding: 0 2rem;
+  }
+
+  .flight-info-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    justify-content: flex-start;
+  }
+
+  .cities {
+    display: flex;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+
+    color: $color-dark;
+  }
+
+  .from-to-icon {
+    margin: 0 16px;
+  }
+
+  .dates {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 40px;
+
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    color: $color-neutral30;
+  }
+
+  .passengers-icon {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    margin: 0 5px;
+
+    filter: $color-neutral30(100%);
+  }
+
+  .divider--dot {
+    width: 4px;
+    height: 4px;
+    margin: 0 8px;
+
+    background: $color-secondary0;
+    border-radius: 2px;
+  }
+
+  .button--edit {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    margin-left: 63px;
+
+    color: $color-primary;
+    border: none;
+    background-color: $color-secondary90;
+    border-radius: 4px;
+  }
+}

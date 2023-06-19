@@ -1,0 +1,48 @@
+@import '../../../../sass/abstracts/variables';
+@import '../../../../sass/base/typography';
+
+.stepper-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  
+  @extend %text-label-medium;
+
+  .stepper-line {
+    flex-grow: 1;
+  }
+  .stepper-icon {
+    width: 16px;
+    height: 16px;
+    box-shadow: none;
+    margin-right: .4rem;
+    
+    &:not(:first-child) {
+      margin-left: .5rem;
+    }
+
+    * {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+  }
+
+  .stepper-label {
+    @media screen and (max-width: 680px) {
+      font-size: 12px;
+    }
+  }
+}
+
+.stepper-label:not(:last-child) {
+  margin-right: .6rem;
+}
+
+@media screen and (max-width: 1090px) {
+  .stepper-wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}

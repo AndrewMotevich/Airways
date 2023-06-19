@@ -1,0 +1,70 @@
+{
+  "flights": [
+    {
+      "id": "6440f4aaf900ed2dd23992e9",
+      "flightNumber": "FC 4557",
+      "duration": 210,
+      "departureStation": "LCA",
+      "departureDateTime": "2023-06-13T10:35:00",
+      "departureTimeUtcOffset": "03:00:00",
+      "arrivalStation": "EVN",
+      "arrivalDateTime": "2023-06-13T14:05:00",
+      "arrivalTimeUtcOffset": "04:00:00"
+    },
+    {
+      "id": "6440f4aaf900ed2ddd9992e9",
+      "flightNumber": "NG 2474",
+      "duration": 82,
+      "departureStation": "Dotsero",
+      "departureDateTime": "Thu Mar 23 2023 23:59:39 GMT+0200 (Eastern European Standard Time)",
+      "departureTimeUtcOffset": "-03:00",
+      "arrivalStation": "Benson",
+      "arrivalDateTime": "Thu Mar 02 2023 08:55:35 GMT+0200 (Eastern European Standard Time)",
+      "arrivalTimeUtcOffset": "-03:00"
+    },
+    {
+      "id": "6440f4aa78d7831fbce0f694",
+      "flightNumber": "MJ 9828",
+      "duration": 663,
+      "departureStation": "Stagecoach",
+      "departureDateTime": "Fri Jan 13 2023 07:52:40 GMT+0200 (Eastern European Standard Time)",
+      "departureTimeUtcOffset": "-03:00",
+      "arrivalStation": "Lowgap",
+      "arrivalDateTime": "Sat Jan 07 2023 12:34:24 GMT+0200 (Eastern European Standard Time)",
+      "arrivalTimeUtcOffset": "-03:00"
+    },
+    {
+      "id": "6440f4aa6cbab70361204197",
+      "flightNumber": "KI 1713",
+      "duration": 560,
+      "departureStation": "Bellfountain",
+      "departureDateTime": "Thu Mar 30 2023 02:41:06 GMT+0300 (Eastern European Summer Time)",
+      "departureTimeUtcOffset": "-03:00",
+      "arrivalStation": "Sunbury",
+      "arrivalDateTime": "Sun Apr 09 2023 14:40:18 GMT+0300 (Eastern European Summer Time)",
+      "arrivalTimeUtcOffset": "-03:00"
+    },
+    {
+      "id": "6440f4aae48876c1955e5c63",
+      "flightNumber": "KI 6381",
+      "duration": 250,
+      "departureStation": "Dodge",
+      "departureDateTime": "Wed Mar 08 2023 18:02:11 GMT+0200 (Eastern European Standard Time)",
+      "departureTimeUtcOffset": "-03:00",
+      "arrivalStation": "Salvo",
+      "arrivalDateTime": "Mon Apr 10 2023 19:41:03 GMT+0300 (Eastern European Summer Time)",
+      "arrivalTimeUtcOffset": "-03:00"
+    },
+    {
+      "id": "6440f4aa37f75254f786f241",
+      "flightNumber": "MK 6225",
+      "duration": 370,
+      "departureStation": "Dixie",
+      "departureDateTime": "Sat Apr 01 2023 00:30:46 GMT+0300 (Eastern European Summer Time)",
+      "departureTimeUtcOffset": "-03:00",
+      "arrivalStation": "Tyro",
+      "arrivalDateTime": "Mon Apr 03 2023 10:52:30 GMT+0300 (Eastern European Summer Time)",
+      "arrivalTimeUtcOffset": "-03:00"
+    }
+  ]
+}

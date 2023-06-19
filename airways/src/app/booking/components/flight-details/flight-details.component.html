@@ -1,0 +1,63 @@
+<section class="flight section-bg">
+  <div class="flight-details">
+    <div class="flight-details_departure">
+      <span class="date">{{
+        flight.departure_at | date : "EEE, d MMM y"
+        }}</span>
+      <span class="start-time">
+        <span class="time">{{
+          flight.departure_at | date : "HH:mm"
+          }}</span>
+        <span class="offset">{{ flight.departure_at | date : "z" }}</span>
+      </span>
+      <span class="station">{{flight.origin}}</span>
+    </div>
+    <div class="travel-time">
+      <span class="travel-time_duration">{{flight.duration | duration}}</span>
+      <mat-icon aria-hidden="true" fontIcon="flight_takeoff" class="plane"></mat-icon>
+      <span class="travel-time_direction">
+        <ng-container *ngIf="flight.transfers > 0">transfers {{flight.transfers}}</ng-container>
+        <ng-container *ngIf="flight.transfers <= 0">Direct</ng-container>
+      </span>
+
+    </div>
+    <div class="flight-details_arrival">
+      <span class="date">{{
+        flight.return_at | date : "EEE, d MMM y"
+        }}</span>
+      <span class="end-time">
+        <span class="offset">{{ flight.return_at | date : "z" }}</span>
+        <span class="time">{{ flight.return_at | date : "HH:mm" }}</span>
+      </span>
+      <span class="station">{{flight.destination_airport}}</span>
+    </div>
+  </div>
+  <div class="flight-order">
+    <div class="flight-number">
+      <span class="flight-number_label">Flight no.</span>
+      <span class="flight-number_number">{{flight.airline}} {{flight.flight_number}}</span>
+    </div>
+    <div class="flight-info">
+      <ng-container *ngIf="!isSelected">
+        <div class="flight-availability" [appColored]="flight.seats">
+          {{flight.seats}} seats <br />
+          available
+        </div>
+      </ng-container>
+      <div class="flight-price">
+        <ng-container *ngIf="!isSelected">
+          <span class="flight-price_label">Price</span>
+        </ng-container>
+        <span class="flight-price_price">{{flight.price | customCurrency: this.flight.currency | formatPrice}}</span>
+      </div>
+    </div>
+    <ng-container *ngIf="!isSelected; else editButtonTemplate">
+      <button mat-button class="btn-with-gradient" (click)="selectTicketHandler()"
+        [disabled]="isSelected || allTicketsSelected">Select</button>
+    </ng-container>
+
+    <ng-template #editButtonTemplate>
+      <button mat-stroked-button class="button--edit" (click)="unselectTicket()">Edit</button>
+    </ng-template>
+  </div>
+</section>
